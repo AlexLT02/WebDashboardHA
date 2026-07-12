@@ -5,6 +5,7 @@ import {
   fetchDashboards,
   updateDashboard,
   widgetTypeForDomain,
+  UNGROUPED,
   type Dashboard,
   type EntityInfo,
   type Group,
@@ -20,6 +21,15 @@ import {
 /** Kollisionsarme ID ohne crypto.randomUUID (fehlt auf Safari 12). */
 function genId(prefix: string): string {
   return prefix + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+}
+
+/** Zielgruppe auflösen; „ohne Gruppe" (UNGROUPED) erzeugt bei Bedarf den losen Bereich. */
+function ensureTarget(groups: Group[], groupId: string): { groups: Group[]; targetId: string } {
+  if (groupId !== UNGROUPED) return { groups, targetId: groupId };
+  const existing = groups.find((g) => g.ungrouped);
+  if (existing) return { groups, targetId: existing.id };
+  const loose: Group = { id: genId("g-"), name: "", columns: 6, ungrouped: true, widgets: [] };
+  return { groups: [loose, ...groups], targetId: loose.id };
 }
 
 export interface DashboardsApi {
@@ -97,9 +107,10 @@ export function useDashboards(): DashboardsApi {
 
   const addWidget = useCallback(
     (entity: EntityInfo, groupId: string) => {
-      withGroups((groups) =>
-        groups.map((g) => {
-          if (g.id !== groupId) return g;
+      withGroups((groups) => {
+        const { groups: gs, targetId } = ensureTarget(groups, groupId);
+        return gs.map((g) => {
+          if (g.id !== targetId) return g;
           const cell = firstFreeCell(g);
           const widget: WidgetConfig = {
             id: genId("w-"),
@@ -113,8 +124,8 @@ export function useDashboards(): DashboardsApi {
             options: {},
           };
           return { ...g, widgets: [...g.widgets, widget] };
-        }),
-      );
+        });
+      });
     },
     [withGroups],
   );
@@ -132,9 +143,10 @@ export function useDashboards(): DashboardsApi {
 
   const addSpecialWidget = useCallback(
     (type: string, groupId: string) => {
-      withGroups((groups) =>
-        groups.map((g) => {
-          if (g.id !== groupId) return g;
+      withGroups((groups) => {
+        const { groups: gs, targetId } = ensureTarget(groups, groupId);
+        return gs.map((g) => {
+          if (g.id !== targetId) return g;
           const cell = firstFreeCell(g);
           const widget: WidgetConfig = {
             id: genId("w-"),
@@ -147,8 +159,8 @@ export function useDashboards(): DashboardsApi {
             options: {},
           };
           return { ...g, widgets: [...g.widgets, widget] };
-        }),
-      );
+        });
+      });
     },
     [withGroups],
   );

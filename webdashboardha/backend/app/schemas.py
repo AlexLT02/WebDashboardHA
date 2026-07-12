@@ -33,6 +33,8 @@ class Group(BaseModel):
     name: str = ""  # leer = Gruppe ohne sichtbaren Titel
     # Spaltenzahl = zugleich Breite der Gruppe im 6-spaltigen Dashboard-Raster.
     columns: int = 6
+    # Loser Bereich (Widgets ohne Gruppe): ohne Card-Hintergrund/Titel.
+    ungrouped: bool = False
     widgets: list[WidgetConfig] = Field(default_factory=list)
 
 

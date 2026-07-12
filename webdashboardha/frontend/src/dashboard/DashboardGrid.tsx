@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { Dashboard, Group, WidgetConfig } from "../state/dashboards";
+import { UNGROUPED, type Dashboard, type Group, type WidgetConfig } from "../state/dashboards";
 import { emptyCells, rowCount } from "../state/grid";
 import { eventPoint, clamp } from "../controls/pointer";
 import { WidgetView as Widget } from "../widgets/WidgetView";
@@ -227,22 +227,24 @@ export function DashboardGrid({
         const span = Math.min(Math.max(1, group.columns), DASHBOARD_COLS);
         return (
           <section
-            className="group"
+            className={`group${group.ungrouped ? " group--loose" : ""}`}
             key={group.id}
             style={{ gridColumn: `span ${span}` }}
           >
-            <GroupHeader
-              name={group.name}
-              editMode={Boolean(editMode)}
-              columns={group.columns}
-              canMoveUp={gi > 0}
-              canMoveDown={gi < dashboard.groups.length - 1}
-              onRename={(name) => onRenameGroup?.(group.id, name)}
-              onRemove={() => onRemoveGroup?.(group.id)}
-              onAddWidget={() => onAddWidget?.(group.id)}
-              onSetColumns={(c) => onSetGroupColumns?.(group.id, c)}
-              onMove={(dir) => onMoveGroup?.(group.id, dir)}
-            />
+            {!group.ungrouped && (
+              <GroupHeader
+                name={group.name}
+                editMode={Boolean(editMode)}
+                columns={group.columns}
+                canMoveUp={gi > 0}
+                canMoveDown={gi < dashboard.groups.length - 1}
+                onRename={(name) => onRenameGroup?.(group.id, name)}
+                onRemove={() => onRemoveGroup?.(group.id)}
+                onAddWidget={() => onAddWidget?.(group.id)}
+                onSetColumns={(c) => onSetGroupColumns?.(group.id, c)}
+                onMove={(dir) => onMoveGroup?.(group.id, dir)}
+              />
+            )}
             <div className="dashboard-grid" data-grid-group={group.id} style={gridStyle}>
               {/* Sichtbares Raster: leere Zellen als Drop-Slots (nur Edit-Modus) */}
               {editMode &&
@@ -337,14 +339,14 @@ export function DashboardGrid({
       })}
 
       {editMode && (
-        <button
-          type="button"
-          className="add-group"
-          style={{ gridColumn: "1 / -1" }}
-          onClick={onAddGroup}
-        >
-          + Gruppe
-        </button>
+        <div className="add-row" style={{ gridColumn: "1 / -1" }}>
+          <button type="button" className="add-group" onClick={() => onAddWidget?.(UNGROUPED)}>
+            + Widget (ohne Gruppe)
+          </button>
+          <button type="button" className="add-group" onClick={onAddGroup}>
+            + Gruppe
+          </button>
+        </div>
       )}
 
       {/* Schwebende Kopie am Finger */}

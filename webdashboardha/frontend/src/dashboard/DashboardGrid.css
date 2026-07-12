@@ -19,6 +19,14 @@
   padding: 8px;
 }
 
+/* Loser Bereich (Widgets ohne Gruppe): kein Card-Hintergrund */
+.group.group--loose {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
 .group__title {
   font-size: 15px;
   font-weight: 600;

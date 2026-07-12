@@ -302,6 +302,17 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+.add-row {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0;
+}
+.add-row .add-group {
+  flex: 1;
+  margin: 0;
+  width: auto;
+}
+
 .add-group {
   display: block;
   width: calc(100% - 24px);

@@ -17,8 +17,12 @@ export interface Group {
   id: string;
   name: string; // leer = Gruppe ohne sichtbaren Titel
   columns: number; // feste Spaltenzahl des Rasters
+  ungrouped?: boolean; // loser Bereich ohne Card/Titel
   widgets: WidgetConfig[];
 }
+
+/** Sentinel-Ziel für „ohne Gruppe" (loser Bereich wird bei Bedarf erzeugt). */
+export const UNGROUPED = "__ungrouped__";
 
 export interface Dashboard {
   id: string;
