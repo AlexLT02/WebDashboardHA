@@ -215,7 +215,8 @@ export function DashboardGrid({
   return (
     <div className="dashboard-groups">
       {dashboard.groups.map((group: Group, gi) => {
-        const rows = rowCount(group) + (editMode ? 1 : 0);
+        // Im Edit-Modus zusätzliche Zeilen als Drop-/Resize-Raum (Höhe unbegrenzt).
+        const rows = rowCount(group) + (editMode ? 3 : 0);
         const gridStyle: React.CSSProperties = {
           gridTemplateColumns: `repeat(${Math.max(1, group.columns)}, 1fr)`,
           gridAutoRows: `${ROW_H}px`,
@@ -313,7 +314,7 @@ export function DashboardGrid({
                         </button>
                       </div>
                     )}
-                    <div className={editMode ? "grid-cell__widget" : undefined}>
+                    <div className="grid-cell__inner">
                       <Widget config={w} />
                     </div>
                     {editMode && (

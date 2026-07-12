@@ -11,7 +11,7 @@ export function LightCard({ config }: { config: WidgetConfig }) {
   const entity = useEntity(config.entity_id);
   const [open, setOpen] = useState(false);
   const name = displayName(config, entity);
-  const Icon = resolveIcon(config.options?.icon as string, "light");
+  const Icon = resolveIcon(config.options?.icon as string, "light", undefined, name);
   const big = config.w >= 2 || config.h >= 2;
 
   if (!entity) {

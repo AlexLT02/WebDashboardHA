@@ -129,9 +129,11 @@
   }
 }
 
-.grid-cell__widget {
+.grid-cell__inner {
+  height: 100%; /* Widget füllt die Rasterzelle (Höhe korrekt durchgereicht) */
+}
+.grid-cell.is-edit .grid-cell__inner {
   pointer-events: none; /* kein versehentliches Schalten im Edit-Modus */
-  height: 100%;
 }
 
 /* Sichtbare Raster-Zelle (leerer Drop-Slot) im Edit-Modus */

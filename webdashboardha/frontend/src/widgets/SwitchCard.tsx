@@ -12,7 +12,12 @@ export function SwitchCard({ config }: { config: WidgetConfig }) {
   const [open, setOpen] = useState(false);
   const name = displayName(config, entity);
   const domain = config.entity_id.split(".")[0] || "switch";
-  const Icon = resolveIcon(config.options?.icon as string, domain, entity?.attributes.device_class as string);
+  const Icon = resolveIcon(
+    config.options?.icon as string,
+    domain,
+    entity?.attributes.device_class as string,
+    name,
+  );
   const big = config.w >= 2 || config.h >= 2;
 
   if (!entity) {

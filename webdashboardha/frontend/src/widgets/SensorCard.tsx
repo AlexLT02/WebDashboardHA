@@ -15,6 +15,7 @@ export function SensorCard({ config }: { config: WidgetConfig }) {
     config.options?.icon as string,
     domain,
     entity?.attributes.device_class as string,
+    name,
   );
   const big = config.w >= 2 || config.h >= 2;
 

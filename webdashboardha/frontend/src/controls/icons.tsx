@@ -136,34 +136,203 @@ export function ClockIcon({ size = 24 }: IconProps) {
   );
 }
 
+export function TvIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M3 4h18a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-7v2h3v2H7v-2h3v-2H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm1 2v9h16V6H4z" />
+    </svg>
+  );
+}
+export function SpeakerIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" />
+    </svg>
+  );
+}
+export function ClimateIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 3 3 5H9l3-5zm-4 8h8a4 4 0 0 1-8 0z" />
+    </svg>
+  );
+}
+export function BlindsIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M3 3h18v2H3V3zm1 4h16v2H4V7zm0 4h16v2H4v-2zm0 4h16v2H4v-2zm7 4h2v3h-2v-3z" />
+    </svg>
+  );
+}
+export function GarageIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 3 3 7v14h2V9h14v12h2V7l-9-4zm-5 9h10v2H7v-2zm0 4h10v2H7v-2z" />
+    </svg>
+  );
+}
+export function CameraIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M9 4h6l1.5 2H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.5L9 4zm3 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" />
+    </svg>
+  );
+}
+export function VacuumIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zM6 13h12a6 6 0 0 1-12 0z" />
+    </svg>
+  );
+}
+export function CoffeeIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M4 8h13v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8zm13 0h2a3 3 0 0 1 0 6h-2V8zM4 20h13v2H4v-2z" />
+    </svg>
+  );
+}
+export function WifiIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0-5c1.7 0 3.2.7 4.3 1.8l-1.8 1.8a3.5 3.5 0 0 0-5 0l-1.8-1.8A6 6 0 0 1 12 13zm0-5c3 0 5.8 1.2 7.8 3.2l-1.8 1.8A8.5 8.5 0 0 0 6 13l-1.8-1.8A11 11 0 0 1 12 8z" />
+    </svg>
+  );
+}
+export function BatteryIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M5 6h12a2 2 0 0 1 2 2v1h2v6h-2v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm1 3v6h10V9H6z" />
+    </svg>
+  );
+}
+export function PlantIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 12c0-4 3-7 8-7 0 5-3 8-7 8h-1zm0 0C12 9 9 6 4 6c0 4 3 6 7 6h1zm-2 2h4l-1 8h-2l-1-8z" />
+    </svg>
+  );
+}
+export function HeaterIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M4 6h2v12H4V6zm4 0h2v12H8V6zm4 0h2v12h-2V6zm4 0h2v12h-2V6zM3 18h18v2H3v-2z" />
+    </svg>
+  );
+}
+export function FridgeIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M6 2h12a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm1 2v5h10V4H7zm0 7v9h10v-9H7zm2-6h2v2H9V5zm0 8h2v3H9v-3z" />
+    </svg>
+  );
+}
+export function WasherIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M5 2h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm2 3a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm5 3a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 2a4 4 0 0 1 0 8 4 4 0 0 1 0-8z" />
+    </svg>
+  );
+}
+export function SunIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5 2 2-2 2-2-2 2-2zm0 16 2 2-2 2-2-2 2-2zM2 12l2-2 2 2-2 2-2-2zm16 0 2-2 2 2-2 2-2-2z" />
+    </svg>
+  );
+}
+export function BedIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M2 6h2v6h16V9a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3v1H4V6H2zm0 8h20v4h-2v-2H4v2H2v-4z" />
+    </svg>
+  );
+}
+
 /** Benannte Icon-Registry — für Auto-Zuweisung UND manuelle Auswahl. */
 export const ICONS: Record<string, (p: IconProps) => JSX.Element> = {
   light: LightbulbIcon,
+  bed: BedIcon,
   power: PowerIcon,
   plug: PlugIcon,
   fan: FanIcon,
+  heater: HeaterIcon,
+  climate: ClimateIcon,
   thermometer: ThermometerIcon,
   droplet: DropletIcon,
+  sun: SunIcon,
   door: DoorIcon,
   window: WindowIcon,
+  blinds: BlindsIcon,
+  garage: GarageIcon,
   motion: MotionIcon,
   lock: LockIcon,
+  camera: CameraIcon,
   music: MusicIcon,
+  speaker: SpeakerIcon,
+  tv: TvIcon,
+  coffee: CoffeeIcon,
+  fridge: FridgeIcon,
+  washer: WasherIcon,
+  vacuum: VacuumIcon,
+  plant: PlantIcon,
+  wifi: WifiIcon,
+  battery: BatteryIcon,
   gauge: GaugeIcon,
   clock: ClockIcon,
   calendar: CalendarIcon,
 };
 
+/** Schlüsselwörter im Gerätenamen → Icon (DE + EN). Reihenfolge = Priorität. */
+const NAME_KEYWORDS: [RegExp, string][] = [
+  [/\b(fernseh|fernseher|tv|beamer)/i, "tv"],
+  [/\b(sonos|lautsprecher|speaker|boxen|echo|homepod)/i, "speaker"],
+  [/\b(spotify|musik|music|radio|player)/i, "music"],
+  [/\b(kaffee|coffee|espresso)/i, "coffee"],
+  [/\b(kühl|fridge|gefrier|freezer)/i, "fridge"],
+  [/\b(wasch|washer|trockner|dryer|spülmasch|dishwash)/i, "washer"],
+  [/\b(saug|vacuum|roomba|robo)/i, "vacuum"],
+  [/\b(rollo|rolladen|rollladen|jalousie|blind|cover|vorhang|shutter)/i, "blinds"],
+  [/\b(garage|tor)/i, "garage"],
+  [/\b(kamera|camera|cam)/i, "camera"],
+  [/\b(router|wlan|wifi|fritz|netzwerk|network)/i, "wifi"],
+  [/\b(pflanze|plant|blume|garten|garden)/i, "plant"],
+  [/\b(heiz|heater|radiator|therm|klima|climate|ac)/i, "heater"],
+  [/\b(bett|bed|schlaf|nachttisch)/i, "bed"],
+  [/\b(sonne|sun|solar|pv)/i, "sun"],
+  [/\b(steckdose|socket|outlet|plug|stecker)/i, "plug"],
+  [/\b(schloss|lock|tür.*schloss|door.*lock)/i, "lock"],
+  [/\b(tür|door)/i, "door"],
+  [/\b(fenster|window)/i, "window"],
+  [/\b(bewegung|motion|präsenz|presence)/i, "motion"],
+  [/\b(temperatur|temperature|temp)/i, "thermometer"],
+  [/\b(feucht|humidity|luftfeucht)/i, "droplet"],
+  [/\b(batterie|battery|akku)/i, "battery"],
+  [/\b(ventilator|lüfter|fan)/i, "fan"],
+  [/\b(decke|ceiling|lampe|licht|light|leuchte|strahler)/i, "light"],
+];
+
+/** „Schlaue" Icon-Wahl: Schlüsselwörter im Namen zuerst, dann Domain/device_class. */
+export function smartIconKey(name: string | undefined, domain: string, deviceClass?: string): string {
+  if (name) {
+    for (const [re, key] of NAME_KEYWORDS) {
+      if (re.test(name)) return key;
+    }
+  }
+  return autoIconKey(domain, deviceClass);
+}
+
 export const ICON_KEYS = Object.keys(ICONS);
 
-/** Icon-Komponente: manueller Override (options.icon) vor Auto-Zuweisung. */
+/** Icon-Komponente: manueller Override (options.icon) vor schlauer Namens-/Auto-Wahl. */
 export function resolveIcon(
   override: string | undefined,
   domain: string,
   deviceClass?: string,
+  name?: string,
 ): (p: IconProps) => JSX.Element {
   if (override && ICONS[override]) return ICONS[override];
-  return ICONS[autoIconKey(domain, deviceClass)] ?? GaugeIcon;
+  return ICONS[smartIconKey(name, domain, deviceClass)] ?? GaugeIcon;
 }
 
 /** Automatischer Icon-Schlüssel aus Domain + device_class. */
