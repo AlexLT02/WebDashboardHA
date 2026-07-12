@@ -28,8 +28,7 @@ export function SwitchCard({ config }: { config: WidgetConfig }) {
       title={title}
       subtitle={on ? "Ein" : "Aus"}
       active={on}
-      onIconClick={toggle}
-      onClick={toggle}
+      onTap={toggle}
     />
   );
 }

@@ -39,8 +39,8 @@ export function LightCard({ config }: { config: WidgetConfig }) {
         subtitle={subtitle}
         active={on}
         accent={accent}
-        onIconClick={toggle}
-        onClick={() => setOpen(true)}
+        onTap={toggle}
+        onLongPress={() => setOpen(true)}
       />
       {open && (
         <MoreInfoDialog entityId={config.entity_id} title={title} onClose={() => setOpen(false)} />

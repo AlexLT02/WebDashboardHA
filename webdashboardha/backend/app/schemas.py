@@ -23,15 +23,21 @@ class WidgetConfig(BaseModel):
     options: dict[str, Any] = Field(default_factory=dict)
 
 
+class Group(BaseModel):
+    id: str
+    name: str = ""  # leer = Gruppe ohne sichtbaren Titel
+    columns: int = 0  # 0 = automatisch (responsive); >0 = feste Spaltenzahl
+    widgets: list[WidgetConfig] = Field(default_factory=list)
+
+
 class Dashboard(BaseModel):
     id: str
     name: str
-    # Grid-Layout: einfache Spaltenzahl + Widgets in Reihenfolge (MVP).
     columns: int = 2
-    widgets: list[WidgetConfig] = Field(default_factory=list)
+    groups: list[Group] = Field(default_factory=list)
 
 
 class DashboardCreate(BaseModel):
     name: str = Field(min_length=1)
     columns: int = 2
-    widgets: list[WidgetConfig] = Field(default_factory=list)
+    groups: list[Group] = Field(default_factory=list)

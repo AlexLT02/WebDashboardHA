@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useEntity } from "../state/store";
+import { useEntity, useLastColor } from "../state/store";
 import { callService } from "../state/service";
 import { useViewport, clampNum } from "../state/useViewport";
 import { TouchSlider } from "../controls/TouchSlider";
@@ -50,7 +50,14 @@ export function MoreInfoDialog({ entityId, title, onClose }: Props) {
   const attrs = entity?.attributes ?? {};
   const brightness = typeof attrs.brightness === "number" ? attrs.brightness : 0;
   const pct = Math.round((brightness / 255) * 100);
-  const hs = Array.isArray(attrs.hs_color) ? (attrs.hs_color as number[]) : [0, 0];
+  // Live-Farbe nur, wenn es eine echte ist (Sättigung > 0); sonst letzte bekannte
+  // Farbe, damit das Farbrad beim Ausschalten nicht in die Mitte springt.
+  const lastColor = useLastColor(entityId);
+  const liveHs =
+    Array.isArray(attrs.hs_color) && (attrs.hs_color as number[])[1] > 0
+      ? (attrs.hs_color as number[])
+      : null;
+  const hs = liveHs ?? lastColor ?? [0, 0];
 
   const hasBrightness = supportsBrightness(attrs);
   const hasColor = supportsColor(attrs);

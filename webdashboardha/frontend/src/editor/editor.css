@@ -1,0 +1,308 @@
+/* ---- Edit-Leiste ---- */
+.editbar {
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  padding-top: calc(10px + env(safe-area-inset-top, 0px));
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.editbar__spacer {
+  flex: 1 1 auto;
+}
+
+.editbar__select,
+.editbar__input {
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 15px;
+}
+
+.editbar__input {
+  flex: 1 1 160px;
+  min-width: 120px;
+}
+
+.editbar__btn,
+.editbar__done {
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.editbar__btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.editbar__btn--danger {
+  color: var(--hot);
+  border-color: var(--hot);
+}
+
+.editbar__done {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.editbar__confirm {
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* ---- Floating Edit-Button (Einstieg) ---- */
+.edit-fab {
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  z-index: 85;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---- Kachel im Edit-Modus ---- */
+.grid-item {
+  position: relative;
+}
+
+.grid-item__widget {
+  pointer-events: none; /* kein versehentliches Schalten im Edit-Modus */
+}
+
+.edit-overlay {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 5;
+  display: flex;
+  gap: 4px;
+}
+
+.edit-overlay__btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(20, 22, 27, 0.9);
+  color: var(--text);
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.edit-overlay__btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.edit-overlay__btn--danger {
+  color: var(--hot);
+}
+
+/* ---- „+ Widget"-Kachel ---- */
+.add-tile {
+  min-height: 60px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 15px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.add-tile:active {
+  background: var(--surface);
+}
+
+/* ---- Gruppen-Kopf im Edit-Modus ---- */
+.group__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 12px 2px;
+  padding: 6px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.group__name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.group__btn {
+  height: 34px;
+  min-width: 34px;
+  padding: 0 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.group__btn--danger {
+  color: var(--hot);
+  border-color: var(--hot);
+}
+
+.group__add {
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.add-group {
+  display: block;
+  width: calc(100% - 24px);
+  margin: 12px;
+  padding: 12px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 15px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---- Entity-Picker-Dialog ---- */
+.picker {
+  width: 92vw;
+  max-width: 460px;
+  max-height: 84vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.picker__header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.picker__title {
+  font-size: 17px;
+  margin: 0;
+}
+
+.picker__search {
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 16px; /* >=16px: iOS zoomt beim Fokus sonst rein */
+  margin-bottom: 10px;
+}
+
+.picker__list {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.picker__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.picker__name {
+  font-size: 15px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.picker__meta {
+  display: grid;
+  justify-items: end;
+  gap: 2px;
+}
+
+.picker__badge {
+  font-size: 11px;
+  padding: 1px 8px;
+  border-radius: 10px;
+  background: var(--border);
+  color: var(--text);
+}
+
+.picker__eid {
+  font-size: 11px;
+  color: var(--text-muted);
+  max-width: 40vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.picker__msg {
+  padding: 24px;
+  text-align: center;
+  color: var(--text-muted);
+}

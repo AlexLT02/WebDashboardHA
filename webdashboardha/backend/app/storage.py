@@ -11,9 +11,27 @@ import logging
 import uuid
 from pathlib import Path
 
-from .schemas import Dashboard, DashboardCreate, WidgetConfig
+from .schemas import Dashboard, DashboardCreate, Group, WidgetConfig
 
 log = logging.getLogger("webdashboardha.storage")
+
+
+def _new_group_id() -> str:
+    return "g-" + uuid.uuid4().hex[:8]
+
+
+def _migrate(raw: dict) -> dict:
+    """Alte Dashboards (flache 'widgets'-Liste) auf das Gruppen-Modell heben."""
+    if "groups" not in raw:
+        widgets = raw.get("widgets", [])
+        raw = {**raw, "groups": [{"id": _new_group_id(), "name": "", "widgets": widgets}]}
+        raw.pop("widgets", None)
+    return raw
+
+
+def _load(path: Path) -> Dashboard:
+    raw = json.loads(path.read_text("utf-8"))
+    return Dashboard.model_validate(_migrate(raw))
 
 
 class DashboardStore:
@@ -34,7 +52,7 @@ class DashboardStore:
                 id="default",
                 name="Wohnzimmer",
                 columns=2,
-                widgets=[],
+                groups=[Group(id=_new_group_id(), name="", widgets=[])],
             )
             self._write(default)
             log.info("Default-Dashboard angelegt.")
@@ -44,7 +62,7 @@ class DashboardStore:
         result: list[Dashboard] = []
         for path in sorted(self._dir.glob("*.json")):
             try:
-                result.append(Dashboard.model_validate_json(path.read_text("utf-8")))
+                result.append(_load(path))
             except Exception as exc:  # noqa: BLE001
                 log.warning("Dashboard %s unlesbar: %s", path.name, exc)
         return result
@@ -53,15 +71,16 @@ class DashboardStore:
         path = self._path(dashboard_id)
         if not path.exists():
             return None
-        return Dashboard.model_validate_json(path.read_text("utf-8"))
+        return _load(path)
 
     def create(self, payload: DashboardCreate) -> Dashboard:
         self._ensure_dir()
+        groups = payload.groups or [Group(id=_new_group_id(), name="", widgets=[])]
         dashboard = Dashboard(
             id=uuid.uuid4().hex[:12],
             name=payload.name,
             columns=payload.columns,
-            widgets=payload.widgets,
+            groups=groups,
         )
         self._write(dashboard)
         return dashboard
@@ -73,7 +92,7 @@ class DashboardStore:
             id=dashboard_id,
             name=payload.name,
             columns=payload.columns,
-            widgets=payload.widgets,
+            groups=payload.groups,
         )
         self._write(dashboard)
         return dashboard

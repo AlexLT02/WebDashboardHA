@@ -1,11 +1,29 @@
+.dashboard-groups {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4px 0 24px;
+}
+
+.group {
+  margin-bottom: 6px;
+}
+
+.group__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 14px 0 2px;
+  padding: 0 14px;
+}
+
 .dashboard-grid {
   display: grid;
   /* Dichtes, responsives Kachel-Grid wie HA — füllt automatisch Spalten. */
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 10px;
-  padding: 12px;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 8px 12px;
 }
 
 .dashboard-empty {

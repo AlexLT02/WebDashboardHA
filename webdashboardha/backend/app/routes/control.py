@@ -15,9 +15,33 @@ log = logging.getLogger("webdashboardha.control")
 router = APIRouter(prefix="/api", tags=["control"])
 
 
+# Domains, die im Editor als Widgets wählbar sind.
+_PICKER_DOMAINS = {"light", "switch", "input_boolean", "fan", "sensor", "binary_sensor"}
+
+
 @router.get("/states")
 async def get_states(hub: HubDep) -> dict[str, dict[str, Any]]:
     return hub.snapshot()
+
+
+@router.get("/entities")
+async def get_entities(hub: HubDep) -> list[dict[str, str]]:
+    """Leichtgewichtige Liste für den Entity-Picker im Editor."""
+    result: list[dict[str, str]] = []
+    for entity_id, state in hub.snapshot().items():
+        domain = entity_id.split(".")[0]
+        if domain not in _PICKER_DOMAINS:
+            continue
+        attrs = state.get("attributes", {})
+        result.append(
+            {
+                "entity_id": entity_id,
+                "name": str(attrs.get("friendly_name", entity_id)),
+                "domain": domain,
+            }
+        )
+    result.sort(key=lambda e: (e["domain"], e["name"].lower()))
+    return result
 
 
 @router.post("/service")
