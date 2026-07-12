@@ -1,9 +1,10 @@
+# Ortsunabhängige Muster (matchen in jedem Unterordner)
+
 # Node / Frontend
 node_modules/
-frontend/dist/
-frontend/node_modules/
-*.local
+dist/
 .vite/
+*.local
 
 # Python / Backend
 __pycache__/
@@ -15,10 +16,13 @@ venv/
 .mypy_cache/
 .ruff_cache/
 
-# Env / Secrets
+# Env / Secrets — NIE committen
 .env
 .env.*
 !.env.example
+
+# Add-on-Laufzeitdaten
+data/
 
 # Editor / OS
 .DS_Store
@@ -26,11 +30,7 @@ Thumbs.db
 .idea/
 .vscode/
 
-# Add-on lokale Daten
-data/
-ha-addon/data/
-
 # Test-Artefakte
-tests/playwright-report/
-tests/test-results/
+playwright-report/
+test-results/
 coverage/
