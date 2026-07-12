@@ -10,6 +10,7 @@ import {
   type Group,
   type WidgetConfig,
 } from "./dashboards";
+import { firstFreeCell, moveGroup as moveGroupFn, placeWidget } from "./grid";
 
 /** Kollisionsarme ID ohne crypto.randomUUID (fehlt auf Safari 12). */
 function genId(prefix: string): string {
@@ -25,13 +26,16 @@ export interface DashboardsApi {
   // Widgets
   addWidget: (entity: EntityInfo, groupId: string) => void;
   removeWidget: (groupId: string, widgetId: string) => void;
-  moveWidget: (groupId: string, widgetId: string, dir: -1 | 1) => void;
-  /** Ganze Gruppen-Struktur ersetzen + speichern (für Drag&Drop). */
+  /** Widget per Drag&Drop auf Zelle (x,y) einer (ggf. anderen) Gruppe legen. */
+  placeWidgetAt: (widgetId: string, toGroupId: string, x: number, y: number) => void;
+  /** Ganze Gruppen-Struktur ersetzen + speichern. */
   applyGroups: (groups: Group[]) => void;
   // Gruppen
   addGroup: (name: string) => void;
   renameGroup: (groupId: string, name: string) => void;
   removeGroup: (groupId: string) => void;
+  setGroupColumns: (groupId: string, columns: number) => void;
+  moveGroup: (groupId: string, dir: -1 | 1) => void;
   // Dashboards
   createNew: (name: string) => Promise<void>;
   rename: (name: string) => void;
@@ -82,15 +86,23 @@ export function useDashboards(): DashboardsApi {
 
   const addWidget = useCallback(
     (entity: EntityInfo, groupId: string) => {
-      const widget: WidgetConfig = {
-        id: genId("w-"),
-        type: widgetTypeForDomain(entity.domain),
-        entity_id: entity.entity_id,
-        title: entity.name,
-        options: {},
-      };
       withGroups((groups) =>
-        groups.map((g) => (g.id === groupId ? { ...g, widgets: [...g.widgets, widget] } : g)),
+        groups.map((g) => {
+          if (g.id !== groupId) return g;
+          const cell = firstFreeCell(g);
+          const widget: WidgetConfig = {
+            id: genId("w-"),
+            type: widgetTypeForDomain(entity.domain),
+            entity_id: entity.entity_id,
+            title: entity.name,
+            x: cell.x,
+            y: cell.y,
+            w: 1,
+            h: 1,
+            options: {},
+          };
+          return { ...g, widgets: [...g.widgets, widget] };
+        }),
       );
     },
     [withGroups],
@@ -107,26 +119,33 @@ export function useDashboards(): DashboardsApi {
     [withGroups],
   );
 
-  const moveWidget = useCallback(
-    (groupId: string, widgetId: string, dir: -1 | 1) => {
+  const placeWidgetAt = useCallback(
+    (widgetId: string, toGroupId: string, x: number, y: number) => {
+      withGroups((groups) => placeWidget(groups, widgetId, toGroupId, x, y));
+    },
+    [withGroups],
+  );
+
+  const setGroupColumns = useCallback(
+    (groupId: string, columns: number) => {
+      const cols = Math.max(1, Math.min(8, columns));
       withGroups((groups) =>
-        groups.map((g) => {
-          if (g.id !== groupId) return g;
-          const idx = g.widgets.findIndex((w) => w.id === widgetId);
-          const target = idx + dir;
-          if (idx < 0 || target < 0 || target >= g.widgets.length) return g;
-          const widgets = [...g.widgets];
-          [widgets[idx], widgets[target]] = [widgets[target], widgets[idx]];
-          return { ...g, widgets };
-        }),
+        groups.map((g) => (g.id === groupId ? { ...g, columns: cols } : g)),
       );
+    },
+    [withGroups],
+  );
+
+  const moveGroup = useCallback(
+    (groupId: string, dir: -1 | 1) => {
+      withGroups((groups) => moveGroupFn(groups, groupId, dir));
     },
     [withGroups],
   );
 
   const addGroup = useCallback(
     (name: string) => {
-      withGroups((groups) => [...groups, { id: genId("g-"), name, widgets: [] }]);
+      withGroups((groups) => [...groups, { id: genId("g-"), name, columns: 4, widgets: [] }]);
     },
     [withGroups],
   );
@@ -150,7 +169,7 @@ export function useDashboards(): DashboardsApi {
       const created = await createDashboard({
         name,
         columns: 2,
-        groups: [{ id: genId("g-"), name: "", widgets: [] }],
+        groups: [{ id: genId("g-"), name: "", columns: 4, widgets: [] }],
       });
       setDashboards((list) => [...list, created]);
       setCurrentId(created.id);
@@ -190,11 +209,13 @@ export function useDashboards(): DashboardsApi {
     select: setCurrentId,
     addWidget,
     removeWidget,
-    moveWidget,
+    placeWidgetAt,
     applyGroups,
     addGroup,
     renameGroup,
     removeGroup,
+    setGroupColumns,
+    moveGroup,
     createNew,
     rename,
     removeCurrent,

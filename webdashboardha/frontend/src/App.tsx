@@ -45,9 +45,11 @@ export default function App() {
             editMode={editMode}
             onAddWidget={(groupId) => setAddTarget(groupId)}
             onRemoveWidget={dash.removeWidget}
-            onMoveWidget={dash.moveWidget}
+            onPlaceWidget={dash.placeWidgetAt}
             onRenameGroup={dash.renameGroup}
             onRemoveGroup={dash.removeGroup}
+            onSetGroupColumns={dash.setGroupColumns}
+            onMoveGroup={dash.moveGroup}
             onAddGroup={() => dash.addGroup("")}
           />
         ) : dash.loading ? (

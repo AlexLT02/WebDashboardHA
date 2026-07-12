@@ -5,12 +5,18 @@ export interface WidgetConfig {
   type: "light" | "sensor" | "switch" | string;
   entity_id: string;
   title?: string;
+  // Position + Größe im Spaltenraster der Gruppe (0-basiert).
+  x: number;
+  y: number;
+  w: number;
+  h: number;
   options: Record<string, unknown>;
 }
 
 export interface Group {
   id: string;
   name: string; // leer = Gruppe ohne sichtbaren Titel
+  columns: number; // feste Spaltenzahl des Rasters
   widgets: WidgetConfig[];
 }
 

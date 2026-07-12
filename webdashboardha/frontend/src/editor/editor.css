@@ -89,13 +89,66 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ---- Kachel im Edit-Modus ---- */
-.grid-item {
+/* ---- Rasterzelle + Drag ---- */
+.grid-cell {
   position: relative;
+  min-width: 0;
 }
 
-.grid-item__widget {
+.grid-cell.is-dragging {
+  opacity: 0.35;
+}
+
+.grid-cell__widget {
   pointer-events: none; /* kein versehentliches Schalten im Edit-Modus */
+  height: 100%;
+}
+
+/* Sichtbare Raster-Zelle (leerer Drop-Slot) im Edit-Modus */
+.grid-slot {
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Zielzelle beim Ziehen */
+.grid-target {
+  border: 2px dashed var(--accent);
+  border-radius: var(--radius);
+  background: rgba(76, 141, 255, 0.12);
+  pointer-events: none;
+}
+
+/* Schwebende Kopie am Finger */
+.drag-ghost {
+  position: fixed;
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0.9;
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.edit-overlay__handle {
+  cursor: grab;
+  touch-action: none;
+}
+
+/* Spaltenzahl-Regler im Gruppenkopf */
+.group__cols {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.group__cols-val {
+  font-size: 13px;
+  color: var(--text-muted);
+  min-width: 30px;
+  text-align: center;
 }
 
 .edit-overlay {

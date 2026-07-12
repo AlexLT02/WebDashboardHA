@@ -21,11 +21,27 @@ def _new_group_id() -> str:
 
 
 def _migrate(raw: dict) -> dict:
-    """Alte Dashboards (flache 'widgets'-Liste) auf das Gruppen-Modell heben."""
+    """Alte Dashboards aufs aktuelle Modell heben:
+    - flache 'widgets'-Liste -> eine Gruppe
+    - Gruppen ohne Spaltenzahl -> Default
+    - Widgets ohne x/y -> automatisch ins Spaltenraster legen
+    """
     if "groups" not in raw:
         widgets = raw.get("widgets", [])
         raw = {**raw, "groups": [{"id": _new_group_id(), "name": "", "widgets": widgets}]}
         raw.pop("widgets", None)
+
+    for g in raw.get("groups", []):
+        cols = g.get("columns") or 4
+        g["columns"] = cols
+        widgets = g.get("widgets", [])
+        # Auto-Layout, wenn Positionen fehlen (alte Widgets stapeln sonst auf 0,0).
+        if any("x" not in w for w in widgets):
+            for i, w in enumerate(widgets):
+                w.setdefault("x", i % cols)
+                w.setdefault("y", i // cols)
+                w.setdefault("w", 1)
+                w.setdefault("h", 1)
     return raw
 
 

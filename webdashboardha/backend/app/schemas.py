@@ -19,6 +19,11 @@ class WidgetConfig(BaseModel):
     type: str  # "light" | "sensor" | "switch" | ...
     entity_id: str
     title: str | None = None
+    # Position + Größe im Spaltenraster der Gruppe (0-basiert).
+    x: int = 0
+    y: int = 0
+    w: int = 1
+    h: int = 1
     # Freie, widget-spezifische Optionen (Farbe erlauben, Icon, ...).
     options: dict[str, Any] = Field(default_factory=dict)
 
@@ -26,7 +31,7 @@ class WidgetConfig(BaseModel):
 class Group(BaseModel):
     id: str
     name: str = ""  # leer = Gruppe ohne sichtbaren Titel
-    columns: int = 0  # 0 = automatisch (responsive); >0 = feste Spaltenzahl
+    columns: int = 4  # feste Spaltenzahl des Rasters
     widgets: list[WidgetConfig] = Field(default_factory=list)
 
 
