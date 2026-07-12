@@ -16,7 +16,16 @@ router = APIRouter(prefix="/api", tags=["control"])
 
 
 # Domains, die im Editor als Widgets wählbar sind.
-_PICKER_DOMAINS = {"light", "switch", "input_boolean", "fan", "sensor", "binary_sensor"}
+_PICKER_DOMAINS = {
+    "light",
+    "switch",
+    "input_boolean",
+    "fan",
+    "sensor",
+    "binary_sensor",
+    "weather",
+    "media_player",
+}
 
 
 @router.get("/states")

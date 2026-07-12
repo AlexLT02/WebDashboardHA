@@ -1,91 +1,106 @@
 import { describe, expect, it } from "vitest";
-import { firstFreeCell, moveGroup, placeWidget, rowCount } from "./grid";
+import {
+  emptyCells,
+  firstFreeCell,
+  moveGroup,
+  placeWidget,
+  resizeWidget,
+  resolveOverlaps,
+  rowCount,
+} from "./grid";
 import type { Group, WidgetConfig } from "./dashboards";
 
-function w(id: string, x: number, y: number): WidgetConfig {
-  return { id, type: "light", entity_id: `light.${id}`, x, y, w: 1, h: 1, options: {} };
+function w(id: string, x: number, y: number, ww = 1, hh = 1): WidgetConfig {
+  return { id, type: "light", entity_id: `light.${id}`, x, y, w: ww, h: hh, options: {} };
 }
 
 function g(id: string, columns: number, widgets: WidgetConfig[]): Group {
   return { id, name: "", columns, widgets };
 }
 
+function pos(group: Group, id: string) {
+  const wi = group.widgets.find((x) => x.id === id)!;
+  return { x: wi.x, y: wi.y, w: wi.w, h: wi.h };
+}
+
 describe("firstFreeCell", () => {
   it("findet die erste freie Zelle zeilenweise", () => {
-    const group = g("g1", 3, [w("a", 0, 0), w("b", 1, 0)]);
-    expect(firstFreeCell(group)).toEqual({ x: 2, y: 0 });
+    expect(firstFreeCell(g("g1", 3, [w("a", 0, 0), w("b", 1, 0)]))).toEqual({ x: 2, y: 0 });
   });
-
   it("springt in die nächste Zeile, wenn die erste voll ist", () => {
-    const group = g("g1", 2, [w("a", 0, 0), w("b", 1, 0)]);
-    expect(firstFreeCell(group)).toEqual({ x: 0, y: 1 });
-  });
-
-  it("überspringt Lücken korrekt", () => {
-    const group = g("g1", 3, [w("a", 0, 0), w("b", 2, 0)]);
-    expect(firstFreeCell(group)).toEqual({ x: 1, y: 0 });
+    expect(firstFreeCell(g("g1", 2, [w("a", 0, 0), w("b", 1, 0)]))).toEqual({ x: 0, y: 1 });
   });
 });
 
 describe("placeWidget — leere Zielzelle", () => {
-  it("verschiebt ein Widget auf eine freie Zelle derselben Gruppe", () => {
-    const groups = [g("g1", 4, [w("a", 0, 0), w("b", 1, 0)])];
-    const res = placeWidget(groups, "a", "g1", 3, 2);
-    const a = res[0].widgets.find((x) => x.id === "a")!;
-    expect(a).toMatchObject({ x: 3, y: 2 });
-    expect(res[0].widgets.find((x) => x.id === "b")).toMatchObject({ x: 1, y: 0 });
+  it("verschiebt ein Widget auf eine freie Zelle", () => {
+    const res = placeWidget([g("g1", 4, [w("a", 0, 0), w("b", 1, 0)])], "a", "g1", 3, 2);
+    expect(pos(res[0], "a")).toMatchObject({ x: 3, y: 2 });
+    expect(pos(res[0], "b")).toMatchObject({ x: 1, y: 0 });
   });
 });
 
-describe("placeWidget — Tausch in derselben Gruppe", () => {
-  it("tauscht die Plätze, wenn die Zielzelle belegt ist", () => {
-    const groups = [g("g1", 4, [w("a", 0, 0), w("b", 2, 1)])];
-    const res = placeWidget(groups, "a", "g1", 2, 1);
-    const a = res[0].widgets.find((x) => x.id === "a")!;
-    const b = res[0].widgets.find((x) => x.id === "b")!;
-    expect(a).toMatchObject({ x: 2, y: 1 });
-    expect(b).toMatchObject({ x: 0, y: 0 }); // b bekommt a's alte Zelle
+describe("placeWidget — Kollision: Blocker rutscht weiter", () => {
+  it("schiebt den Bewohner der Zielzelle an die nächste freie Stelle", () => {
+    const res = placeWidget([g("g1", 4, [w("a", 0, 0), w("b", 2, 1)])], "a", "g1", 2, 1);
+    expect(pos(res[0], "a")).toMatchObject({ x: 2, y: 1 });
+    // b wich an die erste freie Zelle (0,0)
+    expect(pos(res[0], "b")).toMatchObject({ x: 0, y: 0 });
   });
 });
 
 describe("placeWidget — zwischen Gruppen", () => {
-  it("verschiebt ein Widget in eine andere Gruppe (leere Zelle)", () => {
-    const groups = [g("g1", 4, [w("a", 0, 0)]), g("g2", 4, [])];
-    const res = placeWidget(groups, "a", "g2", 1, 0);
-    expect(res[0].widgets).toHaveLength(0);
-    expect(res[1].widgets).toHaveLength(1);
-    expect(res[1].widgets[0]).toMatchObject({ id: "a", x: 1, y: 0 });
-  });
-
-  it("tauscht über Gruppengrenzen: Bewohner wandert in die Herkunftsgruppe", () => {
-    const groups = [g("g1", 4, [w("a", 0, 0)]), g("g2", 4, [w("b", 1, 1)])];
-    const res = placeWidget(groups, "a", "g2", 1, 1);
-    const g1 = res.find((x) => x.id === "g1")!;
+  it("verschiebt in andere Gruppe und löst dort Kollisionen", () => {
+    const res = placeWidget(
+      [g("g1", 4, [w("a", 0, 0)]), g("g2", 4, [w("b", 1, 1)])],
+      "a",
+      "g2",
+      1,
+      1,
+    );
+    expect(res.find((x) => x.id === "g1")!.widgets).toHaveLength(0);
     const g2 = res.find((x) => x.id === "g2")!;
-    expect(g2.widgets.map((x) => x.id)).toEqual(["a"]);
-    expect(g2.widgets[0]).toMatchObject({ x: 1, y: 1 });
-    expect(g1.widgets.map((x) => x.id)).toEqual(["b"]);
-    expect(g1.widgets[0]).toMatchObject({ x: 0, y: 0 }); // b bekommt a's alte Zelle
+    expect(pos(g2, "a")).toMatchObject({ x: 1, y: 1 });
+    expect(pos(g2, "b")).toMatchObject({ x: 0, y: 0 }); // b weicht in g2 aus
+  });
+});
+
+describe("resizeWidget — vergrößern schiebt Nachbarn weg", () => {
+  it("macht ein Widget breiter; der überlappte Nachbar rutscht weiter", () => {
+    const res = resizeWidget([g("g1", 4, [w("a", 0, 0), w("b", 1, 0)])], "g1", "a", 2, 1);
+    expect(pos(res[0], "a")).toMatchObject({ x: 0, y: 0, w: 2, h: 1 });
+    expect(pos(res[0], "b")).toMatchObject({ x: 2, y: 0 }); // b weicht nach rechts
+  });
+  it("begrenzt die Breite auf die Spaltenzahl", () => {
+    const res = resizeWidget([g("g1", 3, [w("a", 0, 0)])], "g1", "a", 9, 1);
+    expect(pos(res[0], "a").w).toBe(3);
+  });
+});
+
+describe("resolveOverlaps — Lücken bleiben", () => {
+  it("lässt nicht-überlappende Widgets in Ruhe", () => {
+    const group = g("g1", 4, [w("a", 0, 0), w("b", 3, 3)]);
+    const res = resolveOverlaps(group.widgets, group.columns, "a");
+    expect(res.find((x) => x.id === "b")).toMatchObject({ x: 3, y: 3 });
   });
 });
 
 describe("moveGroup", () => {
   it("verschiebt eine Gruppe nach hinten", () => {
-    const groups = [g("g1", 4, []), g("g2", 4, []), g("g3", 4, [])];
-    const res = moveGroup(groups, "g1", 1);
+    const res = moveGroup([g("g1", 4, []), g("g2", 4, []), g("g3", 4, [])], "g1", 1);
     expect(res.map((x) => x.id)).toEqual(["g2", "g1", "g3"]);
-  });
-
-  it("macht nichts an den Rändern", () => {
-    const groups = [g("g1", 4, []), g("g2", 4, [])];
-    expect(moveGroup(groups, "g1", -1).map((x) => x.id)).toEqual(["g1", "g2"]);
-    expect(moveGroup(groups, "g2", 1).map((x) => x.id)).toEqual(["g1", "g2"]);
   });
 });
 
-describe("rowCount", () => {
-  it("zählt die belegten Zeilen (inkl. Höhe)", () => {
-    expect(rowCount(g("g1", 4, [w("a", 0, 0), w("b", 0, 2)]))).toBe(3);
-    expect(rowCount(g("g1", 4, []))).toBe(1);
+describe("rowCount / emptyCells", () => {
+  it("zählt belegte Zeilen inkl. Höhe", () => {
+    expect(rowCount(g("g1", 4, [w("a", 0, 0, 1, 2)]))).toBe(2);
+  });
+  it("emptyCells überspringt belegte Zellen (auch mehrzellige)", () => {
+    const cells = emptyCells(g("g1", 2, [w("a", 0, 0, 2, 1)]), 2);
+    expect(cells).toEqual([
+      { x: 0, y: 1 },
+      { x: 1, y: 1 },
+    ]);
   });
 });

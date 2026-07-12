@@ -137,6 +137,26 @@
   touch-action: none;
 }
 
+.resize-handle {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 7px;
+  background: rgba(20, 22, 27, 0.9);
+  color: var(--text);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: nwse-resize;
+  touch-action: none;
+  z-index: 6;
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Spaltenzahl-Regler im Gruppenkopf */
 .group__cols {
   display: inline-flex;
@@ -299,6 +319,23 @@
   color: var(--text);
   font-size: 16px; /* >=16px: iOS zoomt beim Fokus sonst rein */
   margin-bottom: 10px;
+}
+
+.picker__special {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.picker__chip {
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--accent);
+  background: rgba(76, 141, 255, 0.12);
+  color: var(--accent);
+  font-size: 14px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .picker__list {

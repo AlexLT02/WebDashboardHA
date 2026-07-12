@@ -5,6 +5,10 @@ import { eventPoint, clamp } from "../controls/pointer";
 import { LightCard } from "../widgets/LightCard";
 import { SensorCard } from "../widgets/SensorCard";
 import { SwitchCard } from "../widgets/SwitchCard";
+import { ClockCard } from "../widgets/ClockCard";
+import { CalendarCard } from "../widgets/CalendarCard";
+import { WeatherCard } from "../widgets/WeatherCard";
+import { MediaCard } from "../widgets/MediaCard";
 import { Tile } from "../widgets/Tile";
 import { GaugeIcon } from "../controls/icons";
 import { GroupHeader } from "../editor/GroupHeader";
@@ -23,6 +27,14 @@ function Widget({ config }: { config: WidgetConfig }) {
       return <SwitchCard config={config} />;
     case "sensor":
       return <SensorCard config={config} />;
+    case "clock":
+      return <ClockCard config={config} />;
+    case "calendar":
+      return <CalendarCard config={config} />;
+    case "weather":
+      return <WeatherCard config={config} />;
+    case "media":
+      return <MediaCard config={config} />;
     default:
       return (
         <Tile
@@ -50,6 +62,7 @@ interface Props {
   onAddWidget?: (groupId: string) => void;
   onRemoveWidget?: (groupId: string, widgetId: string) => void;
   onPlaceWidget?: (widgetId: string, toGroupId: string, x: number, y: number) => void;
+  onResizeWidget?: (groupId: string, widgetId: string, w: number, h: number) => void;
   onRenameGroup?: (groupId: string, name: string) => void;
   onRemoveGroup?: (groupId: string) => void;
   onSetGroupColumns?: (groupId: string, columns: number) => void;
@@ -63,6 +76,7 @@ export function DashboardGrid({
   onAddWidget,
   onRemoveWidget,
   onPlaceWidget,
+  onResizeWidget,
   onRenameGroup,
   onRemoveGroup,
   onSetGroupColumns,
@@ -135,6 +149,74 @@ export function DashboardGrid({
       window.removeEventListener("mouseup", onUp);
     };
   }, [drag, onMove, onUp]);
+
+  // ---- Resize (eigener Griff unten rechts) ----
+  const [resize, setResize] = useState<{ groupId: string; widget: WidgetConfig } | null>(null);
+  const [resizeTo, setResizeTo] = useState<{ w: number; h: number } | null>(null);
+  const resizeRef = useRef<{ groupId: string; widget: WidgetConfig } | null>(null);
+  const resizeToRef = useRef<{ w: number; h: number } | null>(null);
+
+  const onResizeMove = useCallback(
+    (e: TouchEvent | MouseEvent) => {
+      const r = resizeRef.current;
+      if (!r) return;
+      e.preventDefault();
+      const p = eventPoint(e);
+      if (!p) return;
+      const gridEl = document.querySelector(
+        `[data-grid-group="${r.groupId}"]`,
+      ) as HTMLElement | null;
+      const group = dashboard.groups.find((g) => g.id === r.groupId);
+      if (!gridEl || !group) return;
+      const rect = gridEl.getBoundingClientRect();
+      const cols = Math.max(1, group.columns);
+      const colW = rect.width / cols;
+      const cellLeft = rect.left + r.widget.x * colW;
+      const cellTop = rect.top + r.widget.y * (ROW_H + GAP);
+      const w = clamp(Math.round((p.x - cellLeft) / colW), 1, cols - r.widget.x);
+      const h = Math.max(1, Math.round((p.y - cellTop) / (ROW_H + GAP)));
+      const to = { w, h };
+      resizeToRef.current = to;
+      setResizeTo(to);
+    },
+    [dashboard.groups],
+  );
+
+  const onResizeUp = useCallback(() => {
+    const r = resizeRef.current;
+    const to = resizeToRef.current;
+    if (r && to) onResizeWidget?.(r.groupId, r.widget.id, to.w, to.h);
+    resizeRef.current = null;
+    resizeToRef.current = null;
+    setResize(null);
+    setResizeTo(null);
+  }, [onResizeWidget]);
+
+  useEffect(() => {
+    if (!resize) return;
+    window.addEventListener("touchmove", onResizeMove, { passive: false });
+    window.addEventListener("touchend", onResizeUp);
+    window.addEventListener("mousemove", onResizeMove);
+    window.addEventListener("mouseup", onResizeUp);
+    return () => {
+      window.removeEventListener("touchmove", onResizeMove);
+      window.removeEventListener("touchend", onResizeUp);
+      window.removeEventListener("mousemove", onResizeMove);
+      window.removeEventListener("mouseup", onResizeUp);
+    };
+  }, [resize, onResizeMove, onResizeUp]);
+
+  const startResize = (
+    groupId: string,
+    widget: WidgetConfig,
+    e: React.TouchEvent | React.MouseEvent,
+  ) => {
+    e.stopPropagation();
+    const state = { groupId, widget };
+    resizeRef.current = state;
+    setResize(state);
+    setResizeTo({ w: widget.w, h: widget.h });
+  };
 
   const startDrag = (groupId: string, widget: WidgetConfig, e: React.TouchEvent | React.MouseEvent) => {
     const tile = (e.currentTarget as HTMLElement).closest(".grid-cell") as HTMLElement | null;
@@ -212,6 +294,15 @@ export function DashboardGrid({
                   }}
                 />
               )}
+              {resize?.groupId === group.id && resizeTo && (
+                <div
+                  className="grid-target"
+                  style={{
+                    gridColumn: `${resize.widget.x + 1} / span ${resizeTo.w}`,
+                    gridRow: `${resize.widget.y + 1} / span ${resizeTo.h}`,
+                  }}
+                />
+              )}
               {group.widgets.map((w) => {
                 const dragging = drag?.widget.id === w.id;
                 const cellStyle: React.CSSProperties = {
@@ -248,6 +339,17 @@ export function DashboardGrid({
                     <div className={editMode ? "grid-cell__widget" : undefined}>
                       <Widget config={w} />
                     </div>
+                    {editMode && (
+                      <button
+                        type="button"
+                        className="resize-handle"
+                        aria-label="Größe ändern"
+                        onTouchStart={(e) => startResize(group.id, w, e)}
+                        onMouseDown={(e) => startResize(group.id, w, e)}
+                      >
+                        ⤡
+                      </button>
+                    )}
                   </div>
                 );
               })}

@@ -46,6 +46,7 @@ export default function App() {
             onAddWidget={(groupId) => setAddTarget(groupId)}
             onRemoveWidget={dash.removeWidget}
             onPlaceWidget={dash.placeWidgetAt}
+            onResizeWidget={dash.resizeWidget}
             onRenameGroup={dash.renameGroup}
             onRemoveGroup={dash.removeGroup}
             onSetGroupColumns={dash.setGroupColumns}
@@ -74,6 +75,7 @@ export default function App() {
       {addTarget !== null && (
         <AddWidgetDialog
           onPick={(entity) => dash.addWidget(entity, addTarget)}
+          onPickSpecial={(type) => dash.addSpecialWidget(type, addTarget)}
           onClose={() => setAddTarget(null)}
         />
       )}

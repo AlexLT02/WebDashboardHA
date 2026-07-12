@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { fetchEntities, type EntityInfo } from "../state/dashboards";
+import { fetchEntities, SPECIAL_WIDGETS, type EntityInfo } from "../state/dashboards";
 import "./editor.css";
 
 const DOMAIN_LABEL: Record<string, string> = {
@@ -9,14 +9,17 @@ const DOMAIN_LABEL: Record<string, string> = {
   fan: "Lüfter",
   sensor: "Sensor",
   binary_sensor: "Sensor",
+  weather: "Wetter",
+  media_player: "Medien",
 };
 
 interface Props {
   onPick: (entity: EntityInfo) => void;
+  onPickSpecial: (type: string) => void;
   onClose: () => void;
 }
 
-export function AddWidgetDialog({ onPick, onClose }: Props) {
+export function AddWidgetDialog({ onPick, onPickSpecial, onClose }: Props) {
   const [entities, setEntities] = useState<EntityInfo[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
@@ -54,6 +57,24 @@ export function AddWidgetDialog({ onPick, onClose }: Props) {
           onChange={(e) => setQuery(e.target.value)}
           autoFocus
         />
+
+        {!query && (
+          <div className="picker__special">
+            {SPECIAL_WIDGETS.map((s) => (
+              <button
+                key={s.type}
+                type="button"
+                className="picker__chip"
+                onClick={() => {
+                  onPickSpecial(s.type);
+                  onClose();
+                }}
+              >
+                + {s.label}
+              </button>
+            ))}
+          </div>
+        )}
 
         <div className="picker__list">
           {error && <div className="picker__msg">{error}</div>}

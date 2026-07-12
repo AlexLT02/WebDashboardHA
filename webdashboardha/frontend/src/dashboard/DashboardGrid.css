@@ -12,6 +12,11 @@
 
 .group {
   min-width: 0;
+  /* Dezenter Card-Hintergrund je Gruppe */
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 8px;
 }
 
 .group__title {

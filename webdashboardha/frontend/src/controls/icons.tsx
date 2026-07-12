@@ -64,6 +64,14 @@ export function ColorRingIcon({ size = 24 }: IconProps) {
   );
 }
 
+export function MusicIcon({ size = 24 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z" />
+    </svg>
+  );
+}
+
 export function iconForType(type: string) {
   switch (type) {
     case "light":

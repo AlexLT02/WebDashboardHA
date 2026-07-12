@@ -16,8 +16,8 @@ class ServiceCall(BaseModel):
 
 class WidgetConfig(BaseModel):
     id: str
-    type: str  # "light" | "sensor" | "switch" | ...
-    entity_id: str
+    type: str  # "light" | "sensor" | "switch" | "clock" | "calendar" | "weather" | "media" | ...
+    entity_id: str = ""  # leer bei entity-losen Widgets (Uhr, Kalender)
     title: str | None = None
     # Position + Größe im Spaltenraster der Gruppe (0-basiert).
     x: int = 0

@@ -10,7 +10,12 @@ import {
   type Group,
   type WidgetConfig,
 } from "./dashboards";
-import { firstFreeCell, moveGroup as moveGroupFn, placeWidget } from "./grid";
+import {
+  firstFreeCell,
+  moveGroup as moveGroupFn,
+  placeWidget,
+  resizeWidget as resizeWidgetFn,
+} from "./grid";
 
 /** Kollisionsarme ID ohne crypto.randomUUID (fehlt auf Safari 12). */
 function genId(prefix: string): string {
@@ -25,9 +30,13 @@ export interface DashboardsApi {
   select: (id: string) => void;
   // Widgets
   addWidget: (entity: EntityInfo, groupId: string) => void;
+  /** Entity-loses Vorschlags-Widget (Uhr, Kalender) hinzufügen. */
+  addSpecialWidget: (type: string, groupId: string) => void;
   removeWidget: (groupId: string, widgetId: string) => void;
   /** Widget per Drag&Drop auf Zelle (x,y) einer (ggf. anderen) Gruppe legen. */
   placeWidgetAt: (widgetId: string, toGroupId: string, x: number, y: number) => void;
+  /** Widget-Größe (Spalten/Zeilen) ändern; Nachbarn weichen aus. */
+  resizeWidget: (groupId: string, widgetId: string, w: number, h: number) => void;
   /** Ganze Gruppen-Struktur ersetzen + speichern. */
   applyGroups: (groups: Group[]) => void;
   // Gruppen
@@ -119,9 +128,39 @@ export function useDashboards(): DashboardsApi {
     [withGroups],
   );
 
+  const addSpecialWidget = useCallback(
+    (type: string, groupId: string) => {
+      withGroups((groups) =>
+        groups.map((g) => {
+          if (g.id !== groupId) return g;
+          const cell = firstFreeCell(g);
+          const widget: WidgetConfig = {
+            id: genId("w-"),
+            type,
+            entity_id: "",
+            x: cell.x,
+            y: cell.y,
+            w: 1,
+            h: 1,
+            options: {},
+          };
+          return { ...g, widgets: [...g.widgets, widget] };
+        }),
+      );
+    },
+    [withGroups],
+  );
+
   const placeWidgetAt = useCallback(
     (widgetId: string, toGroupId: string, x: number, y: number) => {
       withGroups((groups) => placeWidget(groups, widgetId, toGroupId, x, y));
+    },
+    [withGroups],
+  );
+
+  const resizeWidget = useCallback(
+    (groupId: string, widgetId: string, w: number, h: number) => {
+      withGroups((groups) => resizeWidgetFn(groups, groupId, widgetId, w, h));
     },
     [withGroups],
   );
@@ -208,8 +247,10 @@ export function useDashboards(): DashboardsApi {
     error,
     select: setCurrentId,
     addWidget,
+    addSpecialWidget,
     removeWidget,
     placeWidgetAt,
+    resizeWidget,
     applyGroups,
     addGroup,
     renameGroup,

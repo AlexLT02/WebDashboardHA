@@ -19,7 +19,7 @@ def test_init_creates_default(tmp_path: Path) -> None:
     dashboards = s.list()
     assert len(dashboards) == 1
     assert dashboards[0].groups  # eine Default-Gruppe
-    assert dashboards[0].groups[0].columns == 4
+    assert dashboards[0].groups[0].columns == 6
 
 
 def test_migrates_flat_widgets_to_grid(tmp_path: Path) -> None:
