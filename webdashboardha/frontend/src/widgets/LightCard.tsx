@@ -12,7 +12,7 @@ export function LightCard({ config }: { config: WidgetConfig }) {
   const [open, setOpen] = useState(false);
   const name = displayName(config, entity);
   const Icon = resolveIcon(config.options?.icon as string, "light", undefined, name);
-  const big = config.w >= 2 || config.h >= 2;
+  const big = config.h >= 2; // zentriertes Layout nur bei mehr Höhe
 
   if (!entity) {
     return <Tile icon={Icon} title={name} subtitle="nicht verfügbar" unavailable big={big} />;

@@ -51,9 +51,8 @@ export function ActiveView({ dashboard }: { dashboard: Dashboard }) {
           </div>
           <div className="active-grid">
             {g.widgets.map((w) => (
-              <div key={w.id} style={{ gridColumn: `span ${Math.min(w.w, 2)}` }}>
-                <WidgetView config={w} />
-              </div>
+              // Einheitlich kompakt — Dashboard-Größe (w/h) hier ignorieren.
+              <WidgetView key={w.id} config={{ ...w, x: 0, y: 0, w: 1, h: 1 }} />
             ))}
           </div>
         </section>

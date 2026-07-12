@@ -17,7 +17,7 @@ export function SensorCard({ config }: { config: WidgetConfig }) {
     entity?.attributes.device_class as string,
     name,
   );
-  const big = config.w >= 2 || config.h >= 2;
+  const big = config.h >= 2;
 
   if (!entity) {
     return <Tile icon={Icon} title={name} subtitle="nicht verfügbar" unavailable big={big} />;
