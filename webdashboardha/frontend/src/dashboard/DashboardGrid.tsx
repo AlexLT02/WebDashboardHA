@@ -13,6 +13,7 @@ import "../editor/editor.css";
 
 const ROW_H = 76; // px pro Rasterzeile
 const GAP = 10;
+const DASHBOARD_COLS = 6; // Gesamtbreite des Dashboards in Rastereinheiten
 
 function Widget({ config }: { config: WidgetConfig }) {
   switch (config.type) {
@@ -173,8 +174,13 @@ export function DashboardGrid({
           minHeight: editMode ? rows * (ROW_H + GAP) : undefined,
         };
         const isTargetGroup = target?.groupId === group.id;
+        const span = Math.min(Math.max(1, group.columns), DASHBOARD_COLS);
         return (
-          <section className="group" key={group.id}>
+          <section
+            className="group"
+            key={group.id}
+            style={{ gridColumn: `span ${span}` }}
+          >
             <GroupHeader
               name={group.name}
               editMode={Boolean(editMode)}
@@ -251,7 +257,12 @@ export function DashboardGrid({
       })}
 
       {editMode && (
-        <button type="button" className="add-group" onClick={onAddGroup}>
+        <button
+          type="button"
+          className="add-group"
+          style={{ gridColumn: "1 / -1" }}
+          onClick={onAddGroup}
+        >
           + Gruppe
         </button>
       )}

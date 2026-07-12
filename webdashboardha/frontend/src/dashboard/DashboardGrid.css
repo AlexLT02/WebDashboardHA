@@ -1,11 +1,17 @@
 .dashboard-groups {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 4px 0 24px;
+  padding: 8px 12px 24px;
+  /* Dashboard = 6-spaltiges Raster; Gruppen spannen ihre Spaltenzahl und
+     fließen nebeneinander (z. B. zwei 3er-Gruppen = eine Reihe). */
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  align-items: start;
 }
 
 .group {
-  margin-bottom: 6px;
+  min-width: 0;
 }
 
 .group__title {
@@ -14,16 +20,15 @@
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  margin: 14px 0 2px;
-  padding: 0 14px;
+  margin: 4px 0 6px;
+  padding: 0 2px;
 }
 
 .dashboard-grid {
   display: grid;
-  /* Dichtes, responsives Kachel-Grid wie HA — füllt automatisch Spalten. */
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 10px;
-  padding: 8px 12px;
+  /* Spalten kommen inline aus der Gruppen-Spaltenzahl; kein eigenes Padding,
+     damit Kacheln über nebeneinander liegende Gruppen hinweg fluchten. */
 }
 
 .dashboard-empty {

@@ -61,8 +61,8 @@ export function GroupHeader({
             <button
               type="button"
               className="group__btn"
-              aria-label="mehr Spalten"
-              disabled={columns >= 8}
+              aria-label="mehr Spalten (breiter)"
+              disabled={columns >= 6}
               onClick={() => onSetColumns(columns + 1)}
             >
               +

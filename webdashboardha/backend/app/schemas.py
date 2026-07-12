@@ -31,7 +31,8 @@ class WidgetConfig(BaseModel):
 class Group(BaseModel):
     id: str
     name: str = ""  # leer = Gruppe ohne sichtbaren Titel
-    columns: int = 4  # feste Spaltenzahl des Rasters
+    # Spaltenzahl = zugleich Breite der Gruppe im 6-spaltigen Dashboard-Raster.
+    columns: int = 6
     widgets: list[WidgetConfig] = Field(default_factory=list)
 
 

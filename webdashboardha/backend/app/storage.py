@@ -32,7 +32,7 @@ def _migrate(raw: dict) -> dict:
         raw.pop("widgets", None)
 
     for g in raw.get("groups", []):
-        cols = g.get("columns") or 4
+        cols = g.get("columns") or 6
         g["columns"] = cols
         widgets = g.get("widgets", [])
         # Auto-Layout, wenn Positionen fehlen (alte Widgets stapeln sonst auf 0,0).

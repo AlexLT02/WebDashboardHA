@@ -128,7 +128,7 @@ export function useDashboards(): DashboardsApi {
 
   const setGroupColumns = useCallback(
     (groupId: string, columns: number) => {
-      const cols = Math.max(1, Math.min(8, columns));
+      const cols = Math.max(1, Math.min(6, columns));
       withGroups((groups) =>
         groups.map((g) => (g.id === groupId ? { ...g, columns: cols } : g)),
       );
@@ -145,7 +145,7 @@ export function useDashboards(): DashboardsApi {
 
   const addGroup = useCallback(
     (name: string) => {
-      withGroups((groups) => [...groups, { id: genId("g-"), name, columns: 4, widgets: [] }]);
+      withGroups((groups) => [...groups, { id: genId("g-"), name, columns: 6, widgets: [] }]);
     },
     [withGroups],
   );
@@ -169,7 +169,7 @@ export function useDashboards(): DashboardsApi {
       const created = await createDashboard({
         name,
         columns: 2,
-        groups: [{ id: genId("g-"), name: "", columns: 4, widgets: [] }],
+        groups: [{ id: genId("g-"), name: "", columns: 6, widgets: [] }],
       });
       setDashboards((list) => [...list, created]);
       setCurrentId(created.id);
