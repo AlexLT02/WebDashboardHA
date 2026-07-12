@@ -14,6 +14,8 @@ interface DashStore {
   /** Zuletzt bekannte Farbe (hs) je Entity — bleibt erhalten, wenn HA sie beim
    *  Ausschalten nicht mehr mitschickt, damit das Farbrad nicht in die Mitte springt. */
   lastColors: Record<string, HS>;
+  /** Zuletzt bekannte Weißtemperatur (Kelvin) je Entity — selber Grund. */
+  lastTemps: Record<string, number>;
   /** WebSocket zum Backend verbunden? */
   connected: boolean;
   /** Backend zu HA verbunden? */
@@ -33,34 +35,46 @@ function colorOf(state: EntityState): HS | null {
   return null;
 }
 
+/** Weißtemperatur (Kelvin) aus einem State ziehen, falls vorhanden. */
+function tempOf(state: EntityState): number | null {
+  const k = state.attributes.color_temp_kelvin;
+  return typeof k === "number" ? k : null;
+}
+
 export const useStore = create<DashStore>((set) => ({
   states: {},
   lastColors: {},
+  lastTemps: {},
   connected: false,
   haConnected: false,
 
   applySnapshot: (states, haConnected) =>
     set((prev) => {
       const lastColors = { ...prev.lastColors };
+      const lastTemps = { ...prev.lastTemps };
       for (const id in states) {
         const c = colorOf(states[id]);
         if (c) lastColors[id] = c;
+        const t = tempOf(states[id]);
+        if (t) lastTemps[id] = t;
       }
-      return { states, haConnected, lastColors };
+      return { states, haConnected, lastColors, lastTemps };
     }),
 
   applyState: (entityId, state) =>
     set((prev) => {
       const next = { ...prev.states };
-      const lastColors = prev.lastColors;
       if (state === null) {
         delete next[entityId];
         return { states: next };
       }
       next[entityId] = state;
+      const patch: Partial<DashStore> = { states: next };
       const c = colorOf(state);
-      if (c) return { states: next, lastColors: { ...lastColors, [entityId]: c } };
-      return { states: next };
+      if (c) patch.lastColors = { ...prev.lastColors, [entityId]: c };
+      const t = tempOf(state);
+      if (t) patch.lastTemps = { ...prev.lastTemps, [entityId]: t };
+      return patch;
     }),
 
   setConnected: (connected) => set({ connected }),
@@ -74,4 +88,9 @@ export function useEntity(entityId: string): EntityState | undefined {
 /** Zuletzt bekannte Farbe (hs) eines Entities, falls vorhanden. */
 export function useLastColor(entityId: string): HS | undefined {
   return useStore((s) => s.lastColors[entityId]);
+}
+
+/** Zuletzt bekannte Weißtemperatur (Kelvin) eines Entities, falls vorhanden. */
+export function useLastTemp(entityId: string): number | undefined {
+  return useStore((s) => s.lastTemps[entityId]);
 }

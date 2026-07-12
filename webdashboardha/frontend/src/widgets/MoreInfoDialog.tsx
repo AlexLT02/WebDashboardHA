@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useEntity, useLastColor } from "../state/store";
+import { useEntity, useLastColor, useLastTemp } from "../state/store";
 import { callService } from "../state/service";
 import { useViewport, clampNum } from "../state/useViewport";
 import { TouchSlider } from "../controls/TouchSlider";
@@ -73,10 +73,13 @@ export function MoreInfoDialog({ entityId, title, onClose }: Props) {
   const barHeight = Math.round(clampNum(vp.height * 0.36, 170, 280));
   const wheelSize = Math.round(clampNum(Math.min(vp.width * 0.6, vp.height * 0.38), 150, 240));
 
-  // Weißtemperatur (Kelvin).
+  // Weißtemperatur (Kelvin). Ist die Lampe aus, liefert HA oft kein color_temp_kelvin
+  // → letzte bekannte Temperatur nutzen, damit der Regler nicht in die Mitte springt.
   const minK = typeof attrs.min_color_temp_kelvin === "number" ? attrs.min_color_temp_kelvin : 2000;
   const maxK = typeof attrs.max_color_temp_kelvin === "number" ? attrs.max_color_temp_kelvin : 6500;
-  const curK = typeof attrs.color_temp_kelvin === "number" ? attrs.color_temp_kelvin : (minK + maxK) / 2;
+  const lastTemp = useLastTemp(entityId);
+  const liveK = typeof attrs.color_temp_kelvin === "number" ? attrs.color_temp_kelvin : null;
+  const curK = liveK ?? lastTemp ?? (minK + maxK) / 2;
   const tempValue = clampNum((curK - minK) / (maxK - minK), 0, 1);
 
   const togglePower = () =>
