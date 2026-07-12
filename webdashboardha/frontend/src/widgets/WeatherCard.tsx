@@ -1,4 +1,5 @@
 import { useEntity } from "../state/store";
+import { displayName } from "../state/display";
 import type { WidgetConfig } from "../state/dashboards";
 import "./panels.css";
 
@@ -22,7 +23,7 @@ const COND: Record<string, { icon: string; label: string }> = {
 
 export function WeatherCard({ config }: { config: WidgetConfig }) {
   const entity = useEntity(config.entity_id);
-  const title = config.title ?? (entity?.attributes.friendly_name as string) ?? "Wetter";
+  const title = displayName(config, entity);
   const big = config.w >= 2 || config.h >= 2;
 
   if (!entity) {

@@ -1,18 +1,23 @@
+import { useState } from "react";
 import { useEntity } from "../state/store";
 import { callService } from "../state/service";
+import { SettingsSheet } from "./SettingsSheet";
+import type { WidgetConfig } from "../state/dashboards";
 import "./MoreInfoDialog.css";
 import "./panels.css";
 
 interface Props {
   entityId: string;
   title: string;
+  config?: WidgetConfig;
   onClose: () => void;
 }
 
 /** Media-Dialog (Halten auf einer Media/Spotify-Kachel): Wiedergabe steuern,
  *  Lautstärke, und Quelle/Playlist aus source_list wählen. */
-export function MediaDialog({ entityId, title, onClose }: Props) {
+export function MediaDialog({ entityId, title, config, onClose }: Props) {
   const entity = useEntity(entityId);
+  const [showSettings, setShowSettings] = useState(false);
   const playing = entity?.state === "playing";
   const artist = entity?.attributes.media_artist as string | undefined;
   const sources = (entity?.attributes.source_list as string[] | undefined) ?? [];
@@ -29,7 +34,18 @@ export function MediaDialog({ entityId, title, onClose }: Props) {
             ✕
           </button>
           <h2 className="dialog__title">{title}</h2>
-          <span />
+          {config ? (
+            <button
+              type="button"
+              className="dialog__close"
+              aria-label="Einstellungen"
+              onClick={() => setShowSettings((s) => !s)}
+            >
+              ⚙
+            </button>
+          ) : (
+            <span />
+          )}
         </div>
 
         {artist && <div className="media__artist">{artist}</div>}
@@ -78,6 +94,8 @@ export function MediaDialog({ entityId, title, onClose }: Props) {
             ))}
           </div>
         )}
+
+        {showSettings && config && <SettingsSheet config={config} />}
       </div>
     </div>
   );

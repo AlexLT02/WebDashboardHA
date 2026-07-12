@@ -99,6 +99,36 @@
   opacity: 0.35;
 }
 
+/* iOS-artiges Wackeln im Bearbeitungsmodus */
+@keyframes jiggle {
+  0% {
+    transform: rotate(-0.6deg);
+  }
+  50% {
+    transform: rotate(0.6deg);
+  }
+  100% {
+    transform: rotate(-0.6deg);
+  }
+}
+.grid-cell.is-edit {
+  animation: jiggle 0.28s ease-in-out infinite;
+}
+.grid-cell.is-edit:nth-child(2n) {
+  animation-delay: 0.09s;
+}
+.grid-cell.is-edit:nth-child(3n) {
+  animation-delay: 0.16s;
+}
+.grid-cell.is-dragging {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .grid-cell.is-edit {
+    animation: none;
+  }
+}
+
 .grid-cell__widget {
   pointer-events: none; /* kein versehentliches Schalten im Edit-Modus */
   height: 100%;

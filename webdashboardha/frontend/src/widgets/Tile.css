@@ -8,6 +8,8 @@
   border: 1px solid var(--border);
   border-radius: var(--radius);
   min-height: 60px;
+  height: 100%; /* füllt die Rasterzelle (2-hoch wird auch groß dargestellt) */
+  box-sizing: border-box;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: background 0.12s ease;
@@ -15,6 +17,26 @@
 
 .tile:active {
   background: var(--surface-2);
+}
+
+/* Großes Widget (>1 Zelle): zentriertes Spalten-Layout, größerer Text */
+.tile.is-big {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-content: center;
+  text-align: center;
+  gap: 8px;
+}
+.tile.is-big .tile__badge {
+  width: 56px;
+  height: 56px;
+}
+.tile.is-big .tile__title {
+  font-size: 16px;
+  white-space: normal;
+}
+.tile.is-big .tile__subtitle {
+  font-size: 14px;
 }
 
 .tile__badge {

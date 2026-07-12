@@ -10,9 +10,11 @@ interface Props {
   /** Optionale Akzentfarbe (z. B. echte Lampenfarbe) fürs aktive Badge. */
   accent?: string;
   unavailable?: boolean;
+  /** Größer dargestellt (Widget ist >1 Zelle) → zentriertes Layout mit größerem Icon. */
+  big?: boolean;
   /** Kurzes Tippen (z. B. an/aus schalten). */
   onTap?: () => void;
-  /** 1 Sekunde halten (z. B. Detail-Dialog öffnen). */
+  /** Halten (0,3 s) → Detail-Dialog. */
   onLongPress?: () => void;
 }
 
@@ -27,6 +29,7 @@ export function Tile({
   active,
   accent,
   unavailable,
+  big,
   onTap,
   onLongPress,
 }: Props) {
@@ -34,7 +37,7 @@ export function Tile({
   const press = useLongPress({
     onTap: () => onTap?.(),
     onLongPress: () => onLongPress?.(),
-    delay: 500,
+    delay: 300,
   });
   const handlers = interactive ? press : {};
 
@@ -45,11 +48,11 @@ export function Tile({
     <div
       className={`tile${active ? " is-active" : ""}${unavailable ? " is-unavailable" : ""}${
         interactive ? " is-interactive" : ""
-      }`}
+      }${big ? " is-big" : ""}`}
       {...handlers}
     >
       <span className="tile__badge" style={badgeStyle}>
-        <Icon size={22} />
+        <Icon size={big ? 30 : 22} />
       </span>
       <div className="tile__text">
         <div className="tile__title">{title}</div>

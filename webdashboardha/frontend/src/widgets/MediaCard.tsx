@@ -3,6 +3,7 @@ import { useEntity } from "../state/store";
 import { callService } from "../state/service";
 import { useLongPress } from "../controls/useLongPress";
 import { MusicIcon } from "../controls/icons";
+import { displayName } from "../state/display";
 import { MediaDialog } from "./MediaDialog";
 import type { WidgetConfig } from "../state/dashboards";
 import "./panels.css";
@@ -11,11 +12,8 @@ export function MediaCard({ config }: { config: WidgetConfig }) {
   const entity = useEntity(config.entity_id);
   const [open, setOpen] = useState(false);
 
-  const title =
-    (entity?.attributes.media_title as string) ??
-    config.title ??
-    (entity?.attributes.friendly_name as string) ??
-    "Medien";
+  const name = displayName(config, entity);
+  const title = (entity?.attributes.media_title as string) ?? name;
   const artist = entity?.attributes.media_artist as string | undefined;
   const playing = entity?.state === "playing";
   const big = config.w >= 2 || config.h >= 2;
@@ -28,7 +26,7 @@ export function MediaCard({ config }: { config: WidgetConfig }) {
   const press = useLongPress({
     onTap: () => svc("media_play_pause"),
     onLongPress: () => setOpen(true),
-    delay: 500,
+    delay: 300,
   });
 
   if (!entity) {
@@ -77,7 +75,12 @@ export function MediaCard({ config }: { config: WidgetConfig }) {
       </div>
 
       {open && (
-        <MediaDialog entityId={config.entity_id} title={title} onClose={() => setOpen(false)} />
+        <MediaDialog
+          entityId={config.entity_id}
+          title={name}
+          config={config}
+          onClose={() => setOpen(false)}
+        />
       )}
     </>
   );

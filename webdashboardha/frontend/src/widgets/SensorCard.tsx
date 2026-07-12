@@ -1,22 +1,37 @@
+import { useState } from "react";
 import { useEntity } from "../state/store";
+import { displayName, sensorStateLabel } from "../state/display";
+import { resolveIcon } from "../controls/icons";
 import { Tile } from "./Tile";
-import { iconForType } from "../controls/icons";
+import { DeviceDialog } from "./DeviceDialog";
 import type { WidgetConfig } from "../state/dashboards";
 
 export function SensorCard({ config }: { config: WidgetConfig }) {
   const entity = useEntity(config.entity_id);
-  const title = config.title ?? (entity?.attributes.friendly_name as string) ?? config.entity_id;
-
-  // Thermometer-Icon für Temperatur, sonst generisches Gauge.
-  const isTemp =
-    entity?.attributes.device_class === "temperature" ||
-    (entity?.attributes.unit_of_measurement as string | undefined)?.includes("C");
-  const Icon = iconForType(isTemp ? "sensor" : "gauge");
+  const [open, setOpen] = useState(false);
+  const name = displayName(config, entity);
+  const domain = config.entity_id.split(".")[0] || "sensor";
+  const Icon = resolveIcon(
+    config.options?.icon as string,
+    domain,
+    entity?.attributes.device_class as string,
+  );
+  const big = config.w >= 2 || config.h >= 2;
 
   if (!entity) {
-    return <Tile icon={Icon} title={title} subtitle="nicht verfügbar" unavailable />;
+    return <Tile icon={Icon} title={name} subtitle="nicht verfügbar" unavailable big={big} />;
   }
 
-  const unit = (entity.attributes.unit_of_measurement as string | undefined) ?? "";
-  return <Tile icon={Icon} title={title} subtitle={`${entity.state} ${unit}`.trim()} />;
+  return (
+    <>
+      <Tile
+        icon={Icon}
+        title={name}
+        subtitle={sensorStateLabel(entity)}
+        big={big}
+        onLongPress={() => setOpen(true)}
+      />
+      {open && <DeviceDialog config={config} onClose={() => setOpen(false)} />}
+    </>
+  );
 }

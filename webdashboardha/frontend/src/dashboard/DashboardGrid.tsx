@@ -2,50 +2,16 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { Dashboard, Group, WidgetConfig } from "../state/dashboards";
 import { emptyCells, rowCount } from "../state/grid";
 import { eventPoint, clamp } from "../controls/pointer";
-import { LightCard } from "../widgets/LightCard";
-import { SensorCard } from "../widgets/SensorCard";
-import { SwitchCard } from "../widgets/SwitchCard";
-import { ClockCard } from "../widgets/ClockCard";
-import { CalendarCard } from "../widgets/CalendarCard";
-import { WeatherCard } from "../widgets/WeatherCard";
-import { MediaCard } from "../widgets/MediaCard";
-import { Tile } from "../widgets/Tile";
-import { GaugeIcon } from "../controls/icons";
+import { WidgetView as Widget } from "../widgets/WidgetView";
 import { GroupHeader } from "../editor/GroupHeader";
+import { SettingsSheet } from "../widgets/SettingsSheet";
+import { displayName } from "../state/display";
 import "./DashboardGrid.css";
 import "../editor/editor.css";
 
 const ROW_H = 76; // px pro Rasterzeile
 const GAP = 10;
 const DASHBOARD_COLS = 6; // Gesamtbreite des Dashboards in Rastereinheiten
-
-function Widget({ config }: { config: WidgetConfig }) {
-  switch (config.type) {
-    case "light":
-      return <LightCard config={config} />;
-    case "switch":
-      return <SwitchCard config={config} />;
-    case "sensor":
-      return <SensorCard config={config} />;
-    case "clock":
-      return <ClockCard config={config} />;
-    case "calendar":
-      return <CalendarCard config={config} />;
-    case "weather":
-      return <WeatherCard config={config} />;
-    case "media":
-      return <MediaCard config={config} />;
-    default:
-      return (
-        <Tile
-          icon={GaugeIcon}
-          title={config.title ?? config.entity_id}
-          subtitle={`Unbekannter Typ: ${config.type}`}
-          unavailable
-        />
-      );
-  }
-}
 
 interface DragState {
   widget: WidgetConfig;
@@ -84,6 +50,7 @@ export function DashboardGrid({
   onAddGroup,
 }: Props) {
   const [drag, setDrag] = useState<DragState | null>(null);
+  const [settingsWidget, setSettingsWidget] = useState<WidgetConfig | null>(null);
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
   const [target, setTarget] = useState<{ groupId: string; x: number; y: number } | null>(null);
   const dragRef = useRef<DragState | null>(null);
@@ -311,7 +278,9 @@ export function DashboardGrid({
                 };
                 return (
                   <div
-                    className={`grid-cell${dragging ? " is-dragging" : ""}`}
+                    className={`grid-cell${dragging ? " is-dragging" : ""}${
+                      editMode ? " is-edit" : ""
+                    }`}
                     style={cellStyle}
                     key={w.id}
                   >
@@ -325,6 +294,14 @@ export function DashboardGrid({
                           onMouseDown={(e) => startDrag(group.id, w, e)}
                         >
                           ⠿
+                        </button>
+                        <button
+                          type="button"
+                          className="edit-overlay__btn"
+                          aria-label="Einstellungen"
+                          onClick={() => setSettingsWidget(w)}
+                        >
+                          ⚙
                         </button>
                         <button
                           type="button"
@@ -381,6 +358,27 @@ export function DashboardGrid({
           }}
         >
           <Widget config={drag.widget} />
+        </div>
+      )}
+
+      {/* Einstellungen (Alias/Icon) im Edit-Modus */}
+      {settingsWidget && (
+        <div className="dialog-backdrop" onClick={() => setSettingsWidget(null)}>
+          <div className="dialog" onClick={(e) => e.stopPropagation()}>
+            <div className="dialog__header">
+              <button
+                type="button"
+                className="dialog__close"
+                aria-label="Schließen"
+                onClick={() => setSettingsWidget(null)}
+              >
+                ✕
+              </button>
+              <h2 className="dialog__title">{displayName(settingsWidget)}</h2>
+              <span />
+            </div>
+            <SettingsSheet config={settingsWidget} />
+          </div>
         </div>
       )}
     </div>

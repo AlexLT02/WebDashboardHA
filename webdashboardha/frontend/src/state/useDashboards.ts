@@ -37,6 +37,8 @@ export interface DashboardsApi {
   placeWidgetAt: (widgetId: string, toGroupId: string, x: number, y: number) => void;
   /** Widget-Größe (Spalten/Zeilen) ändern; Nachbarn weichen aus. */
   resizeWidget: (groupId: string, widgetId: string, w: number, h: number) => void;
+  /** options eines Widgets aktualisieren (Icon, Alias, …). */
+  updateWidgetOptions: (widgetId: string, patch: Record<string, unknown>) => void;
   /** Ganze Gruppen-Struktur ersetzen + speichern. */
   applyGroups: (groups: Group[]) => void;
   // Gruppen
@@ -165,6 +167,20 @@ export function useDashboards(): DashboardsApi {
     [withGroups],
   );
 
+  const updateWidgetOptions = useCallback(
+    (widgetId: string, patch: Record<string, unknown>) => {
+      withGroups((groups) =>
+        groups.map((g) => ({
+          ...g,
+          widgets: g.widgets.map((w) =>
+            w.id === widgetId ? { ...w, options: { ...w.options, ...patch } } : w,
+          ),
+        })),
+      );
+    },
+    [withGroups],
+  );
+
   const setGroupColumns = useCallback(
     (groupId: string, columns: number) => {
       const cols = Math.max(1, Math.min(6, columns));
@@ -251,6 +267,7 @@ export function useDashboards(): DashboardsApi {
     removeWidget,
     placeWidgetAt,
     resizeWidget,
+    updateWidgetOptions,
     applyGroups,
     addGroup,
     renameGroup,

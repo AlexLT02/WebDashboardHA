@@ -1,18 +1,21 @@
 import { useState } from "react";
 import { useEntity } from "../state/store";
 import { callService } from "../state/service";
+import { displayName } from "../state/display";
+import { resolveIcon } from "../controls/icons";
 import { Tile } from "./Tile";
 import { MoreInfoDialog } from "./MoreInfoDialog";
-import { LightbulbIcon } from "../controls/icons";
 import type { WidgetConfig } from "../state/dashboards";
 
 export function LightCard({ config }: { config: WidgetConfig }) {
   const entity = useEntity(config.entity_id);
   const [open, setOpen] = useState(false);
-  const title = config.title ?? (entity?.attributes.friendly_name as string) ?? config.entity_id;
+  const name = displayName(config, entity);
+  const Icon = resolveIcon(config.options?.icon as string, "light");
+  const big = config.w >= 2 || config.h >= 2;
 
   if (!entity) {
-    return <Tile icon={LightbulbIcon} title={title} subtitle="nicht verfügbar" unavailable />;
+    return <Tile icon={Icon} title={name} subtitle="nicht verfügbar" unavailable big={big} />;
   }
 
   const on = entity.state === "on";
@@ -34,16 +37,22 @@ export function LightCard({ config }: { config: WidgetConfig }) {
   return (
     <>
       <Tile
-        icon={LightbulbIcon}
-        title={title}
+        icon={Icon}
+        title={name}
         subtitle={subtitle}
         active={on}
         accent={accent}
+        big={big}
         onTap={toggle}
         onLongPress={() => setOpen(true)}
       />
       {open && (
-        <MoreInfoDialog entityId={config.entity_id} title={title} onClose={() => setOpen(false)} />
+        <MoreInfoDialog
+          entityId={config.entity_id}
+          title={name}
+          config={config}
+          onClose={() => setOpen(false)}
+        />
       )}
     </>
   );

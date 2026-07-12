@@ -5,6 +5,8 @@ import { useViewport, clampNum } from "../state/useViewport";
 import { TouchSlider } from "../controls/TouchSlider";
 import { ColorWheel } from "../controls/ColorWheel";
 import { PowerIcon, BrightnessIcon, ColorRingIcon } from "../controls/icons";
+import { SettingsSheet } from "./SettingsSheet";
+import type { WidgetConfig } from "../state/dashboards";
 import "./MoreInfoDialog.css";
 
 const COLOR_MODES = ["hs", "rgb", "rgbw", "rgbww", "xy"];
@@ -41,11 +43,13 @@ type Mode = "brightness" | "color" | "white";
 interface Props {
   entityId: string;
   title: string;
+  config?: WidgetConfig;
   onClose: () => void;
 }
 
-export function MoreInfoDialog({ entityId, title, onClose }: Props) {
+export function MoreInfoDialog({ entityId, title, config, onClose }: Props) {
   const entity = useEntity(entityId);
+  const [showSettings, setShowSettings] = useState(false);
   const on = entity?.state === "on";
   const attrs = entity?.attributes ?? {};
   const brightness = typeof attrs.brightness === "number" ? attrs.brightness : 0;
@@ -129,7 +133,18 @@ export function MoreInfoDialog({ entityId, title, onClose }: Props) {
             ✕
           </button>
           <h2 className="dialog__title">{title}</h2>
-          <span />
+          {config ? (
+            <button
+              type="button"
+              className="dialog__close"
+              aria-label="Einstellungen"
+              onClick={() => setShowSettings((s) => !s)}
+            >
+              ⚙
+            </button>
+          ) : (
+            <span />
+          )}
         </div>
 
         <div className="dialog__state">{on ? `Ein · ${pct}%` : "Aus"}</div>
@@ -217,6 +232,8 @@ export function MoreInfoDialog({ entityId, title, onClose }: Props) {
             ))}
           </div>
         )}
+
+        {showSettings && config && <SettingsSheet config={config} />}
       </div>
     </div>
   );

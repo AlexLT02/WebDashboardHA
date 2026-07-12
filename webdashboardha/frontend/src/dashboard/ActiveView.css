@@ -1,0 +1,48 @@
+.active-view {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 8px 12px 24px;
+}
+
+.active-group {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 8px 10px 10px;
+  margin-bottom: 12px;
+}
+
+.active-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 2px 8px;
+}
+
+.active-off {
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid var(--hot);
+  background: rgba(232, 116, 116, 0.15);
+  color: var(--hot);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.active-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-auto-rows: 76px;
+  gap: 10px;
+}
+
+.active-empty {
+  padding: 64px 24px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 15px;
+}
