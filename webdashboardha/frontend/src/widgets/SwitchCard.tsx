@@ -21,7 +21,7 @@ export function SwitchCard({ config }: { config: WidgetConfig }) {
   const big = config.h >= 2;
 
   if (!entity) {
-    return <Tile icon={Icon} title={name} subtitle="nicht verfügbar" unavailable big={big} />;
+    return <Tile icon={Icon} title={name} subtitle="nicht verfügbar" unavailable big={big} gridH={config.h} />;
   }
 
   const on = entity.state === "on";
@@ -39,7 +39,7 @@ export function SwitchCard({ config }: { config: WidgetConfig }) {
         title={name}
         subtitle={on ? "Ein" : "Aus"}
         active={on}
-        big={big}
+        big={big} gridH={config.h}
         onTap={toggle}
         onLongPress={() => setOpen(true)}
       />

@@ -40,3 +40,17 @@ export function useViewport(): Viewport {
 export function clampNum(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value));
 }
+
+/** Ungefähre Pixelgröße einer Rasterzelle (w×h) im 6-spaltigen Dashboard —
+ *  für größenabhängig skalierende Inhalte (Uhr, Panels). */
+export function useCellBox(w: number, h: number): { boxW: number; boxH: number } {
+  const vp = useViewport();
+  const cols = 6;
+  const gap = 10;
+  const containerW = Math.min(vp.width, 1280) - 24;
+  const cellW = (containerW - gap * (cols - 1)) / cols;
+  return {
+    boxW: Math.max(0, w * cellW + (w - 1) * gap),
+    boxH: h * 76 + (h - 1) * gap,
+  };
+}

@@ -20,7 +20,7 @@ export function SensorCard({ config }: { config: WidgetConfig }) {
   const big = config.h >= 2;
 
   if (!entity) {
-    return <Tile icon={Icon} title={name} subtitle="nicht verfügbar" unavailable big={big} />;
+    return <Tile icon={Icon} title={name} subtitle="nicht verfügbar" unavailable big={big} gridH={config.h} />;
   }
 
   return (
@@ -29,7 +29,7 @@ export function SensorCard({ config }: { config: WidgetConfig }) {
         icon={Icon}
         title={name}
         subtitle={sensorStateLabel(entity)}
-        big={big}
+        big={big} gridH={config.h}
         onLongPress={() => setOpen(true)}
       />
       {open && <DeviceDialog config={config} onClose={() => setOpen(false)} />}
