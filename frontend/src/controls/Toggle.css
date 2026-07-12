@@ -1,0 +1,39 @@
+.toggle {
+  position: relative;
+  width: 64px;
+  height: 44px; /* volle Tap-Höhe */
+  padding: 0;
+  border: none;
+  border-radius: 22px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.toggle.is-on {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.toggle__knob {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff;
+  transition: left 0.15s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.toggle.is-on .toggle__knob {
+  left: 27px;
+}
+
+.toggle:disabled {
+  opacity: 0.4;
+  cursor: default;
+}

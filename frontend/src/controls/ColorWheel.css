@@ -1,0 +1,31 @@
+.color-wheel {
+  position: relative;
+  border-radius: 50%;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.color-wheel canvas {
+  display: block;
+  border-radius: 50%;
+}
+
+.color-wheel__knob {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  margin-left: -11px;
+  margin-top: -11px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+  background: transparent;
+  pointer-events: none;
+}
+
+.color-wheel.is-disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}

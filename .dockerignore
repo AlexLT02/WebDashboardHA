@@ -1,0 +1,13 @@
+**/node_modules
+frontend/dist
+**/__pycache__
+**/*.pyc
+.venv
+venv
+.git
+data
+ha-addon/data
+tests
+*.md
+.env
+.env.*

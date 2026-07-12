@@ -1,0 +1,51 @@
+.app {
+  min-height: 100%;
+}
+
+.app__main {
+  min-height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  /* Safe-Area fürs iPad im Vollbild-Kiosk (Notch/Statusleiste). */
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.app__error {
+  margin: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  background: rgba(232, 116, 116, 0.15);
+  border: 1px solid var(--hot);
+  color: var(--text);
+  font-size: 14px;
+}
+
+.app__loading {
+  padding: 48px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* Dezenter Trennungs-Hinweis, nur sichtbar wenn offline. */
+.conn-warn {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: rgba(232, 116, 116, 0.18);
+  border: 1px solid var(--hot);
+  color: var(--text);
+  font-size: 13px;
+  z-index: 90;
+}
+
+.conn-warn__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--hot);
+}

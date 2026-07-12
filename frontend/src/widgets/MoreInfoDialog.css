@@ -1,0 +1,128 @@
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 100;
+}
+
+.dialog {
+  width: 92vw;
+  max-width: 340px;
+  max-height: 92vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 14px 18px 20px;
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.dialog__header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.dialog__title {
+  font-size: 17px;
+  margin: 0;
+  text-align: center;
+}
+
+.dialog__close {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.dialog__state {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Zentraler Regler-Bereich (Höhe stabil, damit Modus-Wechsel nicht springt). */
+.dialog__control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  padding: 4px 0;
+}
+
+/* Modus-Umschalter als Pille */
+.mode-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px;
+  background: var(--surface-2);
+  border-radius: 28px;
+}
+
+.mode-pill__btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background 0.12s ease,
+    color 0.12s ease;
+}
+
+.mode-pill__btn.is-active {
+  background: var(--text);
+  color: #14161b;
+}
+
+.mode-pill__btn.is-on {
+  background: var(--warn);
+  color: #1a1400;
+}
+
+.dialog__presets {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  width: 100%;
+  max-width: 236px;
+  justify-items: center;
+}
+
+.dialog__swatch {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dialog__swatch:active {
+  transform: scale(0.92);
+}

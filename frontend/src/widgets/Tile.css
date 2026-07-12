@@ -1,0 +1,72 @@
+.tile {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-height: 60px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.12s ease;
+}
+
+.tile:active {
+  background: var(--surface-2);
+}
+
+.tile__badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  cursor: pointer;
+  flex: none;
+  transition:
+    background 0.12s ease,
+    color 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Aktiv (Licht/Schalter an): warmes Badge, falls keine echte Farbe gesetzt ist. */
+.tile.is-active .tile__badge {
+  background: var(--warn);
+  color: #1a1400;
+}
+
+.tile__badge:disabled {
+  cursor: default;
+}
+
+.tile__text {
+  min-width: 0; /* erlaubt ellipsis */
+}
+
+.tile__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tile__subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tile.is-unavailable {
+  opacity: 0.5;
+}

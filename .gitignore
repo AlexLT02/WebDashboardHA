@@ -1,0 +1,36 @@
+# Node / Frontend
+node_modules/
+frontend/dist/
+frontend/node_modules/
+*.local
+.vite/
+
+# Python / Backend
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Env / Secrets
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Add-on lokale Daten
+data/
+ha-addon/data/
+
+# Test-Artefakte
+tests/playwright-report/
+tests/test-results/
+coverage/

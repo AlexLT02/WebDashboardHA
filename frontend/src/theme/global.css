@@ -1,0 +1,56 @@
+/*
+ * Design-Tokens als CSS-Variablen (in Safari 12 unterstützt).
+ * Dark-Mode ist Default — Wand-iPad läuft dauerhaft dunkel.
+ * WICHTIG: kein flexbox `gap` (erst Safari 14.1) — Abstände via Grid-gap
+ * oder margin.
+ */
+:root {
+  --bg: #0f1115;
+  --surface: #1a1d24;
+  --surface-2: #242832;
+  --border: #2f3440;
+  --text: #e6e8ec;
+  --text-muted: #9aa0ac;
+  --accent: #4c8dff;
+  --ok: #4ec85b;
+  --warn: #e8b260;
+  --hot: #e87474;
+
+  --radius: 14px;
+  --tap-min: 44px; /* minimale Touch-Trefferfläche */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  /* Kiosk: kein Text-Select, kein Callout, kein Tap-Highlight */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-shell {
+  padding: 24px;
+}
+
+h1 {
+  font-size: 22px;
+  margin: 0 0 12px;
+}
