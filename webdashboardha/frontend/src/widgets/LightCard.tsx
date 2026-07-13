@@ -15,7 +15,7 @@ export function LightCard({ config }: { config: WidgetConfig }) {
   const big = config.h >= 2; // zentriertes Layout nur bei mehr Höhe
 
   if (!entity) {
-    return <Tile icon={Icon} title={name} subtitle="nicht verfügbar" unavailable big={big} gridH={config.h} />;
+    return <Tile icon={Icon} title={name} subtitle="nicht verfügbar" unavailable big={big} gridW={config.w} gridH={config.h} />;
   }
 
   const on = entity.state === "on";
@@ -42,7 +42,7 @@ export function LightCard({ config }: { config: WidgetConfig }) {
         subtitle={subtitle}
         active={on}
         accent={accent}
-        big={big} gridH={config.h}
+        big={big} gridW={config.w} gridH={config.h}
         onTap={toggle}
         onLongPress={() => setOpen(true)}
       />

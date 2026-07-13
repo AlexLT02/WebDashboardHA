@@ -10,6 +10,7 @@
   min-height: 60px;
   height: 100%; /* füllt die Rasterzelle (2-hoch wird auch groß dargestellt) */
   box-sizing: border-box;
+  overflow: hidden; /* Inhalt bleibt in der Kachel, läuft nicht in Nachbarn */
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: background 0.12s ease;
@@ -34,6 +35,13 @@
 .tile.is-big .tile__title {
   font-size: 16px;
   white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-width: 100%;
+}
+.tile.is-big .tile__text {
+  min-width: 0;
+  max-width: 100%;
 }
 .tile.is-big .tile__subtitle {
   font-size: 14px;

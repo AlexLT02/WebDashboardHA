@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import { useLongPress } from "../controls/useLongPress";
+import { useCellBox, clampNum } from "../state/useViewport";
 import "./Tile.css";
 
 interface Props {
@@ -12,7 +13,8 @@ interface Props {
   unavailable?: boolean;
   /** Größer dargestellt (Widget ist >1 Zelle) → zentriertes Layout mit größerem Icon. */
   big?: boolean;
-  /** Rasterhöhe (Zeilen) — skaliert Icon/Schrift bei größeren Kacheln mit. */
+  /** Rastermaße — skalieren Icon/Schrift bei größeren Kacheln mit (nach Breite UND Höhe). */
+  gridW?: number;
   gridH?: number;
   /** Kurzes Tippen (z. B. an/aus schalten). */
   onTap?: () => void;
@@ -32,6 +34,7 @@ export function Tile({
   accent,
   unavailable,
   big,
+  gridW = 1,
   gridH = 1,
   onTap,
   onLongPress,
@@ -47,13 +50,18 @@ export function Tile({
   const badgeStyle =
     active && accent ? { background: accent, color: "#fff" } : undefined;
 
-  // Bei größeren Kacheln Icon/Schrift mit der Höhe hochskalieren.
-  const boxH = gridH * 76 + (gridH - 1) * 10;
-  const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(v, hi));
-  const iconSize = big ? Math.round(clamp(boxH * 0.3, 30, 120)) : 22;
-  const titleStyle = big ? { fontSize: Math.round(clamp(boxH * 0.13, 16, 44)) } : undefined;
-  const subStyle = big ? { fontSize: Math.round(clamp(boxH * 0.1, 14, 28)) } : undefined;
-  const badgeSize = big ? Math.round(clamp(boxH * 0.42, 56, 150)) : undefined;
+  // Bei größeren Kacheln Icon/Schrift mitskalieren — nach BEIDEN Dimensionen,
+  // damit der Titel in die (ggf. schmale) Breite passt und nicht überläuft.
+  const { boxW, boxH } = useCellBox(gridW, gridH);
+  const unit = Math.min(boxW, boxH);
+  const iconSize = big ? Math.round(clampNum(unit * 0.3, 30, 96)) : 22;
+  const titleStyle = big
+    ? { fontSize: Math.round(clampNum(Math.min(boxW * 0.15, boxH * 0.13), 15, 28)) }
+    : undefined;
+  const subStyle = big
+    ? { fontSize: Math.round(clampNum(Math.min(boxW * 0.11, boxH * 0.1), 13, 20)) }
+    : undefined;
+  const badgeSize = big ? Math.round(clampNum(unit * 0.4, 56, 120)) : undefined;
 
   return (
     <div
