@@ -58,11 +58,6 @@ export function DashboardGrid({
   const raf = useRef(0);
 
   const totalWidgets = dashboard.groups.reduce((n, g) => n + g.widgets.length, 0);
-  const normalGroups = dashboard.groups.filter((g) => !g.ungrouped);
-  const looseItems: { w: WidgetConfig; groupId: string }[] = [];
-  for (const g of dashboard.groups) {
-    if (g.ungrouped) for (const wi of g.widgets) looseItems.push({ w: wi, groupId: g.id });
-  }
 
   const computeTarget = useCallback(
     (x: number, y: number) => {
@@ -236,7 +231,7 @@ export function DashboardGrid({
 
   return (
     <div className="dashboard-groups">
-      {normalGroups.map((group: Group, gi) => {
+      {dashboard.groups.map((group: Group, gi) => {
         // Im Edit-Modus zusätzliche Zeilen als Drop-/Resize-Raum (Höhe unbegrenzt).
         const rows = rowCount(group) + (editMode ? 3 : 0);
         const gridStyle: React.CSSProperties = {
@@ -259,7 +254,7 @@ export function DashboardGrid({
                 editMode={Boolean(editMode)}
                 columns={group.columns}
                 canMoveUp={gi > 0}
-                canMoveDown={gi < normalGroups.length - 1}
+                canMoveDown={gi < dashboard.groups.length - 1}
                 onRename={(name) => onRenameGroup?.(group.id, name)}
                 onRemove={() => onRemoveGroup?.(group.id)}
                 onAddWidget={() => onAddWidget?.(group.id)}
@@ -359,53 +354,6 @@ export function DashboardGrid({
           </section>
         );
       })}
-
-      {/* Lose Widgets (ohne Gruppe): einzelne Kacheln, füllen Lücken um die Gruppen */}
-      {looseItems.map(({ w, groupId }) => (
-        <div
-          className={`grid-cell loose-item${editMode ? " is-edit" : ""}`}
-          key={w.id}
-          style={{
-            gridColumn: `span ${Math.min(Math.max(1, w.w), DASHBOARD_COLS)}`,
-            height: w.h * ROW_H + (w.h - 1) * GAP,
-          }}
-        >
-          {editMode && (
-            <div className="edit-overlay">
-              <button
-                type="button"
-                className="edit-overlay__btn"
-                aria-label="Einstellungen"
-                onClick={() => setSettingsWidget(w)}
-              >
-                ⚙
-              </button>
-              <button
-                type="button"
-                className="edit-overlay__btn edit-overlay__btn--danger"
-                aria-label="entfernen"
-                onClick={() => onRemoveWidget?.(groupId, w.id)}
-              >
-                ✕
-              </button>
-            </div>
-          )}
-          <div className="grid-cell__inner">
-            <Widget config={w} />
-          </div>
-          {editMode && (
-            <button
-              type="button"
-              className="resize-handle"
-              aria-label="Größe ändern"
-              onTouchStart={(e) => startResize(groupId, w, e)}
-              onMouseDown={(e) => startResize(groupId, w, e)}
-            >
-              ⤡
-            </button>
-          )}
-        </div>
-      ))}
 
       {editMode && (
         <div className="add-row" style={{ gridColumn: "1 / -1" }}>

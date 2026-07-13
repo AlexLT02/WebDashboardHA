@@ -20,7 +20,9 @@
   font-size: 30px;
   font-weight: 700;
   color: var(--text);
-  line-height: 1.1;
+  line-height: 1.05;
+  white-space: nowrap;
+  max-width: 100%;
 }
 .clock__date {
   font-size: 13px;
