@@ -1,14 +1,29 @@
 import type { Group, WidgetConfig } from "./dashboards";
 
-/** Belegte Zellen eines Widgets in ein Set schreiben. */
-function addCells(set: Set<string>, w: WidgetConfig): void {
+/** Gesamtbreite des Dashboards in Rastereinheiten (auch in DashboardGrid gespiegelt). */
+export const DASHBOARD_COLS = 6;
+/** Der Gruppenname sitzt als <legend> auf dem <fieldset>-Rahmen und belegt KEINE
+ *  eigene Rasterzeile mehr — spart eine ganze Zeile Höhe pro Gruppe. */
+export const GROUP_HEADER_ROWS = 0;
+
+/** Ein positioniertes Rechteck im Dashboard-Raster (Gruppe ODER loses Widget). */
+export interface Block {
+  id: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+/** Belegte Zellen eines Rechtecks in ein Set schreiben. */
+function addCells(set: Set<string>, w: Block): void {
   for (let dx = 0; dx < w.w; dx++) {
     for (let dy = 0; dy < w.h; dy++) set.add(`${w.x + dx},${w.y + dy}`);
   }
 }
 
-/** Überlappen sich zwei Widget-Rechtecke? */
-function overlaps(a: WidgetConfig, b: WidgetConfig): boolean {
+/** Überlappen sich zwei Rechtecke? */
+function overlaps(a: Block, b: Block): boolean {
   return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 }
 
@@ -38,11 +53,11 @@ function firstFreeRect(
  * die es überlappen, rutschen an die nächste freie Stelle (blockierendes Element
  * gleitet weiter). Nicht-überlappende Widgets bleiben unberührt (Lücken erlaubt).
  */
-export function resolveOverlaps(
-  widgets: WidgetConfig[],
+export function resolveOverlaps<T extends Block>(
+  widgets: T[],
   columns: number,
   fixedId: string,
-): WidgetConfig[] {
+): T[] {
   const fixed = widgets.find((w) => w.id === fixedId);
   if (!fixed) return widgets;
   const others = widgets.filter((w) => w.id !== fixedId);
@@ -155,4 +170,157 @@ export function emptyCells(group: Group, rows: number): { x: number; y: number }
     }
   }
   return cells;
+}
+
+/* ===================================================================== */
+/* Dashboard-Ebene: Gruppen-Blöcke UND lose Widgets teilen sich EIN      */
+/* 6-spaltiges Raster mit fester Zeilenhöhe. Beides sind „Blöcke“.        */
+/* ===================================================================== */
+
+/** Breite eines Gruppen-Blocks in Dashboard-Spalten (= Spaltenzahl, gekappt). */
+export function groupBlockWidth(group: Group): number {
+  return Math.min(Math.max(1, group.columns), DASHBOARD_COLS);
+}
+
+/** Höhe eines Gruppen-Blocks in Rasterzeilen (Kopfzeile + Inhaltszeilen). */
+export function groupBlockHeight(group: Group): number {
+  return GROUP_HEADER_ROWS + rowCount(group);
+}
+
+/** Der lose Bereich (Widgets ohne Gruppe), falls vorhanden. */
+export function looseGroup(groups: Group[]): Group | undefined {
+  return groups.find((g) => g.ungrouped);
+}
+
+/** Echte (nicht-lose) Gruppen. */
+export function realGroups(groups: Group[]): Group[] {
+  return groups.filter((g) => !g.ungrouped);
+}
+
+/**
+ * Alle Top-Level-Blöcke als Rechtecke: jede echte Gruppe als ein Block
+ * (Breite=Spalten, Höhe=Kopf+Inhalt), jedes lose Widget als eigener Block.
+ * Die id ist die Gruppen- bzw. Widget-id (dashboard-weit eindeutig).
+ */
+export function topLevelBlocks(groups: Group[]): Block[] {
+  const blocks: Block[] = [];
+  for (const g of groups) {
+    if (g.ungrouped) {
+      for (const w of g.widgets) blocks.push({ id: w.id, x: w.x, y: w.y, w: w.w, h: w.h });
+    } else {
+      blocks.push({
+        id: g.id,
+        x: g.x ?? 0,
+        y: g.y ?? 0,
+        w: groupBlockWidth(g),
+        h: groupBlockHeight(g),
+      });
+    }
+  }
+  return blocks;
+}
+
+/** Aufgelöste Blockpositionen zurück in Gruppen/lose Widgets schreiben. */
+function applyBlockPositions(groups: Group[], blocks: Block[]): Group[] {
+  const pos = new Map(blocks.map((b) => [b.id, b]));
+  return groups.map((g) => {
+    if (g.ungrouped) {
+      return {
+        ...g,
+        widgets: g.widgets.map((w) => {
+          const p = pos.get(w.id);
+          return p ? { ...w, x: p.x, y: p.y } : w;
+        }),
+      };
+    }
+    const p = pos.get(g.id);
+    return p ? { ...g, x: p.x, y: p.y } : g;
+  });
+}
+
+/**
+ * Einen Top-Level-Block (Gruppe oder loses Widget) auf (x,y) legen; überlappende
+ * Blöcke weichen dashboard-weit an die nächste freie Stelle aus.
+ */
+export function moveBlock(groups: Group[], blockId: string, x: number, y: number): Group[] {
+  const blocks = topLevelBlocks(groups);
+  const moving = blocks.find((b) => b.id === blockId);
+  if (!moving) return groups;
+  const nx = Math.max(0, Math.min(x, DASHBOARD_COLS - moving.w));
+  const ny = Math.max(0, y);
+  const next = blocks.map((b) => (b.id === blockId ? { ...b, x: nx, y: ny } : b));
+  const resolved = resolveOverlaps(next, DASHBOARD_COLS, blockId);
+  return applyBlockPositions(groups, resolved);
+}
+
+/** Erste freie Top-Level-Position für ein w×h-Rechteck (für neue lose Widgets). */
+export function firstFreeBlock(groups: Group[], w: number, h: number): { x: number; y: number } {
+  const occupied = new Set<string>();
+  for (const b of topLevelBlocks(groups)) addCells(occupied, b);
+  return firstFreeRect(occupied, DASHBOARD_COLS, Math.min(w, DASHBOARD_COLS), h);
+}
+
+/** Höhe des Dashboard-Rasters in Zeilen (unterste belegte Zeile aller Blöcke). */
+export function dashboardRowCount(groups: Group[]): number {
+  let max = 0;
+  for (const b of topLevelBlocks(groups)) max = Math.max(max, b.y + b.h);
+  return Math.max(1, max);
+}
+
+/** Freie Top-Level-Zellen bis `rows` Zeilen — Drop-Slots im Edit-Modus. */
+export function topLevelEmptyCells(groups: Group[], rows: number): { x: number; y: number }[] {
+  const taken = new Set<string>();
+  for (const b of topLevelBlocks(groups)) addCells(taken, b);
+  const cells: { x: number; y: number }[] = [];
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < DASHBOARD_COLS; x++) {
+      if (!taken.has(`${x},${y}`)) cells.push({ x, y });
+    }
+  }
+  return cells;
+}
+
+/**
+ * Layout normalisieren: echten Gruppen ohne (bzw. mit überlappender) x/y-Position
+ * eine kollisionsfreie Stelle geben. Für Altbestände, die noch als Blockfluss
+ * gespeichert wurden. Idempotent, wenn schon alles kollisionsfrei ist.
+ */
+export function normalizeLayout(groups: Group[]): Group[] {
+  const out = groups.map((g) => ({ ...g }));
+  const occupied = new Set<string>();
+
+  const clashes = (b: Block): boolean => {
+    for (let dx = 0; dx < b.w; dx++)
+      for (let dy = 0; dy < b.h; dy++)
+        if (occupied.has(`${b.x + dx},${b.y + dy}`)) return true;
+    return false;
+  };
+
+  // 1. Lose Widgets behalten ihre Position (Vorrang), sofern kollisionsfrei.
+  const loose = looseGroup(out);
+  if (loose) {
+    for (const w of loose.widgets) {
+      const b: Block = { id: w.id, x: w.x, y: w.y, w: w.w, h: w.h };
+      if (!clashes(b)) addCells(occupied, b);
+    }
+  }
+
+  // 2. Echte Gruppen: gültige, kollisionsfreie Position behalten; sonst zeilenweise neu setzen.
+  for (const g of out) {
+    if (g.ungrouped) continue;
+    const w = groupBlockWidth(g);
+    const h = groupBlockHeight(g);
+    const positioned = g.x !== undefined && g.y !== undefined;
+    const current: Block = { id: g.id, x: g.x ?? 0, y: g.y ?? 0, w, h };
+    if (positioned && !clashes(current)) {
+      addCells(occupied, current);
+    } else {
+      const spot = firstFreeRect(occupied, DASHBOARD_COLS, w, h);
+      g.x = spot.x;
+      g.y = spot.y;
+      addCells(occupied, { id: g.id, ...spot, w, h });
+    }
+  }
+
+  return out;
 }

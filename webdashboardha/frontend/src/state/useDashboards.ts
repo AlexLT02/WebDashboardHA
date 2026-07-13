@@ -12,8 +12,10 @@ import {
   type WidgetConfig,
 } from "./dashboards";
 import {
+  firstFreeBlock,
   firstFreeCell,
-  moveGroup as moveGroupFn,
+  moveBlock,
+  normalizeLayout,
   placeWidget,
   resizeWidget as resizeWidgetFn,
 } from "./grid";
@@ -32,6 +34,30 @@ function ensureTarget(groups: Group[], groupId: string): { groups: Group[]; targ
   return { groups: [loose, ...groups], targetId: loose.id };
 }
 
+/** Gruppen-Block an seiner aktuellen Position neu einpassen (Nachbarn weichen aus),
+ *  nachdem sich seine Größe geändert hat (Spaltenzahl / neue Inhaltszeile). */
+function reflowRealGroup(groups: Group[], groupId: string): Group[] {
+  const g = groups.find((gr) => gr.id === groupId);
+  if (!g || g.ungrouped) return groups;
+  return moveBlock(groups, groupId, g.x ?? 0, g.y ?? 0);
+}
+
+/** Widget in Ziel anlegen: loses Ziel → erste freie Dashboard-Zelle, echte Gruppe →
+ *  erste freie Zelle im Gruppenraster (+ Block neu einpassen, falls er wächst). */
+function addWidgetToTarget(
+  groups: Group[],
+  groupId: string,
+  makeWidget: (cell: { x: number; y: number }) => WidgetConfig,
+): Group[] {
+  const { groups: gs, targetId } = ensureTarget(groups, groupId);
+  const target = gs.find((g) => g.id === targetId);
+  if (!target) return gs;
+  const cell = target.ungrouped ? firstFreeBlock(gs, 1, 1) : firstFreeCell(target);
+  const widget = makeWidget(cell);
+  const out = gs.map((g) => (g.id === targetId ? { ...g, widgets: [...g.widgets, widget] } : g));
+  return target.ungrouped ? out : reflowRealGroup(out, targetId);
+}
+
 export interface DashboardsApi {
   dashboards: Dashboard[];
   current: Dashboard | null;
@@ -45,6 +71,10 @@ export interface DashboardsApi {
   removeWidget: (groupId: string, widgetId: string) => void;
   /** Widget per Drag&Drop auf Zelle (x,y) einer (ggf. anderen) Gruppe legen. */
   placeWidgetAt: (widgetId: string, toGroupId: string, x: number, y: number) => void;
+  /** Widget aus einer Gruppe lösen und frei aufs Dashboard-Raster (x,y) legen. */
+  placeWidgetLoose: (widgetId: string, x: number, y: number) => void;
+  /** Einen Top-Level-Block (Gruppe oder loses Widget) im Dashboard-Raster auf (x,y) legen. */
+  moveBlockAt: (blockId: string, x: number, y: number) => void;
   /** Widget-Größe (Spalten/Zeilen) ändern; Nachbarn weichen aus. */
   resizeWidget: (groupId: string, widgetId: string, w: number, h: number) => void;
   /** options eines Widgets aktualisieren (Icon, Alias, …). */
@@ -56,7 +86,6 @@ export interface DashboardsApi {
   renameGroup: (groupId: string, name: string) => void;
   removeGroup: (groupId: string) => void;
   setGroupColumns: (groupId: string, columns: number) => void;
-  moveGroup: (groupId: string, dir: -1 | 1) => void;
   // Dashboards
   createNew: (name: string) => Promise<void>;
   rename: (name: string) => void;
@@ -72,8 +101,10 @@ export function useDashboards(): DashboardsApi {
   useEffect(() => {
     fetchDashboards()
       .then((list) => {
-        setDashboards(list);
-        if (list.length > 0) setCurrentId(list[0].id);
+        // Altbestände (Gruppen ohne x/y) einmalig aufs Dashboard-Raster normalisieren.
+        const normalized = list.map((d) => ({ ...d, groups: normalizeLayout(d.groups) }));
+        setDashboards(normalized);
+        if (normalized.length > 0) setCurrentId(normalized[0].id);
         setLoading(false);
       })
       .catch((e) => {
@@ -107,25 +138,19 @@ export function useDashboards(): DashboardsApi {
 
   const addWidget = useCallback(
     (entity: EntityInfo, groupId: string) => {
-      withGroups((groups) => {
-        const { groups: gs, targetId } = ensureTarget(groups, groupId);
-        return gs.map((g) => {
-          if (g.id !== targetId) return g;
-          const cell = firstFreeCell(g);
-          const widget: WidgetConfig = {
-            id: genId("w-"),
-            type: widgetTypeForDomain(entity.domain),
-            entity_id: entity.entity_id,
-            title: entity.name,
-            x: cell.x,
-            y: cell.y,
-            w: 1,
-            h: 1,
-            options: {},
-          };
-          return { ...g, widgets: [...g.widgets, widget] };
-        });
-      });
+      withGroups((groups) =>
+        addWidgetToTarget(groups, groupId, (cell) => ({
+          id: genId("w-"),
+          type: widgetTypeForDomain(entity.domain),
+          entity_id: entity.entity_id,
+          title: entity.name,
+          x: cell.x,
+          y: cell.y,
+          w: 1,
+          h: 1,
+          options: {},
+        })),
+      );
     },
     [withGroups],
   );
@@ -143,38 +168,70 @@ export function useDashboards(): DashboardsApi {
 
   const addSpecialWidget = useCallback(
     (type: string, groupId: string) => {
-      withGroups((groups) => {
-        const { groups: gs, targetId } = ensureTarget(groups, groupId);
-        return gs.map((g) => {
-          if (g.id !== targetId) return g;
-          const cell = firstFreeCell(g);
-          const widget: WidgetConfig = {
-            id: genId("w-"),
-            type,
-            entity_id: "",
-            x: cell.x,
-            y: cell.y,
-            w: 1,
-            h: 1,
-            options: {},
-          };
-          return { ...g, widgets: [...g.widgets, widget] };
-        });
-      });
+      withGroups((groups) =>
+        addWidgetToTarget(groups, groupId, (cell) => ({
+          id: genId("w-"),
+          type,
+          entity_id: "",
+          x: cell.x,
+          y: cell.y,
+          w: 1,
+          h: 1,
+          options: {},
+        })),
+      );
     },
     [withGroups],
   );
 
   const placeWidgetAt = useCallback(
     (widgetId: string, toGroupId: string, x: number, y: number) => {
-      withGroups((groups) => placeWidget(groups, widgetId, toGroupId, x, y));
+      // Ziel ist eine echte Gruppe: intern platzieren + Block ggf. neu einpassen.
+      withGroups((groups) => reflowRealGroup(placeWidget(groups, widgetId, toGroupId, x, y), toGroupId));
+    },
+    [withGroups],
+  );
+
+  const placeWidgetLoose = useCallback(
+    (widgetId: string, x: number, y: number) => {
+      withGroups((groups) => {
+        const { groups: gs, targetId } = ensureTarget(groups, UNGROUPED);
+        let widget: WidgetConfig | undefined;
+        const detached = gs.map((g) => {
+          const found = g.widgets.find((w) => w.id === widgetId);
+          if (found) widget = { ...found, x, y };
+          return { ...g, widgets: g.widgets.filter((w) => w.id !== widgetId) };
+        });
+        if (!widget) return groups;
+        const withWidget = detached.map((g) =>
+          g.id === targetId ? { ...g, widgets: [...g.widgets, widget!] } : g,
+        );
+        return moveBlock(withWidget, widgetId, x, y);
+      });
+    },
+    [withGroups],
+  );
+
+  const moveBlockAt = useCallback(
+    (blockId: string, x: number, y: number) => {
+      withGroups((groups) => moveBlock(groups, blockId, x, y));
     },
     [withGroups],
   );
 
   const resizeWidget = useCallback(
     (groupId: string, widgetId: string, w: number, h: number) => {
-      withGroups((groups) => resizeWidgetFn(groups, groupId, widgetId, w, h));
+      withGroups((groups) => {
+        const resized = resizeWidgetFn(groups, groupId, widgetId, w, h);
+        const g = resized.find((gr) => gr.id === groupId);
+        if (!g) return resized;
+        if (g.ungrouped) {
+          // Loses Widget wuchs -> im Dashboard-Raster gegen Gruppen-Blöcke auflösen.
+          const wi = g.widgets.find((x) => x.id === widgetId);
+          return wi ? moveBlock(resized, widgetId, wi.x, wi.y) : resized;
+        }
+        return reflowRealGroup(resized, groupId);
+      });
     },
     [withGroups],
   );
@@ -196,23 +253,21 @@ export function useDashboards(): DashboardsApi {
   const setGroupColumns = useCallback(
     (groupId: string, columns: number) => {
       const cols = Math.max(1, Math.min(6, columns));
-      withGroups((groups) =>
-        groups.map((g) => (g.id === groupId ? { ...g, columns: cols } : g)),
-      );
-    },
-    [withGroups],
-  );
-
-  const moveGroup = useCallback(
-    (groupId: string, dir: -1 | 1) => {
-      withGroups((groups) => moveGroupFn(groups, groupId, dir));
+      withGroups((groups) => {
+        const updated = groups.map((g) => (g.id === groupId ? { ...g, columns: cols } : g));
+        // Breitenänderung kann Nachbarn überlappen -> Block neu einpassen.
+        return reflowRealGroup(updated, groupId);
+      });
     },
     [withGroups],
   );
 
   const addGroup = useCallback(
     (name: string) => {
-      withGroups((groups) => [...groups, { id: genId("g-"), name, columns: 6, widgets: [] }]);
+      // Neue Gruppe an die erste freie Stelle im Dashboard-Raster legen.
+      withGroups((groups) =>
+        normalizeLayout([...groups, { id: genId("g-"), name, columns: 6, widgets: [] }]),
+      );
     },
     [withGroups],
   );
@@ -278,6 +333,8 @@ export function useDashboards(): DashboardsApi {
     addSpecialWidget,
     removeWidget,
     placeWidgetAt,
+    placeWidgetLoose,
+    moveBlockAt,
     resizeWidget,
     updateWidgetOptions,
     applyGroups,
@@ -285,7 +342,6 @@ export function useDashboards(): DashboardsApi {
     renameGroup,
     removeGroup,
     setGroupColumns,
-    moveGroup,
     createNew,
     rename,
     removeCurrent,

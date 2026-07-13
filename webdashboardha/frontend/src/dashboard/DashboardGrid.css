@@ -1,52 +1,63 @@
 .dashboard-groups {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 8px 12px 24px;
-  /* Dashboard = 6-spaltiges Raster; Gruppen spannen ihre Spaltenzahl und
-     fließen nebeneinander (z. B. zwei 3er-Gruppen = eine Reihe). */
+  /* Kein horizontales Padding: die Drop-Rechnung (Punkt -> Rasterzelle) misst die
+     Breite dieses Elements durch 6; Padding würde die Zellen verschieben. */
+  padding: 8px 0 24px;
+  /* EIN gemeinsames 6-spaltiges Raster mit fester Zeilenhöhe. Gruppen-Blöcke UND
+     lose Widgets werden per grid-column/grid-row (x/y) explizit platziert. */
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 12px;
-  align-items: start;
-  /* dense: lose Einzel-Widgets füllen Lücken neben/um die Gruppen */
-  grid-auto-flow: row dense;
+  grid-auto-flow: row;
 }
 
-/* Lose Einzelkachel im Dashboard-Raster */
-.loose-item {
-  min-width: 0;
-}
-
+/* Gruppen-Block als <fieldset>: der Name sitzt als <legend> auf dem Rahmen und
+   spart die früher reservierte Kopfzeile. Fieldset-Defaults müssen resettet
+   werden (min-width:min-content bläht sonst das Raster auf). */
 .group {
+  position: relative; /* Anker für die absolut sitzende Legend */
   min-width: 0;
-  /* Dezenter Card-Hintergrund je Gruppe */
+  min-inline-size: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 8px;
+  border-radius: 12px;
+  padding: 5px;
 }
 
-/* Loser Bereich (Widgets ohne Gruppe): kein Card-Hintergrund */
-.group.group--loose {
-  background: none;
-  border: none;
-  border-radius: 0;
-  padding: 0;
-}
-
-.group__title {
-  font-size: 15px;
+/* Gruppenname als schwebendes Label auf dem oberen Rahmen (kostet keine Zeile).
+   Absolut statt native <legend>-Magie, weil display:flex-Fieldsets die native
+   Legend-Platzierung verlieren — so klappt es auch auf Safari 12. */
+.group__legend {
+  position: absolute;
+  top: -9px;
+  left: 10px;
+  z-index: 3;
+  padding: 0 4px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  margin: 4px 0 6px;
-  padding: 0 2px;
+  max-width: calc(100% - 20px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Loses Widget als gleichwertige Kachel direkt im Dashboard-Raster */
+.grid-cell--loose {
+  min-width: 0;
 }
 
 .dashboard-grid {
   display: grid;
-  gap: 10px;
+  gap: 8px;
+  /* füllt den Gruppen-Block unterhalb der Legend */
+  flex: 1 1 auto;
+  min-height: 0;
   /* Spalten kommen inline aus der Gruppen-Spaltenzahl; kein eigenes Padding,
      damit Kacheln über nebeneinander liegende Gruppen hinweg fluchten. */
 }

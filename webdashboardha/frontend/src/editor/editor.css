@@ -134,6 +134,9 @@
 }
 .grid-cell.is-edit .grid-cell__inner {
   pointer-events: none; /* kein versehentliches Schalten im Edit-Modus */
+  /* Inhalt zurücknehmen, damit die Edit-Buttons darüber klar lesbar sind und
+     nicht wie ein Bug über dem Gerätenamen zu „kleben“ scheinen. */
+  opacity: 0.45;
 }
 
 /* Sichtbare Raster-Zelle (leerer Drop-Slot) im Edit-Modus */
@@ -164,7 +167,30 @@
   overflow: hidden;
 }
 
+/* Ghost eines ganzen Gruppen-Blocks: nur ein beschrifteter Rahmen */
+.drag-ghost--group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(30, 34, 42, 0.92);
+  border: 2px solid var(--accent);
+}
+
+.drag-ghost__label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
 .edit-overlay__handle {
+  cursor: grab;
+  touch-action: none;
+}
+
+/* Zieh-Griff für den ganzen Gruppen-Block */
+.group__drag {
   cursor: grab;
   touch-action: none;
 }
@@ -189,42 +215,57 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Spaltenzahl-Regler im Gruppenkopf */
+/* Spaltenzahl-Regler im Gruppenkopf (Safari 12: margin statt flex-gap) */
 .group__cols {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  vertical-align: middle;
+}
+
+.group__cols > * {
+  margin-right: 2px;
 }
 
 .group__cols-val {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-muted);
-  min-width: 30px;
+  min-width: 24px;
   text-align: center;
+}
+
+.group__rename {
+  max-width: 130px;
 }
 
 .edit-overlay {
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: 3px;
+  right: 3px;
   z-index: 5;
   display: flex;
-  gap: 4px;
+  /* kein flex-gap (Safari 12) -> Abstand via Button-margin unten */
+  padding: 2px;
+  border-radius: 9px;
+  background: rgba(10, 12, 16, 0.72); /* Pille, damit die Buttons als Cluster lesbar sind */
 }
 
 .edit-overlay__btn {
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
   border: none;
-  background: rgba(20, 22, 27, 0.9);
+  background: rgba(36, 40, 50, 0.95);
   color: var(--text);
-  font-size: 15px;
+  font-size: 14px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   -webkit-tap-highlight-color: transparent;
+}
+
+.edit-overlay__btn + .edit-overlay__btn {
+  margin-left: 3px;
 }
 
 .edit-overlay__btn:disabled {
@@ -252,34 +293,44 @@
   background: var(--surface);
 }
 
-/* ---- Gruppen-Kopf im Edit-Modus ---- */
-.group__bar {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 0 0 6px;
-  padding: 6px 8px;
-  background: var(--surface);
+/* ---- Gruppen-Kopf im Edit-Modus: kompakte Controls als schwebende Toolbar ---- */
+.group__legend--edit {
+  /* überschreibt das schmale Label: volle Breite oben, darf umbrechen */
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  max-width: none;
+  padding: 3px 4px;
+  text-transform: none;
+  letter-spacing: 0;
+  white-space: normal;
+  line-height: 2;
+  background: rgba(26, 29, 36, 0.96);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
+}
+
+/* Kinder inline, Abstand via margin (kein flex-gap wegen Safari 12) */
+.group__legend--edit > * {
+  vertical-align: middle;
+  margin-right: 3px;
 }
 
 .group__name {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text);
 }
 
 .group__btn {
-  height: 34px;
-  min-width: 34px;
-  padding: 0 8px;
-  border-radius: 8px;
+  height: 26px;
+  min-width: 26px;
+  padding: 0 6px;
+  border-radius: 7px;
   border: 1px solid var(--border);
   background: var(--surface-2);
   color: var(--text);
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
@@ -287,6 +338,11 @@
 .group__btn--danger {
   color: var(--hot);
   border-color: var(--hot);
+}
+
+.group__btn--accent {
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 .group__add {

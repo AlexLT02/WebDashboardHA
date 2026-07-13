@@ -16,8 +16,12 @@ export interface WidgetConfig {
 export interface Group {
   id: string;
   name: string; // leer = Gruppe ohne sichtbaren Titel
-  columns: number; // feste Spaltenzahl des Rasters
-  ungrouped?: boolean; // loser Bereich ohne Card/Titel
+  columns: number; // feste Spaltenzahl des Rasters = Breite des Blocks im Dashboard-Raster
+  ungrouped?: boolean; // loser Bereich ohne Card/Titel (Widgets liegen direkt im Dashboard-Raster)
+  // Position des Gruppen-Blocks im 6-spaltigen Dashboard-Raster (0-basiert).
+  // Nur für echte Gruppen relevant; lose Widgets tragen ihre eigene x/y (= Dashboard-Koordinaten).
+  x?: number;
+  y?: number;
   widgets: WidgetConfig[];
 }
 

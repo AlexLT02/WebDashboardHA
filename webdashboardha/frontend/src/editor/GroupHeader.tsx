@@ -5,13 +5,12 @@ interface Props {
   name: string;
   editMode: boolean;
   columns: number;
-  canMoveUp: boolean;
-  canMoveDown: boolean;
   onRename: (name: string) => void;
   onRemove: () => void;
   onAddWidget: () => void;
   onSetColumns: (columns: number) => void;
-  onMove: (dir: -1 | 1) => void;
+  /** Beginnt das Ziehen des ganzen Gruppen-Blocks im Dashboard-Raster. */
+  onDragStart: (e: React.TouchEvent | React.MouseEvent) => void;
 }
 
 type Mode = "idle" | "renaming" | "confirmDelete";
@@ -22,34 +21,45 @@ export function GroupHeader({
   name,
   editMode,
   columns,
-  canMoveUp,
-  canMoveDown,
   onRename,
   onRemove,
   onAddWidget,
   onSetColumns,
-  onMove,
+  onDragStart,
 }: Props) {
   const [mode, setMode] = useState<Mode>("idle");
   const [text, setText] = useState(name);
 
+  // Normalmodus: Name sitzt als <legend> auf dem Rahmen (spart eine Zeile).
+  // Ohne Namen keine <legend> — der <fieldset>-Rahmen bleibt dann titellos.
   if (!editMode) {
     if (!name) return null;
-    return <h2 className="group__title">{name}</h2>;
+    return <legend className="group__legend">{name}</legend>;
   }
 
   return (
-    <div className="group__bar">
+    <legend className="group__legend group__legend--edit">
       {mode === "idle" && (
         <>
+          {/* Ganzen Gruppen-Block im Dashboard-Raster verschieben */}
+          <button
+            type="button"
+            className="group__btn group__drag"
+            aria-label="Gruppe verschieben"
+            onTouchStart={onDragStart}
+            onMouseDown={onDragStart}
+          >
+            ⠿
+          </button>
+
           <span className="group__name">{name || "Ohne Titel"}</span>
 
-          {/* Spaltenzahl (Gruppengröße) */}
+          {/* Spaltenzahl (Gruppenbreite) */}
           <span className="group__cols">
             <button
               type="button"
               className="group__btn"
-              aria-label="weniger Spalten"
+              aria-label="schmaler"
               disabled={columns <= 1}
               onClick={() => onSetColumns(columns - 1)}
             >
@@ -61,33 +71,13 @@ export function GroupHeader({
             <button
               type="button"
               className="group__btn"
-              aria-label="mehr Spalten (breiter)"
+              aria-label="breiter"
               disabled={columns >= 6}
               onClick={() => onSetColumns(columns + 1)}
             >
               +
             </button>
           </span>
-
-          {/* Gruppe verschieben */}
-          <button
-            type="button"
-            className="group__btn"
-            aria-label="Gruppe nach oben"
-            disabled={!canMoveUp}
-            onClick={() => onMove(-1)}
-          >
-            ↑
-          </button>
-          <button
-            type="button"
-            className="group__btn"
-            aria-label="Gruppe nach unten"
-            disabled={!canMoveDown}
-            onClick={() => onMove(1)}
-          >
-            ↓
-          </button>
 
           <button
             type="button"
@@ -108,9 +98,13 @@ export function GroupHeader({
           >
             🗑
           </button>
-          <span className="editbar__spacer" />
-          <button type="button" className="group__add" onClick={onAddWidget}>
-            + Widget
+          <button
+            type="button"
+            className="group__btn group__btn--accent"
+            aria-label="Widget hinzufügen"
+            onClick={onAddWidget}
+          >
+            +
           </button>
         </>
       )}
@@ -118,9 +112,9 @@ export function GroupHeader({
       {mode === "renaming" && (
         <>
           <input
-            className="editbar__input"
+            className="editbar__input group__rename"
             type="text"
-            placeholder="Gruppentitel (leer = keiner)"
+            placeholder="Titel (leer = keiner)"
             value={text}
             autoFocus
             onChange={(e) => setText(e.target.value)}
@@ -150,7 +144,7 @@ export function GroupHeader({
 
       {mode === "confirmDelete" && (
         <>
-          <span className="group__name">Gruppe löschen? (Widgets gehen mit)</span>
+          <span className="group__name">Löschen?</span>
           <button
             type="button"
             className="group__btn group__btn--danger"
@@ -166,6 +160,6 @@ export function GroupHeader({
           </button>
         </>
       )}
-    </div>
+    </legend>
   );
 }

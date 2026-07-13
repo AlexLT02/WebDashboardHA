@@ -35,6 +35,9 @@ class Group(BaseModel):
     columns: int = 6
     # Loser Bereich (Widgets ohne Gruppe): ohne Card-Hintergrund/Titel.
     ungrouped: bool = False
+    # Position des Gruppen-Blocks im 6-spaltigen Dashboard-Raster (0-basiert).
+    x: int = 0
+    y: int = 0
     widgets: list[WidgetConfig] = Field(default_factory=list)
 
 
