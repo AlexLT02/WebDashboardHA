@@ -19,10 +19,17 @@ interface Props {
   onClose: () => void;
 }
 
+// Filter-Chips: zeigen nur Geräte einer Domain (z. B. Spotify = media_player).
+const FILTER_CHIPS: { label: string; domain: string }[] = [
+  { label: "Spotify / Medien", domain: "media_player" },
+  { label: "Wetter", domain: "weather" },
+];
+
 export function AddWidgetDialog({ onPick, onPickSpecial, onClose }: Props) {
   const [entities, setEntities] = useState<EntityInfo[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  const [domainFilter, setDomainFilter] = useState<string | null>(null);
 
   useEffect(() => {
     fetchEntities()
@@ -33,11 +40,12 @@ export function AddWidgetDialog({ onPick, onPickSpecial, onClose }: Props) {
   const filtered = useMemo(() => {
     if (!entities) return [];
     const q = query.trim().toLowerCase();
-    if (!q) return entities;
-    return entities.filter(
-      (e) => e.name.toLowerCase().includes(q) || e.entity_id.toLowerCase().includes(q),
-    );
-  }, [entities, query]);
+    return entities.filter((e) => {
+      if (domainFilter && e.domain !== domainFilter) return false;
+      if (!q) return true;
+      return e.name.toLowerCase().includes(q) || e.entity_id.toLowerCase().includes(q);
+    });
+  }, [entities, query, domainFilter]);
 
   return (
     <div className="dialog-backdrop" onClick={onClose}>
@@ -58,9 +66,9 @@ export function AddWidgetDialog({ onPick, onPickSpecial, onClose }: Props) {
           autoFocus
         />
 
-        {!query && (
-          <div className="picker__special">
-            {SPECIAL_WIDGETS.map((s) => (
+        <div className="picker__special">
+          {!query &&
+            SPECIAL_WIDGETS.map((s) => (
               <button
                 key={s.type}
                 type="button"
@@ -73,8 +81,21 @@ export function AddWidgetDialog({ onPick, onPickSpecial, onClose }: Props) {
                 + {s.label}
               </button>
             ))}
-          </div>
-        )}
+          {FILTER_CHIPS.map((c) => (
+            <button
+              key={c.domain}
+              type="button"
+              className={`picker__chip picker__chip--filter${
+                domainFilter === c.domain ? " is-active" : ""
+              }`}
+              onClick={() =>
+                setDomainFilter((cur) => (cur === c.domain ? null : c.domain))
+              }
+            >
+              {c.label}
+            </button>
+          ))}
+        </div>
 
         <div className="picker__list">
           {error && <div className="picker__msg">{error}</div>}
