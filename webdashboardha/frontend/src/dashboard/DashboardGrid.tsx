@@ -58,6 +58,11 @@ export function DashboardGrid({
   const raf = useRef(0);
 
   const totalWidgets = dashboard.groups.reduce((n, g) => n + g.widgets.length, 0);
+  const normalGroups = dashboard.groups.filter((g) => !g.ungrouped);
+  const looseItems: { w: WidgetConfig; groupId: string }[] = [];
+  for (const g of dashboard.groups) {
+    if (g.ungrouped) for (const wi of g.widgets) looseItems.push({ w: wi, groupId: g.id });
+  }
 
   const computeTarget = useCallback(
     (x: number, y: number) => {
@@ -117,37 +122,35 @@ export function DashboardGrid({
     };
   }, [drag, onMove, onUp]);
 
-  // ---- Resize (eigener Griff unten rechts) ----
-  const [resize, setResize] = useState<{ groupId: string; widget: WidgetConfig } | null>(null);
+  // ---- Resize (eigener Griff unten rechts) — Delta-basiert (auch für lose Widgets) ----
+  interface ResizeState {
+    groupId: string;
+    widget: WidgetConfig;
+    loose: boolean;
+    startX: number;
+    startY: number;
+    colW: number;
+    maxCols: number;
+  }
+  const [resize, setResize] = useState<ResizeState | null>(null);
   const [resizeTo, setResizeTo] = useState<{ w: number; h: number } | null>(null);
-  const resizeRef = useRef<{ groupId: string; widget: WidgetConfig } | null>(null);
+  const resizeRef = useRef<ResizeState | null>(null);
   const resizeToRef = useRef<{ w: number; h: number } | null>(null);
 
-  const onResizeMove = useCallback(
-    (e: TouchEvent | MouseEvent) => {
-      const r = resizeRef.current;
-      if (!r) return;
-      e.preventDefault();
-      const p = eventPoint(e);
-      if (!p) return;
-      const gridEl = document.querySelector(
-        `[data-grid-group="${r.groupId}"]`,
-      ) as HTMLElement | null;
-      const group = dashboard.groups.find((g) => g.id === r.groupId);
-      if (!gridEl || !group) return;
-      const rect = gridEl.getBoundingClientRect();
-      const cols = Math.max(1, group.columns);
-      const colW = rect.width / cols;
-      const cellLeft = rect.left + r.widget.x * colW;
-      const cellTop = rect.top + r.widget.y * (ROW_H + GAP);
-      const w = clamp(Math.round((p.x - cellLeft) / colW), 1, cols - r.widget.x);
-      const h = Math.max(1, Math.round((p.y - cellTop) / (ROW_H + GAP)));
-      const to = { w, h };
-      resizeToRef.current = to;
-      setResizeTo(to);
-    },
-    [dashboard.groups],
-  );
+  const onResizeMove = useCallback((e: TouchEvent | MouseEvent) => {
+    const r = resizeRef.current;
+    if (!r) return;
+    e.preventDefault();
+    const p = eventPoint(e);
+    if (!p) return;
+    const dw = Math.round((p.x - r.startX) / r.colW);
+    const dh = Math.round((p.y - r.startY) / (ROW_H + GAP));
+    const w = clamp(r.widget.w + dw, 1, r.maxCols);
+    const h = Math.max(1, r.widget.h + dh);
+    const to = { w, h };
+    resizeToRef.current = to;
+    setResizeTo(to);
+  }, []);
 
   const onResizeUp = useCallback(() => {
     const r = resizeRef.current;
@@ -179,7 +182,26 @@ export function DashboardGrid({
     e: React.TouchEvent | React.MouseEvent,
   ) => {
     e.stopPropagation();
-    const state = { groupId, widget };
+    const p = eventPoint(e.nativeEvent as TouchEvent | MouseEvent);
+    if (!p) return;
+    const grp = dashboard.groups.find((g) => g.id === groupId);
+    const loose = Boolean(grp?.ungrouped);
+    const cols = loose ? DASHBOARD_COLS : Math.max(1, grp?.columns ?? 6);
+    const gridEl = (
+      loose
+        ? document.querySelector(".dashboard-groups")
+        : document.querySelector(`[data-grid-group="${groupId}"]`)
+    ) as HTMLElement | null;
+    const colW = gridEl ? gridEl.getBoundingClientRect().width / cols : 120;
+    const state: ResizeState = {
+      groupId,
+      widget,
+      loose,
+      startX: p.x,
+      startY: p.y,
+      colW,
+      maxCols: cols,
+    };
     resizeRef.current = state;
     setResize(state);
     setResizeTo({ w: widget.w, h: widget.h });
@@ -214,7 +236,7 @@ export function DashboardGrid({
 
   return (
     <div className="dashboard-groups">
-      {dashboard.groups.map((group: Group, gi) => {
+      {normalGroups.map((group: Group, gi) => {
         // Im Edit-Modus zusätzliche Zeilen als Drop-/Resize-Raum (Höhe unbegrenzt).
         const rows = rowCount(group) + (editMode ? 3 : 0);
         const gridStyle: React.CSSProperties = {
@@ -237,7 +259,7 @@ export function DashboardGrid({
                 editMode={Boolean(editMode)}
                 columns={group.columns}
                 canMoveUp={gi > 0}
-                canMoveDown={gi < dashboard.groups.length - 1}
+                canMoveDown={gi < normalGroups.length - 1}
                 onRename={(name) => onRenameGroup?.(group.id, name)}
                 onRemove={() => onRemoveGroup?.(group.id)}
                 onAddWidget={() => onAddWidget?.(group.id)}
@@ -337,6 +359,53 @@ export function DashboardGrid({
           </section>
         );
       })}
+
+      {/* Lose Widgets (ohne Gruppe): einzelne Kacheln, füllen Lücken um die Gruppen */}
+      {looseItems.map(({ w, groupId }) => (
+        <div
+          className={`grid-cell loose-item${editMode ? " is-edit" : ""}`}
+          key={w.id}
+          style={{
+            gridColumn: `span ${Math.min(Math.max(1, w.w), DASHBOARD_COLS)}`,
+            height: w.h * ROW_H + (w.h - 1) * GAP,
+          }}
+        >
+          {editMode && (
+            <div className="edit-overlay">
+              <button
+                type="button"
+                className="edit-overlay__btn"
+                aria-label="Einstellungen"
+                onClick={() => setSettingsWidget(w)}
+              >
+                ⚙
+              </button>
+              <button
+                type="button"
+                className="edit-overlay__btn edit-overlay__btn--danger"
+                aria-label="entfernen"
+                onClick={() => onRemoveWidget?.(groupId, w.id)}
+              >
+                ✕
+              </button>
+            </div>
+          )}
+          <div className="grid-cell__inner">
+            <Widget config={w} />
+          </div>
+          {editMode && (
+            <button
+              type="button"
+              className="resize-handle"
+              aria-label="Größe ändern"
+              onTouchStart={(e) => startResize(groupId, w, e)}
+              onMouseDown={(e) => startResize(groupId, w, e)}
+            >
+              ⤡
+            </button>
+          )}
+        </div>
+      ))}
 
       {editMode && (
         <div className="add-row" style={{ gridColumn: "1 / -1" }}>

@@ -8,6 +8,13 @@
   grid-template-columns: repeat(6, 1fr);
   gap: 12px;
   align-items: start;
+  /* dense: lose Einzel-Widgets füllen Lücken neben/um die Gruppen */
+  grid-auto-flow: row dense;
+}
+
+/* Lose Einzelkachel im Dashboard-Raster */
+.loose-item {
+  min-width: 0;
 }
 
 .group {

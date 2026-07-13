@@ -35,9 +35,13 @@
 .tile.is-big .tile__title {
   font-size: 16px;
   white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  overflow-wrap: break-word; /* bricht nur bei Bedarf, kein „Bewegungsmelde r" */
   max-width: 100%;
+  /* Höchstens 2 Zeilen, damit der Status nicht aus der Kachel gedrängt wird */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .tile.is-big .tile__text {
   min-width: 0;
