@@ -293,17 +293,11 @@
   background: var(--surface);
 }
 
-/* ---- Gruppen-Kopf im Edit-Modus: kompakte Controls als schwebende Toolbar ---- */
-.group__legend--edit {
-  /* überschreibt das schmale Label: volle Breite oben, darf umbrechen */
-  top: 3px;
-  left: 3px;
-  right: 3px;
-  max-width: none;
-  padding: 3px 4px;
-  text-transform: none;
-  letter-spacing: 0;
-  white-space: normal;
+/* ---- Gruppen-Kopf im Edit-Modus: kompakte Controls als Toolbar-Zeile über
+   dem Grid (normaler Fluss, nicht schwebend) ---- */
+.group__bar {
+  padding: 4px 6px;
+  margin: 0 0 6px;
   line-height: 2;
   background: rgba(26, 29, 36, 0.96);
   border: 1px solid var(--border);
@@ -311,7 +305,7 @@
 }
 
 /* Kinder inline, Abstand via margin (kein flex-gap wegen Safari 12) */
-.group__legend--edit > * {
+.group__bar > * {
   vertical-align: middle;
   margin-right: 3px;
 }

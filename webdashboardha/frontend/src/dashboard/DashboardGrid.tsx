@@ -422,7 +422,7 @@ export function DashboardGrid({
           gridRow: `${(group.y ?? 0) + 1} / span ${groupBlockHeight(group)}`,
         };
         return (
-          <fieldset className="group" key={group.id} style={blockStyle}>
+          <section className="group" key={group.id} style={blockStyle}>
             <GroupHeader
               name={group.name}
               editMode={Boolean(editMode)}
@@ -462,7 +462,7 @@ export function DashboardGrid({
               )}
               {group.widgets.map((w) => renderCell(group.id, false, w))}
             </div>
-          </fieldset>
+          </section>
         );
       })}
 

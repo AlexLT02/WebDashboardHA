@@ -11,37 +11,24 @@
   grid-auto-flow: row;
 }
 
-/* Gruppen-Block als <fieldset>: der Name sitzt als <legend> auf dem Rahmen und
-   spart die früher reservierte Kopfzeile. Fieldset-Defaults müssen resettet
-   werden (min-width:min-content bläht sonst das Raster auf). */
+/* Gruppen-Block: rahmenloser Container (kompakter HA-Tile-Stil, keine Karte).
+   Der Titel sitzt als eigene <h2>-Zeile darüber. */
 .group {
-  position: relative; /* Anker für die absolut sitzende Legend */
   min-width: 0;
-  min-inline-size: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 5px;
 }
 
-/* Gruppenname als schwebendes Label auf dem oberen Rahmen (kostet keine Zeile).
-   Absolut statt native <legend>-Magie, weil display:flex-Fieldsets die native
-   Legend-Platzierung verlieren — so klappt es auch auf Safari 12. */
-.group__legend {
-  position: absolute;
-  top: -9px;
-  left: 10px;
-  z-index: 3;
-  padding: 0 4px;
-  font-size: 12px;
+/* Gruppentitel als Überschrift über den Kacheln (releaste Position). */
+.group__title {
+  font-size: 15px;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  max-width: calc(100% - 20px);
+  margin: 4px 0 6px;
+  padding: 0 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

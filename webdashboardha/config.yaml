@@ -1,7 +1,7 @@
 # Home-Assistant-Add-on-Manifest.
 # Liegt im Repo-Root, damit der Build-Kontext frontend/ und backend/ erreicht.
 name: WebDashboardHA
-version: "0.0.1"
+version: "0.0.2"
 slug: webdashboardha
 description: Steuerbares, iPad-Air-1-taugliches Web-Dashboard für Home Assistant
 url: https://github.com/DEIN-USER/WebDashboardHA

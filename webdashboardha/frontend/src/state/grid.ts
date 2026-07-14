@@ -2,9 +2,9 @@ import type { Group, WidgetConfig } from "./dashboards";
 
 /** Gesamtbreite des Dashboards in Rastereinheiten (auch in DashboardGrid gespiegelt). */
 export const DASHBOARD_COLS = 6;
-/** Der Gruppenname sitzt als <legend> auf dem <fieldset>-Rahmen und belegt KEINE
- *  eigene Rasterzeile mehr — spart eine ganze Zeile Höhe pro Gruppe. */
-export const GROUP_HEADER_ROWS = 0;
+/** Der Gruppentitel sitzt als <h2>-Zeile über dem Gruppen-Grid (wie in der
+ *  releasten Version) und belegt EINE Rasterzeile im Dashboard-Block. */
+export const GROUP_HEADER_ROWS = 1;
 
 /** Ein positioniertes Rechteck im Dashboard-Raster (Gruppe ODER loses Widget). */
 export interface Block {

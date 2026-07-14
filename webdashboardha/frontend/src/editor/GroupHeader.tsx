@@ -30,15 +30,15 @@ export function GroupHeader({
   const [mode, setMode] = useState<Mode>("idle");
   const [text, setText] = useState(name);
 
-  // Normalmodus: Name sitzt als <legend> auf dem Rahmen (spart eine Zeile).
-  // Ohne Namen keine <legend> — der <fieldset>-Rahmen bleibt dann titellos.
+  // Normalmodus: Titel als eigene <h2>-Zeile über dem Gruppen-Grid (releaste
+  // Position). Ohne Namen keine Überschrift.
   if (!editMode) {
     if (!name) return null;
-    return <legend className="group__legend">{name}</legend>;
+    return <h2 className="group__title">{name}</h2>;
   }
 
   return (
-    <legend className="group__legend group__legend--edit">
+    <div className="group__bar">
       {mode === "idle" && (
         <>
           {/* Ganzen Gruppen-Block im Dashboard-Raster verschieben */}
@@ -160,6 +160,6 @@ export function GroupHeader({
           </button>
         </>
       )}
-    </legend>
+    </div>
   );
 }
