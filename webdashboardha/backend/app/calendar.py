@@ -17,7 +17,11 @@ HTML_ESCAPE_MAP = {
 
 _GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", "")
 _GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", "")
-_GOOGLE_REDIRECT_URI = os.environ.get("GOOGLE_REDIRECT_URI", "http://localhost:8099/api/calendar/oauth/callback")
+_GOOGLE_REDIRECT_URI = os.environ.get("GOOGLE_REDIRECT_URI", "").strip()
+
+
+def _effective_redirect_uri(redirect_uri: str | None = None) -> str:
+    return (redirect_uri or _GOOGLE_REDIRECT_URI or "http://localhost:8099/api/calendar/oauth/callback").strip()
 
 
 def normalize_calendar_config(payload: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -41,7 +45,7 @@ def build_google_auth_url(redirect_uri: str | None = None) -> str:
     params = urlencode(
         {
             "client_id": _GOOGLE_CLIENT_ID,
-            "redirect_uri": redirect_uri or _GOOGLE_REDIRECT_URI,
+            "redirect_uri": _effective_redirect_uri(redirect_uri),
             "response_type": "code",
             "scope": "https://www.googleapis.com/auth/calendar.readonly",
             "access_type": "offline",
@@ -138,7 +142,7 @@ def exchange_google_code(code: str, redirect_uri: str | None = None) -> dict[str
         "code": code,
         "client_id": _GOOGLE_CLIENT_ID,
         "client_secret": _GOOGLE_CLIENT_SECRET,
-        "redirect_uri": redirect_uri or _GOOGLE_REDIRECT_URI,
+        "redirect_uri": _effective_redirect_uri(redirect_uri),
         "grant_type": "authorization_code",
     }
 
