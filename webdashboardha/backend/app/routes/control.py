@@ -83,14 +83,13 @@ async def google_oauth_start(request: Request) -> dict[str, Any]:
 
 
 @router.get("/calendar/oauth/callback", response_class=HTMLResponse, name="google_oauth_callback")
-async def google_oauth_callback(code: str | None = None, error: str | None = None, request: Request | None = None) -> HTMLResponse:
+async def google_oauth_callback(code: str | None = None, error: str | None = None) -> HTMLResponse:
     if error:
         return HTMLResponse(content=build_google_oauth_completion_page("", "", []), status_code=400)
     if not code:
         return HTMLResponse(content=build_google_oauth_completion_page("", "", []), status_code=400)
     try:
-        redirect_uri = str(request.url_for("google_oauth_callback")) if request is not None else None
-        tokens = exchange_google_code(code, redirect_uri)
+        tokens = exchange_google_code(code, None)
         access_token = str(tokens.get("access_token") or "").strip()
         refresh_token = str(tokens.get("refresh_token") or "").strip()
         calendars = fetch_google_calendars(access_token)
