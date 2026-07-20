@@ -5,9 +5,17 @@ from __future__ import annotations
 import logging
 from typing import Any
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import HTMLResponse
 
-from ..calendar import fetch_google_events, normalize_calendar_config
+from ..calendar import (
+    build_google_auth_url,
+    build_google_oauth_completion_page,
+    exchange_google_code,
+    fetch_google_calendars,
+    fetch_google_events,
+    normalize_calendar_config,
+)
 from ..dependencies import HubDep
 from ..schemas import ServiceCall
 
@@ -68,13 +76,41 @@ async def call_service(payload: ServiceCall, hub: HubDep) -> dict[str, str]:
     return {"status": "ok"}
 
 
+@router.get("/calendar/oauth/start")
+async def google_oauth_start(request: Request) -> dict[str, Any]:
+    redirect_uri = str(request.url_for("google_oauth_callback"))
+    return {"authUrl": build_google_auth_url(redirect_uri)}
+
+
+@router.get("/calendar/oauth/callback", response_class=HTMLResponse, name="google_oauth_callback")
+async def google_oauth_callback(code: str | None = None, error: str | None = None, request: Request | None = None) -> HTMLResponse:
+    if error:
+        return HTMLResponse(content=build_google_oauth_completion_page("", "", []), status_code=400)
+    if not code:
+        return HTMLResponse(content=build_google_oauth_completion_page("", "", []), status_code=400)
+    try:
+        redirect_uri = str(request.url_for("google_oauth_callback")) if request is not None else None
+        tokens = exchange_google_code(code, redirect_uri)
+        access_token = str(tokens.get("access_token") or "").strip()
+        refresh_token = str(tokens.get("refresh_token") or "").strip()
+        calendars = fetch_google_calendars(access_token)
+        return HTMLResponse(
+            content=build_google_oauth_completion_page(access_token, refresh_token, calendars),
+            status_code=200,
+        )
+    except Exception as exc:  # noqa: BLE001
+        log.warning("Google-OAuth-Callback fehlgeschlagen: %s", exc)
+        return HTMLResponse(content=build_google_oauth_completion_page("", "", []), status_code=502)
+
+
 @router.post("/calendar")
 async def fetch_calendar_events(payload: dict[str, Any]) -> dict[str, Any]:
     try:
         config = normalize_calendar_config(payload)
         if not config["enabled"]:
             return {"provider": "google", "events": [], "enabled": False}
-        events = fetch_google_events(config["calendarId"], config["apiKey"])
+        access_token = config.get("accessToken") or config.get("apiKey") or ""
+        events = fetch_google_events(config["calendarId"], access_token)
         return {"provider": "google", "enabled": True, "label": config["label"], "events": events}
     except Exception as exc:  # noqa: BLE001
         log.warning("Google-Kalenderabruf fehlgeschlagen: %s", exc)
