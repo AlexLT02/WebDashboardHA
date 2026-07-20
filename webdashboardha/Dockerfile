@@ -17,7 +17,7 @@ ENV PYTHONUNBUFFERED=1 \
     DATA_DIR=/data \
     PORT=8099
 
-WORKDIR /app
+WORKDIR /app/backend
 
 # Backend-Deps
 COPY backend/requirements.txt ./
@@ -32,4 +32,4 @@ COPY --from=frontend-build /build/frontend/dist /app/static
 EXPOSE 8099
 
 # uvicorn direkt (kein bashio nötig — SUPERVISOR_TOKEN kommt aus der Umgebung).
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8099"]
+CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8099"]
