@@ -7,6 +7,7 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException
 
+from ..calendar import fetch_google_events, normalize_calendar_config
 from ..dependencies import HubDep
 from ..schemas import ServiceCall
 
@@ -65,3 +66,16 @@ async def call_service(payload: ServiceCall, hub: HubDep) -> dict[str, str]:
         log.warning("call_service fehlgeschlagen: %s", exc)
         raise HTTPException(status_code=502, detail=f"HA-Fehler: {exc}") from exc
     return {"status": "ok"}
+
+
+@router.post("/calendar")
+async def fetch_calendar_events(payload: dict[str, Any]) -> dict[str, Any]:
+    try:
+        config = normalize_calendar_config(payload)
+        if not config["enabled"]:
+            return {"provider": "google", "events": [], "enabled": False}
+        events = fetch_google_events(config["calendarId"], config["apiKey"])
+        return {"provider": "google", "enabled": True, "label": config["label"], "events": events}
+    except Exception as exc:  # noqa: BLE001
+        log.warning("Google-Kalenderabruf fehlgeschlagen: %s", exc)
+        raise HTTPException(status_code=502, detail=f"Kalenderabruf fehlgeschlagen: {exc}") from exc
