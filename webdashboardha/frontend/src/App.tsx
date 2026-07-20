@@ -1,159 +1,259 @@
 import { useEffect, useRef, useState } from "react";
 import { connectWs } from "./state/ws";
 import { useStore } from "./state/store";
-import { useDashboards } from "./state/useDashboards";
-import { WidgetUpdateContext } from "./state/widgetContext";
-import { DashboardGrid } from "./dashboard/DashboardGrid";
+import { useBoard, type BoardSettings } from "./state/useBoard";
+import { allCategories, allWidgets, domainOf, isOn } from "./state/board";
+import { useEdgePanels } from "./shell/useEdgePanels";
+import { ControlPanel, type HistoryEntry } from "./shell/ControlPanel";
+import { AgendaPanel } from "./shell/AgendaPanel";
+import { EditBar } from "./shell/EditBar";
+import { Screensaver } from "./shell/Screensaver";
+import { Header } from "./dashboard/Header";
+import { DashboardView } from "./dashboard/DashboardView";
 import { ActiveView } from "./dashboard/ActiveView";
-import { EditBar } from "./editor/EditBar";
-import { AddWidgetDialog } from "./editor/AddWidgetDialog";
+import { MoreInfoDialog } from "./dialogs/MoreInfoDialog";
+import { AddDeviceDialog } from "./dialogs/AddDeviceDialog";
+import { AddCategoryDialog } from "./dialogs/AddCategoryDialog";
+import { SettingsDialog } from "./dialogs/SettingsDialog";
+import { CalendarDialog } from "./dialogs/CalendarDialog";
+import type { DetailKind } from "./widgets/Tile";
+import type { WidgetConfig } from "./state/dashboards";
 import "./App.css";
-import "./editor/editor.css";
 
 type View = "dashboard" | "active";
 
+type DialogState =
+  | { type: "detail"; widget: WidgetConfig; kind: DetailKind }
+  | { type: "add"; targetCategory?: string }
+  | { type: "addcat" }
+  | { type: "settings" }
+  | { type: "cal" }
+  | null;
+
+const IDLE_MS = 60000; // 1 Min bis zum Bildschirmschoner
+
+function nowLabel(): string {
+  const d = new Date();
+  return d.toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" });
+}
+
 export default function App() {
-  const dash = useDashboards();
-  const [editMode, setEditMode] = useState(false);
-  const [view, setView] = useState<View>("dashboard");
-  const [addTarget, setAddTarget] = useState<string | null>(null);
+  const board = useBoard();
+  const states = useStore((s) => s.states);
   const connected = useStore((s) => s.connected);
   const haConnected = useStore((s) => s.haConnected);
 
-  // Ansichts-Umschalter (Dashboard / Aktive Geräte) ist normal versteckt und
-  // erscheint nur, wenn man am oberen Rand weiter „hinaus" navigiert:
-  // PC = weiter hoch scrollen, iPad = am Anfang nach unten ziehen.
-  const mainRef = useRef<HTMLElement | null>(null);
-  const [showSwitcher, setShowSwitcher] = useState(false);
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const panels = useEdgePanels(rootRef);
+
+  const [view, setView] = useState<View>("dashboard");
+  const [editMode, setEditMode] = useState(false);
+  const [dialog, setDialog] = useState<DialogState>(null);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [saver, setSaver] = useState(false);
+  const historyId = useRef(0);
 
   useEffect(() => connectWs(), []);
 
-  useEffect(() => {
-    if (editMode) setShowSwitcher(false);
-  }, [editMode]);
+  const widgets = allWidgets(board.current);
+  const categories = allCategories(board.current?.meta);
+  const activeCount = widgets.filter((w) => isOn(domainOf(w), states[w.entity_id]?.state)).length;
 
+  const logAction = (text: string, color: string) => {
+    historyId.current += 1;
+    const entry: HistoryEntry = { id: historyId.current, text, time: nowLabel(), color };
+    setHistory((h) => [entry, ...h].slice(0, 6));
+  };
+
+  const closeDialog = () => setDialog(null);
+
+  const toggleEdit = () => {
+    setEditMode((e) => !e);
+    setView("dashboard");
+    panels.close();
+  };
+
+  const showActive = () => {
+    setView("active");
+    panels.close();
+  };
+
+  const setSetting = (key: keyof BoardSettings, value: boolean) => {
+    board.setSetting(key, value);
+    if (key === "kiosk") {
+      try {
+        const el = document.documentElement as HTMLElement & {
+          webkitRequestFullscreen?: () => void;
+        };
+        const doc = document as Document & { webkitExitFullscreen?: () => void };
+        if (value) (el.requestFullscreen ?? el.webkitRequestFullscreen)?.call(el);
+        else if (document.fullscreenElement)
+          (doc.exitFullscreen ?? doc.webkitExitFullscreen)?.call(doc);
+      } catch {
+        /* Fullscreen nicht verfügbar — kein Beinbruch */
+      }
+    }
+  };
+
+  // Bildschirmschoner: nach IDLE_MS ohne Interaktion große Uhr zeigen.
   useEffect(() => {
-    const el = mainRef.current;
-    if (!el || editMode) return;
-    let startY = 0;
-    const onWheel = (e: WheelEvent) => {
-      if (el.scrollTop <= 0 && e.deltaY < 0) setShowSwitcher(true);
-      else if (e.deltaY > 0) setShowSwitcher(false);
+    if (!board.settings.screensaver) {
+      setSaver(false);
+      return;
+    }
+    let timer = window.setTimeout(() => setSaver(true), IDLE_MS);
+    const reset = () => {
+      setSaver(false);
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => setSaver(true), IDLE_MS);
     };
-    const onTouchStart = (e: TouchEvent) => {
-      startY = e.touches[0]?.clientY ?? 0;
-    };
-    const onTouchMove = (e: TouchEvent) => {
-      const dy = (e.touches[0]?.clientY ?? 0) - startY;
-      if (el.scrollTop <= 0 && dy > 24) setShowSwitcher(true);
-      else if (dy < -10 || el.scrollTop > 4) setShowSwitcher(false);
-    };
-    el.addEventListener("wheel", onWheel, { passive: true });
-    el.addEventListener("touchstart", onTouchStart, { passive: true });
-    el.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("mousedown", reset);
+    window.addEventListener("touchstart", reset, { passive: true });
+    window.addEventListener("keydown", reset);
     return () => {
-      el.removeEventListener("wheel", onWheel);
-      el.removeEventListener("touchstart", onTouchStart);
-      el.removeEventListener("touchmove", onTouchMove);
+      window.clearTimeout(timer);
+      window.removeEventListener("mousedown", reset);
+      window.removeEventListener("touchstart", reset);
+      window.removeEventListener("keydown", reset);
     };
-  }, [editMode]);
-
-  const offline = !connected || !haConnected;
-  const error = dash.error;
+  }, [board.settings.screensaver]);
 
   return (
-    <WidgetUpdateContext.Provider value={dash.updateWidgetOptions}>
-      <div className="app">
-        {editMode && view === "dashboard" ? (
-          <EditBar
-            dashboards={dash.dashboards}
-            current={dash.current}
-            onSelect={dash.select}
-            onCreateNew={dash.createNew}
-            onRename={dash.rename}
-            onDelete={dash.removeCurrent}
-            onDone={() => setEditMode(false)}
+    <div className="root" ref={rootRef}>
+      <div className="stage">
+        {/* ---- Steuer-Panel (links) ---- */}
+        <aside
+          className={`panel panel--left${panels.leftOpen ? " is-open" : ""}`}
+          data-panel="left"
+        >
+          <ControlPanel
+            connected={connected}
+            haConnected={haConnected}
+            deviceTotal={widgets.length}
+            activeCount={activeCount}
+            view={view}
+            editMode={editMode}
+            history={history}
+            onSettings={() => setDialog({ type: "settings" })}
+            onShowActive={showActive}
+            onToggleEdit={toggleEdit}
           />
-        ) : (
-          <div className={`view-switch${showSwitcher ? " is-shown" : ""}`}>
-            <button
-              type="button"
-              className={`view-switch__btn${view === "dashboard" ? " is-active" : ""}`}
-              onClick={() => {
-                setView("dashboard");
-                setShowSwitcher(false);
-              }}
-            >
-              Dashboard
-            </button>
-            <button
-              type="button"
-              className={`view-switch__btn${view === "active" ? " is-active" : ""}`}
-              onClick={() => {
-                setView("active");
-                setShowSwitcher(false);
-              }}
-            >
-              Aktive Geräte
-            </button>
-          </div>
-        )}
+        </aside>
 
-        {error && <div className="app__error">{error}</div>}
-
-        <main className="app__main" ref={mainRef}>
-          {!dash.current ? (
-            dash.loading ? (
-              <div className="app__loading">Lädt…</div>
-            ) : (
-              !error && <div className="app__loading">Kein Dashboard.</div>
-            )
-          ) : view === "active" ? (
-            <ActiveView dashboard={dash.current} />
+        {/* ---- Hauptbereich ---- */}
+        <main className="main">
+          {view === "active" ? (
+            <div className="main__head">
+              <button
+                type="button"
+                className="backbtn"
+                aria-label="Zurück"
+                onClick={() => setView("dashboard")}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4-4.6-4.6z" />
+                </svg>
+              </button>
+              <div>
+                <div className="main__title">Aktive Geräte</div>
+                <div className="main__meta">{activeCount} Geräte an</div>
+              </div>
+            </div>
           ) : (
-            <DashboardGrid
-              dashboard={dash.current}
+            <Header />
+          )}
+
+          {editMode && view === "dashboard" && board.current && (
+            <EditBar
+              dashboards={board.dashboards}
+              current={board.current}
+              onSelect={board.select}
+              onRename={board.rename}
+              onCreateNew={board.createNew}
+              onDelete={board.removeCurrent}
+            />
+          )}
+
+          {board.error && <div className="app-error">{board.error}</div>}
+
+          {board.loading ? (
+            <div className="dash-empty">Lädt…</div>
+          ) : !board.current ? (
+            <div className="dash-empty">Kein Dashboard vorhanden.</div>
+          ) : view === "active" ? (
+            <ActiveView
+              widgets={widgets}
+              categories={categories}
+              onOpen={(w, kind) => setDialog({ type: "detail", widget: w, kind })}
+              onRemoveWidget={board.removeWidget}
+              onAction={logAction}
+            />
+          ) : (
+            <DashboardView
+              widgets={widgets}
+              categories={categories}
               editMode={editMode}
-              onAddWidget={(groupId) => setAddTarget(groupId)}
-              onRemoveWidget={dash.removeWidget}
-              onPlaceWidget={dash.placeWidgetAt}
-              onPlaceWidgetLoose={dash.placeWidgetLoose}
-              onMoveBlock={dash.moveBlockAt}
-              onResizeWidget={dash.resizeWidget}
-              onRenameGroup={dash.renameGroup}
-              onRemoveGroup={dash.removeGroup}
-              onSetGroupColumns={dash.setGroupColumns}
-              onAddGroup={() => dash.addGroup("")}
+              onOpen={(w, kind) => setDialog({ type: "detail", widget: w, kind })}
+              onRemoveWidget={board.removeWidget}
+              onAddDevice={(cat) => setDialog({ type: "add", targetCategory: cat })}
+              onAddCategory={() => setDialog({ type: "addcat" })}
+              onRemoveCategory={board.removeCategory}
+              onAction={logAction}
             />
           )}
         </main>
 
-        {!editMode && view === "dashboard" && (
-          <button
-            type="button"
-            className="edit-fab"
-            aria-label="Bearbeiten"
-            onClick={() => setEditMode(true)}
-          >
-            ✎
-          </button>
-        )}
+        {/* ---- Agenda-Panel (rechts) ---- */}
+        <aside
+          className={`panel panel--right${panels.rightOpen ? " is-open" : ""}`}
+          data-panel="right"
+        >
+          <AgendaPanel onConnect={() => setDialog({ type: "cal" })} />
+        </aside>
 
-        {addTarget !== null && (
-          <AddWidgetDialog
-            onPick={(entity) => dash.addWidget(entity, addTarget)}
-            onPickSpecial={(type) => dash.addSpecialWidget(type, addTarget)}
-            onClose={() => setAddTarget(null)}
-          />
-        )}
-
-        {offline && (
-          <div className="conn-warn" role="status">
-            <span className="conn-warn__dot" />
-            {!connected ? "Getrennt" : "HA getrennt"}
-          </div>
+        {/* ---- Edge-Grips ---- */}
+        {!panels.leftOpen && !panels.rightOpen && (
+          <>
+            <div className="grip grip--left" onClick={panels.openLeft} />
+            <div className="grip grip--right" onClick={panels.openRight} />
+          </>
         )}
       </div>
-    </WidgetUpdateContext.Provider>
+
+      {/* ---- Dialoge ---- */}
+      {dialog?.type === "detail" && (
+        <MoreInfoDialog
+          widget={dialog.widget}
+          kind={dialog.kind}
+          onClose={closeDialog}
+          onUpdateOptions={board.updateWidgetOptions}
+        />
+      )}
+      {dialog?.type === "add" && (
+        <AddDeviceDialog
+          targetCategory={dialog.targetCategory}
+          onPick={(entity, cat) => board.addWidget(entity, cat)}
+          onClose={closeDialog}
+        />
+      )}
+      {dialog?.type === "addcat" && (
+        <AddCategoryDialog onCreate={board.addCategory} onClose={closeDialog} />
+      )}
+      {dialog?.type === "settings" && (
+        <SettingsDialog settings={board.settings} onSetting={setSetting} onClose={closeDialog} />
+      )}
+      {dialog?.type === "cal" && <CalendarDialog onClose={closeDialog} />}
+
+      {/* ---- Verbindungswarnung ---- */}
+      {(!connected || !haConnected) && (
+        <div className="conn-warn" role="status">
+          <span className="conn-warn__dot" />
+          {!connected ? "Getrennt" : "HA getrennt"}
+        </div>
+      )}
+
+      {/* ---- Bildschirmschoner ---- */}
+      {saver && <Screensaver onDismiss={() => setSaver(false)} />}
+    </div>
   );
 }
