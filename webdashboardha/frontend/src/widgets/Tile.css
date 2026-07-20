@@ -1,106 +1,80 @@
+/* Kompakte HA-artige Kachel (neues Design): Icon-Badge + Name + Statuszeile.
+   Grid statt Flex → `gap` ist hier Safari-12-tauglich (Grid-gap). */
 .tile {
+  position: relative;
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
-  gap: 12px;
+  gap: 11px;
+  min-height: 59px;
   padding: 10px 12px;
-  background: var(--surface);
+  border-radius: var(--r-tile);
+  background: var(--tile);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  min-height: 60px;
-  height: 100%; /* füllt die Rasterzelle (2-hoch wird auch groß dargestellt) */
-  box-sizing: border-box;
-  overflow: hidden; /* Inhalt bleibt in der Kachel, läuft nicht in Nachbarn */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  transition: background 0.12s ease;
-}
-
-.tile:active {
-  background: var(--surface-2);
-}
-
-/* Großes Widget (>1 Zelle): zentriertes Spalten-Layout, größerer Text */
-.tile.is-big {
-  grid-template-columns: 1fr;
-  justify-items: center;
-  align-content: center;
-  text-align: center;
-  gap: 8px;
-}
-.tile.is-big .tile__badge {
-  width: 56px;
-  height: 56px;
-}
-.tile.is-big .tile__title {
-  font-size: 16px;
-  white-space: normal;
-  overflow-wrap: break-word; /* bricht nur bei Bedarf, kein „Bewegungsmelde r" */
-  max-width: 100%;
-  /* Höchstens 2 Zeilen, damit der Status nicht aus der Kachel gedrängt wird */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.tile.is-big .tile__text {
-  min-width: 0;
-  max-width: 100%;
-}
-.tile.is-big .tile__subtitle {
-  font-size: 14px;
-}
-
-.tile__badge {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--surface-2);
-  color: var(--text-muted);
-  cursor: pointer;
-  flex: none;
   transition:
     background 0.12s ease,
-    color 0.12s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Aktiv (Licht/Schalter an): warmes Badge, falls keine echte Farbe gesetzt ist. */
-.tile.is-active .tile__badge {
-  background: var(--warn);
-  color: #1a1400;
-}
-
-.tile__badge:disabled {
-  cursor: default;
-}
-
-.tile__text {
-  min-width: 0; /* erlaubt ellipsis */
-}
-
-.tile__title {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.tile__subtitle {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-top: 1px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    border-color 0.12s ease;
 }
 
 .tile.is-unavailable {
-  opacity: 0.5;
+  opacity: 0.55;
+  cursor: default;
+}
+
+.tile__badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  background: var(--surface-3);
+  color: var(--text-muted);
+}
+
+.tile__body {
+  min-width: 0;
+  width: 100%;
+}
+
+.tile__name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tile__sub {
+  font-size: 11.5px;
+  color: var(--text-dim);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tile__remove {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(232, 116, 116, 0.9);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

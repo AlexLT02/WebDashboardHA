@@ -1,0 +1,40 @@
+.dragbar {
+  position: relative;
+  width: 100%;
+  border-radius: 14px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none; /* Scrollen unterdrücken, während gezogen wird */
+}
+
+/* Füllbalken-Modus (Helligkeit): dunkler Track, farbiger Füllbalken links. */
+.dragbar--fill {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.dragbar__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 13px 0 0 13px;
+  min-width: 4px;
+}
+
+/* Pick-Modus (Farbe/Weißton): voller Verlauf als Track, runder Thumb. */
+.dragbar--pick {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+.dragbar__thumb {
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}

@@ -97,6 +97,7 @@ class DashboardStore:
             name=payload.name,
             columns=payload.columns,
             groups=groups,
+            meta=payload.meta,
         )
         self._write(dashboard)
         return dashboard
@@ -109,6 +110,7 @@ class DashboardStore:
             name=payload.name,
             columns=payload.columns,
             groups=payload.groups,
+            meta=payload.meta,
         )
         self._write(dashboard)
         return dashboard

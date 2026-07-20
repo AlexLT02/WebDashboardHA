@@ -16,6 +16,7 @@ export interface WidgetConfig {
 export interface Group {
   id: string;
   name: string; // leer = Gruppe ohne sichtbaren Titel
+  icon?: string; // optionaler Kategorie-Icon-Schlüssel (neues Design)
   columns: number; // feste Spaltenzahl des Rasters = Breite des Blocks im Dashboard-Raster
   ungrouped?: boolean; // loser Bereich ohne Card/Titel (Widgets liegen direkt im Dashboard-Raster)
   // Position des Gruppen-Blocks im 6-spaltigen Dashboard-Raster (0-basiert).
@@ -23,6 +24,22 @@ export interface Group {
   x?: number;
   y?: number;
   widgets: WidgetConfig[];
+}
+
+/** Benutzerdefinierte Kategorie (Name + Icon), persistiert in Dashboard.meta. */
+export interface CustomCategory {
+  key: string;
+  name: string;
+  icon: string;
+}
+
+/** App-Ebene: Custom-Kategorien + Settings. Persistiert im additiven `meta`-Feld. */
+export interface DashboardMeta {
+  customCategories?: CustomCategory[];
+  settings?: {
+    screensaver?: boolean;
+    kiosk?: boolean;
+  };
 }
 
 /** Sentinel-Ziel für „ohne Gruppe" (loser Bereich wird bei Bedarf erzeugt). */
@@ -33,6 +50,7 @@ export interface Dashboard {
   name: string;
   columns: number;
   groups: Group[];
+  meta?: DashboardMeta;
 }
 
 export interface EntityInfo {
@@ -46,6 +64,7 @@ export interface DashboardInput {
   name: string;
   columns: number;
   groups: Group[];
+  meta?: DashboardMeta;
 }
 
 export async function fetchDashboards(): Promise<Dashboard[]> {

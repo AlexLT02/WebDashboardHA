@@ -31,6 +31,8 @@ class WidgetConfig(BaseModel):
 class Group(BaseModel):
     id: str
     name: str = ""  # leer = Gruppe ohne sichtbaren Titel
+    # Optionaler Icon-Schlüssel (Kategorie-Symbol im neuen Design).
+    icon: str = ""
     # Spaltenzahl = zugleich Breite der Gruppe im 6-spaltigen Dashboard-Raster.
     columns: int = 6
     # Loser Bereich (Widgets ohne Gruppe): ohne Card-Hintergrund/Titel.
@@ -46,9 +48,13 @@ class Dashboard(BaseModel):
     name: str
     columns: int = 2
     groups: list[Group] = Field(default_factory=list)
+    # Freie App-Ebene: Custom-Kategorien, Settings (Bildschirmschoner, Kiosk …).
+    # Additiv & rückwärtskompatibel — alte JSONs ohne meta bekommen {}.
+    meta: dict[str, Any] = Field(default_factory=dict)
 
 
 class DashboardCreate(BaseModel):
     name: str = Field(min_length=1)
     columns: int = 2
     groups: list[Group] = Field(default_factory=list)
+    meta: dict[str, Any] = Field(default_factory=dict)

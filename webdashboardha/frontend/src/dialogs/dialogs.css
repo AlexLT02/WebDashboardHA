@@ -1,0 +1,404 @@
+.dlg-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 7, 9, 0.66);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: ha-fade 0.15s ease;
+  padding: 16px;
+}
+
+.dlg {
+  width: 380px;
+  max-width: 100%;
+  max-height: 88%;
+  overflow: auto;
+  border-radius: var(--r-dialog);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.85);
+  padding: 22px;
+  animation: ha-pop 0.2s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+.dlg--wide {
+  width: 440px;
+}
+
+.dlg__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.dlg__title {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #f3f5f8;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dlg__close {
+  width: 32px;
+  height: 32px;
+  flex: none;
+  margin-left: 12px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.06);
+  color: #aeb4c0;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+/* Sektions-Label über einem Control. */
+.dlg__label {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 9px;
+}
+.dlg__label + .dlg__label {
+  margin-top: 4px;
+}
+
+/* Text-Eingabe (Alias, Kategoriename). */
+.dlg__input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+}
+
+.dlg__gap {
+  height: 18px;
+}
+.dlg__gap--sm {
+  height: 12px;
+}
+
+/* Große Kennzahl (Sensor-Info). */
+.dlg__big {
+  text-align: center;
+  padding: 6px 0 18px;
+}
+.dlg__big-val {
+  font-weight: 800;
+  font-size: 42px;
+  letter-spacing: -1px;
+  color: #f3f5f8;
+}
+.dlg__big-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Zeilen (Key/Value) im Info-Dialog. */
+.dlg__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+}
+.dlg__row-k {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.dlg__row-v {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  text-align: right;
+  min-width: 0;
+  margin-left: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Ein/Aus-Kachel oben im Light-Dialog. */
+.dlg__toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+.dlg__icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.dlg__toggle-btn {
+  height: 42px;
+  padding: 0 20px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Farb-Swatches. */
+.dlg__swatches {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 9px;
+}
+.dlg__swatch {
+  height: 38px;
+  border-radius: 11px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Icon-Auswahl (Kategorie). */
+.dlg__icons {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 9px;
+}
+.dlg__icon-pick {
+  height: 46px;
+  border-radius: 12px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-2);
+  color: #9aa0ac;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dlg__icon-pick.is-sel {
+  border-color: rgba(239, 147, 107, 0.5);
+  background: rgba(239, 147, 107, 0.16);
+  color: var(--warm-soft);
+}
+
+/* Primär-Button unten (Kategorie erstellen). */
+.dlg__primary {
+  width: 100%;
+  height: 48px;
+  border-radius: 13px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  background: var(--warm);
+  color: #1a1206;
+}
+.dlg__primary:disabled {
+  background: #2a2f3a;
+  color: var(--text-dim);
+  cursor: default;
+}
+
+/* Medien-Transport. */
+.dlg__transport {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 10px;
+  align-items: center;
+}
+.dlg__mbtn {
+  height: 52px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dlg__mbtn--play {
+  border: none;
+  background: var(--cool);
+  color: #04122b;
+}
+
+/* Ausgabe-/Quellenliste (Medien). */
+.dlg__source {
+  width: 100%;
+  padding: 13px 14px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-soft);
+  font-size: 13.5px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+.dlg__source.is-sel {
+  border-color: rgba(110, 168, 254, 0.4);
+  background: rgba(110, 168, 254, 0.12);
+  color: var(--cool-soft);
+}
+
+/* Toggle-Schalter (Settings/Kalender). */
+.dlg__setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+.dlg__setting:last-child {
+  margin-bottom: 0;
+}
+.dlg__setting-t {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.dlg__setting-d {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.dlg__switch {
+  width: 46px;
+  height: 27px;
+  flex: none;
+  border: none;
+  border-radius: 14px;
+  background: #2f3440;
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s ease;
+}
+.dlg__switch.is-on {
+  background: var(--ok);
+}
+.dlg__switch-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background: #fff;
+  transition: left 0.15s ease;
+}
+.dlg__switch.is-on .dlg__switch-knob {
+  left: 22px;
+}
+
+/* Geräte-Liste (Hinzufügen). */
+.dlg__search {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  margin-bottom: 12px;
+}
+.dlg__list {
+  max-height: 46vh;
+  overflow-y: auto;
+}
+.dlg__additem {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 12px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  text-align: left;
+}
+.dlg__additem-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #9aa0ac;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.dlg__additem-name {
+  min-width: 0;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dlg__additem-eid {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-weight: 400;
+  margin-top: 1px;
+}
+.dlg__additem-plus {
+  color: var(--cool);
+  font-size: 20px;
+  flex: none;
+}
+.dlg__chips {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.dlg__chip {
+  height: 30px;
+  padding: 0 12px;
+  margin: 0 8px 8px 0;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-soft);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.dlg__chip.is-active {
+  border-color: rgba(110, 168, 254, 0.4);
+  background: rgba(110, 168, 254, 0.12);
+  color: var(--cool-soft);
+}
+.dlg__msg {
+  padding: 18px 4px;
+  color: var(--text-muted);
+  font-size: 13.5px;
+  text-align: center;
+}
