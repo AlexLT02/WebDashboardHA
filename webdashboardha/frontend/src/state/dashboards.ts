@@ -115,8 +115,7 @@ export function widgetTypeForDomain(domain: string): string {
   return "sensor"; // sensor, binary_sensor, ...
 }
 
-/** Entity-lose Vorschlags-Widgets (Uhr, Kalender). */
+/** Entity-lose Vorschlags-Widgets (Uhr). */
 export const SPECIAL_WIDGETS: { type: string; label: string }[] = [
   { type: "clock", label: "Uhr" },
-  { type: "calendar", label: "Kalender" },
 ];

@@ -5,7 +5,6 @@ import { useBoard, type BoardSettings } from "./state/useBoard";
 import { allCategories, allWidgets, domainOf, isOn } from "./state/board";
 import { useEdgePanels } from "./shell/useEdgePanels";
 import { ControlPanel, type HistoryEntry } from "./shell/ControlPanel";
-import { AgendaPanel } from "./shell/AgendaPanel";
 import { EditBar } from "./shell/EditBar";
 import { Screensaver } from "./shell/Screensaver";
 import { Header } from "./dashboard/Header";
@@ -15,7 +14,6 @@ import { MoreInfoDialog } from "./dialogs/MoreInfoDialog";
 import { AddDeviceDialog } from "./dialogs/AddDeviceDialog";
 import { AddCategoryDialog } from "./dialogs/AddCategoryDialog";
 import { SettingsDialog } from "./dialogs/SettingsDialog";
-import { CalendarDialog } from "./dialogs/CalendarDialog";
 import type { DetailKind } from "./widgets/Tile";
 import type { WidgetConfig } from "./state/dashboards";
 import "./App.css";
@@ -27,7 +25,6 @@ type DialogState =
   | { type: "add"; targetCategory?: string }
   | { type: "addcat" }
   | { type: "settings" }
-  | { type: "cal" }
   | null;
 
 const IDLE_MS = 60000; // 1 Min bis zum Bildschirmschoner
@@ -203,21 +200,8 @@ export default function App() {
           )}
         </main>
 
-        {/* ---- Agenda-Panel (rechts) ---- */}
-        <aside
-          className={`panel panel--right${panels.rightOpen ? " is-open" : ""}`}
-          data-panel="right"
-        >
-          <AgendaPanel onConnect={() => setDialog({ type: "cal" })} />
-        </aside>
-
-        {/* ---- Edge-Grips ---- */}
-        {!panels.leftOpen && !panels.rightOpen && (
-          <>
-            <div className="grip grip--left" onClick={panels.openLeft} />
-            <div className="grip grip--right" onClick={panels.openRight} />
-          </>
-        )}
+        {/* ---- Edge-Grip (links) ---- */}
+        {!panels.leftOpen && <div className="grip grip--left" onClick={panels.openLeft} />}
       </div>
 
       {/* ---- Dialoge ---- */}
@@ -242,7 +226,6 @@ export default function App() {
       {dialog?.type === "settings" && (
         <SettingsDialog settings={board.settings} onSetting={setSetting} onClose={closeDialog} />
       )}
-      {dialog?.type === "cal" && <CalendarDialog onClose={closeDialog} />}
 
       {/* ---- Verbindungswarnung ---- */}
       {(!connected || !haConnected) && (
