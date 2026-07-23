@@ -1,48 +1,52 @@
-// Minimales Inline-SVG-Icon-Set (keine Icon-Library — spart Bundle/RAM fürs iPad).
-// Alle 24x24, nutzen currentColor.
+// Inline-SVG-Icon-Set im Material-Design-Standard (die Pfade entsprechen den
+// Material Design Icons, die auch Home Assistant nutzt). Bewusst KEINE Library —
+// spart Bundle/RAM fürs iPad Air 1. Alle 24x24, nutzen currentColor.
 
 interface IconProps {
   size?: number;
 }
 
-export function LightbulbIcon({ size = 24 }: IconProps) {
+/** Kleiner Helfer: ein Standard-24x24-Icon aus einem Pfad. */
+function svg(size: number, d: string) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z" />
+      <path d={d} />
     </svg>
+  );
+}
+
+export function LightbulbIcon({ size = 24 }: IconProps) {
+  return svg(
+    size,
+    "M12,2A7,7 0 0,0 5,9C5,11.38 6.19,13.47 8,14.74V17A1,1 0 0,0 9,18H15A1,1 0 0,0 16,17V14.74C17.81,13.47 19,11.38 19,9A7,7 0 0,0 12,2M9,21A1,1 0 0,0 10,22H14A1,1 0 0,0 15,21V20H9V21Z",
   );
 }
 
 export function PowerIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M13 3h-2v10h2V3zm4.83 2.17-1.42 1.42A6.92 6.92 0 0 1 19 12a7 7 0 0 1-14 0c0-2.22 1.04-4.19 2.65-5.44L6.24 5.17A8.96 8.96 0 0 0 3 12a9 9 0 0 0 18 0c0-2.74-1.23-5.19-3.17-6.83z" />
-    </svg>
+  return svg(
+    size,
+    "M16.56,5.44L15.11,6.89C16.84,7.94 18,9.83 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12C6,9.83 7.16,7.94 8.88,6.88L7.44,5.44C5.36,6.88 4,9.28 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12C20,9.28 18.64,6.88 16.56,5.44M13,3H11V13H13V3Z",
   );
 }
 
 export function ThermometerIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M15 13V5a3 3 0 0 0-6 0v8a5 5 0 1 0 6 0zm-3-9a1 1 0 0 1 1 1v3h-2V5a1 1 0 0 1 1-1z" />
-    </svg>
+  return svg(
+    size,
+    "M15,13V5A3,3 0 0,0 9,5V13A5,5 0 1,0 15,13M12,4A1,1 0 0,1 13,5V8H11V5A1,1 0 0,1 12,4Z",
   );
 }
 
 export function GaugeIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 4a8 8 0 0 0-8 8 8 8 0 0 0 2.34 5.66l1.42-1.42A6 6 0 0 1 6 12a6 6 0 0 1 12 0 6 6 0 0 1-1.76 4.24l1.42 1.42A8 8 0 0 0 20 12a8 8 0 0 0-8-8zm-1 4v5a1 1 0 1 0 2 0V8h-2z" />
-    </svg>
+  return svg(
+    size,
+    "M12,16A2,2 0 0,1 10,14C10,13.1 10.6,12.3 11.4,12.1L18.5,5L12.4,12.1C12.7,12.4 13,12.9 13,14A2,2 0 0,1 12,16M12,3C13.5,3 15,3.4 16.2,4L14.7,5.5C14,5.2 13,5 12,5A7,7 0 0,0 5,12A7,7 0 0,0 7,16.9C7,17 7.1,17 7.1,17H16.9C17,17 17,17 17,16.9C18.2,15.5 19,13.9 19,12C19,11 18.8,10.1 18.5,9.3L20,7.8C20.6,9 21,10.5 21,12C21,14.4 20.1,16.5 18.7,18.1C18.3,18.5 17.8,18.7 17.2,18.7H6.8C6.2,18.7 5.7,18.5 5.3,18.1C3.9,16.5 3,14.4 3,12A9,9 0 0,1 12,3Z",
   );
 }
 
 export function BrightnessIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 7a5 5 0 0 0 0 10V7z" opacity="0.55" />
-      <path d="M12 4a1 1 0 0 1 1 1v.05a7 7 0 0 1 0 13.9V19a1 1 0 0 1-2 0v-.05a7 7 0 0 1 0-13.9V5a1 1 0 0 1 1-1zm0 3a5 5 0 1 0 0 10A5 5 0 0 0 12 7z" />
-    </svg>
+  return svg(
+    size,
+    "M12,18V6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,15.31L23.31,12L20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31Z",
   );
 }
 
@@ -65,187 +69,189 @@ export function ColorRingIcon({ size = 24 }: IconProps) {
 }
 
 export function MusicIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z" />
-    </svg>
+  return svg(
+    size,
+    "M21,3V15.5A3.5,3.5 0 0,1 17.5,19A3.5,3.5 0 0,1 14,15.5A3.5,3.5 0 0,1 17.5,12C18.04,12 18.5,12.1 19,12.29V6.81L9,8.6V17.5A3.5,3.5 0 0,1 5.5,21A3.5,3.5 0 0,1 2,17.5A3.5,3.5 0 0,1 5.5,14C6.04,14 6.5,14.1 7,14.29V6L21,3Z",
   );
 }
 
 export function FanIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 11a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm0-9c2 0 3 1.5 3 3 0 1.2-.7 2-1.5 3.2C15 8 16.5 7.5 18 8c1.7.6 2.3 2.3 1.7 3.7-.5 1.1-1.6 1.6-3 1.6 1.2.6 2.1 1.4 2.1 2.9 0 1.8-1.4 2.8-3 2.8-1.2 0-2-.7-3-1.8.1 1.4-.3 3-2 3.5-1.7.5-3.2-.6-3.4-2.2-.1-1.2.5-2 1.6-2.9-1.4 0-2.8-.5-3.3-1.9C1.6 12 2.5 10.4 4 10c1.2-.3 2.1.1 3.2.9C6.5 9.6 6 8.5 6.4 7 6.9 5.4 8.5 4.7 10 5.2c-.6-.9-1-1.7-1-2.7C9 1 10.3 2 12 2z" />
-    </svg>
+  return svg(
+    size,
+    "M12,11A1,1 0 0,0 11,12A1,1 0 0,0 12,13A1,1 0 0,0 13,12A1,1 0 0,0 12,11M12.5,2C17,2 17.11,5.57 14.75,6.75C13.76,7.24 13.32,8.29 13.13,9.22C13.61,9.42 14.03,9.73 14.35,10.13C18.05,8.13 22.03,8.92 22.03,12.5C22.03,17 18.46,17.1 17.28,14.73C16.78,13.74 15.72,13.3 14.79,13.11C14.59,13.59 14.28,14 13.88,14.34C15.87,18.03 15.08,22 11.5,22C7,22 6.91,18.42 9.27,17.24C10.25,16.75 10.69,15.71 10.89,14.79C10.4,14.59 9.97,14.27 9.65,13.87C5.96,15.85 2,15.07 2,11.5C2,7 5.56,6.89 6.74,9.26C7.24,10.25 8.29,10.68 9.22,10.87C9.41,10.39 9.73,9.97 10.14,9.65C8.15,5.96 8.94,2 12.5,2Z",
   );
 }
+
 export function DropletIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 3s6 6.5 6 10.5A6 6 0 0 1 6 13.5C6 9.5 12 3 12 3z" />
-    </svg>
+  return svg(
+    size,
+    "M12,20A6,6 0 0,1 6,14C6,10 12,3.25 12,3.25C12,3.25 18,10 18,14A6,6 0 0,1 12,20Z",
   );
 }
+
 export function DoorIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M6 3h10a1 1 0 0 1 1 1v16h2v2H3v-2h2V4a1 1 0 0 1 1-1zm8 8h-2v2h2v-2z" />
-    </svg>
+  return svg(
+    size,
+    "M8,3C6.89,3 6,3.89 6,5V21H18V5C18,3.89 17.11,3 16,3H8M13,11H15V13H13V11Z",
   );
 }
+
 export function WindowIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M4 4h16v16H4V4zm2 2v5h5V6H6zm7 0v5h5V6h-5zm-7 7v5h5v-5H6zm7 0v5h5v-5h-5z" />
-    </svg>
+  return svg(
+    size,
+    "M4,4H20V20H4V4M6,6V11H11V6H6M13,6V11H18V6H13M6,13V18H11V13H6M13,13V18H18V13H13Z",
   );
 }
+
 export function MotionIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M13 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-2 5-4 2 .8 2 2.4-1.1L9 12l-3 8h2.2l2-5 2 2v3H14v-4l-2-2 .6-3c1 1.2 2.4 2 4.4 2v-2c-1.6 0-2.9-.8-3.6-2l-1-1.6C11 8.3 10.4 8 9.8 8H11z" />
-    </svg>
+  return svg(
+    size,
+    "M13.5,5.5C14.59,5.5 15.5,4.59 15.5,3.5C15.5,2.39 14.59,1.5 13.5,1.5C12.39,1.5 11.5,2.39 11.5,3.5C11.5,4.59 12.39,5.5 13.5,5.5M9.89,19.38L10.89,15L13,17V23H15V15.5L12.89,13.5L13.5,10.5C14.79,12 16.79,13 19,13V11C17.09,11 15.5,10 14.69,8.58L13.69,7C13.29,6.38 12.69,6 12,6C11.69,6 11.5,6.08 11.19,6.08L6,8.28V13H8V9.58L9.79,8.88L8.19,17L3.29,16L2.89,18L9.89,19.38Z",
   );
 }
+
 export function LockIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 0 1 6 0v3H9z" />
-    </svg>
+  return svg(
+    size,
+    "M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z",
   );
 }
+
 export function PlugIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M9 2v6H7V2H5v6a4 4 0 0 0 3 3.9V16a2 2 0 0 0 2 2h1v4h2v-4h1a2 2 0 0 0 2-2v-4.1A4 4 0 0 0 19 8V2h-2v6h-2V2H9z" />
-    </svg>
+  return svg(
+    size,
+    "M16,7V3H14V7H10V3H8V7C7.89,7 7,7.89 7,9V14.5L10.5,18V21H13.5V18L17,14.5V9C17,7.89 16.11,7 16,7Z",
   );
 }
+
 export function CalendarIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M7 2v2H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7zM5 9h14v10H5V9z" />
-    </svg>
+  return svg(
+    size,
+    "M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z",
   );
 }
+
 export function ClockIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 10V6h-2v7h6v-2h-4z" />
-    </svg>
+  return svg(
+    size,
+    "M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12.5,7H11V13L15.75,15.85L16.5,14.62L12.5,12.25V7Z",
   );
 }
 
 export function TvIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M3 4h18a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-7v2h3v2H7v-2h3v-2H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm1 2v9h16V6H4z" />
-    </svg>
+  return svg(
+    size,
+    "M21,3H3C1.89,3 1,3.89 1,5V17A2,2 0 0,0 3,19H8V21H16V19H21A2,2 0 0,0 23,17V5C23,3.89 22.1,3 21,3M21,17H3V5H21V17Z",
   );
 }
+
 export function SpeakerIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" />
-    </svg>
+  return svg(
+    size,
+    "M12,12A3,3 0 0,0 9,15A3,3 0 0,0 12,18A3,3 0 0,0 15,15A3,3 0 0,0 12,12M12,20A5,5 0 0,1 7,15A5,5 0 0,1 12,10A5,5 0 0,1 17,15A5,5 0 0,1 12,20M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8C10.89,8 10,7.1 10,6C10,4.89 10.89,4 12,4M17,2H7C5.89,2 5,2.89 5,4V20A2,2 0 0,0 7,22H17A2,2 0 0,0 19,20V4C19,2.89 18.1,2 17,2Z",
   );
 }
+
 export function ClimateIcon({ size = 24 }: IconProps) {
+  // Klimaanlage: Einheit mit Lamellenschlitz (evenodd-Loch) + Luftauslass-Striche.
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 3 3 5H9l3-5zm-4 8h8a4 4 0 0 1-8 0z" />
+      <path
+        fillRule="evenodd"
+        d="M3,6.5A1.5,1.5 0 0,1 4.5,5H19.5A1.5,1.5 0 0,1 21,6.5V10.5A1.5,1.5 0 0,1 19.5,12H4.5A1.5,1.5 0 0,1 3,10.5V6.5Z M5.5,8.5H18.5V9.5H5.5Z M7,15H9V19H7Z M11,15H13V19H11Z M15,15H17V19H15Z"
+      />
     </svg>
   );
 }
+
 export function BlindsIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M3 3h18v2H3V3zm1 4h16v2H4V7zm0 4h16v2H4v-2zm0 4h16v2H4v-2zm7 4h2v3h-2v-3z" />
-    </svg>
+  return svg(
+    size,
+    "M3,3H21V5H3V3M4,7H20V9H4V7M4,11H20V13H4V11M4,15H20V17H4V15M11,19H13V22H11V19Z",
   );
 }
+
 export function GarageIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 3 3 7v14h2V9h14v12h2V7l-9-4zm-5 9h10v2H7v-2zm0 4h10v2H7v-2z" />
-    </svg>
+  return svg(
+    size,
+    "M22,9V20H19V11H5V20H2V9L12,5L22,9M18,12V13H6V12H18M18,14V15H6V14H18M18,16V17H6V16H18M18,18V19H6V18H18Z",
   );
 }
+
 export function CameraIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M9 4h6l1.5 2H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.5L9 4zm3 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" />
-    </svg>
+  return svg(
+    size,
+    "M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z",
   );
 }
+
 export function VacuumIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zM6 13h12a6 6 0 0 1-12 0z" />
-    </svg>
+  return svg(
+    size,
+    "M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A1.5,1.5 0 0,1 13.5,7.5A1.5,1.5 0 0,1 12,9A1.5,1.5 0 0,1 10.5,7.5A1.5,1.5 0 0,1 12,6M5.6,13H18.4A6.5,6.5 0 0,1 12,18.5A6.5,6.5 0 0,1 5.6,13Z",
   );
 }
+
 export function CoffeeIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M4 8h13v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8zm13 0h2a3 3 0 0 1 0 6h-2V8zM4 20h13v2H4v-2z" />
-    </svg>
+  return svg(
+    size,
+    "M2,21V19H20V21H2M20,8V5H18V8H20M20,3A2,2 0 0,1 22,5V8A2,2 0 0,1 20,10H18V13A4,4 0 0,1 14,17H8A4,4 0 0,1 4,13V3H20M16,5H6V13A2,2 0 0,0 8,15H14A2,2 0 0,0 16,13V5Z",
   );
 }
+
 export function WifiIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0-5c1.7 0 3.2.7 4.3 1.8l-1.8 1.8a3.5 3.5 0 0 0-5 0l-1.8-1.8A6 6 0 0 1 12 13zm0-5c3 0 5.8 1.2 7.8 3.2l-1.8 1.8A8.5 8.5 0 0 0 6 13l-1.8-1.8A11 11 0 0 1 12 8z" />
-    </svg>
+  return svg(
+    size,
+    "M12,21L15.6,16.2C14.6,15.45 13.35,15 12,15C10.65,15 9.4,15.45 8.4,16.2L12,21M12,3C7.95,3 4.21,4.34 1.2,6.6L3,9C5.5,7.12 8.62,6 12,6C15.38,6 18.5,7.12 21,9L22.8,6.6C19.79,4.34 16.05,3 12,3M12,9C9.3,9 6.81,9.89 4.8,11.4L6.6,13.8C8.1,12.67 9.97,12 12,12C14.03,12 15.9,12.67 17.4,13.8L19.2,11.4C17.19,9.89 14.7,9 12,9Z",
   );
 }
+
 export function BatteryIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M5 6h12a2 2 0 0 1 2 2v1h2v6h-2v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm1 3v6h10V9H6z" />
-    </svg>
+  return svg(
+    size,
+    "M16.67,4H15V2H9V4H7.33A1.33,1.33 0 0,0 6,5.33V20.67C6,21.4 6.6,22 7.33,22H16.67A1.33,1.33 0 0,0 18,20.67V5.33C18,4.6 17.4,4 16.67,4Z",
   );
 }
+
 export function PlantIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 12c0-4 3-7 8-7 0 5-3 8-7 8h-1zm0 0C12 9 9 6 4 6c0 4 3 6 7 6h1zm-2 2h4l-1 8h-2l-1-8z" />
-    </svg>
+  return svg(
+    size,
+    "M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z",
   );
 }
+
 export function HeaterIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M4 6h2v12H4V6zm4 0h2v12H8V6zm4 0h2v12h-2V6zm4 0h2v12h-2V6zM3 18h18v2H3v-2z" />
-    </svg>
+  return svg(
+    size,
+    "M7.95,3L6.53,5.19L7.95,7.4L7.06,8.76L5.18,5.87L6.6,3.68L5.95,3H7.95M11.95,3L10.53,5.19L11.95,7.4L11.06,8.76L9.18,5.87L10.6,3.68L9.95,3H11.95M15.95,3L14.53,5.19L15.95,7.4L15.06,8.76L13.18,5.87L14.6,3.68L13.95,3H15.95M17,10H22V12H21V21H19V19H5V21H3V12H2V10H7L7.66,11H16.34L17,10M19,17V12H5V17H19Z",
   );
 }
+
 export function FridgeIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M6 2h12a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm1 2v5h10V4H7zm0 7v9h10v-9H7zm2-6h2v2H9V5zm0 8h2v3H9v-3z" />
-    </svg>
+  return svg(
+    size,
+    "M7,2H17A2,2 0 0,1 19,4V20A2,2 0 0,1 17,22H7A2,2 0 0,1 5,20V4A2,2 0 0,1 7,2M7,4V9H17V4H7M17,20V11H7V20H17M8,5.5H10V8H8V5.5M8,12.5H10V16H8V12.5Z",
   );
 }
+
 export function WasherIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M5 2h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm2 3a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm5 3a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 2a4 4 0 0 1 0 8 4 4 0 0 1 0-8z" />
-    </svg>
+  return svg(
+    size,
+    "M18,2.01L6,2C4.89,2 4,2.89 4,4V20C4,21.11 4.89,22 6,22H18C19.11,22 20,21.11 20,20V4C20,2.89 19.11,2.01 18,2.01M18,20H6V8H18V20M18,6H6V4H18V6M7.5,5C8.05,5 8.5,4.55 8.5,4C8.5,3.45 8.05,3 7.5,3C6.95,3 6.5,3.45 6.5,4C6.5,4.55 6.95,5 7.5,5M10.5,5C11.05,5 11.5,4.55 11.5,4C11.5,3.45 11.05,3 10.5,3C9.95,3 9.5,3.45 9.5,4C9.5,4.55 9.95,5 10.5,5M12,9A5,5 0 0,0 7,14A5,5 0 0,0 12,19A5,5 0 0,0 17,14A5,5 0 0,0 12,9M12,17C10.34,17 9,15.66 9,14C9,12.34 10.34,11 12,11C13.66,11 15,12.34 15,14C15,15.66 13.66,17 12,17Z",
   );
 }
+
 export function SunIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5 2 2-2 2-2-2 2-2zm0 16 2 2-2 2-2-2 2-2zM2 12l2-2 2 2-2 2-2-2zm16 0 2-2 2 2-2 2-2-2z" />
-    </svg>
+  return svg(
+    size,
+    "M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,2L14.39,5.42C13.65,5.15 12.84,5 12,5C11.16,5 10.35,5.15 9.61,5.42L12,2M3.34,7L7.5,6.65C6.9,7.16 6.36,7.78 5.94,8.5C5.5,9.24 5.25,10 5.11,10.79L3.34,7M3.36,17L5.12,13.23C5.26,14 5.53,14.78 5.95,15.5C6.37,16.24 6.91,16.86 7.5,17.37L3.36,17M20.65,7L18.88,10.79C18.74,10 18.47,9.23 18.05,8.5C17.63,7.78 17.1,7.15 16.5,6.64L20.65,7M20.64,17L16.5,17.36C17.09,16.85 17.62,16.22 18.04,15.5C18.46,14.77 18.73,14 18.87,13.21L20.64,17M12,22L9.59,18.56C10.33,18.83 11.16,19 12,19C12.84,19 13.65,18.85 14.39,18.58L12,22Z",
   );
 }
+
 export function BedIcon({ size = 24 }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M2 6h2v6h16V9a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3v1H4V6H2zm0 8h20v4h-2v-2H4v2H2v-4z" />
-    </svg>
+  return svg(
+    size,
+    "M19,7H11V14H3V5H1V20H3V17H21V20H23V11A4,4 0 0,0 19,7M7,13A3,3 0 0,0 10,10A3,3 0 0,0 7,7A3,3 0 0,0 4,10A3,3 0 0,0 7,13Z",
   );
 }
 
