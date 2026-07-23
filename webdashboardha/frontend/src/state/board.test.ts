@@ -3,7 +3,6 @@ import {
   ACCENT_WARM,
   allCategories,
   bucketByCategory,
-  categoryForDomain,
   categoryOf,
   customCategories,
   greeting,
@@ -17,55 +16,48 @@ function w(id: string, entity_id: string, options: Record<string, unknown> = {})
   return { id, type: "x", entity_id, x: 0, y: 0, w: 1, h: 1, options };
 }
 
-describe("categoryForDomain", () => {
-  it("mappt Domains auf Basiskategorien", () => {
-    expect(categoryForDomain("light")).toBe("licht");
-    expect(categoryForDomain("switch")).toBe("geraete");
-    expect(categoryForDomain("input_boolean")).toBe("geraete");
-    expect(categoryForDomain("fan")).toBe("luft");
-    expect(categoryForDomain("cover")).toBe("rollo");
-    expect(categoryForDomain("media_player")).toBe("medien");
-    expect(categoryForDomain("sensor")).toBe("sensor");
-    expect(categoryForDomain("binary_sensor")).toBe("sensor");
-    expect(categoryForDomain("unknown")).toBe("geraete");
-  });
-});
-
 describe("categoryOf", () => {
-  it("nutzt die Domain, wenn kein Override gesetzt ist", () => {
-    expect(categoryOf(w("1", "light.wz"))).toBe("licht");
-    expect(categoryOf(w("2", "fan.bad"))).toBe("luft");
+  it("nutzt ohne Override die Sammelkategorie", () => {
+    expect(categoryOf(w("1", "light.wz"))).toBe("uncategorized");
+    expect(categoryOf(w("2", "fan.bad"))).toBe("uncategorized");
   });
   it("respektiert einen bekannten Override", () => {
-    const known = new Set(["licht", "garten"]);
-    expect(categoryOf(w("3", "light.aussen", { category: "garten" }), known)).toBe("garten");
+    const known = new Set(["kueche", "uncategorized"]);
+    expect(categoryOf(w("3", "light.aussen", { category: "kueche" }), known)).toBe("kueche");
   });
-  it("fällt bei unbekanntem Override auf die Domain zurück", () => {
-    const known = new Set(["licht"]);
-    expect(categoryOf(w("4", "light.aussen", { category: "geloescht" }), known)).toBe("licht");
+  it("fällt bei unbekanntem Override auf die Sammelkategorie zurück", () => {
+    const known = new Set(["uncategorized"]);
+    expect(categoryOf(w("4", "light.aussen", { category: "geloescht" }), known)).toBe(
+      "uncategorized",
+    );
   });
 });
 
 describe("bucketByCategory", () => {
-  const cats = allCategories(undefined);
-  const widgets = [w("a", "light.a"), w("b", "switch.b"), w("c", "sensor.c")];
+  const cats = allCategories({ customCategories: [{ key: "kueche", name: "Küche", icon: "light" }] });
+  const widgets = [
+    w("a", "light.a", { category: "kueche" }),
+    w("b", "switch.b"), // ohne Kategorie → uncategorized
+    w("c", "light.c", { category: "geloescht" }), // unbekannt → uncategorized
+  ];
 
   it("gruppiert nach Kategorie und lässt leere aus", () => {
     const buckets = bucketByCategory(widgets, cats, false);
-    const keys = buckets.map((b) => b.def.key);
-    expect(keys).toEqual(["licht", "geraete", "sensor"]);
+    expect(buckets.map((b) => b.def.key)).toEqual(["kueche", "uncategorized"]);
     expect(buckets[0].widgets.map((x) => x.id)).toEqual(["a"]);
+    expect(buckets[1].widgets.map((x) => x.id)).toEqual(["b", "c"]);
   });
 
   it("zeigt im Edit-Modus auch leere Kategorien", () => {
-    const buckets = bucketByCategory(widgets, cats, true);
-    // Alle 6 Basiskategorien erscheinen.
-    expect(buckets.length).toBe(6);
+    const buckets = bucketByCategory([], cats, true);
+    // Custom-Kategorie + Sammelkategorie, beide leer.
+    expect(buckets.map((b) => b.def.key)).toEqual(["kueche", "uncategorized"]);
   });
 
-  it("behält die Kategorie-Reihenfolge bei", () => {
-    const buckets = bucketByCategory([w("m", "media_player.s"), w("l", "light.x")], cats, false);
-    expect(buckets.map((b) => b.def.key)).toEqual(["licht", "medien"]);
+  it("behält die Kategorie-Reihenfolge bei (Custom vor Sammelkategorie)", () => {
+    const buckets = bucketByCategory([w("x", "switch.x")], cats, false);
+    // Nur uncategorized hat Geräte; leere Custom-Kategorie fällt weg.
+    expect(buckets.map((b) => b.def.key)).toEqual(["uncategorized"]);
   });
 });
 
@@ -74,9 +66,13 @@ describe("customCategories / allCategories", () => {
     const meta = { customCategories: [{ key: "g", name: "Garten", icon: "plant" }, null, {}] as never };
     expect(customCategories(meta as never)).toEqual([{ key: "g", name: "Garten", icon: "plant" }]);
   });
-  it("hängt Custom-Kategorien hinten an", () => {
+  it("stellt Custom-Kategorien vor die Sammelkategorie", () => {
     const cats = allCategories({ customCategories: [{ key: "g", name: "Garten", icon: "plant" }] });
-    expect(cats[cats.length - 1]).toMatchObject({ key: "g", name: "Garten", custom: true });
+    expect(cats[0]).toMatchObject({ key: "g", name: "Garten", custom: true });
+    expect(cats[cats.length - 1].key).toBe("uncategorized");
+  });
+  it("ohne Custom-Kategorien nur die Sammelkategorie", () => {
+    expect(allCategories(undefined).map((c) => c.key)).toEqual(["uncategorized"]);
   });
 });
 

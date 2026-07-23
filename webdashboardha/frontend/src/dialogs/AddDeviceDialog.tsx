@@ -6,6 +6,8 @@ import { Dialog } from "./Dialog";
 interface Props {
   /** Zielkategorie (aus dem „Gerät"-Button einer Kategorie) — optional. */
   targetCategory?: string;
+  /** Bereits auf dem Dashboard vorhandene Entity-IDs — werden als „hinzugefügt" markiert. */
+  existing?: string[];
   onPick: (entity: EntityInfo, categoryKey?: string) => void;
   onClose: () => void;
 }
@@ -21,16 +23,20 @@ const DOMAIN_LABEL: Record<string, string> = {
   media_player: "Medien",
 };
 
-export function AddDeviceDialog({ targetCategory, onPick, onClose }: Props) {
+export function AddDeviceDialog({ targetCategory, existing, onPick, onClose }: Props) {
   const [entities, setEntities] = useState<EntityInfo[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  // In dieser Sitzung hinzugefügte Entities — Dialog bleibt für Mehrfachauswahl offen.
+  const [added, setAdded] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     fetchEntities()
       .then(setEntities)
       .catch((e) => setError(String(e)));
   }, []);
+
+  const onBoard = useMemo(() => new Set(existing ?? []), [existing]);
 
   const filtered = useMemo(() => {
     if (!entities) return [];
@@ -40,6 +46,15 @@ export function AddDeviceDialog({ targetCategory, onPick, onClose }: Props) {
       (e) => e.name.toLowerCase().includes(q) || e.entity_id.toLowerCase().includes(q),
     );
   }, [entities, query]);
+
+  const add = (e: EntityInfo) => {
+    onPick(e, targetCategory);
+    setAdded((prev) => {
+      const next = new Set(prev);
+      next.add(e.entity_id);
+      return next;
+    });
+  };
 
   return (
     <Dialog title="Gerät hinzufügen" onClose={onClose}>
@@ -57,15 +72,14 @@ export function AddDeviceDialog({ targetCategory, onPick, onClose }: Props) {
         {entities && filtered.length === 0 && <div className="dlg__msg">Nichts gefunden.</div>}
         {filtered.map((e) => {
           const Icon = resolveIcon(undefined, e.domain, undefined, e.name);
+          const isAdded = added.has(e.entity_id) || onBoard.has(e.entity_id);
           return (
             <button
               key={e.entity_id}
               type="button"
-              className="dlg__additem"
-              onClick={() => {
-                onPick(e, targetCategory);
-                onClose();
-              }}
+              className={`dlg__additem${isAdded ? " is-added" : ""}`}
+              disabled={isAdded}
+              onClick={() => add(e)}
             >
               <span className="dlg__additem-badge">
                 <Icon size={18} />
@@ -76,11 +90,15 @@ export function AddDeviceDialog({ targetCategory, onPick, onClose }: Props) {
                   {DOMAIN_LABEL[e.domain] ?? e.domain} · {e.entity_id}
                 </span>
               </span>
-              <span className="dlg__additem-plus">＋</span>
+              <span className="dlg__additem-plus">{isAdded ? "✓" : "＋"}</span>
             </button>
           );
         })}
       </div>
+      <div className="dlg__gap--sm" />
+      <button type="button" className="dlg__primary" onClick={onClose}>
+        {added.size > 0 ? `Fertig (${added.size} hinzugefügt)` : "Fertig"}
+      </button>
     </Dialog>
   );
 }

@@ -12,7 +12,7 @@ import {
   type Group,
   type WidgetConfig,
 } from "./dashboards";
-import { categoryForDomain, customCategories } from "./board";
+import { UNCATEGORIZED, customCategories } from "./board";
 
 /** Kollisionsarme ID ohne crypto.randomUUID (fehlt auf Safari 12). */
 function genId(prefix: string): string {
@@ -129,7 +129,7 @@ export function useBoard(): BoardApi {
           return widgets;
         }
         const options: Record<string, unknown> = {};
-        if (categoryKey && categoryKey !== categoryForDomain(entity.domain)) {
+        if (categoryKey && categoryKey !== UNCATEGORIZED.key) {
           options.category = categoryKey;
         }
         const widget: WidgetConfig = {

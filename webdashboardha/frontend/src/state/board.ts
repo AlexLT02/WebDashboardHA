@@ -18,39 +18,16 @@ export interface CategoryDef {
   custom?: boolean;
 }
 
-/** Basis-Kategorien in Anzeige-Reihenfolge. */
-export const BASE_CATEGORIES: CategoryDef[] = [
-  { key: "licht", name: "Beleuchtung", icon: "light" },
-  { key: "geraete", name: "Steckdosen & Geräte", icon: "plug" },
-  { key: "luft", name: "Ventilation", icon: "fan" },
-  { key: "rollo", name: "Rollläden", icon: "blinds" },
-  { key: "medien", name: "Medien", icon: "speaker" },
-  { key: "sensor", name: "Sensoren", icon: "motion" },
-];
-
-const BASE_KEYS = new Set(BASE_CATEGORIES.map((c) => c.key));
-
-/** Entity-Domain → Basiskategorie-Schlüssel. */
-export function categoryForDomain(domain: string): string {
-  switch (domain) {
-    case "light":
-      return "licht";
-    case "fan":
-      return "luft";
-    case "cover":
-      return "rollo";
-    case "media_player":
-      return "medien";
-    case "sensor":
-    case "binary_sensor":
-    case "weather":
-      return "sensor";
-    case "switch":
-    case "input_boolean":
-    default:
-      return "geraete";
-  }
-}
+/**
+ * Sammelkategorie für alle Geräte ohne explizite (benutzerdefinierte) Zuordnung.
+ * Es gibt bewusst KEINE vordefinierten Template-Kategorien mehr — Kategorien
+ * legt der Nutzer selbst an (Dashboard.meta.customCategories).
+ */
+export const UNCATEGORIZED: CategoryDef = {
+  key: "uncategorized",
+  name: "Ohne Kategorie",
+  icon: "plug",
+};
 
 /** Domain eines Widgets (leer bei entity-losen Widgets). */
 export function domainOf(widget: WidgetConfig): string {
@@ -58,16 +35,17 @@ export function domainOf(widget: WidgetConfig): string {
 }
 
 /**
- * Kategorie eines Widgets: expliziter Override (options.category) vor
- * Domain-Ableitung. Zeigt der Override auf eine nicht (mehr) existierende
- * Kategorie, fällt er auf die Domain-Kategorie zurück.
+ * Kategorie eines Widgets: expliziter Override (options.category) auf eine
+ * benutzerdefinierte Kategorie. Ohne Override — oder wenn der Override auf eine
+ * nicht (mehr) existierende Kategorie zeigt — fällt das Gerät in die
+ * Sammelkategorie „Ohne Kategorie".
  */
 export function categoryOf(widget: WidgetConfig, known?: Set<string>): string {
   const override = widget.options?.category;
   if (typeof override === "string" && override) {
     if (!known || known.has(override)) return override;
   }
-  return categoryForDomain(domainOf(widget));
+  return UNCATEGORIZED.key;
 }
 
 /** Uhr/Kalender sind Teil der Shell (Header/Agenda), nicht Kacheln. */
@@ -120,12 +98,12 @@ export function customCategories(meta: DashboardMeta | undefined): CustomCategor
   );
 }
 
-/** Basis- + Custom-Kategorien (Custom hinten, in Definitionsreihenfolge). */
+/** Custom-Kategorien (in Definitionsreihenfolge) + Sammelkategorie am Ende. */
 export function allCategories(meta: DashboardMeta | undefined): CategoryDef[] {
   const custom = customCategories(meta)
-    .filter((c) => !BASE_KEYS.has(c.key))
+    .filter((c) => c.key !== UNCATEGORIZED.key)
     .map((c) => ({ key: c.key, name: c.name, icon: c.icon, custom: true }));
-  return BASE_CATEGORIES.concat(custom);
+  return [...custom, UNCATEGORIZED];
 }
 
 export interface CategoryBucket {
@@ -149,7 +127,7 @@ export function bucketByCategory(
     const key = categoryOf(w, known);
     const bucket = byKey.get(key);
     if (bucket) bucket.push(w);
-    else byKey.get("geraete")?.push(w); // Fallback, sollte nie greifen
+    else byKey.get(UNCATEGORIZED.key)?.push(w); // Fallback, sollte nie greifen
   }
   const out: CategoryBucket[] = [];
   for (const def of cats) {

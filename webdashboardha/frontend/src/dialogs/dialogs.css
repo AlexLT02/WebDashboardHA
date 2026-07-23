@@ -374,6 +374,13 @@
   font-size: 20px;
   flex: none;
 }
+.dlg__additem.is-added {
+  opacity: 0.55;
+  cursor: default;
+}
+.dlg__additem.is-added .dlg__additem-plus {
+  color: var(--ok);
+}
 .dlg__chips {
   display: flex;
   flex-wrap: wrap;
