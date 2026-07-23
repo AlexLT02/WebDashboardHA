@@ -6,7 +6,6 @@ import {
   isOn,
   type CategoryDef,
 } from "../state/board";
-import { turnOffAll } from "../state/commands";
 import { ICONS } from "../controls/icons";
 import { Tile, type DetailKind } from "../widgets/Tile";
 import type { WidgetConfig } from "../state/dashboards";
@@ -58,7 +57,6 @@ export function DashboardView({
         const countLabel = isSensorCat
           ? `${ws.length}`
           : `${onCount}/${controllable.length} an`;
-        const hasOff = !editMode && !isSensorCat && onCount > 0;
         const CatIcon = ICONS[def.icon] ?? ICONS.light;
 
         return (
@@ -70,18 +68,6 @@ export function DashboardView({
               <span className="cat__title">{def.name}</span>
               <span className="cat__count">{countLabel}</span>
               <span className="cat__spacer" />
-              {hasOff && (
-                <button
-                  type="button"
-                  className="cat__off"
-                  onClick={() => {
-                    turnOffAll(ws, states);
-                    onAction?.(`${def.name} aus`, "#6b7280");
-                  }}
-                >
-                  Alle aus
-                </button>
-              )}
               {editMode && def.custom && (
                 <button
                   type="button"

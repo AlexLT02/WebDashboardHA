@@ -3,7 +3,9 @@
 .tile {
   position: relative;
   display: grid;
-  grid-template-columns: auto 1fr;
+  /* minmax(0, 1fr) statt 1fr: Safari 12 lässt die Textspalte sonst nicht unter
+     ihre Inhaltsbreite schrumpfen → Gerätename läuft aus der Kachel. */
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 11px;
   min-height: 59px;
@@ -12,6 +14,7 @@
   background: var(--tile);
   border: 1px solid var(--border);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  overflow: hidden;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition:
