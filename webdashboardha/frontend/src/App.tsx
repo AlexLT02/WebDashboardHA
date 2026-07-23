@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { connectWs } from "./state/ws";
 import { useStore } from "./state/store";
 import { useBoard, type BoardSettings } from "./state/useBoard";
-import { allCategories, allWidgets, domainOf, isOn } from "./state/board";
+import { allWidgets, domainOf, isOn } from "./state/board";
 import { useEdgePanels } from "./shell/useEdgePanels";
 import { ControlPanel, type HistoryEntry } from "./shell/ControlPanel";
 import { EditBar } from "./shell/EditBar";
@@ -12,7 +12,6 @@ import { DashboardView } from "./dashboard/DashboardView";
 import { ActiveView } from "./dashboard/ActiveView";
 import { MoreInfoDialog } from "./dialogs/MoreInfoDialog";
 import { AddDeviceDialog } from "./dialogs/AddDeviceDialog";
-import { AddCategoryDialog } from "./dialogs/AddCategoryDialog";
 import { SettingsDialog } from "./dialogs/SettingsDialog";
 import type { DetailKind } from "./widgets/Tile";
 import type { WidgetConfig } from "./state/dashboards";
@@ -22,8 +21,7 @@ type View = "dashboard" | "active";
 
 type DialogState =
   | { type: "detail"; widget: WidgetConfig; kind: DetailKind }
-  | { type: "add"; targetCategory?: string }
-  | { type: "addcat" }
+  | { type: "add" }
   | { type: "settings" }
   | null;
 
@@ -53,7 +51,6 @@ export default function App() {
   useEffect(() => connectWs(), []);
 
   const widgets = allWidgets(board.current);
-  const categories = allCategories(board.current?.meta);
   const activeCount = widgets.filter((w) => isOn(domainOf(w), states[w.entity_id]?.state)).length;
 
   const logAction = (text: string, color: string) => {
@@ -180,7 +177,6 @@ export default function App() {
           ) : view === "active" ? (
             <ActiveView
               widgets={widgets}
-              categories={categories}
               onOpen={(w, kind) => setDialog({ type: "detail", widget: w, kind })}
               onRemoveWidget={board.removeWidget}
               onAction={logAction}
@@ -188,13 +184,10 @@ export default function App() {
           ) : (
             <DashboardView
               widgets={widgets}
-              categories={categories}
               editMode={editMode}
               onOpen={(w, kind) => setDialog({ type: "detail", widget: w, kind })}
               onRemoveWidget={board.removeWidget}
-              onAddDevice={(cat) => setDialog({ type: "add", targetCategory: cat })}
-              onAddCategory={() => setDialog({ type: "addcat" })}
-              onRemoveCategory={board.removeCategory}
+              onAddDevice={() => setDialog({ type: "add" })}
               onAction={logAction}
             />
           )}
@@ -214,14 +207,7 @@ export default function App() {
         />
       )}
       {dialog?.type === "add" && (
-        <AddDeviceDialog
-          targetCategory={dialog.targetCategory}
-          onPick={(entity, cat) => board.addWidget(entity, cat)}
-          onClose={closeDialog}
-        />
-      )}
-      {dialog?.type === "addcat" && (
-        <AddCategoryDialog onCreate={board.addCategory} onClose={closeDialog} />
+        <AddDeviceDialog onPick={(entity) => board.addWidget(entity)} onClose={closeDialog} />
       )}
       {dialog?.type === "settings" && (
         <SettingsDialog settings={board.settings} onSetting={setSetting} onClose={closeDialog} />
