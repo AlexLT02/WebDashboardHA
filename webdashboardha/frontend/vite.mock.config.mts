@@ -44,6 +44,22 @@ const mockDashboard = {
 
 // supported_features: OPEN|CLOSE|SET_POSITION|STOP = 15, ohne SET_POSITION/STOP = 3.
 const mockStates: Record<string, unknown> = {
+  // Absichtlich überlange Namen (ganz oben) — testet die Laufschrift in der Geräteauswahl.
+  "cover.rolladen_terrassentuer_links": {
+    entity_id: "cover.rolladen_terrassentuer_links",
+    state: "open",
+    attributes: {
+      friendly_name: "Rollladen Wohnzimmer Terrassentür links (Sonnenschutz)",
+      device_class: "shutter",
+      current_position: 80,
+      supported_features: 15,
+    },
+  },
+  "light.esszimmer_pendelleuchte_dimmbar": {
+    entity_id: "light.esszimmer_pendelleuchte_dimmbar",
+    state: "off",
+    attributes: { friendly_name: "Esszimmer Pendelleuchte über dem Tisch dimmbar" },
+  },
   "light.a": { entity_id: "light.a", state: "on", attributes: { friendly_name: "Decke", brightness: 180 } },
   "light.loose": { entity_id: "light.loose", state: "off", attributes: { friendly_name: "Loses Licht" } },
   "sensor.b": { entity_id: "sensor.b", state: "21.4", attributes: { friendly_name: "Temperatur", unit_of_measurement: "°C", device_class: "temperature" } },

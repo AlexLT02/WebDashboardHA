@@ -367,6 +367,17 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+/* Laufschrift für zu lange Gerätenamen (Distanz/Dauer setzt React inline). */
+.dlg__mq {
+  display: block;
+  overflow: hidden;
+}
+.dlg__mq-in {
+  display: inline-block;
+  white-space: nowrap;
+  transition-property: -webkit-transform, transform;
+  transition-timing-function: ease-in-out;
+}
 .dlg__additem-eid {
   display: block; /* eigene Zeile unter dem Namen */
   font-size: 11px;

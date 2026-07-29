@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { fetchEntities, type EntityInfo } from "../state/dashboards";
 import { useStore } from "../state/store";
 import { resolveIcon } from "../controls/icons";
@@ -28,6 +28,17 @@ const DOMAIN_LABEL: Record<string, string> = {
 /** `domain.object_id` — HA-Format einer Entity-ID. */
 const ENTITY_ID_RE = /^[a-z][a-z0-9_]*\.[a-z0-9_]+$/;
 
+// Laufschrift für zu lange Gerätenamen. Bewusst per CSS-Transition und mit EINEM
+// Timer für die ganze Liste: `var()` in @keyframes ist auf Safari 12 unzuverlässig,
+// und eine Dauer-Animation pro Zeile würde das iPad Air 1 unnötig belasten.
+const MQ_PAUSE_MS = 3200; // Standzeit an Anfang/Ende (zum Lesen)
+const MQ_SPEED_PX_S = 55; // Scroll-Tempo
+const MQ_MIN_OVERFLOW = 4; // Sub-Pixel-Rauschen ignorieren
+
+function mqDurationMs(shift: number): number {
+  return Math.max(700, Math.min(6000, Math.round((shift / MQ_SPEED_PX_S) * 1000)));
+}
+
 export function AddDeviceDialog({ targetCategory, existing, onPick, onClose }: Props) {
   const [entities, setEntities] = useState<EntityInfo[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -54,6 +65,38 @@ export function AddDeviceDialog({ targetCategory, existing, onPick, onClose }: P
       (e) => e.name.toLowerCase().includes(q) || e.entity_id.toLowerCase().includes(q),
     );
   }, [entities, query]);
+
+  // ---- Laufschrift: welche Namen passen nicht in ihre Zeile? ----
+  const listRef = useRef<HTMLDivElement>(null);
+  const [shifts, setShifts] = useState<Record<string, number>>({});
+  const [atEnd, setAtEnd] = useState(false);
+
+  // Ein einziger Lese-Durchlauf (= ein Layout) nach jedem Listen-Wechsel.
+  useEffect(() => {
+    const list = listRef.current;
+    if (!list) return;
+    const boxes = list.querySelectorAll<HTMLElement>("[data-mq]");
+    const next: Record<string, number> = {};
+    for (let i = 0; i < boxes.length; i++) {
+      const box = boxes[i];
+      const inner = box.firstElementChild as HTMLElement | null;
+      const id = box.getAttribute("data-mq");
+      if (!inner || !id) continue;
+      const over = inner.scrollWidth - box.clientWidth;
+      if (over > MQ_MIN_OVERFLOW) next[id] = over;
+    }
+    setShifts(next);
+  }, [filtered]);
+
+  const hasMarquee = Object.keys(shifts).length > 0;
+  useEffect(() => {
+    if (!hasMarquee) return;
+    const timer = window.setInterval(() => setAtEnd((v) => !v), MQ_PAUSE_MS);
+    return () => {
+      window.clearInterval(timer);
+      setAtEnd(false);
+    };
+  }, [hasMarquee]);
 
   const add = (e: EntityInfo) => {
     onPick(e, targetCategory);
@@ -100,13 +143,14 @@ export function AddDeviceDialog({ targetCategory, existing, onPick, onClose }: P
         onChange={(e) => setQuery(e.target.value)}
         autoFocus
       />
-      <div className="dlg__list ha-scroll">
+      <div className="dlg__list ha-scroll" ref={listRef}>
         {error && <div className="dlg__msg">{error}</div>}
         {!entities && !error && <div className="dlg__msg">Lädt…</div>}
         {entities && filtered.length === 0 && <div className="dlg__msg">Nichts gefunden.</div>}
         {filtered.map((e) => {
           const Icon = resolveIcon(undefined, e.domain, undefined, e.name);
           const isAdded = added.has(e.entity_id) || onBoard.has(e.entity_id);
+          const shift = shifts[e.entity_id];
           return (
             <button
               key={e.entity_id}
@@ -119,7 +163,21 @@ export function AddDeviceDialog({ targetCategory, existing, onPick, onClose }: P
                 <Icon size={18} />
               </span>
               <span className="dlg__additem-name">
-                {e.name}
+                <span className="dlg__mq" data-mq={e.entity_id}>
+                  <span
+                    className="dlg__mq-in"
+                    style={
+                      shift
+                        ? {
+                            transform: atEnd ? `translateX(-${shift}px)` : "translateX(0)",
+                            transitionDuration: `${mqDurationMs(shift)}ms`,
+                          }
+                        : undefined
+                    }
+                  >
+                    {e.name}
+                  </span>
+                </span>
                 <span className="dlg__additem-eid">
                   {DOMAIN_LABEL[e.domain] ?? e.domain} · {e.entity_id}
                 </span>
