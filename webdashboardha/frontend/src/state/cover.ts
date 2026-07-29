@@ -22,8 +22,10 @@ export type CoverService = "open_cover" | "close_cover" | "stop_cover";
 
 /**
  * Fähigkeiten eines Covers. Meldet die Integration gar keine Features
- * (`supported_features` fehlt oder 0), bieten wir Auf/Zu trotzdem an — sonst
- * wäre die Kachel bei simplen Integrationen komplett tot.
+ * (`supported_features` fehlt oder 0), bieten wir Auf/Zu/Stopp trotzdem an —
+ * sonst wäre die Kachel bei simplen Integrationen komplett tot. Eine Position
+ * wird nicht geraten: ohne gemeldete Unterstützung fehlt auch `current_position`,
+ * der Slider hätte also keinen Wert zum Anzeigen.
  */
 export function coverFeatures(attrs: Record<string, unknown>): CoverFeatures {
   const f = typeof attrs.supported_features === "number" ? attrs.supported_features : 0;
@@ -31,7 +33,7 @@ export function coverFeatures(attrs: Record<string, unknown>): CoverFeatures {
   return {
     open: unknown || (f & FEATURE_OPEN) !== 0,
     close: unknown || (f & FEATURE_CLOSE) !== 0,
-    stop: (f & FEATURE_STOP) !== 0,
+    stop: unknown || (f & FEATURE_STOP) !== 0,
     setPosition: (f & FEATURE_SET_POSITION) !== 0,
   };
 }

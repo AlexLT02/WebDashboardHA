@@ -28,13 +28,22 @@ describe("coverFeatures", () => {
       setPosition: false,
     });
   });
-  it("bietet ohne gemeldete Features wenigstens Auf/Zu an", () => {
+  it("bietet ohne gemeldete Features Auf/Zu/Stopp an, aber keine Position", () => {
     expect(coverFeatures({})).toEqual({
       open: true,
       close: true,
-      stop: false,
+      stop: true,
       setPosition: false,
     });
+    expect(coverFeatures({ supported_features: "15" })).toEqual({
+      open: true,
+      close: true,
+      stop: true,
+      setPosition: false,
+    });
+  });
+  it("stoppt eine Fahrt auch bei ungemeldeten Features", () => {
+    expect(coverTapService("closing", null, coverFeatures({}))).toBe("stop_cover");
   });
 });
 
