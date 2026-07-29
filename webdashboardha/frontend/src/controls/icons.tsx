@@ -255,6 +255,20 @@ export function BedIcon({ size = 24 }: IconProps) {
   );
 }
 
+// Rollladen-Transport (Auf/Stopp/Zu). Bewusst NICHT in der ICONS-Registry:
+// das sind Steuer-Symbole, keine Geräte-Icons für die Kategorie-Auswahl.
+export function ArrowUpIcon({ size = 24 }: IconProps) {
+  return svg(size, "M7 14l5-5 5 5z");
+}
+
+export function StopIcon({ size = 24 }: IconProps) {
+  return svg(size, "M6 6h12v12H6z");
+}
+
+export function ArrowDownIcon({ size = 24 }: IconProps) {
+  return svg(size, "M7 10l5 5 5-5z");
+}
+
 /** Benannte Icon-Registry — für Auto-Zuweisung UND manuelle Auswahl. */
 export const ICONS: Record<string, (p: IconProps) => JSX.Element> = {
   light: LightbulbIcon,

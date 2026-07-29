@@ -14,11 +14,11 @@
 .stage {
   height: 100%;
   box-sizing: border-box;
-  padding: 18px 30px;
-  padding-top: calc(18px + env(safe-area-inset-top, 0px));
-  padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
-  padding-left: calc(30px + env(safe-area-inset-left, 0px));
-  padding-right: calc(30px + env(safe-area-inset-right, 0px));
+  padding: 14px 18px;
+  padding-top: calc(14px + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  padding-left: calc(18px + env(safe-area-inset-left, 0px));
+  padding-right: calc(18px + env(safe-area-inset-right, 0px));
 }
 
 .main {
@@ -27,7 +27,7 @@
   height: 100%;
   min-height: 0;
   min-width: 0;
-  max-width: 820px;
+  max-width: 940px;
   margin: 0 auto;
   position: relative;
 }
@@ -41,15 +41,15 @@
   padding: 2px 6px 0;
 }
 .dash-header__greet {
-  font-size: 15px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--text-soft);
   letter-spacing: -0.01em;
 }
 .dash-header__date {
-  font-size: 12.5px;
+  font-size: 16px;
   color: var(--text-muted);
-  margin-top: 3px;
+  margin-top: 5px;
 }
 .dash-header__clock {
   font-size: 140px;
@@ -205,9 +205,12 @@
   margin-left: 8px;
   white-space: nowrap;
 }
+/* Feste Zeilenhöhe: nur so kann die Rollladen-Kachel exakt zwei Zeilen hoch sein
+   (grid-row: span 2) statt sich an ihrem eigenen Inhalt zu orientieren. */
 .cat__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: 78px;
   gap: 10px;
 }
 .cat__add {

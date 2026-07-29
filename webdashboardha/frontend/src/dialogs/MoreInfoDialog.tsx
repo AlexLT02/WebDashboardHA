@@ -9,7 +9,7 @@ import {
   coverPosition,
   coverStateLabel,
 } from "../state/cover";
-import { resolveIcon } from "../controls/icons";
+import { ArrowDownIcon, ArrowUpIcon, StopIcon, resolveIcon } from "../controls/icons";
 import { DragBar } from "../controls/DragBar";
 import { Dialog } from "./Dialog";
 import type { DetailKind } from "../widgets/Tile";
@@ -42,11 +42,6 @@ const HUE_GRADIENT =
 const CT_GRADIENT = "linear-gradient(90deg,#ffd39a,#fff3e2,#ffffff,#eaf2ff,#cfe0ff)";
 const BRI_GRADIENT = "linear-gradient(90deg,rgba(239,147,107,0.5),#ef936b)";
 const POS_GRADIENT = "linear-gradient(90deg,rgba(110,168,254,0.45),#6ea8fe)";
-
-// Rollladen-Transport (Material-Pfade, wie das restliche Icon-Set).
-const ARROW_UP = "M7 14l5-5 5 5z";
-const SQUARE = "M6 6h12v12H6z";
-const ARROW_DOWN = "M7 10l5 5 5-5z";
 
 const SWATCHES: { css: string; hs: [number, number] }[] = [
   { css: "hsl(34,60%,74%)", hs: [34, 60] },
@@ -320,9 +315,7 @@ export function MoreInfoDialog({ widget, kind, onClose, onUpdateOptions }: Props
             disabled={!features.open}
             onClick={() => svc("cover", "open_cover")}
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-              <path d={ARROW_UP} />
-            </svg>
+            <ArrowUpIcon size={22} />
           </button>
           <button
             type="button"
@@ -331,9 +324,7 @@ export function MoreInfoDialog({ widget, kind, onClose, onUpdateOptions }: Props
             disabled={!features.stop}
             onClick={() => svc("cover", "stop_cover")}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d={SQUARE} />
-            </svg>
+            <StopIcon size={16} />
           </button>
           <button
             type="button"
@@ -343,9 +334,7 @@ export function MoreInfoDialog({ widget, kind, onClose, onUpdateOptions }: Props
             disabled={!features.close}
             onClick={() => svc("cover", "close_cover")}
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-              <path d={ARROW_DOWN} />
-            </svg>
+            <ArrowDownIcon size={22} />
           </button>
         </div>
 

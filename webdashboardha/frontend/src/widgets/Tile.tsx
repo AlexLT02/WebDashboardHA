@@ -10,8 +10,9 @@ import {
   coverStateLabel,
   coverTapService,
 } from "../state/cover";
-import { resolveIcon } from "../controls/icons";
+import { ArrowDownIcon, ArrowUpIcon, StopIcon, resolveIcon } from "../controls/icons";
 import { useLongPress } from "../controls/useLongPress";
+import type { CoverService } from "../state/cover";
 import type { WidgetConfig } from "../state/dashboards";
 import "./Tile.css";
 
@@ -119,6 +120,59 @@ function useTileVM(widget: Props["widget"], name: string, onAction?: Props["onAc
   };
 }
 
+/** Auf/Stopp/Zu direkt auf der Kachel — die Rollladen-Kachel ist dafür 2x2 groß. */
+function CoverActions({
+  attrs,
+  onCommand,
+}: {
+  attrs: Record<string, unknown>;
+  onCommand: (service: CoverService) => void;
+}) {
+  const f = coverFeatures(attrs);
+  // Der Tile-Container hört auf Touch/Maus (Tap + Long-Press) — hier abfangen,
+  // sonst schaltet ein Tastendruck zusätzlich das ganze Gerät um.
+  const stop = (e: React.SyntheticEvent) => e.stopPropagation();
+
+  return (
+    <div
+      className="tile__cover"
+      onTouchStart={stop}
+      onTouchEnd={stop}
+      onMouseDown={stop}
+      onMouseUp={stop}
+      onClick={stop}
+    >
+      <button
+        type="button"
+        className="tile__cbtn"
+        aria-label="Öffnen"
+        disabled={!f.open}
+        onClick={() => onCommand("open_cover")}
+      >
+        <ArrowUpIcon size={22} />
+      </button>
+      <button
+        type="button"
+        className="tile__cbtn"
+        aria-label="Stoppen"
+        disabled={!f.stop}
+        onClick={() => onCommand("stop_cover")}
+      >
+        <StopIcon size={15} />
+      </button>
+      <button
+        type="button"
+        className="tile__cbtn"
+        aria-label="Schließen"
+        disabled={!f.close}
+        onClick={() => onCommand("close_cover")}
+      >
+        <ArrowDownIcon size={22} />
+      </button>
+    </div>
+  );
+}
+
 export function Tile({ widget, editMode, onOpen, onRemove, onAction }: Props) {
   const entity = useEntity(widget.entity_id);
   const domain = domainOf(widget);
@@ -132,7 +186,13 @@ export function Tile({ widget, editMode, onOpen, onRemove, onAction }: Props) {
   const vm = useTileVM(widget, name, onAction);
 
   const isSensor = domain === "sensor" || domain === "binary_sensor" || domain === "weather";
+  const isCover = domain === "cover";
   const openDetail = () => onOpen(widget, vm.detail);
+
+  const coverCommand = (service: CoverService) => {
+    callService({ domain: "cover", service, entity_id: widget.entity_id }).catch(console.error);
+    onAction?.(`${name} ${coverActionVerb(service)}`, ACCENT_COOL);
+  };
   // Sensor: Tap öffnet den Info-Dialog; sonst schaltet Tap.
   const tap = isSensor ? openDetail : vm.onTap;
 
@@ -163,7 +223,9 @@ export function Tile({ widget, editMode, onOpen, onRemove, onAction }: Props) {
 
   return (
     <div
-      className={`tile${vm.active ? " is-active" : ""}${entity ? "" : " is-unavailable"}`}
+      className={`tile${isCover ? " tile--cover" : ""}${vm.active ? " is-active" : ""}${
+        entity ? "" : " is-unavailable"
+      }`}
       style={tileStyle}
       {...(editMode ? {} : press)}
     >
@@ -188,6 +250,9 @@ export function Tile({ widget, editMode, onOpen, onRemove, onAction }: Props) {
           {vm.sub}
         </div>
       </div>
+      {isCover && entity && !editMode && (
+        <CoverActions attrs={entity.attributes} onCommand={coverCommand} />
+      )}
     </div>
   );
 }
