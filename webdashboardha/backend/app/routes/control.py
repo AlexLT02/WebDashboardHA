@@ -15,12 +15,14 @@ log = logging.getLogger("webdashboardha.control")
 router = APIRouter(prefix="/api", tags=["control"])
 
 
-# Domains, die im Editor als Widgets wählbar sind.
+# Domains, die im Editor in der Vorschlagsliste auftauchen. Andere Entitäten
+# lassen sich im Frontend weiterhin über die direkte Entity-ID-Eingabe anlegen.
 _PICKER_DOMAINS = {
     "light",
     "switch",
     "input_boolean",
     "fan",
+    "cover",
     "sensor",
     "binary_sensor",
     "weather",

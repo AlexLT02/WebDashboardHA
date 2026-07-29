@@ -2,7 +2,13 @@ import { useState } from "react";
 import { useEntity, useLastColor, useLastTemp } from "../state/store";
 import { callService } from "../state/service";
 import { displayName, sensorStateLabel } from "../state/display";
-import { domainOf, withAlpha, ACCENT_WARM } from "../state/board";
+import { domainOf, withAlpha, ACCENT_WARM, ACCENT_COOL } from "../state/board";
+import {
+  coverFeatures,
+  coverIsOpen,
+  coverPosition,
+  coverStateLabel,
+} from "../state/cover";
 import { resolveIcon } from "../controls/icons";
 import { DragBar } from "../controls/DragBar";
 import { Dialog } from "./Dialog";
@@ -35,6 +41,12 @@ const HUE_GRADIENT =
   "linear-gradient(90deg,#ff5a5a,#ffd24c,#4cd07d,#4ce0d0,#4c8dff,#a97bff,#ff6ac2,#ff5a5a)";
 const CT_GRADIENT = "linear-gradient(90deg,#ffd39a,#fff3e2,#ffffff,#eaf2ff,#cfe0ff)";
 const BRI_GRADIENT = "linear-gradient(90deg,rgba(239,147,107,0.5),#ef936b)";
+const POS_GRADIENT = "linear-gradient(90deg,rgba(110,168,254,0.45),#6ea8fe)";
+
+// Rollladen-Transport (Material-Pfade, wie das restliche Icon-Set).
+const ARROW_UP = "M7 14l5-5 5 5z";
+const SQUARE = "M6 6h12v12H6z";
+const ARROW_DOWN = "M7 10l5 5 5-5z";
 
 const SWATCHES: { css: string; hs: [number, number] }[] = [
   { css: "hsl(34,60%,74%)", hs: [34, 60] },
@@ -260,12 +272,112 @@ export function MoreInfoDialog({ widget, kind, onClose, onUpdateOptions }: Props
     );
   }
 
+  // ---------- COVER / ROLLLADEN ----------
+  if (kind === "cover") {
+    const attrs = entity?.attributes ?? {};
+    const state = entity?.state;
+    const position = coverPosition(attrs);
+    const features = coverFeatures(attrs);
+    const open = coverIsOpen(state, position);
+    const Icon = resolveIcon(
+      widget.options?.icon as string,
+      "cover",
+      attrs.device_class as string,
+      name,
+    );
+    // Aktive Richtung hervorheben, solange der Rollladen fährt.
+    const dirStyle = (dir: "opening" | "closing"): React.CSSProperties =>
+      state === dir ? { borderColor: withAlpha(ACCENT_COOL, 0.5), color: ACCENT_COOL } : {};
+
+    return (
+      <Dialog title={name} onClose={onClose}>
+        <AliasField widget={widget} onUpdateOptions={onUpdateOptions} />
+
+        <div className="dlg__toggle-row">
+          <span
+            className="dlg__icon"
+            style={{
+              background: open ? ACCENT_COOL : "#232833",
+              color: open ? "#04122b" : "#8b92a0",
+              boxShadow: open ? `0 6px 20px ${withAlpha(ACCENT_COOL, 0.45)}` : "none",
+            }}
+          >
+            <Icon size={28} />
+          </span>
+          <div style={{ textAlign: "right", minWidth: 0 }}>
+            <div className="dlg__setting-t">{coverStateLabel(state, position)}</div>
+            <div className="dlg__setting-d">{entity ? entity.state : "nicht verfügbar"}</div>
+          </div>
+        </div>
+        <div className="dlg__gap" />
+
+        <div className="dlg__transport">
+          <button
+            type="button"
+            className="dlg__mbtn"
+            style={dirStyle("opening")}
+            aria-label={`${name} öffnen`}
+            disabled={!features.open}
+            onClick={() => svc("cover", "open_cover")}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d={ARROW_UP} />
+            </svg>
+          </button>
+          <button
+            type="button"
+            className="dlg__mbtn"
+            aria-label={`${name} stoppen`}
+            disabled={!features.stop}
+            onClick={() => svc("cover", "stop_cover")}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d={SQUARE} />
+            </svg>
+          </button>
+          <button
+            type="button"
+            className="dlg__mbtn"
+            style={dirStyle("closing")}
+            aria-label={`${name} schließen`}
+            disabled={!features.close}
+            onClick={() => svc("cover", "close_cover")}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d={ARROW_DOWN} />
+            </svg>
+          </button>
+        </div>
+
+        {features.setPosition && (
+          <>
+            <div className="dlg__gap" />
+            <div className="dlg__label">Position · {position ?? 0}% offen</div>
+            <DragBar
+              mode="fill"
+              gradient={POS_GRADIENT}
+              value={(position ?? 0) / 100}
+              aria-label={`${name} Position`}
+              onChange={(v) =>
+                svc("cover", "set_cover_position", { position: Math.round(v * 100) })
+              }
+            />
+          </>
+        )}
+
+        <div className="dlg__gap--sm" />
+        <div className="dlg__row">
+          <span className="dlg__row-k">Entität</span>
+          <span className="dlg__row-v">{widget.entity_id || "—"}</span>
+        </div>
+      </Dialog>
+    );
+  }
+
   // ---------- INFO / SENSOR / schaltbar ----------
   const isSensor = domain === "sensor" || domain === "binary_sensor" || domain === "weather";
   const toggleable = ["switch", "input_boolean", "fan"].includes(domain);
-  const isCover = domain === "cover";
   const on = entity?.state === "on";
-  const coverOpen = entity?.state === "open" || entity?.state === "opening";
   const unit = (entity?.attributes.unit_of_measurement as string) || "";
 
   return (
@@ -279,24 +391,18 @@ export function MoreInfoDialog({ widget, kind, onClose, onUpdateOptions }: Props
 
       <AliasField widget={widget} onUpdateOptions={onUpdateOptions} />
 
-      {(toggleable || isCover) && (
+      {toggleable && (
         <>
           <div className="dlg__setting">
             <div>
-              <div className="dlg__setting-t">{isCover ? "Öffnen / Schließen" : "Schalten"}</div>
-              <div className="dlg__setting-d">
-                {isCover ? (coverOpen ? "Offen" : "Geschlossen") : on ? "Ein" : "Aus"}
-              </div>
+              <div className="dlg__setting-t">Schalten</div>
+              <div className="dlg__setting-d">{on ? "Ein" : "Aus"}</div>
             </div>
             <button
               type="button"
-              className={`dlg__switch${(isCover ? coverOpen : on) ? " is-on" : ""}`}
+              className={`dlg__switch${on ? " is-on" : ""}`}
               aria-label="Schalten"
-              onClick={() =>
-                isCover
-                  ? svc("cover", coverOpen ? "close_cover" : "open_cover")
-                  : svc(domain || "switch", on ? "turn_off" : "turn_on")
-              }
+              onClick={() => svc(domain || "switch", on ? "turn_off" : "turn_on")}
             >
               <span className="dlg__switch-knob" />
             </button>

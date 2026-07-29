@@ -61,7 +61,8 @@ export function isOn(domain: string, state: string | undefined): boolean {
   if (!state) return false;
   switch (domain) {
     case "cover":
-      return state === "open" || state === "opening";
+      // Auch „closing" zählt: bis zum Ende der Fahrt ist der Rollladen noch offen.
+      return state === "open" || state === "opening" || state === "closing";
     case "media_player":
       return state === "playing";
     case "sensor":

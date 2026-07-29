@@ -348,6 +348,19 @@ export function autoIconKey(domain: string, deviceClass?: string): string {
   if (domain === "media_player") return "music";
   if (domain === "switch" || domain === "input_boolean") return "power";
   if (domain === "weather") return "gauge";
+  if (domain === "cover") {
+    switch (deviceClass) {
+      case "garage":
+      case "gate":
+        return "garage";
+      case "door":
+        return "door";
+      case "window":
+        return "window";
+      default:
+        return "blinds"; // shutter, blind, curtain, awning, shade …
+    }
+  }
   if (domain === "binary_sensor" || domain === "sensor") {
     switch (deviceClass) {
       case "motion":
@@ -384,6 +397,8 @@ export function iconForType(type: string) {
       return PowerIcon;
     case "sensor":
       return ThermometerIcon;
+    case "cover":
+      return BlindsIcon;
     default:
       return GaugeIcon;
   }

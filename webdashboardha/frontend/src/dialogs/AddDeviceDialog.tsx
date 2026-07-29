@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { fetchEntities, type EntityInfo } from "../state/dashboards";
+import { useStore } from "../state/store";
 import { resolveIcon } from "../controls/icons";
 import { Dialog } from "./Dialog";
 
@@ -17,18 +18,25 @@ const DOMAIN_LABEL: Record<string, string> = {
   switch: "Schalter",
   input_boolean: "Schalter",
   fan: "Lüfter",
+  cover: "Rollladen",
   sensor: "Sensor",
   binary_sensor: "Sensor",
   weather: "Wetter",
   media_player: "Medien",
 };
 
+/** `domain.object_id` — HA-Format einer Entity-ID. */
+const ENTITY_ID_RE = /^[a-z][a-z0-9_]*\.[a-z0-9_]+$/;
+
 export function AddDeviceDialog({ targetCategory, existing, onPick, onClose }: Props) {
   const [entities, setEntities] = useState<EntityInfo[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  const [manual, setManual] = useState("");
   // In dieser Sitzung hinzugefügte Entities — Dialog bleibt für Mehrfachauswahl offen.
   const [added, setAdded] = useState<Set<string>>(new Set());
+  // Alle HA-States (aus dem WS-Snapshot) — damit lässt sich eine getippte ID prüfen.
+  const states = useStore((s) => s.states);
 
   useEffect(() => {
     fetchEntities()
@@ -55,6 +63,32 @@ export function AddDeviceDialog({ targetCategory, existing, onPick, onClose }: P
       return next;
     });
   };
+
+  // ---- Freie Entity-ID (für Geräte, die die Vorschlagsliste nicht führt) ----
+  const manualId = manual.trim().toLowerCase();
+  const manualValid = ENTITY_ID_RE.test(manualId);
+  const manualState = manualValid ? states[manualId] : undefined;
+  const manualAdded = manualValid && (added.has(manualId) || onBoard.has(manualId));
+
+  const addManual = () => {
+    if (!manualValid || manualAdded) return;
+    add({
+      entity_id: manualId,
+      name: (manualState?.attributes.friendly_name as string) || manualId,
+      domain: manualId.split(".")[0],
+    });
+    setManual("");
+  };
+
+  const manualHint = !manualId
+    ? "Format: domain.objekt_id — z. B. cover.rolladen_wohnzimmer"
+    : !manualValid
+      ? "Ungültige Entity-ID (erwartet: domain.objekt_id)."
+      : manualAdded
+        ? "Ist schon auf dem Dashboard."
+        : manualState
+          ? `${(manualState.attributes.friendly_name as string) || manualId} · ${manualState.state}`
+          : "In Home Assistant nicht gefunden — wird trotzdem angelegt.";
 
   return (
     <Dialog title="Gerät hinzufügen" onClose={onClose}>
@@ -95,6 +129,35 @@ export function AddDeviceDialog({ targetCategory, existing, onPick, onClose }: P
           );
         })}
       </div>
+
+      <div className="dlg__gap--sm" />
+      <div className="dlg__label">Entity-ID direkt hinzufügen</div>
+      <div className="dlg__idrow">
+        <input
+          className="dlg__input"
+          type="text"
+          placeholder="cover.rolladen_wohnzimmer"
+          value={manual}
+          autoCapitalize="off"
+          autoCorrect="off"
+          spellCheck={false}
+          onChange={(e) => setManual(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") addManual();
+          }}
+        />
+        <button
+          type="button"
+          className="dlg__idbtn"
+          aria-label="Entity-ID hinzufügen"
+          disabled={!manualValid || manualAdded}
+          onClick={addManual}
+        >
+          ＋
+        </button>
+      </div>
+      <div className={`dlg__idhint${manualState && !manualAdded ? " is-ok" : ""}`}>{manualHint}</div>
+
       <div className="dlg__gap--sm" />
       <button type="button" className="dlg__primary" onClick={onClose}>
         {added.size > 0 ? `Fertig (${added.size} hinzugefügt)` : "Fertig"}

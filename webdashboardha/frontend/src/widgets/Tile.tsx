@@ -2,12 +2,20 @@ import { useEntity } from "../state/store";
 import { callService } from "../state/service";
 import { displayName, sensorStateLabel } from "../state/display";
 import { domainOf, withAlpha, ACCENT_WARM, ACCENT_COOL } from "../state/board";
+import {
+  coverActionVerb,
+  coverFeatures,
+  coverIsOpen,
+  coverPosition,
+  coverStateLabel,
+  coverTapService,
+} from "../state/cover";
 import { resolveIcon } from "../controls/icons";
 import { useLongPress } from "../controls/useLongPress";
 import type { WidgetConfig } from "../state/dashboards";
 import "./Tile.css";
 
-export type DetailKind = "light" | "media" | "info";
+export type DetailKind = "light" | "media" | "cover" | "info";
 
 interface Props {
   widget: WidgetConfig;
@@ -72,15 +80,17 @@ function useTileVM(widget: Props["widget"], name: string, onAction?: Props["onAc
   }
 
   if (domain === "cover") {
-    const open = state === "open" || state === "opening";
+    const position = coverPosition(attrs);
+    const open = coverIsOpen(state, position);
+    const service = coverTapService(state, position, coverFeatures(attrs));
     return {
       active: open,
-      sub: open ? "Offen" : "Geschlossen",
+      sub: coverStateLabel(state, position),
       accent: open ? ACCENT_COOL : null,
-      detail: "info",
+      detail: "cover",
       onTap: () => {
-        svc("cover", open ? "close_cover" : "open_cover");
-        log(open ? "geschlossen" : "geöffnet", ACCENT_COOL);
+        svc("cover", service);
+        log(coverActionVerb(service), ACCENT_COOL);
       },
     };
   }

@@ -2,7 +2,7 @@ import { apiUrl } from "./basePath";
 
 export interface WidgetConfig {
   id: string;
-  type: "light" | "sensor" | "switch" | "clock" | "calendar" | "weather" | "media" | string;
+  type: "light" | "sensor" | "switch" | "cover" | "clock" | "calendar" | "weather" | "media" | string;
   entity_id: string; // leer bei entity-losen Widgets (Uhr, Kalender)
   title?: string;
   // Position + Größe im Spaltenraster der Gruppe (0-basiert).
@@ -110,6 +110,7 @@ export async function fetchEntities(): Promise<EntityInfo[]> {
 export function widgetTypeForDomain(domain: string): string {
   if (domain === "light") return "light";
   if (domain === "switch" || domain === "input_boolean" || domain === "fan") return "switch";
+  if (domain === "cover") return "cover";
   if (domain === "weather") return "weather";
   if (domain === "media_player") return "media";
   return "sensor"; // sensor, binary_sensor, ...

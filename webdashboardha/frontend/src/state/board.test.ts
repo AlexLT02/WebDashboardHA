@@ -81,6 +81,7 @@ describe("isOn / isControllable", () => {
     expect(isOn("light", "on")).toBe(true);
     expect(isOn("light", "off")).toBe(false);
     expect(isOn("cover", "open")).toBe(true);
+    expect(isOn("cover", "closing")).toBe(true); // fährt noch → zählt als aktiv
     expect(isOn("cover", "closed")).toBe(false);
     expect(isOn("media_player", "playing")).toBe(true);
     expect(isOn("media_player", "paused")).toBe(false);

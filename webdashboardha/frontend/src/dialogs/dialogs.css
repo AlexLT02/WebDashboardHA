@@ -237,6 +237,10 @@
   background: var(--cool);
   color: #04122b;
 }
+.dlg__mbtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
 
 /* Ausgabe-/Quellenliste (Medien). */
 .dlg__source {
@@ -364,6 +368,7 @@
   white-space: nowrap;
 }
 .dlg__additem-eid {
+  display: block; /* eigene Zeile unter dem Namen */
   font-size: 11px;
   color: var(--text-dim);
   font-weight: 400;
@@ -403,6 +408,41 @@
   background: rgba(110, 168, 254, 0.12);
   color: var(--cool-soft);
 }
+/* Freie Entity-ID-Eingabe (Geräte, die die Vorschlagsliste nicht führt). */
+.dlg__idrow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+.dlg__idbtn {
+  width: var(--tap-min);
+  height: var(--tap-min);
+  border-radius: 12px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-2);
+  color: var(--cool);
+  font-size: 18px;
+  cursor: pointer;
+}
+.dlg__idbtn:disabled {
+  opacity: 0.45;
+  color: var(--text-dim);
+  cursor: default;
+}
+.dlg__idhint {
+  font-size: 11.5px;
+  color: var(--text-dim);
+  margin-top: 7px;
+  min-height: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dlg__idhint.is-ok {
+  color: var(--ok);
+}
+
 .dlg__msg {
   padding: 18px 4px;
   color: var(--text-muted);
