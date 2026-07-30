@@ -12,6 +12,17 @@ const mockDashboard = {
   id: "mock",
   name: "Mock",
   columns: 2,
+  // Nachtmodus: `night` auf true setzen (und ggf. das Fenster auf die aktuelle
+  // Uhrzeit legen), um die Abdunklung im Test auszulösen.
+  meta: {
+    settings: {
+      night: false,
+      nightStart: "22:00",
+      nightEnd: "06:30",
+      nightDim: 0.85,
+      nightFadeSec: 900,
+    },
+  },
   groups: [
     {
       id: "L",

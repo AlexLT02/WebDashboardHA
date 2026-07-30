@@ -33,13 +33,22 @@ export interface CustomCategory {
   icon: string;
 }
 
+/** Persistierte Einstellungen (alle optional — alte Dashboards kennen sie nicht). */
+export interface DashboardSettings {
+  screensaver?: boolean;
+  kiosk?: boolean;
+  /** Nachtmodus: Anzeige im Zeitfenster abdunkeln. */
+  night?: boolean;
+  nightStart?: string; // "HH:MM"
+  nightEnd?: string; // "HH:MM"
+  nightDim?: number; // Deckkraft der Abdunklung, 0…0.95
+  nightFadeSec?: number; // Dauer des Übergangs in Sekunden
+}
+
 /** App-Ebene: Custom-Kategorien + Settings. Persistiert im additiven `meta`-Feld. */
 export interface DashboardMeta {
   customCategories?: CustomCategory[];
-  settings?: {
-    screensaver?: boolean;
-    kiosk?: boolean;
-  };
+  settings?: DashboardSettings;
 }
 
 /** Sentinel-Ziel für „ohne Gruppe" (loser Bereich wird bei Bedarf erzeugt). */

@@ -40,6 +40,11 @@ function canonicalGroups(dashboard: Dashboard, widgets: WidgetConfig[]): Group[]
 export interface BoardSettings {
   screensaver: boolean;
   kiosk: boolean;
+  night: boolean;
+  nightStart: string;
+  nightEnd: string;
+  nightDim: number;
+  nightFadeSec: number;
 }
 
 export interface BoardApi {
@@ -57,13 +62,21 @@ export interface BoardApi {
   addCategory: (name: string, icon: string) => string | null;
   /** Custom-Kategorie entfernen; darin einsortierte Geräte fallen auf ihre Domain-Kategorie zurück. */
   removeCategory: (key: string) => void;
-  setSetting: (key: keyof BoardSettings, value: boolean) => void;
+  setSetting: <K extends keyof BoardSettings>(key: K, value: BoardSettings[K]) => void;
   rename: (name: string) => void;
   createNew: (name: string) => Promise<void>;
   removeCurrent: () => Promise<void>;
 }
 
-const DEFAULT_SETTINGS: BoardSettings = { screensaver: false, kiosk: true };
+const DEFAULT_SETTINGS: BoardSettings = {
+  screensaver: false,
+  kiosk: true,
+  night: false,
+  nightStart: "22:00",
+  nightEnd: "06:30",
+  nightDim: 0.85,
+  nightFadeSec: 900, // 15 Minuten
+};
 
 export function useBoard(): BoardApi {
   const [dashboards, setDashboards] = useState<Dashboard[]>([]);
@@ -204,7 +217,7 @@ export function useBoard(): BoardApi {
   );
 
   const setSetting = useCallback(
-    (key: keyof BoardSettings, value: boolean) => {
+    <K extends keyof BoardSettings>(key: K, value: BoardSettings[K]) => {
       withMeta((meta) => ({
         ...meta,
         settings: { ...DEFAULT_SETTINGS, ...meta.settings, [key]: value },

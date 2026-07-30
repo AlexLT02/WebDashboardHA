@@ -56,8 +56,7 @@
   align-items: center;
   margin-top: 9px;
   font-size: 19px;
-  font-weight: 600;
-  color: var(--warm-soft);
+  color: var(--text-muted);
 }
 /* margin statt flex-gap: gap in Flexbox kann Safari 12 noch nicht. */
 .dash-header__temp svg {
@@ -344,6 +343,16 @@
   color: #f3f5f8;
   letter-spacing: -0.01em;
 }
+/* Icon-Knöpfe rechts oben (Neu laden + Einstellungen). Abstand über margin,
+   nicht flex-gap — das kann Safari 12 noch nicht. */
+.cp__actions {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+.cp__actions .cp__iconbtn + .cp__iconbtn {
+  margin-left: 8px;
+}
 .cp__iconbtn {
   width: 38px;
   height: 38px;
@@ -566,6 +575,22 @@
   border-radius: 50%;
   background: var(--hot);
   margin-right: 8px;
+}
+
+/* Nachtmodus-Abdunklung: über allem, aber nicht im Weg (Langform statt `inset`
+   — die Kurzform kennt Safari erst ab 14.1). */
+.nightshade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 300;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition-property: opacity;
+  transition-timing-function: linear;
 }
 
 .saver {

@@ -7,6 +7,7 @@ import { useEdgePanels } from "./shell/useEdgePanels";
 import { ControlPanel, type HistoryEntry } from "./shell/ControlPanel";
 import { EditBar } from "./shell/EditBar";
 import { Screensaver } from "./shell/Screensaver";
+import { NightShade } from "./shell/NightShade";
 import { Header } from "./dashboard/Header";
 import { DashboardView } from "./dashboard/DashboardView";
 import { ActiveView } from "./dashboard/ActiveView";
@@ -75,7 +76,7 @@ export default function App() {
     panels.close();
   };
 
-  const setSetting = (key: keyof BoardSettings, value: boolean) => {
+  const setSetting = <K extends keyof BoardSettings>(key: K, value: BoardSettings[K]) => {
     board.setSetting(key, value);
     if (key === "kiosk") {
       try {
@@ -91,6 +92,17 @@ export default function App() {
       }
     }
   };
+
+  // ESC verlässt den Bearbeiten-Modus. Ist ein Dialog offen, gehört ESC diesem
+  // (der Dialog schließt sich selbst) — sonst würde beides auf einmal passieren.
+  useEffect(() => {
+    if (!editMode || dialog) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" || e.key === "Esc") setEditMode(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [editMode, dialog]);
 
   // Bildschirmschoner: nach IDLE_MS ohne Interaktion große Uhr zeigen.
   useEffect(() => {
@@ -132,6 +144,7 @@ export default function App() {
             editMode={editMode}
             history={history}
             onSettings={() => setDialog({ type: "settings" })}
+            onReload={() => window.location.reload()}
             onShowActive={showActive}
             onToggleEdit={toggleEdit}
           />
@@ -237,6 +250,9 @@ export default function App() {
 
       {/* ---- Bildschirmschoner ---- */}
       {saver && <Screensaver onDismiss={() => setSaver(false)} />}
+
+      {/* ---- Nachtmodus (liegt über allem, blockiert nichts) ---- */}
+      <NightShade settings={board.settings} />
     </div>
   );
 }
