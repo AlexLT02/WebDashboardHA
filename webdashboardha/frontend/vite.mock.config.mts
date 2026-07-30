@@ -60,6 +60,11 @@ const mockStates: Record<string, unknown> = {
     state: "off",
     attributes: { friendly_name: "Esszimmer Pendelleuchte über dem Tisch dimmbar" },
   },
+  "sensor.thermometer_alex_temperature": {
+    entity_id: "sensor.thermometer_alex_temperature",
+    state: "21.4",
+    attributes: { friendly_name: "Thermometer Alex", unit_of_measurement: "°C", device_class: "temperature" },
+  },
   "light.a": { entity_id: "light.a", state: "on", attributes: { friendly_name: "Decke", brightness: 180 } },
   "light.loose": { entity_id: "light.loose", state: "off", attributes: { friendly_name: "Loses Licht" } },
   "sensor.b": { entity_id: "sensor.b", state: "21.4", attributes: { friendly_name: "Temperatur", unit_of_measurement: "°C", device_class: "temperature" } },
@@ -143,6 +148,7 @@ function mockApi(): Plugin {
         const url = req.url || "";
         if (url.startsWith("/api/dashboards") && req.method === "GET") return json(res, [mockDashboard]);
         if (url.startsWith("/api/entities")) return json(res, mockEntities);
+        if (url.startsWith("/api/hostinfo")) return json(res, { host: "192.168.2.50", port: 8099 });
         if (url.startsWith("/api/service")) return json(res, { status: "ok" });
         if (url.startsWith("/api/dashboards") && req.method === "PUT") {
           let body = "";

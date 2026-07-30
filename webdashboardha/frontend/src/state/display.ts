@@ -13,6 +13,20 @@ export function displayName(config: WidgetConfig, entity?: EntityState): string 
   );
 }
 
+/**
+ * Temperatur für die Kopfzeile: „21,4 °C". Null, wenn das Entity fehlt oder
+ * keinen Zahlenwert liefert (unavailable/unknown) — dann bleibt die Zeile weg,
+ * statt „nicht verfügbar" in den Header zu schreiben.
+ */
+export function formatTemperature(entity: EntityState | undefined): string | null {
+  if (!entity) return null;
+  const value = Number(entity.state);
+  if (entity.state === "" || !isFinite(value)) return null;
+  const unit = (entity.attributes.unit_of_measurement as string) || "°C";
+  // toFixed statt Intl: Safari 12 ist bei toLocaleString-Optionen unzuverlässig.
+  return `${value.toFixed(1).replace(".", ",")} ${unit}`;
+}
+
 const BINARY_LABELS: Record<string, [string, string]> = {
   motion: ["Bewegung erkannt", "Keine Bewegung"],
   occupancy: ["Belegt", "Frei"],

@@ -9,7 +9,7 @@ import {
   coverPosition,
   coverStateLabel,
 } from "../state/cover";
-import { ArrowDownIcon, ArrowUpIcon, StopIcon, resolveIcon } from "../controls/icons";
+import { ICONS, ICON_KEYS, ArrowDownIcon, ArrowUpIcon, StopIcon, resolveIcon } from "../controls/icons";
 import { DragBar } from "../controls/DragBar";
 import { Dialog } from "./Dialog";
 import type { DetailKind } from "../widgets/Tile";
@@ -84,6 +84,46 @@ function AliasField({ widget, onUpdateOptions }: Pick<Props, "widget" | "onUpdat
   );
 }
 
+/**
+ * Symbol-Auswahl. „Auto" löscht den Override (options.icon) — dann greift
+ * wieder die automatische Wahl aus Name/Domain/device_class.
+ */
+function IconField({ widget, onUpdateOptions }: Pick<Props, "widget" | "onUpdateOptions">) {
+  const current = (widget.options?.icon as string) || "";
+  const pick = (key: string) => onUpdateOptions(widget.id, { icon: key });
+
+  return (
+    <>
+      <div className="dlg__label">Symbol</div>
+      <div className="dlg__icons dlg__icons--scroll ha-scroll">
+        <button
+          type="button"
+          className={`dlg__icon-pick dlg__icon-pick--auto${current ? "" : " is-sel"}`}
+          aria-label="Symbol automatisch wählen"
+          onClick={() => pick("")}
+        >
+          Auto
+        </button>
+        {ICON_KEYS.map((key) => {
+          const Icon = ICONS[key];
+          return (
+            <button
+              key={key}
+              type="button"
+              className={`dlg__icon-pick${current === key ? " is-sel" : ""}`}
+              aria-label={key}
+              onClick={() => pick(key)}
+            >
+              <Icon size={20} />
+            </button>
+          );
+        })}
+      </div>
+      <div className="dlg__gap" />
+    </>
+  );
+}
+
 export function MoreInfoDialog({ widget, kind, onClose, onUpdateOptions }: Props) {
   const entity = useEntity(widget.entity_id);
   const lastColor = useLastColor(widget.entity_id);
@@ -124,6 +164,7 @@ export function MoreInfoDialog({ widget, kind, onClose, onUpdateOptions }: Props
     return (
       <Dialog title={name} onClose={onClose}>
         <AliasField widget={widget} onUpdateOptions={onUpdateOptions} />
+        <IconField widget={widget} onUpdateOptions={onUpdateOptions} />
 
         <div className="dlg__toggle-row">
           <span
@@ -226,6 +267,7 @@ export function MoreInfoDialog({ widget, kind, onClose, onUpdateOptions }: Props
     return (
       <Dialog title={name} onClose={onClose}>
         <AliasField widget={widget} onUpdateOptions={onUpdateOptions} />
+        <IconField widget={widget} onUpdateOptions={onUpdateOptions} />
 
         <div style={{ marginBottom: 18 }}>
           <div style={{ fontSize: 17, fontWeight: 700, color: "#f3f5f8", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
@@ -287,6 +329,7 @@ export function MoreInfoDialog({ widget, kind, onClose, onUpdateOptions }: Props
     return (
       <Dialog title={name} onClose={onClose}>
         <AliasField widget={widget} onUpdateOptions={onUpdateOptions} />
+        <IconField widget={widget} onUpdateOptions={onUpdateOptions} />
 
         <div className="dlg__toggle-row">
           <span
@@ -379,6 +422,7 @@ export function MoreInfoDialog({ widget, kind, onClose, onUpdateOptions }: Props
       )}
 
       <AliasField widget={widget} onUpdateOptions={onUpdateOptions} />
+      <IconField widget={widget} onUpdateOptions={onUpdateOptions} />
 
       {toggleable && (
         <>

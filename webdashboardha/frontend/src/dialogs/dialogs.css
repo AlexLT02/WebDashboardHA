@@ -130,6 +130,12 @@
   white-space: nowrap;
 }
 
+/* Auswählbarer Wert (Adressen im Einstellungs-Dialog). */
+.dlg__row-v--pick {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
 /* Ein/Aus-Kachel oben im Light-Dialog. */
 .dlg__toggle-row {
   display: flex;
@@ -178,6 +184,13 @@
   grid-template-columns: repeat(6, 1fr);
   gap: 9px;
 }
+/* Volle Symbol-Auswahl (Detail-Dialog) — begrenzt, damit der Dialog nicht
+   ins Endlose wächst. */
+.dlg__icons--scroll {
+  max-height: 172px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
 .dlg__icon-pick {
   height: 46px;
   border-radius: 12px;
@@ -193,6 +206,12 @@
   border-color: rgba(239, 147, 107, 0.5);
   background: rgba(239, 147, 107, 0.16);
   color: var(--warm-soft);
+}
+.dlg__icon-pick--auto {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  font-family: inherit;
 }
 
 /* Primär-Button unten (Kategorie erstellen). */

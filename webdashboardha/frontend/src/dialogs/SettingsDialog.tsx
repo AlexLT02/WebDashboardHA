@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { fetchHostInfo } from "../state/dashboards";
 import { Dialog } from "./Dialog";
 import type { BoardSettings } from "../state/useBoard";
 
@@ -34,6 +36,25 @@ function Switch({
 }
 
 export function SettingsDialog({ settings, onSetting, onClose }: Props) {
+  // Kiosk-Adresse: die echte Host-IP kennt nur der Supervisor. Klappt das nicht
+  // (Dev-Modus), tut es der Hostname der aktuellen Seite genauso gut.
+  const [kioskUrl, setKioskUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    fetchHostInfo()
+      .then((info) => {
+        if (!alive) return;
+        setKioskUrl(`http://${info.host ?? window.location.hostname}:${info.port}`);
+      })
+      .catch(() => {
+        if (alive) setKioskUrl(`http://${window.location.hostname}:8099`);
+      });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
   return (
     <Dialog title="Einstellungen" onClose={onClose}>
       <div className="dlg__setting">
@@ -67,6 +88,22 @@ export function SettingsDialog({ settings, onSetting, onClose }: Props) {
           onToggle={() => onSetting("kiosk", !settings.kiosk)}
         />
       </div>
+
+      <div className="dlg__gap" />
+      <div className="dlg__label">Adresse</div>
+      <div className="dlg__row">
+        <span className="dlg__row-k">Kiosk (iPad)</span>
+        <span className="dlg__row-v dlg__row-v--pick">{kioskUrl ?? "…"}</span>
+      </div>
+      <div className="dlg__row">
+        <span className="dlg__row-k">Diese Seite</span>
+        <span className="dlg__row-v dlg__row-v--pick">{window.location.host}</span>
+      </div>
+
+      <div className="dlg__gap" />
+      <button type="button" className="dlg__primary" onClick={() => window.location.reload()}>
+        Seite neu laden
+      </button>
     </Dialog>
   );
 }

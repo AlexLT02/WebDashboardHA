@@ -100,6 +100,18 @@ export async function deleteDashboard(id: string): Promise<void> {
   }
 }
 
+/** Kiosk-Adresse fürs iPad; `host` ist null, wenn sie nicht ermittelbar ist. */
+export interface HostInfo {
+  host: string | null;
+  port: number;
+}
+
+export async function fetchHostInfo(): Promise<HostInfo> {
+  const res = await fetch(apiUrl("/api/hostinfo"));
+  if (!res.ok) throw new Error(`Adresse laden fehlgeschlagen (${res.status})`);
+  return res.json();
+}
+
 export async function fetchEntities(): Promise<EntityInfo[]> {
   const res = await fetch(apiUrl("/api/entities"));
   if (!res.ok) throw new Error(`Entities laden fehlgeschlagen (${res.status})`);
