@@ -45,6 +45,9 @@ export interface BoardSettings {
   nightEnd: string;
   nightDim: number;
   nightFadeSec: number;
+  alertSwitchEntity: string;
+  alertTextEntity: string;
+  alertLevelEntity: string;
 }
 
 export interface BoardApi {
@@ -76,6 +79,9 @@ const DEFAULT_SETTINGS: BoardSettings = {
   nightEnd: "06:30",
   nightDim: 0.85,
   nightFadeSec: 900, // 15 Minuten
+  alertSwitchEntity: "input_boolean.dashboard_alert",
+  alertTextEntity: "input_text.dashboard_alert_text",
+  alertLevelEntity: "input_select.dashboard_alert_level",
 };
 
 export function useBoard(): BoardApi {

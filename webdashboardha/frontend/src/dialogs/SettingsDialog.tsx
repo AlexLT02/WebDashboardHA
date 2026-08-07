@@ -174,6 +174,49 @@ export function SettingsDialog({ settings, onSetting, onClose }: Props) {
       )}
 
       <div className="dlg__gap" />
+      <div className="dlg__label">Warnmeldung — HA-Helfer</div>
+      <div className="dlg__hint">
+        Entitäten, die das Vollbild-Overlay steuern. Switch an = anzeigen.
+      </div>
+      <div className="dlg__gap--sm" />
+      <div className="dlg__label">Switch (an = anzeigen)</div>
+      <input
+        type="text"
+        className="dlg__input"
+        value={settings.alertSwitchEntity}
+        placeholder="input_boolean.dashboard_alert"
+        spellCheck={false}
+        autoCapitalize="off"
+        autoCorrect="off"
+        onChange={(e) => onSetting("alertSwitchEntity", e.target.value.trim())}
+      />
+      <div className="dlg__gap--sm" />
+      <div className="dlg__label">Text</div>
+      <input
+        type="text"
+        className="dlg__input"
+        value={settings.alertTextEntity}
+        placeholder="input_text.dashboard_alert_text"
+        spellCheck={false}
+        autoCapitalize="off"
+        autoCorrect="off"
+        onChange={(e) => onSetting("alertTextEntity", e.target.value.trim())}
+      />
+      <div className="dlg__gap--sm" />
+      <div className="dlg__label">Dringlichkeit</div>
+      <input
+        type="text"
+        className="dlg__input"
+        value={settings.alertLevelEntity}
+        placeholder="input_select.dashboard_alert_level"
+        spellCheck={false}
+        autoCapitalize="off"
+        autoCorrect="off"
+        onChange={(e) => onSetting("alertLevelEntity", e.target.value.trim())}
+      />
+      <div className="dlg__hint">Stufen: wichtig (rot) · warnung (gelb) · hinweis (hellblau).</div>
+
+      <div className="dlg__gap" />
       <div className="dlg__label">Adresse</div>
       <div className="dlg__row">
         <span className="dlg__row-k">Kiosk (iPad)</span>

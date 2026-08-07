@@ -43,6 +43,10 @@ export interface DashboardSettings {
   nightEnd?: string; // "HH:MM"
   nightDim?: number; // Deckkraft der Abdunklung, 0…0.95
   nightFadeSec?: number; // Dauer des Übergangs in Sekunden
+  /** HA-Helfer für die Vollbild-Warnmeldung (entity_ids). */
+  alertSwitchEntity?: string; // input_boolean: an = anzeigen
+  alertTextEntity?: string; // input_text: Meldungstext
+  alertLevelEntity?: string; // input_select: Dringlichkeit
 }
 
 /** App-Ebene: Custom-Kategorien + Settings. Persistiert im additiven `meta`-Feld. */

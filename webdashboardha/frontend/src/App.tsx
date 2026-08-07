@@ -8,6 +8,7 @@ import { ControlPanel, type HistoryEntry } from "./shell/ControlPanel";
 import { EditBar } from "./shell/EditBar";
 import { Screensaver } from "./shell/Screensaver";
 import { NightShade } from "./shell/NightShade";
+import { AlertOverlay } from "./shell/AlertOverlay";
 import { Header } from "./dashboard/Header";
 import { DashboardView } from "./dashboard/DashboardView";
 import { ActiveView } from "./dashboard/ActiveView";
@@ -253,6 +254,9 @@ export default function App() {
 
       {/* ---- Nachtmodus (liegt über allem, blockiert nichts) ---- */}
       <NightShade settings={board.settings} />
+
+      {/* ---- Warnmeldung (oberste Ebene, auch über dem Nachtmodus) ---- */}
+      <AlertOverlay settings={board.settings} />
     </div>
   );
 }

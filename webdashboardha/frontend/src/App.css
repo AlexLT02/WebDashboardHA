@@ -1,7 +1,10 @@
 /* ============================ Shell ============================ */
 .root {
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   overflow: hidden;
   background:
     radial-gradient(130% 80% at 15% -10%, rgba(239, 147, 107, 0.08), rgba(0, 0, 0, 0) 45%),
@@ -393,13 +396,19 @@
 }
 .cp__dot-core {
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   border-radius: 50%;
   background: var(--ok);
 }
 .cp__dot-halo {
   position: absolute;
-  inset: -4px;
+  top: -4px;
+  right: -4px;
+  bottom: -4px;
+  left: -4px;
   border-radius: 50%;
   background: rgba(78, 200, 91, 0.28);
 }
@@ -595,7 +604,10 @@
 
 .saver {
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 200;
   background: #05060a;
   display: flex;
@@ -615,4 +627,95 @@
   font-size: 20px;
   color: var(--text-muted);
   margin-top: 16px;
+}
+
+/* Vollbild-Warnmeldung. Bewusst OBERHALB des Nachtmodus (z-index 300) und aller
+   anderen Ebenen: eine Warnung muss auch nachts in voller Größe und in kräftiger,
+   ungedimmter Farbe durchkommen. Die Abdunklung liegt darunter und erreicht die
+   Meldung nicht; die Farben sind fixe Hex-Werte, nicht vom Nachtmodus abhängig.
+   Hintergrund immer dunkel — nur Schrift/Icon tragen die Dringlichkeitsfarbe.
+   Langform-Offsets statt `inset` (Safari < 14.1). */
+.alert {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background: rgba(6, 8, 12, 0.94);
+  animation: ha-fade 0.25s ease;
+}
+.alert__body {
+  max-width: 82%;
+  text-align: center;
+}
+/* Nur dieser Block pulsiert (via opacity im Compositor). Der OK-Button bleibt
+   bewusst außen vor, damit er ruhig und eindeutig antippbar wirkt. */
+.alert__pulse {
+  animation-name: alert-pulse;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+.alert__icon svg {
+  width: 68px;
+  height: 68px;
+  color: inherit;
+}
+.alert__text {
+  margin-top: 20px;
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: inherit;
+}
+.alert__ok {
+  display: inline-block;
+  margin-top: 44px;
+  min-width: 180px;
+  min-height: var(--tap-min);
+  padding: 14px 30px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-btn);
+}
+.alert__ok:active {
+  background: var(--surface-3);
+}
+
+/* Farbe + Puls-Tempo je Dringlichkeit. Dringender = schneller. */
+.alert--wichtig {
+  color: #ff6b6b;
+}
+.alert--wichtig .alert__pulse {
+  animation-duration: 0.8s;
+}
+.alert--warnung {
+  color: #f4c542;
+}
+.alert--warnung .alert__pulse {
+  animation-duration: 1.4s;
+}
+.alert--hinweis {
+  color: #7cc4ff;
+}
+.alert--hinweis .alert__pulse {
+  animation-duration: 2.4s;
+}
+
+@keyframes alert-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
 }
