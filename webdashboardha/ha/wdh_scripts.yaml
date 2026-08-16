@@ -1,0 +1,389 @@
+# ─── WebDashboardHA · Warnsystem — Register-Skripte ───────────────────────────
+# Alle Register-Mutationen laufen ausschliesslich ueber diese Skripte. Sie sind
+# `mode: queued` und damit der Serialisierungspunkt: zwei gleichzeitig aktiv
+# werdende Warnungen koennen sich nicht gegenseitig ueberschreiben.
+#
+# Register  : input_text.wdh_slot_1..4 ("warn_id|stufe|text") + _ents
+# Rotation  : input_number.wdh_index zeigt auf den gerade angezeigten Slot
+# Restore   : scene.create-Snapshot pro Geraet, Reference-Counting ueber die Slots
+
+wdh_alarm_set:
+  alias: WDH · Warnung setzen
+  icon: mdi:alert-decagram
+  mode: queued
+  max: 25
+  fields:
+    warn_id:
+      name: Warn-ID
+      description: Eindeutige ID der Warnung (i. d. R. die Automations-Entity-ID).
+      required: true
+      selector:
+        text:
+    text:
+      name: Meldungstext
+      required: true
+      selector:
+        text:
+    stufe:
+      name: Stufe
+      default: warnung
+      selector:
+        select:
+          options:
+            - hinweis
+            - warnung
+            - wichtig
+    entities:
+      name: Belegte Geraete
+      description: Geraete, deren Zustand gesichert und spaeter wiederhergestellt wird.
+      default: []
+      selector:
+        object:
+  variables:
+    slots: >-
+      {%- set ns = namespace(out=[]) -%}
+      {%- for n in [1, 2, 3, 4] -%}
+        {%- set raw = states('input_text.wdh_slot_' ~ n) -%}
+        {%- set raw = '' if raw in ['unknown', 'unavailable'] else raw -%}
+        {%- set p = raw.split('|') -%}
+        {%- set e = states('input_text.wdh_slot_' ~ n ~ '_ents') -%}
+        {%- set e = '' if e in ['unknown', 'unavailable'] else e -%}
+        {%- set ns.out = ns.out + [{'n': n, 'id': (p[0] if p | length > 0 else ''), 'stufe': (p[1] if p | length > 1 else 'warnung'), 'text': (p[2] if p | length > 2 else ''), 'ents': e}] -%}
+      {%- endfor -%}
+      {{ ns.out }}
+    # Bereits belegter Slot dieser Warnung gewinnt, sonst der erste freie.
+    eigene: "{{ slots | selectattr('id', 'eq', warn_id) | map(attribute='n') | list }}"
+    freie: "{{ slots | selectattr('id', 'eq', '') | map(attribute='n') | list }}"
+    ziel: "{{ (eigene + freie) | first | default(0, true) }}"
+    # Auf 250 Zeichen begrenzen, aber nur an Entity-Grenzen — ein abgeschnittener
+    # entity_id waere schlimmer als ein fehlender.
+    ent_liste: >-
+      {%- set roh = entities | default([], true) -%}
+      {%- set roh = roh.split(',') if roh is string else roh -%}
+      {%- set alle = roh | map('trim') | reject('eq', '') | list -%}
+      {%- set ns = namespace(out=[], laenge=0) -%}
+      {%- for e in alle -%}
+        {%- if ns.laenge + (e | length) + 1 <= 250 -%}
+          {%- set ns.out = ns.out + [e] -%}
+          {%- set ns.laenge = ns.laenge + (e | length) + 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {{ ns.out }}
+    sauber: "{{ text | replace('|', '/') | trim | truncate(150, true, '…') }}"
+    stufe_ok: "{{ stufe if stufe in ['hinweis', 'warnung', 'wichtig'] else 'warnung' }}"
+  sequence:
+    # Kein freier Slot mehr (5. gleichzeitige Warnung) -> still verwerfen.
+    - condition: template
+      value_template: "{{ ziel | int(0) > 0 }}"
+
+    # 1) Originalzustand sichern — VOR der ersten Geraete-Aktion und nur, wenn
+    #    nicht schon eine andere Warnung dasselbe Geraet gesichert hat.
+    - repeat:
+        for_each: "{{ ent_liste }}"
+        sequence:
+          - variables:
+              snap_id: "wdh_snap_{{ repeat.item | replace('.', '_') }}"
+          - if:
+              - condition: template
+                value_template: "{{ states['scene.' ~ snap_id] is none }}"
+            then:
+              - service: scene.create
+                data:
+                  scene_id: "{{ snap_id }}"
+                  snapshot_entities: "{{ [repeat.item] }}"
+
+    # 2) Slot belegen
+    - service: input_text.set_value
+      target:
+        entity_id: "input_text.wdh_slot_{{ ziel }}"
+      data:
+        value: "{{ warn_id }}|{{ stufe_ok }}|{{ sauber }}"
+    - service: input_text.set_value
+      target:
+        entity_id: "input_text.wdh_slot_{{ ziel }}_ents"
+      data:
+        value: "{{ ent_liste | join(',') }}"
+
+    # 3) Overlay einschalten und direkt auf die neue Warnung springen
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.dashboard_alert
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.wdh_index
+      data:
+        value: "{{ ziel | int }}"
+    - service: script.wdh_apply_current
+
+wdh_alarm_clear:
+  alias: WDH · Warnung beenden
+  icon: mdi:alert-remove-outline
+  mode: queued
+  max: 25
+  fields:
+    warn_id:
+      name: Warn-ID
+      required: true
+      selector:
+        text:
+  variables:
+    slots: >-
+      {%- set ns = namespace(out=[]) -%}
+      {%- for n in [1, 2, 3, 4] -%}
+        {%- set raw = states('input_text.wdh_slot_' ~ n) -%}
+        {%- set raw = '' if raw in ['unknown', 'unavailable'] else raw -%}
+        {%- set p = raw.split('|') -%}
+        {%- set e = states('input_text.wdh_slot_' ~ n ~ '_ents') -%}
+        {%- set e = '' if e in ['unknown', 'unavailable'] else e -%}
+        {%- set ns.out = ns.out + [{'n': n, 'id': (p[0] if p | length > 0 else ''), 'stufe': (p[1] if p | length > 1 else 'warnung'), 'text': (p[2] if p | length > 2 else ''), 'ents': e}] -%}
+      {%- endfor -%}
+      {{ ns.out }}
+    eigene: "{{ slots | selectattr('id', 'eq', warn_id) | list }}"
+    meine_ents: >-
+      {{ (eigene | map(attribute='ents') | join(','))
+         .split(',') | map('trim') | reject('eq', '') | list }}
+    # Alles, was NACH dem Freigeben noch von anderen Warnungen belegt bleibt.
+    rest_ents: >-
+      {{ (slots | rejectattr('id', 'eq', '') | rejectattr('id', 'eq', warn_id)
+                | map(attribute='ents') | join(','))
+         .split(',') | map('trim') | reject('eq', '') | list }}
+    frei_ents: "{{ meine_ents | reject('in', rest_ents) | list }}"
+  sequence:
+    - condition: template
+      value_template: "{{ eigene | length > 0 }}"
+
+    # 1) Slot(s) freigeben — zuerst, damit ein parallel laufender Clear die
+    #    Belegung nicht mehr sieht und nichts doppelt zurueckgesetzt wird.
+    - repeat:
+        for_each: "{{ eigene | map(attribute='n') | list }}"
+        sequence:
+          - service: input_text.set_value
+            target:
+              entity_id: "input_text.wdh_slot_{{ repeat.item }}"
+            data:
+              value: ""
+          - service: input_text.set_value
+            target:
+              entity_id: "input_text.wdh_slot_{{ repeat.item }}_ents"
+            data:
+              value: ""
+
+    # 2) Nur die Geraete zuruecksetzen, die keine andere Warnung mehr belegt.
+    - repeat:
+        for_each: "{{ frei_ents }}"
+        sequence:
+          - variables:
+              snap: "scene.wdh_snap_{{ repeat.item | replace('.', '_') }}"
+          - if:
+              - condition: template
+                value_template: "{{ states[snap] is not none }}"
+            then:
+              - service: scene.turn_on
+                target:
+                  entity_id: "{{ snap }}"
+                data:
+                  transition: 1
+              - delay:
+                  milliseconds: 400
+              - service: scene.delete
+                target:
+                  entity_id: "{{ snap }}"
+
+    # 3) Melder informieren (loescht seine Push-Nachricht selbst)
+    - event: wdh_cleared
+      event_data:
+        warn_id: "{{ warn_id }}"
+
+    # 4) Anzeige nachziehen (schaltet das Overlay aus, wenn nichts mehr aktiv ist)
+    - service: script.wdh_apply_current
+
+wdh_apply_current:
+  alias: WDH · Aktuelle Warnung anzeigen
+  icon: mdi:television-play
+  mode: queued
+  max: 25
+  variables:
+    slots: >-
+      {%- set ns = namespace(out=[]) -%}
+      {%- for n in [1, 2, 3, 4] -%}
+        {%- set raw = states('input_text.wdh_slot_' ~ n) -%}
+        {%- set raw = '' if raw in ['unknown', 'unavailable'] else raw -%}
+        {%- set p = raw.split('|') -%}
+        {%- set e = states('input_text.wdh_slot_' ~ n ~ '_ents') -%}
+        {%- set e = '' if e in ['unknown', 'unavailable'] else e -%}
+        {%- set ns.out = ns.out + [{'n': n, 'id': (p[0] if p | length > 0 else ''), 'stufe': (p[1] if p | length > 1 else 'warnung'), 'text': (p[2] if p | length > 2 else ''), 'ents': e}] -%}
+      {%- endfor -%}
+      {{ ns.out }}
+    aktive: "{{ slots | rejectattr('id', 'eq', '') | list }}"
+    # input_number liefert "2.0" -> ueber float nach int. Bewusst KEIN `| string`:
+    # HA rendert Templates nativ und macht aus "2" sofort wieder die Zahl 2 —
+    # der Vergleich mit den (dann numerischen) Slot-Nummern muss also int/int sein.
+    idx: "{{ states('input_number.wdh_index') | float(1) | int }}"
+    treffer: "{{ aktive | selectattr('n', 'eq', idx) | list }}"
+    aktuell: >-
+      {%- if treffer | length > 0 -%}
+        {{ treffer | first }}
+      {%- elif aktive | length > 0 -%}
+        {{ aktive | first }}
+      {%- else -%}
+        {{ none }}
+      {%- endif -%}
+  sequence:
+    - if:
+        - condition: template
+          value_template: "{{ aktuell is none }}"
+      then:
+        # Nichts mehr aktiv -> Overlay aus, Legacy-Text leeren.
+        - service: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.dashboard_alert
+        - service: input_text.set_value
+          target:
+            entity_id: input_text.dashboard_alert_text
+          data:
+            value: ""
+      else:
+        - service: input_number.set_value
+          target:
+            entity_id: input_number.wdh_index
+          data:
+            value: "{{ aktuell.n | int }}"
+        # Legacy-Helfer spiegeln: aeltere Dashboard-Versionen (und die HA-UI)
+        # zeigen weiterhin die gerade rotierende Meldung.
+        - service: input_text.set_value
+          target:
+            entity_id: input_text.dashboard_alert_text
+          data:
+            value: "{{ aktuell.text | truncate(100, true, '…') }}"
+        - service: input_select.select_option
+          target:
+            entity_id: input_select.dashboard_alert_level
+          data:
+            option: "{{ aktuell.stufe if aktuell.stufe in ['hinweis', 'warnung', 'wichtig'] else 'warnung' }}"
+        # Der Melder dieser Warnung faehrt jetzt seine Geraete-Aktion.
+        - event: wdh_apply
+          event_data:
+            warn_id: "{{ aktuell.id }}"
+
+wdh_rotate:
+  alias: WDH · Zur naechsten Warnung wechseln
+  icon: mdi:rotate-right
+  mode: queued
+  max: 5
+  variables:
+    aktive_n: >-
+      {%- set ns = namespace(out=[]) -%}
+      {%- for n in [1, 2, 3, 4] -%}
+        {%- set raw = states('input_text.wdh_slot_' ~ n) -%}
+        {%- set raw = '' if raw in ['unknown', 'unavailable'] else raw -%}
+        {%- if raw.split('|')[0] | default('', true) != '' -%}
+          {%- set ns.out = ns.out + [n] -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {{ ns.out }}
+    # input_number liefert "2.0" -> ueber float nach int. Bewusst KEIN `| string`:
+    # HA rendert Templates nativ und macht aus "2" sofort wieder die Zahl 2 —
+    # der Vergleich mit den (dann numerischen) Slot-Nummern muss also int/int sein.
+    idx: "{{ states('input_number.wdh_index') | float(1) | int }}"
+    pos: "{{ aktive_n.index(idx) if idx in aktive_n else -1 }}"
+    naechste: >-
+      {%- if aktive_n | length > 0 -%}
+        {{ aktive_n[(pos | int(-1) + 1) % (aktive_n | length)] }}
+      {%- else -%}
+        {{ 0 }}
+      {%- endif -%}
+  sequence:
+    # Bei nur einer aktiven Warnung gibt es nichts zu rotieren.
+    - condition: template
+      value_template: "{{ aktive_n | length > 1 and naechste | int(0) > 0 }}"
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.wdh_index
+      data:
+        value: "{{ naechste | int }}"
+    - service: script.wdh_apply_current
+
+wdh_ack:
+  alias: WDH · Angezeigte Warnung quittieren
+  icon: mdi:check-circle-outline
+  mode: queued
+  max: 10
+  variables:
+    slots: >-
+      {%- set ns = namespace(out=[]) -%}
+      {%- for n in [1, 2, 3, 4] -%}
+        {%- set raw = states('input_text.wdh_slot_' ~ n) -%}
+        {%- set raw = '' if raw in ['unknown', 'unavailable'] else raw -%}
+        {%- set p = raw.split('|') -%}
+        {%- set ns.out = ns.out + [{'n': n, 'id': (p[0] if p | length > 0 else '')}] -%}
+      {%- endfor -%}
+      {{ ns.out }}
+    aktive: "{{ slots | rejectattr('id', 'eq', '') | list }}"
+    # input_number liefert "2.0" -> ueber float nach int. Bewusst KEIN `| string`:
+    # HA rendert Templates nativ und macht aus "2" sofort wieder die Zahl 2 —
+    # der Vergleich mit den (dann numerischen) Slot-Nummern muss also int/int sein.
+    idx: "{{ states('input_number.wdh_index') | float(1) | int }}"
+    treffer: "{{ aktive | selectattr('n', 'eq', idx) | list }}"
+    ziel_id: >-
+      {%- if treffer | length > 0 -%}
+        {{ (treffer | first).id }}
+      {%- elif aktive | length > 0 -%}
+        {{ (aktive | first).id }}
+      {%- else -%}
+        {{ '' }}
+      {%- endif -%}
+  sequence:
+    - if:
+        - condition: template
+          value_template: "{{ ziel_id == '' }}"
+      then:
+        - service: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.dashboard_alert
+      else:
+        - service: script.wdh_alarm_clear
+          data:
+            warn_id: "{{ ziel_id }}"
+
+wdh_reset:
+  alias: WDH · Register leeren
+  icon: mdi:backup-restore
+  mode: single
+  sequence:
+    # Beim HA-Start ueberleben die Slot-Werte, die Snapshot-Szenen aber nicht.
+    # Darum: alles leeren und die Melder neu registrieren lassen (Boot-Trigger).
+    - repeat:
+        for_each: ["1", "2", "3", "4"]
+        sequence:
+          - service: input_text.set_value
+            target:
+              entity_id: "input_text.wdh_slot_{{ repeat.item }}"
+            data:
+              value: ""
+          - service: input_text.set_value
+            target:
+              entity_id: "input_text.wdh_slot_{{ repeat.item }}_ents"
+            data:
+              value: ""
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.wdh_index
+      data:
+        value: 1
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.dashboard_alert
+    - service: input_text.set_value
+      target:
+        entity_id: input_text.dashboard_alert_text
+      data:
+        value: ""
+    # Verwaiste Snapshot-Szenen aus einem harten Abbruch aufraeumen.
+    - repeat:
+        for_each: >-
+          {{ states.scene | map(attribute='entity_id')
+             | select('match', '^scene\\.wdh_snap_') | list }}
+        sequence:
+          - service: scene.delete
+            target:
+              entity_id: "{{ repeat.item }}"

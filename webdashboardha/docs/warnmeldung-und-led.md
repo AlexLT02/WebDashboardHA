@@ -1,248 +1,153 @@
-# Warnmeldung (Overlay) & LED-Priorisierung — HA-Setup
+# Warnmeldungen, Geräte-Aktionen & LED — HA-Setup
 
-Zwei Bausteine, ein gemeinsames Prinzip: **ein Schiedsrichter entscheidet, was gerade
-gezeigt wird** — bei der Bildschirm-Warnung wie bei der WLED-Statusleiste. Mehr
-Sensoren bedeuten *nicht* mehr Helfer, sondern nur mehr Einträge in der Prioritätsliste.
+Ab Add-on **v1.4.0** können mehrere Warnungen **gleichzeitig** aktiv sein. Das
+alte Prinzip „ein Schiedsrichter entscheidet, was gezeigt wird" ist damit
+abgelöst: es gewinnt niemand mehr, es kommen **alle** durch — als Laufschrift,
+und die Geräte-Aktion wechselt im Takt mit dem angezeigten Text.
 
----
-
-## Teil 1 — Das Overlay
-
-Das Dashboard zeigt eine Vollbild-Warnung, sobald ein `input_boolean` an ist. Die
-Sichtbarkeit ist eine **reine Ableitung** aus drei Helfern — das Overlay hat keinen
-eigenen Zustand:
-
-| Helfer | Bedeutung | Default-entity_id |
-|---|---|---|
-| `input_boolean` | an = anzeigen | `input_boolean.dashboard_alert` |
-| `input_text` | Meldungstext | `input_text.dashboard_alert_text` |
-| `input_select` | Dringlichkeit | `input_select.dashboard_alert_level` |
-
-Stufen (Optionen des `input_select`): **`wichtig`** (rot) · **`warnung`** (gelb) ·
-**`hinweis`** (hellblau). Groß/Klein und Synonyme (`critical`, `info`, `rot`/`gelb`/`blau`)
-werden vom Frontend toleriert; Unbekanntes fällt auf `warnung`.
-
-> Die entity_ids sind im Dashboard unter **Einstellungen → „Warnmeldung — HA-Helfer"**
-> frei einstellbar. Wer die Defaults nutzt, muss dort nichts ändern.
-
-**Woraus folgt das gewünschte Verhalten von selbst:**
-- **OK-Button** ruft `turn_off` auf den Switch → Overlay weg.
-- **Switch geht extern aus** (Automation) → Overlay weg. Gleicher Effekt, kein Sonderfall.
-- Neuer Text/neue Stufe bei laufendem Alarm → Overlay zeigt sofort die neue Meldung.
-
-### Helfer anlegen
-
-Per UI (*Einstellungen → Geräte & Dienste → Helfer*) oder in `configuration.yaml`:
-
-```yaml
-input_boolean:
-  dashboard_alert:
-    name: Dashboard-Alarm anzeigen
-
-input_text:
-  dashboard_alert_text:
-    name: Dashboard-Alarm Text
-    max: 120
-
-input_select:
-  dashboard_alert_level:
-    name: Dashboard-Alarm Stufe
-    options:
-      - hinweis
-      - warnung
-      - wichtig
-    initial: hinweis
-```
-
-### Bequemes Setzen per Skript
-
-Ein Helfer-Skript setzt Text, Stufe und Switch in einem Rutsch — alle Automationen
-rufen nur noch dieses auf:
-
-```yaml
-script:
-  set_dashboard_alert:
-    alias: Dashboard-Alarm setzen
-    mode: queued
-    fields:
-      text: { description: Meldungstext, example: "Kühlschrank steht offen!" }
-      level: { description: "wichtig | warnung | hinweis", example: warnung }
-    sequence:
-      - service: input_text.set_value
-        target: { entity_id: input_text.dashboard_alert_text }
-        data: { value: "{{ text }}" }
-      - service: input_select.select_option
-        target: { entity_id: input_select.dashboard_alert_level }
-        data: { option: "{{ level | default('warnung') }}" }
-      - service: input_boolean.turn_on
-        target: { entity_id: input_boolean.dashboard_alert }
-```
-
-### Schnellstart: eine Quelle (mit Auto-Clear)
-
-Reicht, solange praktisch immer nur *eine* Sache gleichzeitig alarmiert:
-
-```yaml
-automation:
-  # Waschmaschine fertig → Hinweis
-  - alias: "Alarm: Waschmaschine fertig"
-    trigger:
-      - platform: state
-        entity_id: sensor.waschmaschine_phase   # dein Sensor
-        to: "done"
-    action:
-      - service: script.set_dashboard_alert
-        data: { text: "Waschmaschine ist fertig.", level: hinweis }
-
-  # Kühlschrank > 2 min offen → Warnung
-  - alias: "Alarm: Kühlschrank offen"
-    trigger:
-      - platform: state
-        entity_id: binary_sensor.kuehlschrank_tuer
-        to: "on"
-        for: "00:02:00"
-    action:
-      - service: script.set_dashboard_alert
-        data: { text: "Kühlschrank steht offen!", level: warnung }
-
-  # Auto-Clear: Tür wieder zu → Overlay verschwindet ohne OK
-  - alias: "Alarm aus: Kühlschrank wieder zu"
-    trigger:
-      - platform: state
-        entity_id: binary_sensor.kuehlschrank_tuer
-        to: "off"
-    action:
-      - service: input_boolean.turn_off
-        target: { entity_id: input_boolean.dashboard_alert }
-```
-
-Der Haken beim Schnellstart: schalten mehrere Quellen gegeneinander, „gewinnt" die
-zuletzt gefeuerte — es gibt keine echte Priorität, und ein Auto-Clear der einen Quelle
-löscht auch die Meldung einer anderen. Sobald du mehr als ein, zwei Quellen hast → Teil 2.
+Die YAML-Dateien dazu liegen im Repo unter [`../ha/`](../ha/).
 
 ---
 
-## Teil 2 — Der Schiedsrichter (empfohlen)
+## Das Prinzip in vier Sätzen
 
-Eine einzige Automation entscheidet per **Prioritätsliste**, was im Slot steht — und
-kann in einem Aufwasch die WLED-Leiste mitsteuern. Neue Quelle = ein Listeneintrag.
-
-```yaml
-automation:
-  - alias: "Dashboard-Alarm Schiedsrichter"
-    id: dashboard_alert_arbiter
-    trigger:
-      # Alle Quellen, die mitreden dürfen:
-      - platform: state
-        entity_id:
-          - binary_sensor.wasserleck_kueche
-          - binary_sensor.kuehlschrank_tuer
-          - sensor.waschmaschine_phase
-      # Optional: alle 5 min neu bewerten, damit ein per OK weggeklickter, aber
-      # noch offener Kühlschrank wieder nachnervt.
-      - platform: time_pattern
-        minutes: "/5"
-    variables:
-      # Reihenfolge = Priorität (oben schlägt unten). Nur `active` zählt.
-      candidates:
-        - active: "{{ is_state('binary_sensor.wasserleck_kueche','on') }}"
-          text: "Wasserleck in der Küche!"
-          level: wichtig
-          led: alarm
-        - active: "{{ is_state('binary_sensor.kuehlschrank_tuer','on') }}"
-          text: "Kühlschrank steht offen!"
-          level: warnung
-          led: fridge_open
-        - active: "{{ is_state('sensor.waschmaschine_phase','done') }}"
-          text: "Waschmaschine ist fertig."
-          level: hinweis
-          led: wash_done
-      winner: >
-        {% set ns = namespace(w=none) %}
-        {% for c in candidates if c.active and ns.w is none %}
-          {% set ns.w = c %}
-        {% endfor %}
-        {{ (ns.w | to_json) if ns.w else '' }}
-    action:
-      - choose:
-          - conditions: "{{ winner != '' }}"
-            sequence:
-              - variables:
-                  w: "{{ winner | from_json }}"
-              - service: script.set_dashboard_alert
-                data: { text: "{{ w.text }}", level: "{{ w.level }}" }
-              # LED gleich mitziehen (Preset-Name = w.led, siehe Teil 3):
-              - service: select.select_option
-                target: { entity_id: select.wohnzimmer_wled_preset }
-                data: { option: "{{ w.led }}" }
-        default:
-          # Nichts aktiv → Overlay aus, LED zurück auf Ambient
-          - service: input_boolean.turn_off
-            target: { entity_id: input_boolean.dashboard_alert }
-          - service: select.select_option
-            target: { entity_id: select.wohnzimmer_wled_preset }
-            data: { option: idle }
-```
-
-Damit ist deine Ausgangsfrage beantwortet: **Kühlschrank-offen (gelb) schlägt
-Waschmaschine-läuft, aber ein Wasserleck (rot) schlägt alles** — allein über die
-Reihenfolge in `candidates`. Kein Mischen, sondern ein klarer Stack.
+1. Jede Warnung ist eine **Automation aus dem Blueprint „Dashboard-Warnung Pro"**.
+   Sie kennt ihren Auslöser, ihren Text und ihre Geräte-Aktion — sonst nichts.
+2. Aktiv werdende Warnungen tragen sich in ein **Register** aus vier Slots ein
+   (`input_text.wdh_slot_1..4`). Das Register ist die einzige Wahrheit darüber,
+   was gerade anliegt.
+3. Eine **Rotation** (alle 5 s) setzt `input_number.wdh_index` auf den nächsten
+   belegten Slot und bittet die zugehörige Automation per Event, ihre
+   Geräte-Aktion zu fahren. Das Dashboard schiebt dieselbe Meldung in die Mitte
+   der Laufschrift — Licht und Text bleiben so zwangsläufig synchron.
+4. Bevor eine Warnung ein Gerät anfasst, wird dessen **kompletter Zustand als
+   Szene gesichert** und am Ende exakt so wiederhergestellt — aber erst, wenn die
+   *letzte* Warnung weg ist, die dieses Gerät belegt.
 
 ---
 
-## Teil 3 — Die WLED-Leiste
+## Warum es bei zwei gleichzeitigen Meldungen nicht kracht
 
-Ein Strip zeigt zu einem Zeitpunkt nur *einen* Zustand. „Mischen" ginge technisch nur
-über WLED-**Segmente** (Kreis in Bögen teilen) — für einen kleinen Status-Ring aber
-schwer ablesbar. Empfehlung: **nicht mischen, priorisieren** (Teil 2).
+Drei Probleme, drei Antworten:
 
-**Presets statt Effekt-Parameter:** Lege die Animationen einmalig in der WLED-Oberfläche
-als **Presets** an (Farbe + Effekt + Geschwindigkeit), z. B.:
+**Beide Meldungen müssen durchkommen.** Vier Slots statt einem Textfeld. Das
+Dashboard liest alle Slots und rendert sie als eine Laufschrift; die aktive
+Meldung steht mittig und in voller Deckkraft, die anderen ziehen gedimmt in
+ihrer eigenen Dringlichkeitsfarbe vorbei. Ein Punkt-Indikator zeigt, wie viele
+anliegen. **OK** quittiert nur die angezeigte Meldung, die übrigen laufen weiter.
 
-| Preset-Name | Anlass | Optik |
-|---|---|---|
-| `idle` | nichts los | Ambient, gedimmt / aus |
-| `wash_running` | Waschmaschine läuft | ruhiges Blau, langsam |
-| `wash_done` | fertig | Blau, Blink/Pulse |
-| `fridge_open` | Tür zu lange offen | Gelb, Pulse |
-| `alarm` | Wasserleck/Rauch | Rot, schnelles Blinken |
+**Beide Aktionen müssen ausgeführt werden können.** Ein LED-Strip kann nicht
+gleichzeitig rot blinken und ruhig blau leuchten. Statt zu mischen, wechseln sich
+die Aktionen ab: wer gerade in der Laufschrift dran ist, steuert die Geräte. Wer
+gleich drankommt, hat 5 Sekunden später seinen Auftritt.
 
-HA steuert sie über die WLED-Integration per **`select.<name>_preset`** (Option =
-Preset-Name), wie oben im Schiedsrichter gezeigt. Alternativ per Preset-Nummer über
-`number.<name>_preset`.
+**Das Zurücksetzen darf sich nicht in die Quere kommen.** Der Snapshot entsteht
+nur beim *ersten* Zugriff auf ein Gerät. Beim Beenden prüft das Register, ob noch
+ein anderer belegter Slot dasselbe Gerät auflistet — wenn ja, bleibt alles wie es
+ist. Erst der Letzte spielt die Szene zurück und löscht sie. Das ist
+Reference-Counting, abgeleitet aus den Slots statt separat mitgezählt, also ohne
+Zähler, der aus dem Tritt geraten kann.
 
-**Status vs. Alert — wichtige Trennung fürs Ablesen:**
-- *Status* (Waschmaschine **läuft**) = ruhiges Ambient, darf überschrieben werden.
-- *Alert* (Waschmaschine **fertig** / Kühlschrank offen) = auffällig, bleibt bis erledigt.
+Dazu die Absicherung darunter: **alle** Register-Änderungen laufen durch
+`script.wdh_alarm_set` / `wdh_alarm_clear`, beide `mode: queued`. Zwei im selben
+Moment auslösende Warnungen werden dadurch nacheinander abgearbeitet und können
+sich nicht gegenseitig überschreiben.
 
-Wer LED und Overlay getrennt halten will, baut statt des kombinierten Schiedsrichters
-einen reinen **Template-Sensor** nur für die LED:
+---
 
-```yaml
-template:
-  - sensor:
-      - name: LED Signal
-        state: >
-          {% if is_state('binary_sensor.wasserleck_kueche','on') %}alarm
-          {% elif is_state('binary_sensor.kuehlschrank_tuer','on') %}fridge_open
-          {% elif is_state('sensor.waschmaschine_phase','done') %}wash_done
-          {% elif is_state('sensor.waschmaschine_phase','running') %}wash_running
-          {% else %}idle{% endif %}
-```
+## Der Blueprint
 
-…und eine Automation reagiert auf `sensor.led_signal` → `select.select_option` mit dem
-gleichnamigen Preset. Priorität steckt wieder allein in der Reihenfolge der `elif`.
+*Einstellungen → Automationen → Blueprint → **Dashboard-Warnung Pro***
+
+### Überwachung
+| Feld | Bedeutung |
+|---|---|
+| **Gerät / Entität** | Was überwacht wird (Dropdown) |
+| **Worauf achten** | `Zustand ist gleich …` · `Wert überschreitet Schwelle` · `Wert unterschreitet Schwelle` |
+| **Auslösender Zustand** | nur bei „Zustand" — z. B. `on`, `open`, `home` |
+| **Schwellwert** | nur bei über/unter — z. B. `25` |
+| **Muss so lange anliegen** | Mindestdauer; `0` = sofort |
+
+### Meldung
+Meldungstext und Dringlichkeit (`hinweis` hellblau · `warnung` gelb · `wichtig` rot).
+
+### Push-Benachrichtigung
+Beliebig viele Geräte mit HA-App. Die Nachricht wird mit einem festen `tag`
+verschickt und beim Ende der Warnung per `clear_notification` **wieder
+zurückgezogen** — sie verschwindet also von selbst vom Sperrbildschirm. Leer
+lassen = keine Push.
+
+### Geräte-Aktionen
+| Feld | Bedeutung |
+|---|---|
+| **Geräte, die diese Warnung übernimmt** | Snapshot-/Restore-Liste. **Alles, was deine Aktion anfasst, muss hier stehen** — was fehlt, wird nicht zurückgesetzt. |
+| **Was soll passieren?** | Freier Aktions-Editor: mehrere Lampen mit eigener Farbe, eine Szene, ein WLED-Preset, ein Schalter, ein Media-Player — beliebig kombinierbar. |
+
+> **Die häufigste Falle:** Wer per `select.select_option` ein WLED-Preset setzt,
+> muss auch das `select.…_voreinstellung` in die Snapshot-Liste aufnehmen, nicht
+> nur das `light.…`. Sonst kommt zwar die Farbe zurück, WLED steht aber danach
+> auf „kein Preset".
+
+### Erweitert
+**Nach dem Wegklicken erneut melden** (Standard: an) — besteht die Ursache noch,
+meldet sich die Warnung nach spätestens 5 Minuten wieder.
+
+---
+
+## Register — Innenleben
+
+| Entität | Inhalt |
+|---|---|
+| `input_text.wdh_slot_1..4` | `warn_id\|stufe\|text`, leer = frei |
+| `input_text.wdh_slot_1..4_ents` | Geräte, die dieser Slot belegt |
+| `input_number.wdh_index` | welcher Slot gerade angezeigt wird |
+| `scene.wdh_snap_<entity>` | Snapshot eines belegten Geräts (kommt und geht automatisch) |
+
+| Skript | Zweck |
+|---|---|
+| `script.wdh_alarm_set` | Slot belegen, Snapshot anlegen, Overlay an |
+| `script.wdh_alarm_clear` | Slot freigeben, ggf. restaurieren, Melder informieren |
+| `script.wdh_apply_current` | angezeigte Meldung spiegeln + Aktions-Event feuern |
+| `script.wdh_rotate` | zum nächsten belegten Slot wechseln |
+| `script.wdh_ack` | die *angezeigte* Warnung quittieren (OK-Button) |
+| `script.wdh_reset` | Register komplett leeren (läuft beim HA-Start) |
+
+**Grenzen, bewusst gewählt:**
+- **Vier** gleichzeitige Warnungen. Die fünfte wird still verworfen — mehr als
+  vier rotierende Meldungen kann ohnehin niemand lesen.
+- Nach einem **HA-Neustart** wird das Register geleert (die Snapshot-Szenen
+  überleben den Neustart nicht). Jede Warnung prüft 20 s nach dem Start selbst,
+  ob ihre Ursache noch besteht, und meldet sich neu. Der dabei entstehende
+  Snapshot ist dann allerdings der Zustand *nach* dem Neustart.
+- Der Meldungstext wird bei 150 Zeichen gekappt (Slot-Kapazität).
+
+---
+
+## Kompatibilität
+
+Die drei alten Helfer (`input_boolean.dashboard_alert`,
+`input_text.dashboard_alert_text`, `input_select.dashboard_alert_level`) bleiben
+in Betrieb:
+
+- Der `input_boolean` **schaltet das Overlay weiterhin** — er wird jetzt vom
+  Register gesetzt.
+- Text und Stufe werden auf die jeweils angezeigte Meldung **gespiegelt**, damit
+  ältere Dashboard-Versionen und HA-eigene Karten weiter funktionieren.
+- Ist gar kein Register vorhanden (Slot-Präfix im Dashboard leer), fällt das
+  Overlay auf den alten Ein-Meldungs-Betrieb zurück.
+
+Der alte Blueprint `dashboard_warnung.yaml` bleibt unangetastet liegen; er wird
+von nichts mehr benutzt und kann gelöscht werden.
 
 ---
 
 ## Prioritäts-Referenz
 
-| Stufe (Overlay-Farbe) | typischer Anlass | LED-Preset |
+| Stufe | Farbe / Puls | typischer Anlass |
 |---|---|---|
-| `wichtig` — rot, schnell | Wasserleck, Rauch | `alarm` |
-| `warnung` — gelb, mittel | Kühlschrank offen, Fenster bei Regen | `fridge_open` … |
-| `hinweis` — hellblau, langsam | Waschmaschine fertig, Post da | `wash_done` … |
+| `wichtig` | rot, schnell | Wasserleck, Rauch |
+| `warnung` | gelb, mittel | Kühlschrank offen, Fenster bei Regen |
+| `hinweis` | hellblau, langsam | Waschmaschine fertig, Post da |
 
-Höchste aktive Stufe/Quelle gewinnt. Genau eine Meldung liegt gleichzeitig auf dem
-Bild — ein Vollbild-Overlay, das „alles überdeckt", kann sinnvoll nicht zwei Dinge
-gleichzeitig zeigen.
+Die Stufe bestimmt Farbe und Puls-Tempo — **nicht** mehr, wer gewinnt. Alle
+aktiven Meldungen werden gezeigt.

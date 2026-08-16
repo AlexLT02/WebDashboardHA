@@ -673,6 +673,68 @@
   letter-spacing: -0.01em;
   color: inherit;
 }
+
+/* Laufschrift bei mehreren gleichzeitigen Warnungen. Alle Texte stehen in einer
+   Zeile nebeneinander; verschoben wird die ganze Spur, damit die gerade aktive
+   Meldung mittig steht. `inline-block` + `white-space: nowrap` statt Flexbox —
+   Flex-`gap` gibt es auf Safari 12 nicht, Abstände macht hier das Padding. */
+.alert__marquee {
+  margin-top: 20px;
+  overflow: hidden;
+  /* Weiche Kanten links/rechts, damit die Nachbarmeldungen nicht abgehackt
+     wirken. Ohne Maskensupport (Safari 12) fällt das schlicht weg. */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
+}
+.alert__track {
+  white-space: nowrap;
+  -webkit-transition: -webkit-transform 0.55s ease;
+  transition: transform 0.55s ease;
+  will-change: transform;
+}
+.alert__seg {
+  display: inline-block;
+  padding: 0 46px;
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  opacity: 0.28;
+  -webkit-transition: opacity 0.55s ease;
+  transition: opacity 0.55s ease;
+}
+.alert__seg.is-current {
+  opacity: 1;
+}
+/* Jede Meldung traegt ihre eigene Dringlichkeitsfarbe — auch die, die gerade
+   nur am Rand vorbeizieht. */
+.alert__seg--wichtig {
+  color: #ff6b6b;
+}
+.alert__seg--warnung {
+  color: #f4c542;
+}
+.alert__seg--hinweis {
+  color: #7cc4ff;
+}
+
+/* Positionsanzeige: wie viele Warnungen liegen an, welche ist gerade dran. */
+.alert__dots {
+  margin-top: 26px;
+  text-align: center;
+}
+.alert__dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin: 0 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.3;
+}
+.alert__dot.is-current {
+  opacity: 1;
+}
 .alert__ok {
   display: inline-block;
   margin-top: 44px;

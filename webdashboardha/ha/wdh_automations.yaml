@@ -1,0 +1,32 @@
+- id: wdh_rotation
+  alias: WDH · Warnungs-Rotation
+  description: >-
+    Wechselt alle 5 Sekunden zur naechsten aktiven Warnung. Damit laufen Text
+    (Laufschrift im Dashboard) und Geraete-Aktion synchron: es leuchtet immer
+    das, was zur gerade angezeigten Meldung gehoert. Bei nur einer aktiven
+    Warnung macht das aufgerufene Skript nichts.
+  mode: single
+  max_exceeded: silent
+  trigger:
+    - platform: time_pattern
+      seconds: /5
+  condition:
+    - condition: state
+      entity_id: input_boolean.dashboard_alert
+      state: "on"
+  action:
+    - service: script.wdh_rotate
+
+- id: wdh_boot_reset
+  alias: WDH · Register beim Start leeren
+  description: >-
+    Nach einem HA-Neustart sind die Snapshot-Szenen weg, die Slot-Werte aber
+    noch da. Ohne Reset wuerde spaeter auf nicht mehr existierende Szenen
+    zurueckgesetzt. Die Melder registrieren sich ueber ihren Boot-Trigger
+    (mit 20 s Vorlauf) selbst neu, falls ihre Bedingung noch zutrifft.
+  mode: single
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    - service: script.wdh_reset

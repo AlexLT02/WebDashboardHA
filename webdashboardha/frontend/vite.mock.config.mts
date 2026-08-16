@@ -53,8 +53,50 @@ const mockDashboard = {
   ],
 };
 
+// Warn-Overlay im Mock: `WDH_ALERT=1` zeigt drei gleichzeitige Warnungen
+// (Laufschrift + Punkte), `WDH_ALERT=2` nur eine. Ohne die Variable ist Ruhe.
+const alertDemo = process.env.WDH_ALERT || "";
+const alertSlots =
+  alertDemo === "1"
+    ? [
+        "automation.leck|wichtig|Wasserleck in der Küche!",
+        "automation.kuehl|warnung|Kühlschrank steht offen",
+        "",
+        "automation.wasch|hinweis|Waschmaschine ist fertig",
+      ]
+    : alertDemo === "2"
+      ? ["automation.kuehl|warnung|Kühlschrank steht offen", "", "", ""]
+      : ["", "", "", ""];
+
+const helper = (id: string, state: string, name: string) => ({
+  entity_id: id,
+  state,
+  attributes: { friendly_name: name },
+});
+
 // supported_features: OPEN|CLOSE|SET_POSITION|STOP = 15, ohne SET_POSITION/STOP = 3.
 const mockStates: Record<string, unknown> = {
+  "input_boolean.dashboard_alert": helper(
+    "input_boolean.dashboard_alert",
+    alertDemo ? "on" : "off",
+    "Dashboard Alert",
+  ),
+  "input_text.dashboard_alert_text": helper("input_text.dashboard_alert_text", "", "Alert Text"),
+  "input_select.dashboard_alert_level": helper(
+    "input_select.dashboard_alert_level",
+    "warnung",
+    "Alert Level",
+  ),
+  // WDH_INDEX waehlt, welche der Warnungen gerade "dran" ist (wie HAs Rotation).
+  "input_number.wdh_index": helper(
+    "input_number.wdh_index",
+    (process.env.WDH_INDEX || "1") + ".0",
+    "WDH Index",
+  ),
+  "input_text.wdh_slot_1": helper("input_text.wdh_slot_1", alertSlots[0], "WDH Slot 1"),
+  "input_text.wdh_slot_2": helper("input_text.wdh_slot_2", alertSlots[1], "WDH Slot 2"),
+  "input_text.wdh_slot_3": helper("input_text.wdh_slot_3", alertSlots[2], "WDH Slot 3"),
+  "input_text.wdh_slot_4": helper("input_text.wdh_slot_4", alertSlots[3], "WDH Slot 4"),
   // Absichtlich überlange Namen (ganz oben) — testet die Laufschrift in der Geräteauswahl.
   "cover.rolladen_terrassentuer_links": {
     entity_id: "cover.rolladen_terrassentuer_links",

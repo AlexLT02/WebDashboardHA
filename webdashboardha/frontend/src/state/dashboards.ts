@@ -47,6 +47,10 @@ export interface DashboardSettings {
   alertSwitchEntity?: string; // input_boolean: an = anzeigen
   alertTextEntity?: string; // input_text: Meldungstext
   alertLevelEntity?: string; // input_select: Dringlichkeit
+  /** Register für mehrere gleichzeitige Warnungen (Laufschrift). */
+  alertSlotPrefix?: string; // input_text.wdh_slot_ → …1 … …4
+  alertIndexEntity?: string; // input_number: welcher Slot ist gerade dran
+  alertAckScript?: string; // script: quittiert die angezeigte Warnung
 }
 
 /** App-Ebene: Custom-Kategorien + Settings. Persistiert im additiven `meta`-Feld. */

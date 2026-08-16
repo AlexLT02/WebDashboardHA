@@ -217,6 +217,49 @@ export function SettingsDialog({ settings, onSetting, onClose }: Props) {
       <div className="dlg__hint">Stufen: wichtig (rot) · warnung (gelb) · hinweis (hellblau).</div>
 
       <div className="dlg__gap" />
+      <div className="dlg__label">Mehrere Warnungen — Register</div>
+      <div className="dlg__hint">
+        Sind die Slot-Helfer da, laufen mehrere Meldungen gleichzeitig als Laufschrift.
+        Feld leeren = nur eine Meldung (alte Betriebsart).
+      </div>
+      <div className="dlg__gap--sm" />
+      <div className="dlg__label">Slot-Präfix</div>
+      <input
+        type="text"
+        className="dlg__input"
+        value={settings.alertSlotPrefix}
+        placeholder="input_text.wdh_slot_"
+        spellCheck={false}
+        autoCapitalize="off"
+        autoCorrect="off"
+        onChange={(e) => onSetting("alertSlotPrefix", e.target.value.trim())}
+      />
+      <div className="dlg__gap--sm" />
+      <div className="dlg__label">Index (welche Meldung ist dran)</div>
+      <input
+        type="text"
+        className="dlg__input"
+        value={settings.alertIndexEntity}
+        placeholder="input_number.wdh_index"
+        spellCheck={false}
+        autoCapitalize="off"
+        autoCorrect="off"
+        onChange={(e) => onSetting("alertIndexEntity", e.target.value.trim())}
+      />
+      <div className="dlg__gap--sm" />
+      <div className="dlg__label">Quittier-Skript</div>
+      <input
+        type="text"
+        className="dlg__input"
+        value={settings.alertAckScript}
+        placeholder="script.wdh_ack"
+        spellCheck={false}
+        autoCapitalize="off"
+        autoCorrect="off"
+        onChange={(e) => onSetting("alertAckScript", e.target.value.trim())}
+      />
+
+      <div className="dlg__gap" />
       <div className="dlg__label">Adresse</div>
       <div className="dlg__row">
         <span className="dlg__row-k">Kiosk (iPad)</span>

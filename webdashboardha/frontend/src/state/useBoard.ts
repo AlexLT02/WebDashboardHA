@@ -48,6 +48,10 @@ export interface BoardSettings {
   alertSwitchEntity: string;
   alertTextEntity: string;
   alertLevelEntity: string;
+  /** Präfix der Register-Slots (`…1`, `…1_ents`, …). Leer = Register aus. */
+  alertSlotPrefix: string;
+  alertIndexEntity: string;
+  alertAckScript: string;
 }
 
 export interface BoardApi {
@@ -82,6 +86,9 @@ const DEFAULT_SETTINGS: BoardSettings = {
   alertSwitchEntity: "input_boolean.dashboard_alert",
   alertTextEntity: "input_text.dashboard_alert_text",
   alertLevelEntity: "input_select.dashboard_alert_level",
+  alertSlotPrefix: "input_text.wdh_slot_",
+  alertIndexEntity: "input_number.wdh_index",
+  alertAckScript: "script.wdh_ack",
 };
 
 export function useBoard(): BoardApi {

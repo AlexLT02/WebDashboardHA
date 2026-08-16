@@ -1,0 +1,48 @@
+# ─── WebDashboardHA · Warnsystem (wdh) ────────────────────────────────────────
+# Register fuer gleichzeitig aktive Warnungen. Vier Slots, pro Slot zwei Helfer:
+#   wdh_slot_N        "warn_id|stufe|text"        (leer = Slot frei)
+#   wdh_slot_N_ents   "entity_id,entity_id,..."   (Geraete, die diese Warnung belegt)
+# Die Belegung ist die einzige Quelle fuer das Reference-Counting: ein Geraet wird
+# erst zurueckgesetzt, wenn KEIN aktiver Slot es mehr auffuehrt.
+input_text:
+  wdh_slot_1:
+    name: WDH Slot 1
+    max: 255
+    icon: mdi:numeric-1-box-outline
+  wdh_slot_1_ents:
+    name: WDH Slot 1 Geraete
+    max: 255
+    icon: mdi:numeric-1-box-multiple-outline
+  wdh_slot_2:
+    name: WDH Slot 2
+    max: 255
+    icon: mdi:numeric-2-box-outline
+  wdh_slot_2_ents:
+    name: WDH Slot 2 Geraete
+    max: 255
+    icon: mdi:numeric-2-box-multiple-outline
+  wdh_slot_3:
+    name: WDH Slot 3
+    max: 255
+    icon: mdi:numeric-3-box-outline
+  wdh_slot_3_ents:
+    name: WDH Slot 3 Geraete
+    max: 255
+    icon: mdi:numeric-3-box-multiple-outline
+  wdh_slot_4:
+    name: WDH Slot 4
+    max: 255
+    icon: mdi:numeric-4-box-outline
+  wdh_slot_4_ents:
+    name: WDH Slot 4 Geraete
+    max: 255
+    icon: mdi:numeric-4-box-multiple-outline
+
+input_number:
+  wdh_index:
+    name: WDH Rotationsindex
+    min: 1
+    max: 4
+    step: 1
+    mode: box
+    icon: mdi:rotate-right

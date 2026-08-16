@@ -1,0 +1,359 @@
+blueprint:
+  name: Dashboard-Warnung Pro
+  description: >-
+    Vollbild-Warnung auf dem WebDashboardHA-Panel, optionale Push-Nachricht und
+    beliebige Geraete-Aktionen (Licht, Szene, WLED-Preset, alles andere) — mit
+    sauberem Verhalten, wenn mehrere Warnungen gleichzeitig aktiv sind.
+
+
+    Ausloeser waehlbar als Zustand, Wert-Ueberschreitung oder
+    Wert-Unterschreitung, jeweils mit Mindestdauer.
+
+
+    Wichtig: die Geraete werden NICHT auf einen festen Wert zurueckgesetzt.
+    Vor der ersten Aktion wird der komplette Zustand jedes betroffenen Geraets
+    als Snapshot gesichert (alle Attribute) und am Ende exakt so
+    wiederhergestellt — und zwar erst, wenn die LETZTE Warnung weg ist, die
+    dieses Geraet belegt.
+
+
+    Setzt die wdh-Register-Skripte und -Helfer voraus
+    (script.wdh_alarm_set / wdh_alarm_clear / wdh_apply_current,
+    input_text.wdh_slot_1..4, input_number.wdh_index).
+  domain: automation
+  source_url: https://github.com/AlexLT02/WebDashboardHA
+  input:
+    ueberwachung:
+      name: Ueberwachung
+      icon: mdi:eye-outline
+      input:
+        sensor:
+          name: Geraet / Entitaet
+          description: Was soll ueberwacht werden?
+          selector:
+            entity:
+        modus:
+          name: Worauf soll geachtet werden?
+          default: zustand
+          selector:
+            select:
+              mode: dropdown
+              options:
+                - label: Zustand ist gleich …
+                  value: zustand
+                - label: Wert ueberschreitet Schwelle
+                  value: ueber
+                - label: Wert unterschreitet Schwelle
+                  value: unter
+        zielzustand:
+          name: Ausloesender Zustand
+          description: Nur bei „Zustand ist gleich …“ — z. B. `on`, `open`, `home`.
+          default: "on"
+          selector:
+            text:
+        schwelle:
+          name: Schwellwert
+          description: Nur bei ueber/unter — z. B. 25 (Grad) oder 20 (Prozent).
+          default: 0
+          selector:
+            number:
+              min: -10000
+              max: 100000
+              step: 0.1
+              mode: box
+        dauer:
+          name: Muss so lange anliegen
+          description: Erst danach wird gewarnt. 0 = sofort.
+          default:
+            hours: 0
+            minutes: 2
+            seconds: 0
+          selector:
+            duration:
+              enable_second: true
+    meldung:
+      name: Meldung
+      icon: mdi:message-alert-outline
+      input:
+        meldungstext:
+          name: Meldungstext
+          description: Erscheint im Dashboard-Overlay und in der Push-Nachricht.
+          selector:
+            text:
+        stufe:
+          name: Dringlichkeit
+          default: warnung
+          selector:
+            select:
+              mode: dropdown
+              options:
+                - label: Hinweis (hellblau)
+                  value: hinweis
+                - label: Warnung (gelb)
+                  value: warnung
+                - label: Wichtig (rot)
+                  value: wichtig
+    benachrichtigung:
+      name: Push-Benachrichtigung
+      icon: mdi:cellphone-message
+      collapsed: true
+      input:
+        notify_geraete:
+          name: Zielgeraete
+          description: >-
+            Geraete mit Home-Assistant-App. Die Nachricht verschwindet
+            automatisch wieder, sobald die Warnung nicht mehr aktiv ist.
+            Leer lassen = keine Push-Nachricht.
+          default: []
+          selector:
+            device:
+              integration: mobile_app
+              multiple: true
+        notify_titel:
+          name: Titel
+          description: Leer = automatisch nach Dringlichkeit.
+          default: ""
+          selector:
+            text:
+    aktionen:
+      name: Geraete-Aktionen
+      icon: mdi:lightbulb-group-outline
+      input:
+        aktion_entitaeten:
+          name: Geraete, die diese Warnung uebernimmt
+          description: >-
+            Alle Geraete, die deine Aktion unten anfasst — Lampen, Schalter,
+            Media-Player, WLED-Select … Genau diese werden vorher gesichert und
+            danach wieder exakt so hergestellt. Wer hier fehlt, wird nicht
+            zurueckgesetzt.
+          default: []
+          selector:
+            entity:
+              multiple: true
+        aktion:
+          name: Was soll passieren?
+          description: >-
+            Laeuft immer dann, wenn diese Warnung gerade angezeigt wird — bei
+            mehreren gleichzeitig aktiven Warnungen also im Wechsel alle 5 s.
+            Hier ist alles erlaubt: mehrere Lampen mit eigener Farbe, eine
+            Szene aktivieren, ein WLED-Preset waehlen, ein Geraet schalten.
+          default:
+            - delay:
+                milliseconds: 1
+          selector:
+            action:
+    erweitert:
+      name: Erweitert
+      icon: mdi:tune
+      collapsed: true
+      input:
+        nachnerven:
+          name: Nach dem Wegklicken erneut melden
+          description: >-
+            Wenn die Ursache noch besteht, meldet sich die Warnung nach
+            spaetestens 5 Minuten wieder. Aus = einmal quittiert ist Ruhe, bis
+            die Ursache weg war und erneut auftritt.
+          default: true
+          selector:
+            boolean:
+
+mode: queued
+max: 20
+max_exceeded: silent
+
+variables:
+  # Stabile ID dieser Warnung = die Entity-ID der Automation selbst.
+  warn_id: "{{ this.entity_id }}"
+  notify_tag: "wdh_{{ this.entity_id | replace('.', '_') }}"
+  modus: !input modus
+  sensor: !input sensor
+  zielzustand: !input zielzustand
+  schwelle: !input schwelle
+  dauer: !input dauer
+  stufe: !input stufe
+  meldungstext: !input meldungstext
+  notify_titel: !input notify_titel
+  notify_geraete: !input notify_geraete
+  nachnerven: !input nachnerven
+  dauer_s: >-
+    {{ (dauer.hours | default(0) | int) * 3600
+       + (dauer.minutes | default(0) | int) * 60
+       + (dauer.seconds | default(0) | int) }}
+  # Trifft die Bedingung JETZT zu? (unabhaengig davon, was getriggert hat)
+  aktiv_jetzt: >-
+    {%- set s = states(sensor) -%}
+    {%- if s in ['unknown', 'unavailable', 'none', None] -%}
+      {{ false }}
+    {%- elif modus == 'ueber' -%}
+      {{ s | float(-1000000000) > schwelle | float(0) }}
+    {%- elif modus == 'unter' -%}
+      {{ s | float(1000000000) < schwelle | float(0) }}
+    {%- else -%}
+      {{ s == zielzustand | string }}
+    {%- endif -%}
+  # Liegt der Zustand schon lange genug an? (fuer Boot- und Nachpruef-Laeufe)
+  lange_genug: >-
+    {%- set st = states[sensor] -%}
+    {%- if st is none -%}
+      {{ false }}
+    {%- else -%}
+      {{ (now() - st.last_changed).total_seconds() >= dauer_s | int }}
+    {%- endif -%}
+  # Steht diese Warnung schon im Register?
+  schon_aktiv: >-
+    {%- set ns = namespace(found=false) -%}
+    {%- for n in ['1', '2', '3', '4'] -%}
+      {%- set raw = states('input_text.wdh_slot_' ~ n) -%}
+      {%- if raw not in ['unknown', 'unavailable'] and raw.split('|')[0] == warn_id -%}
+        {%- set ns.found = true -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {{ ns.found }}
+  # Passt der ausgeloeste Trigger ueberhaupt zum gewaehlten Modus?
+  modus_passt: >-
+    {{ (trigger.id == 'an_zustand' and modus == 'zustand')
+       or (trigger.id == 'an_ueber' and modus == 'ueber')
+       or (trigger.id == 'an_unter' and modus == 'unter')
+       or trigger.id in ['pruef', 'pruef_zeit', 'boot'] }}
+  notify_services: >-
+    {%- set ns = namespace(out=[]) -%}
+    {%- for d in notify_geraete | default([], true) -%}
+      {%- set n = device_attr(d, 'name_by_user') or device_attr(d, 'name') -%}
+      {%- if n -%}
+        {%- set ns.out = ns.out + ['notify.mobile_app_' ~ (n | slugify)] -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {{ ns.out | unique | list }}
+
+trigger:
+  # Autoritativer Start — traegt die Mindestdauer als `for`.
+  - platform: state
+    entity_id: !input sensor
+    to: !input zielzustand
+    for: !input dauer
+    id: an_zustand
+  - platform: numeric_state
+    entity_id: !input sensor
+    above: !input schwelle
+    for: !input dauer
+    id: an_ueber
+  - platform: numeric_state
+    entity_id: !input sensor
+    below: !input schwelle
+    for: !input dauer
+    id: an_unter
+  # Jede Zustandsaenderung -> neu bewerten (beendet die Warnung von selbst).
+  - platform: state
+    entity_id: !input sensor
+    id: pruef
+  # Selbstheilung + Nachnerven.
+  - platform: time_pattern
+    minutes: /5
+    id: pruef_zeit
+  # Das Register bittet um die Geraete-Aktion (Rotation).
+  - platform: event
+    event_type: wdh_apply
+    id: paint
+  # Das Register meldet: diese Warnung ist beendet.
+  - platform: event
+    event_type: wdh_cleared
+    id: cleared
+  - platform: homeassistant
+    event: start
+    id: boot
+
+condition: []
+
+action:
+  # Beim HA-Start erst dem Register-Reset den Vortritt lassen.
+  - if:
+      - condition: trigger
+        id: boot
+    then:
+      - delay: "00:00:20"
+
+  - choose:
+      # ── 1) Diese Warnung ist gerade dran -> Geraete-Aktion fahren ──────────
+      - alias: Geraete-Aktion (diese Warnung wird gerade angezeigt)
+        conditions:
+          - condition: trigger
+            id: paint
+          - condition: template
+            value_template: "{{ trigger.event.data.warn_id == warn_id }}"
+        sequence: !input aktion
+
+      # ── 2) Register meldet Ende -> Push-Nachricht zurueckziehen ───────────
+      - alias: Aufraeumen nach dem Ende
+        conditions:
+          - condition: trigger
+            id: cleared
+          - condition: template
+            value_template: "{{ trigger.event.data.warn_id == warn_id }}"
+        sequence:
+          - repeat:
+              for_each: "{{ notify_services }}"
+              sequence:
+                - service: "{{ repeat.item }}"
+                  data:
+                    message: clear_notification
+                    data:
+                      tag: "{{ notify_tag }}"
+
+      # ── 3) Warnung ausloesen ──────────────────────────────────────────────
+      - alias: Warnung ausloesen
+        conditions:
+          - condition: template
+            value_template: "{{ trigger.id not in ['paint', 'cleared'] }}"
+          - condition: template
+            value_template: "{{ modus_passt }}"
+          - condition: template
+            value_template: "{{ aktiv_jetzt }}"
+          - condition: template
+            value_template: "{{ not schon_aktiv }}"
+          # Bei den `an_*`-Triggern hat HA die Dauer schon geprueft; bei den
+          # Nachpruef-Laeufen muessen wir das selbst tun.
+          - condition: template
+            value_template: >-
+              {{ trigger.id in ['an_zustand', 'an_ueber', 'an_unter'] or lange_genug }}
+          # Nach dem Wegklicken nur erneut melden, wenn gewuenscht.
+          - condition: template
+            value_template: >-
+              {{ nachnerven or trigger.id in ['an_zustand', 'an_ueber', 'an_unter', 'boot'] }}
+        sequence:
+          - service: script.wdh_alarm_set
+            data:
+              warn_id: "{{ warn_id }}"
+              text: "{{ meldungstext }}"
+              stufe: "{{ stufe }}"
+              entities: !input aktion_entitaeten
+          - repeat:
+              for_each: "{{ notify_services }}"
+              sequence:
+                - service: "{{ repeat.item }}"
+                  data:
+                    title: >-
+                      {{ notify_titel if notify_titel else
+                         ({'wichtig': 'Achtung', 'warnung': 'Warnung',
+                           'hinweis': 'Hinweis'}[stufe] | default('Warnung')) }}
+                    message: "{{ meldungstext }}"
+                    data:
+                      tag: "{{ notify_tag }}"
+                      channel: "{{ 'Alarm' if stufe == 'wichtig' else 'Warnung' }}"
+                      importance: high
+                      push:
+                        interruption-level: >-
+                          {{ 'time-sensitive' if stufe == 'wichtig' else 'active' }}
+
+      # ── 4) Ursache weg -> Warnung beenden (Register stellt alles wieder her) ─
+      - alias: Warnung beenden
+        conditions:
+          - condition: template
+            value_template: "{{ trigger.id in ['pruef', 'pruef_zeit', 'boot'] }}"
+          - condition: template
+            value_template: "{{ not aktiv_jetzt }}"
+          - condition: template
+            value_template: "{{ schon_aktiv }}"
+        sequence:
+          - service: script.wdh_alarm_clear
+            data:
+              warn_id: "{{ warn_id }}"
