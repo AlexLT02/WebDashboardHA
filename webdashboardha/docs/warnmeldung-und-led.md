@@ -112,6 +112,26 @@ wiederhergestellt.
 
 ---
 
+## Eingerichtete Warnungen (Stand 2026-08-16)
+
+| Automation | Auslöser | Bedingung | Stufe | Dauer |
+|---|---|---|---|---|
+| Dashboard-Warnung Pro | `binary_sensor.kuelschrank_sensor_kuhlschrank_tur` | ist an / offen | wichtig | 2 min |
+| Warnung · Gefrierfach offen | `binary_sensor.kuelschrank_sensor_gefrierfach_tur` | ist an / offen | wichtig | 2 min |
+| Warnung · Wäsche fertig | `sensor.waschmaschine_zustand` | genau `clean` | hinweis | 0 |
+
+Alle drei fahren dasselbe WLED-Preset-Muster (`Wichtig` bzw. `Hinweis` auf
+`select.ipad_backlights_controller_voreinstellung`) und pushen aufs iPhone.
+
+Die Wäsche-Warnung hängt an der **WashData**-Integration (HACS, `ha_washdata`),
+die aus dem Verbrauch der Tuya-Steckdose `sensor.spiegel_leistung` Zyklen
+erkennt. Ihr Zustand `clean` steht für „fertig, aber noch nicht ausgeräumt" und
+bleibt anliegen, bis die Maschine geleert ist — deshalb passt er ins Register:
+das Overlay verschwindet erst mit der Wäsche. „Nach dem Wegklicken erneut
+melden" ist hier bewusst **aus**, sonst nervt ein Hinweis alle 5 Minuten.
+
+---
+
 ## Selbst testen, ohne auf den Auslöser zu warten
 
 **Nur das Overlay** — *Entwicklerwerkzeuge → Aktionen*, `script.wdh_alarm_set`:
