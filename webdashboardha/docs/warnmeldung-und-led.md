@@ -11,7 +11,7 @@ Die YAML-Dateien dazu liegen im Repo unter [`../ha/`](../ha/).
 
 ## Das Prinzip in vier Sätzen
 
-1. Jede Warnung ist eine **Automation aus dem Blueprint „Dashboard-Warnung Pro"**.
+1. Jede Warnung ist eine **Automation aus dem Blueprint „Dashboard-Warnung"**.
    Sie kennt ihren Auslöser, ihren Text und ihre Geräte-Aktion — sonst nichts.
 2. Aktiv werdende Warnungen tragen sich in ein **Register** aus vier Slots ein
    (`input_text.wdh_slot_1..4`). Das Register ist die einzige Wahrheit darüber,
@@ -57,40 +57,83 @@ sich nicht gegenseitig überschreiben.
 
 ## Der Blueprint
 
-*Einstellungen → Automationen → Blueprint → **Dashboard-Warnung Pro***
+*Einstellungen → Automationen → Blueprint → **Dashboard-Warnung***
 
-### Überwachung
+Pflichtfelder sind **zwei**: die Entität und der Meldungstext. Alles andere hat
+brauchbare Vorgaben und ist eingeklappt.
+
+### 1 · Wann soll gewarnt werden?
 | Feld | Bedeutung |
 |---|---|
 | **Gerät / Entität** | Was überwacht wird (Dropdown) |
-| **Worauf achten** | `Zustand ist gleich …` · `Wert überschreitet Schwelle` · `Wert unterschreitet Schwelle` |
-| **Auslösender Zustand** | nur bei „Zustand" — z. B. `on`, `open`, `home` |
-| **Schwellwert** | nur bei über/unter — z. B. `25` |
+| **Bedingung** | `ist an / offen / erkannt` · `ist aus / zu / nicht erkannt` · `Zahlenwert > Schwelle` · `Zahlenwert < Schwelle` · `Zustand ist genau …` |
+| **Schwellwert** | nur bei größer/kleiner |
+| **Eigener Zustand** | nur bei „genau …" — der technische Wert, z. B. `playing`, `heat` |
 | **Muss so lange anliegen** | Mindestdauer; `0` = sofort |
 
-### Meldung
+> **Warum kein Textfeld mehr für den Zustand:** HA zeigt bei einer Tür „Offen",
+> intern heißt der Zustand aber `on`. Wer „open" eintippt, baut eine Automation,
+> die aussieht als würde sie funktionieren und nie auslöst — genau daran ist die
+> erste Fassung gescheitert. Die beiden ersten Dropdown-Punkte prüfen deshalb
+> gegen eine Liste (`on`/`open`/`home`/`detected`/`playing`/`unlocked`/… bzw.
+> `off`/`closed`/`not_home`/`idle`/`locked`/…), Groß-/Kleinschreibung egal.
+> HA kann die Zustände eines Geräts leider nicht als Dropdown anbieten:
+> `!input` ist im `state`-Selector nicht erlaubt (getestet, HA 2026.8).
+
+### 2 · Meldung
 Meldungstext und Dringlichkeit (`hinweis` hellblau · `warnung` gelb · `wichtig` rot).
 
-### Push-Benachrichtigung
+### 3 · Push aufs Handy
 Beliebig viele Geräte mit HA-App. Die Nachricht wird mit einem festen `tag`
 verschickt und beim Ende der Warnung per `clear_notification` **wieder
 zurückgezogen** — sie verschwindet also von selbst vom Sperrbildschirm. Leer
 lassen = keine Push.
 
-### Geräte-Aktionen
-| Feld | Bedeutung |
-|---|---|
-| **Geräte, die diese Warnung übernimmt** | Snapshot-/Restore-Liste. **Alles, was deine Aktion anfasst, muss hier stehen** — was fehlt, wird nicht zurückgesetzt. |
-| **Was soll passieren?** | Freier Aktions-Editor: mehrere Lampen mit eigener Farbe, eine Szene, ein WLED-Preset, ein Schalter, ein Media-Player — beliebig kombinierbar. |
+Der Dienstname `notify.mobile_app_<gerät>` entsteht aus dem Gerätenamen **zum
+Zeitpunkt der Registrierung**; ein späteres Umbenennen in HA ändert ihn nicht
+mit. Der Blueprint versucht deshalb beide Namen und ruft mit
+`continue_on_error` — der falsche läuft ins Leere statt die Warnung abzubrechen.
 
-> **Die häufigste Falle:** Wer per `select.select_option` ein WLED-Preset setzt,
-> muss auch das `select.…_voreinstellung` in die Snapshot-Liste aufnehmen, nicht
-> nur das `light.…`. Sonst kommt zwar die Farbe zurück, WLED steht aber danach
-> auf „kein Preset".
+### 4 · Geräte-Aktion
+Freier Aktions-Editor: mehrere Lampen mit eigener Farbe, eine Szene, ein
+WLED-Preset, ein Schalter, ein Media-Player — beliebig kombinierbar. Optional.
+
+**Die Snapshot-Liste pflegt sich selbst.** Der Blueprint liest die Ziel-Entitäten
+aus der Aktion aus (`target`, `data`, alte `entity_id`-Schreibweise, auch eine
+Ebene tief in `if`/`choose`/`repeat`) und löst Szenen auf ihre Mitglieder auf.
+Diese Geräte werden vor der ersten Aktion gesichert und am Ende exakt
+wiederhergestellt.
 
 ### Erweitert
-**Nach dem Wegklicken erneut melden** (Standard: an) — besteht die Ursache noch,
-meldet sich die Warnung nach spätestens 5 Minuten wieder.
+| Feld | Bedeutung |
+|---|---|
+| **Zusätzlich sichern** | normalerweise leer. Nur für Geräte, die die Automatik nicht sehen kann — z. B. ein `light.…`, das indirekt über ein WLED-Preset mitgeschaltet wird, oder etwas, das ein aufgerufenes Skript anfasst. |
+| **Nach dem Wegklicken erneut melden** | Standard an — besteht die Ursache noch, meldet sich die Warnung nach spätestens 5 Minuten wieder. |
+
+---
+
+## Selbst testen, ohne auf den Auslöser zu warten
+
+**Nur das Overlay** — *Entwicklerwerkzeuge → Aktionen*, `script.wdh_alarm_set`:
+
+```yaml
+warn_id: test.manuell
+text: Testmeldung
+stufe: wichtig
+entities: []
+```
+
+Wieder weg mit `script.wdh_alarm_clear` (`warn_id: test.manuell`) oder per **OK**
+am iPad.
+
+**Die ganze Kette inklusive Push und LED** — *Entwicklerwerkzeuge → Zustände*,
+die überwachte Entität suchen, Zustand auf `on` setzen, „Zustand überschreiben".
+Nach der eingestellten Mindestdauer muss alles kommen. Zurück auf `off` beendet
+es wieder. Der echte Zustand kommt beim nächsten Update des Geräts von selbst
+zurück.
+
+**Wenn nichts passiert** — die Automation öffnen, *Traces* (⋮ → Ablaufverfolgung).
+Dort steht, welcher Zweig gelaufen ist und woran eine Bedingung gescheitert ist.
 
 ---
 
@@ -111,6 +154,15 @@ meldet sich die Warnung nach spätestens 5 Minuten wieder.
 | `script.wdh_rotate` | zum nächsten belegten Slot wechseln |
 | `script.wdh_ack` | die *angezeigte* Warnung quittieren (OK-Button) |
 | `script.wdh_reset` | Register komplett leeren (läuft beim HA-Start) |
+
+**Auslöse-Logik, einmal statt dreimal:** die Bedingung steckt in *einem*
+`template`-Trigger mit `for:` (Mindestdauer) — nicht mehr in drei parallelen
+`state`/`numeric_state`-Triggern plus einer „passt der Trigger zum Modus"-Prüfung.
+Dieselbe Logik braucht die Automation auch außerhalb des Triggers (Selbstheilung,
+Nachnerven, „Ursache weg?"), Trigger-Templates sehen `variables` aber nicht.
+Gelöst über einen YAML-Anker `&aktiv` auf dem Trigger-Template plus dieselben
+vier Eingabewerte in `trigger_variables` **und** `variables` — der Ausdruck
+existiert dadurch nur an einer Stelle und kann nicht auseinanderlaufen.
 
 **Grenzen, bewusst gewählt:**
 - **Vier** gleichzeitige Warnungen. Die fünfte wird still verworfen — mehr als
@@ -138,6 +190,16 @@ in Betrieb:
 
 Der alte Blueprint `dashboard_warnung.yaml` bleibt unangetastet liegen; er wird
 von nichts mehr benutzt und kann gelöscht werden.
+
+**Umbenannte Blueprint-Eingaben** (nur relevant, wenn noch Automationen aus der
+ersten Fassung existieren — HA meldet dann „unbekannte Eingabe"):
+
+| alt | neu |
+|---|---|
+| `modus` + `zielzustand` | `bedingung` (Dropdown) + `eigener_zustand` |
+| `aktion_entitaeten` | `extra_entitaeten` — meist leer, wird automatisch ermittelt |
+
+Betroffene Automationen einmal öffnen, Felder neu setzen, speichern.
 
 ---
 

@@ -1,30 +1,11 @@
 blueprint:
-  name: Dashboard-Warnung Pro
-  description: >-
-    Vollbild-Warnung auf dem WebDashboardHA-Panel, optionale Push-Nachricht und
-    beliebige Geraete-Aktionen (Licht, Szene, WLED-Preset, alles andere) — mit
-    sauberem Verhalten, wenn mehrere Warnungen gleichzeitig aktiv sind.
-
-
-    Ausloeser waehlbar als Zustand, Wert-Ueberschreitung oder
-    Wert-Unterschreitung, jeweils mit Mindestdauer.
-
-
-    Wichtig: die Geraete werden NICHT auf einen festen Wert zurueckgesetzt.
-    Vor der ersten Aktion wird der komplette Zustand jedes betroffenen Geraets
-    als Snapshot gesichert (alle Attribute) und am Ende exakt so
-    wiederhergestellt — und zwar erst, wenn die LETZTE Warnung weg ist, die
-    dieses Geraet belegt.
-
-
-    Setzt die wdh-Register-Skripte und -Helfer voraus
-    (script.wdh_alarm_set / wdh_alarm_clear / wdh_apply_current,
-    input_text.wdh_slot_1..4, input_number.wdh_index).
+  name: Dashboard-Warnung
+  description: Warnung auf dem Wand-Dashboard, Push aufs Handy und beliebige Geraete-Aktion. Mehrere Warnungen duerfen gleichzeitig laufen; angefasste Geraete werden vorher gesichert und danach exakt wiederhergestellt.
   domain: automation
   source_url: https://github.com/AlexLT02/WebDashboardHA
   input:
-    ueberwachung:
-      name: Ueberwachung
+    ausloeser:
+      name: 1 · Wann soll gewarnt werden?
       icon: mdi:eye-outline
       input:
         sensor:
@@ -32,28 +13,31 @@ blueprint:
           description: Was soll ueberwacht werden?
           selector:
             entity:
-        modus:
-          name: Worauf soll geachtet werden?
-          default: zustand
+        bedingung:
+          name: Bedingung
+          description: >-
+            Die ersten beiden Punkte verstehen alle ueblichen Schreibweisen
+            (on/off, open/closed, home/not_home, detected …) — es muss also
+            nichts abgetippt werden. Schwellwert und eigener Zustand darunter
+            gelten nur fuer die jeweils passende Zeile.
+          default: an
           selector:
             select:
               mode: dropdown
               options:
-                - label: Zustand ist gleich …
-                  value: zustand
-                - label: Wert ueberschreitet Schwelle
+                - label: ist an / offen / erkannt
+                  value: an
+                - label: ist aus / zu / nicht erkannt
+                  value: aus
+                - label: Zahlenwert ist groesser als der Schwellwert
                   value: ueber
-                - label: Wert unterschreitet Schwelle
+                - label: Zahlenwert ist kleiner als der Schwellwert
                   value: unter
-        zielzustand:
-          name: Ausloesender Zustand
-          description: Nur bei „Zustand ist gleich …“ — z. B. `on`, `open`, `home`.
-          default: "on"
-          selector:
-            text:
+                - label: Zustand ist genau … (Feld „Eigener Zustand")
+                  value: text
         schwelle:
           name: Schwellwert
-          description: Nur bei ueber/unter — z. B. 25 (Grad) oder 20 (Prozent).
+          description: Nur fuer „groesser/kleiner als" — z. B. 25 (Grad) oder 20 (Prozent).
           default: 0
           selector:
             number:
@@ -61,6 +45,15 @@ blueprint:
               max: 100000
               step: 0.1
               mode: box
+        eigener_zustand:
+          name: Eigener Zustand
+          description: >-
+            Nur fuer „Zustand ist genau …". Der technische Wert, nicht die
+            Anzeige — z. B. playing, heat, docked. Steht in den
+            Entwicklerwerkzeugen unter „Zustaende".
+          default: ""
+          selector:
+            text:
         dauer:
           name: Muss so lange anliegen
           description: Erst danach wird gewarnt. 0 = sofort.
@@ -72,7 +65,7 @@ blueprint:
             duration:
               enable_second: true
     meldung:
-      name: Meldung
+      name: 2 · Meldung
       icon: mdi:message-alert-outline
       input:
         meldungstext:
@@ -82,6 +75,7 @@ blueprint:
             text:
         stufe:
           name: Dringlichkeit
+          description: Bestimmt Farbe und Puls im Overlay — nicht, wer gewinnt.
           default: warnung
           selector:
             select:
@@ -94,16 +88,15 @@ blueprint:
                 - label: Wichtig (rot)
                   value: wichtig
     benachrichtigung:
-      name: Push-Benachrichtigung
+      name: 3 · Push aufs Handy
       icon: mdi:cellphone-message
       collapsed: true
       input:
         notify_geraete:
           name: Zielgeraete
           description: >-
-            Geraete mit Home-Assistant-App. Die Nachricht verschwindet
-            automatisch wieder, sobald die Warnung nicht mehr aktiv ist.
-            Leer lassen = keine Push-Nachricht.
+            Geraete mit Home-Assistant-App. Die Nachricht zieht sich selbst
+            zurueck, sobald die Warnung vorbei ist. Leer lassen = keine Push.
           default: []
           selector:
             device:
@@ -116,27 +109,18 @@ blueprint:
           selector:
             text:
     aktionen:
-      name: Geraete-Aktionen
+      name: 4 · Geraete-Aktion
       icon: mdi:lightbulb-group-outline
+      collapsed: true
       input:
-        aktion_entitaeten:
-          name: Geraete, die diese Warnung uebernimmt
-          description: >-
-            Alle Geraete, die deine Aktion unten anfasst — Lampen, Schalter,
-            Media-Player, WLED-Select … Genau diese werden vorher gesichert und
-            danach wieder exakt so hergestellt. Wer hier fehlt, wird nicht
-            zurueckgesetzt.
-          default: []
-          selector:
-            entity:
-              multiple: true
         aktion:
           name: Was soll passieren?
           description: >-
-            Laeuft immer dann, wenn diese Warnung gerade angezeigt wird — bei
-            mehreren gleichzeitig aktiven Warnungen also im Wechsel alle 5 s.
-            Hier ist alles erlaubt: mehrere Lampen mit eigener Farbe, eine
-            Szene aktivieren, ein WLED-Preset waehlen, ein Geraet schalten.
+            Optional. Laeuft, solange diese Warnung angezeigt wird — bei
+            mehreren gleichzeitigen Warnungen im 5-Sekunden-Wechsel. Erlaubt ist
+            alles: Lampen, Szene, WLED-Preset, Schalter, Media-Player. Die
+            angefassten Geraete werden automatisch erkannt, gesichert und am
+            Ende wiederhergestellt.
           default:
             - delay:
                 milliseconds: 1
@@ -147,12 +131,22 @@ blueprint:
       icon: mdi:tune
       collapsed: true
       input:
+        extra_entitaeten:
+          name: Zusaetzlich sichern
+          description: >-
+            Normalerweise leer lassen. Die Geraete aus der Aktion oben werden
+            selbst gefunden. Nur eintragen, was die Automatik nicht sehen kann —
+            etwa Geraete, die per Skript oder Geraete-Aktion geschaltet werden.
+          default: []
+          selector:
+            entity:
+              multiple: true
         nachnerven:
           name: Nach dem Wegklicken erneut melden
           description: >-
-            Wenn die Ursache noch besteht, meldet sich die Warnung nach
-            spaetestens 5 Minuten wieder. Aus = einmal quittiert ist Ruhe, bis
-            die Ursache weg war und erneut auftritt.
+            Besteht die Ursache noch, meldet sich die Warnung nach spaetestens
+            5 Minuten wieder. Aus = einmal quittiert ist Ruhe, bis die Ursache
+            weg war und erneut auftritt.
           default: true
           selector:
             boolean:
@@ -161,39 +155,88 @@ mode: queued
 max: 20
 max_exceeded: silent
 
+# Dieselben Werte wie unter `variables` — Trigger-Templates sehen `variables`
+# nicht, darum hier noch einmal. So kann der YAML-Anker `&aktiv` unten in beiden
+# Welten stehen und die Ausloese-Logik existiert trotzdem nur an EINER Stelle.
+trigger_variables:
+  t_sensor: !input sensor
+  t_bed: !input bedingung
+  t_schwelle: !input schwelle
+  t_eigen: !input eigener_zustand
+
+triggers:
+  # Autoritativer Start. Ein Template-Trigger statt getrennter state-/
+  # numeric_state-Trigger: er deckt alle fuenf Bedingungen ab, kennt die
+  # Mindestdauer ueber `for` und feuert nicht bei blossen Attribut-Aenderungen.
+  - trigger: template
+    id: an
+    for: !input dauer
+    value_template: &aktiv >-
+      {%- set s = states(t_sensor) | lower | trim -%}
+      {%- set an = ['on', 'open', 'opened', 'offen', 'auf', 'home', 'detected',
+                    'unlocked', 'playing', 'active', 'wet', 'true', 'ein'] -%}
+      {%- set aus = ['off', 'closed', 'geschlossen', 'zu', 'not_home', 'away',
+                     'clear', 'locked', 'idle', 'paused', 'standby', 'dry',
+                     'false'] -%}
+      {%- if s in ['unknown', 'unavailable', 'none', ''] -%}
+        {{ false }}
+      {%- elif t_bed == 'an' -%}
+        {{ s in an }}
+      {%- elif t_bed == 'aus' -%}
+        {{ s in aus }}
+      {%- elif t_bed == 'ueber' -%}
+        {{ s | float(-1000000000) > t_schwelle | float(0) }}
+      {%- elif t_bed == 'unter' -%}
+        {{ s | float(1000000000) < t_schwelle | float(0) }}
+      {%- else -%}
+        {{ s == t_eigen | lower | trim }}
+      {%- endif -%}
+  # Jede Zustandsaenderung -> neu bewerten (beendet die Warnung von selbst).
+  - trigger: state
+    entity_id: !input sensor
+    id: pruef
+  # Selbstheilung + Nachnerven.
+  - trigger: time_pattern
+    minutes: /5
+    id: pruef_zeit
+  # Das Register bittet um die Geraete-Aktion (Rotation).
+  - trigger: event
+    event_type: wdh_apply
+    id: paint
+  # Das Register meldet: diese Warnung ist beendet.
+  - trigger: event
+    event_type: wdh_cleared
+    id: cleared
+  - trigger: homeassistant
+    event: start
+    id: boot
+
 variables:
+  t_sensor: !input sensor
+  t_bed: !input bedingung
+  t_schwelle: !input schwelle
+  t_eigen: !input eigener_zustand
   # Stabile ID dieser Warnung = die Entity-ID der Automation selbst.
   warn_id: "{{ this.entity_id }}"
   notify_tag: "wdh_{{ this.entity_id | replace('.', '_') }}"
-  modus: !input modus
-  sensor: !input sensor
-  zielzustand: !input zielzustand
-  schwelle: !input schwelle
   dauer: !input dauer
   stufe: !input stufe
   meldungstext: !input meldungstext
   notify_titel: !input notify_titel
   notify_geraete: !input notify_geraete
   nachnerven: !input nachnerven
+  aktion_roh: !input aktion
+  extra_entitaeten: !input extra_entitaeten
   dauer_s: >-
     {{ (dauer.hours | default(0) | int) * 3600
        + (dauer.minutes | default(0) | int) * 60
        + (dauer.seconds | default(0) | int) }}
-  # Trifft die Bedingung JETZT zu? (unabhaengig davon, was getriggert hat)
-  aktiv_jetzt: >-
-    {%- set s = states(sensor) -%}
-    {%- if s in ['unknown', 'unavailable', 'none', None] -%}
-      {{ false }}
-    {%- elif modus == 'ueber' -%}
-      {{ s | float(-1000000000) > schwelle | float(0) }}
-    {%- elif modus == 'unter' -%}
-      {{ s | float(1000000000) < schwelle | float(0) }}
-    {%- else -%}
-      {{ s == zielzustand | string }}
-    {%- endif -%}
-  # Liegt der Zustand schon lange genug an? (fuer Boot- und Nachpruef-Laeufe)
+  # Trifft die Bedingung JETZT zu? Exakt dieselbe Logik wie im Trigger.
+  aktiv_jetzt: *aktiv
+  # Liegt der Zustand schon lange genug an? (fuer Boot- und Nachpruef-Laeufe;
+  # beim `an`-Trigger hat HA das ueber `for` bereits erledigt)
   lange_genug: >-
-    {%- set st = states[sensor] -%}
+    {%- set st = states[t_sensor] -%}
     {%- if st is none -%}
       {{ false }}
     {%- else -%}
@@ -209,62 +252,62 @@ variables:
       {%- endif -%}
     {%- endfor -%}
     {{ ns.found }}
-  # Passt der ausgeloeste Trigger ueberhaupt zum gewaehlten Modus?
-  modus_passt: >-
-    {{ (trigger.id == 'an_zustand' and modus == 'zustand')
-       or (trigger.id == 'an_ueber' and modus == 'ueber')
-       or (trigger.id == 'an_unter' and modus == 'unter')
-       or trigger.id in ['pruef', 'pruef_zeit', 'boot'] }}
+  # Welche Geraete fasst die Aktion an? Aus dem Aktions-Editor abgelesen, damit
+  # niemand die Snapshot-Liste von Hand pflegen muss. Erkannt werden `target`,
+  # `data` und die alte `entity_id`-Schreibweise, auch eine Ebene tiefer (if /
+  # choose / repeat). Szenen werden auf ihre Mitglieder aufgeloest — die Szene
+  # selbst zu sichern brauechte niemand.
+  ziel_entitaeten: >-
+    {%- set ns = namespace(roh=[]) -%}
+    {%- set schritte = aktion_roh | default([], true) -%}
+    {%- for stufe1 in schritte -%}
+      {%- if stufe1 is mapping -%}
+        {%- set tiefer = (stufe1.get('sequence', []) + stufe1.get('then', [])
+                          + stufe1.get('else', []) + stufe1.get('default', [])
+                          + (stufe1.get('choose', []) | map(attribute='sequence')
+                             | sum(start=[]))) -%}
+        {%- for s in [stufe1] + (tiefer if tiefer is iterable else []) -%}
+          {%- if s is mapping -%}
+            {%- set t = s.get('target', {}) -%}
+            {%- set d = s.get('data', {}) -%}
+            {%- set treffer = [t.get('entity_id', []) if t is mapping else [],
+                               d.get('entity_id', []) if d is mapping else [],
+                               s.get('entity_id', [])] -%}
+            {%- for e in treffer -%}
+              {%- set ns.roh = ns.roh + ([e] if e is string else (e | list)) -%}
+            {%- endfor -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- set extra = extra_entitaeten | default([], true) -%}
+    {%- set ns.roh = ns.roh + ([extra] if extra is string else (extra | list)) -%}
+    {%- set ns2 = namespace(out=[]) -%}
+    {%- for e in ns.roh | map('trim') | reject('eq', '') | unique | list -%}
+      {%- if e.startswith('scene.') -%}
+        {%- set ns2.out = ns2.out + (state_attr(e, 'entity_id') or []) -%}
+      {%- else -%}
+        {%- set ns2.out = ns2.out + [e] -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {{ ns2.out | unique | list }}
+  # Der mobile_app-Dienst haengt am Geraetenamen bei der Registrierung — ein
+  # spaeteres Umbenennen aendert ihn nicht mit. Darum beide Namen anbieten und
+  # den Aufruf `continue_on_error` machen: der falsche laeuft ins Leere.
   notify_services: >-
     {%- set ns = namespace(out=[]) -%}
     {%- for d in notify_geraete | default([], true) -%}
-      {%- set n = device_attr(d, 'name_by_user') or device_attr(d, 'name') -%}
-      {%- if n -%}
-        {%- set ns.out = ns.out + ['notify.mobile_app_' ~ (n | slugify)] -%}
-      {%- endif -%}
+      {%- for n in [device_attr(d, 'name'), device_attr(d, 'name_by_user')] -%}
+        {%- if n -%}
+          {%- set ns.out = ns.out + ['notify.mobile_app_' ~ (n | slugify)] -%}
+        {%- endif -%}
+      {%- endfor -%}
     {%- endfor -%}
     {{ ns.out | unique | list }}
 
-trigger:
-  # Autoritativer Start — traegt die Mindestdauer als `for`.
-  - platform: state
-    entity_id: !input sensor
-    to: !input zielzustand
-    for: !input dauer
-    id: an_zustand
-  - platform: numeric_state
-    entity_id: !input sensor
-    above: !input schwelle
-    for: !input dauer
-    id: an_ueber
-  - platform: numeric_state
-    entity_id: !input sensor
-    below: !input schwelle
-    for: !input dauer
-    id: an_unter
-  # Jede Zustandsaenderung -> neu bewerten (beendet die Warnung von selbst).
-  - platform: state
-    entity_id: !input sensor
-    id: pruef
-  # Selbstheilung + Nachnerven.
-  - platform: time_pattern
-    minutes: /5
-    id: pruef_zeit
-  # Das Register bittet um die Geraete-Aktion (Rotation).
-  - platform: event
-    event_type: wdh_apply
-    id: paint
-  # Das Register meldet: diese Warnung ist beendet.
-  - platform: event
-    event_type: wdh_cleared
-    id: cleared
-  - platform: homeassistant
-    event: start
-    id: boot
+conditions: []
 
-condition: []
-
-action:
+actions:
   # Beim HA-Start erst dem Register-Reset den Vortritt lassen.
   - if:
       - condition: trigger
@@ -293,7 +336,8 @@ action:
           - repeat:
               for_each: "{{ notify_services }}"
               sequence:
-                - service: "{{ repeat.item }}"
+                - action: "{{ repeat.item }}"
+                  continue_on_error: true
                   data:
                     message: clear_notification
                     data:
@@ -305,31 +349,28 @@ action:
           - condition: template
             value_template: "{{ trigger.id not in ['paint', 'cleared'] }}"
           - condition: template
-            value_template: "{{ modus_passt }}"
-          - condition: template
             value_template: "{{ aktiv_jetzt }}"
           - condition: template
             value_template: "{{ not schon_aktiv }}"
-          # Bei den `an_*`-Triggern hat HA die Dauer schon geprueft; bei den
+          # Beim `an`-Trigger hat HA die Dauer schon geprueft; bei den
           # Nachpruef-Laeufen muessen wir das selbst tun.
           - condition: template
-            value_template: >-
-              {{ trigger.id in ['an_zustand', 'an_ueber', 'an_unter'] or lange_genug }}
+            value_template: "{{ trigger.id == 'an' or lange_genug }}"
           # Nach dem Wegklicken nur erneut melden, wenn gewuenscht.
           - condition: template
-            value_template: >-
-              {{ nachnerven or trigger.id in ['an_zustand', 'an_ueber', 'an_unter', 'boot'] }}
+            value_template: "{{ nachnerven or trigger.id in ['an', 'boot'] }}"
         sequence:
-          - service: script.wdh_alarm_set
+          - action: script.wdh_alarm_set
             data:
               warn_id: "{{ warn_id }}"
               text: "{{ meldungstext }}"
               stufe: "{{ stufe }}"
-              entities: !input aktion_entitaeten
+              entities: "{{ ziel_entitaeten }}"
           - repeat:
               for_each: "{{ notify_services }}"
               sequence:
-                - service: "{{ repeat.item }}"
+                - action: "{{ repeat.item }}"
+                  continue_on_error: true
                   data:
                     title: >-
                       {{ notify_titel if notify_titel else
@@ -354,6 +395,6 @@ action:
           - condition: template
             value_template: "{{ schon_aktiv }}"
         sequence:
-          - service: script.wdh_alarm_clear
+          - action: script.wdh_alarm_clear
             data:
               warn_id: "{{ warn_id }}"
