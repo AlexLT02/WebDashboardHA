@@ -118,17 +118,48 @@ wiederhergestellt.
 |---|---|---|---|---|
 | Dashboard-Warnung Pro | `binary_sensor.kuelschrank_sensor_kuhlschrank_tur` | ist an / offen | wichtig | 2 min |
 | Warnung · Gefrierfach offen | `binary_sensor.kuelschrank_sensor_gefrierfach_tur` | ist an / offen | wichtig | 2 min |
-| Warnung · Wäsche fertig | `sensor.waschmaschine_zustand` | genau `clean` | hinweis | 0 |
+| Warnung · Wäsche fertig | `sensor.waschmaschiene_alex_zustand` | genau `clean` | hinweis | 0 |
 
 Alle drei fahren dasselbe WLED-Preset-Muster (`Wichtig` bzw. `Hinweis` auf
 `select.ipad_backlights_controller_voreinstellung`) und pushen aufs iPhone.
 
 Die Wäsche-Warnung hängt an der **WashData**-Integration (HACS, `ha_washdata`),
-die aus dem Verbrauch der Tuya-Steckdose `sensor.spiegel_leistung` Zyklen
-erkennt. Ihr Zustand `clean` steht für „fertig, aber noch nicht ausgeräumt" und
-bleibt anliegen, bis die Maschine geleert ist — deshalb passt er ins Register:
-das Overlay verschwindet erst mit der Wäsche. „Nach dem Wegklicken erneut
-melden" ist hier bewusst **aus**, sonst nervt ein Hinweis alle 5 Minuten.
+die aus dem Verbrauch der Tuya-Steckdose
+`sensor.alex_wohnung_waschmaschiene_leistung` Zyklen erkennt. Ihr Zustand
+`clean` steht für „fertig, aber noch nicht ausgeräumt" und bleibt anliegen, bis
+die Maschine geleert ist — deshalb passt er ins Register: das Overlay
+verschwindet erst mit der Wäsche. „Nach dem Wegklicken erneut melden" ist hier
+bewusst **aus**, sonst nervt ein Hinweis alle 5 Minuten.
+
+> **Achtung bei WashData-Umbauten:** Wird der Eintrag gelöscht und neu angelegt,
+> ändern sich alle Entity-IDs (sie leiten sich vom Namen ab —
+> `Waschmaschine` → `Waschmaschiene Alex` machte aus
+> `sensor.waschmaschine_zustand` ein `sensor.waschmaschiene_alex_zustand`).
+> Automationen zeigen danach ins Leere und lösen still nie wieder aus. Statt
+> löschen+neu besser *Einstellungen → Geräte & Dienste → WashData →
+> Konfigurieren* nutzen, das behält die IDs. Sonst hinterher alle Verweise
+> nachziehen.
+
+### Restzeit-Status aufs iPhone
+
+`Waschmaschine · Restzeit aufs iPhone` (keine Blueprint-Automation) hält
+**eine** Mitteilung mit festem `tag: waschmaschine_status` aktuell. iOS ersetzt
+bei gleichem Tag die vorhandene Mitteilung, statt eine neue zu stapeln — es
+bleibt also ein einziger Eintrag, der sich fortschreibt.
+
+| | |
+|---|---|
+| Auslöser | Änderung von `…_verbleibende_zeit` oder `…_zustand`, dazu ein 5-Minuten-Tick als Netz |
+| Text | `Noch ca. 42 min · 35 % fertig`, solange keine Schätzung da ist `Läuft seit 12 min · 340 W` |
+| Titel | `Waschmaschine`, nach dem Anlernen `Waschmaschine · <Programm>` |
+| Ton | `sound: none` durchgehend |
+| Störlevel | Zustandswechsel `active` (Banner), Minuten-Updates `passive` (lautlos, nur Mitteilungszentrale) |
+| Ende | verlässt der Zustand die Laufmenge → `clear_notification`, danach übernimmt „Wäsche fertig" |
+
+Echte **Live Activities** (Dynamic Island, Sperrbildschirm-Widget) könnte die
+Companion-App ab iOS 17.2 und Core 2026.7 über `data.live_update: true` — das
+steckt aber noch in der TestFlight-/Labs-Version der App. Mit der App-Store-App
+ist die Tag-Variante oben der funktionierende Weg.
 
 ---
 
