@@ -48,13 +48,12 @@ wdh_alarm_set:
   variables:
     # Ziele der Sprachdurchsage — notify-Entities (Alexa Devices), kein
     # notify-Dienst, darum `notify.send_message`. Hier zentral aendern.
-    # Bewusst die einzelnen Echos per "Sprechen" statt der Gruppe
-    # `notify.alex_wohnung_durchsagen`: eine Gruppen-Durchsage muss Amazon erst
-    # ueber die Multiroom-Gruppe synchronisieren und spielt vorher einen Gong,
-    # das kam spuerbar verzoegert an. HA ruft beide Entities parallel auf.
+    # Bewusst die Lautsprechergruppe: Amazon spielt die Durchsage auf allen
+    # Echos synchron (mit Gong, dafuer etwas spaeter). Die einzelnen Echos per
+    # "Sprechen" (`notify.alex_wohnung_echo_sprechen`, `..._echo_dot_sprechen`)
+    # sind schneller, kommen aber hoerbar versetzt an — getestet 2026-10-01.
     durchsage_ziel:
-      - notify.alex_wohnung_echo_sprechen
-      - notify.alex_wohnung_echo_dot_sprechen
+      - notify.alex_wohnung_durchsagen
     slots: >-
       {%- set ns = namespace(out=[]) -%}
       {%- for n in [1, 2, 3, 4] -%}
