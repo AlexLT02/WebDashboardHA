@@ -39,7 +39,22 @@ wdh_alarm_set:
       default: []
       selector:
         object:
+    durchsage:
+      name: Durchsage
+      description: Meldung zusaetzlich ueber Alexa ansagen (nur beim ersten Setzen).
+      default: true
+      selector:
+        boolean:
   variables:
+    # Ziele der Sprachdurchsage — notify-Entities (Alexa Devices), kein
+    # notify-Dienst, darum `notify.send_message`. Hier zentral aendern.
+    # Bewusst die einzelnen Echos per "Sprechen" statt der Gruppe
+    # `notify.alex_wohnung_durchsagen`: eine Gruppen-Durchsage muss Amazon erst
+    # ueber die Multiroom-Gruppe synchronisieren und spielt vorher einen Gong,
+    # das kam spuerbar verzoegert an. HA ruft beide Entities parallel auf.
+    durchsage_ziel:
+      - notify.alex_wohnung_echo_sprechen
+      - notify.alex_wohnung_echo_dot_sprechen
     slots: >-
       {%- set ns = namespace(out=[]) -%}
       {%- for n in [1, 2, 3, 4] -%}
@@ -78,19 +93,49 @@ wdh_alarm_set:
 
     # 1) Originalzustand sichern — VOR der ersten Geraete-Aktion und nur, wenn
     #    nicht schon eine andere Warnung dasselbe Geraet gesichert hat.
+    #    `unknown`/`unavailable` (z. B. WLED-Preset-Select ohne aktives Preset)
+    #    ist nicht wiederherstellbar und wird gar nicht erst gesichert.
     - repeat:
         for_each: "{{ ent_liste }}"
         sequence:
           - variables:
               snap_id: "wdh_snap_{{ repeat.item | replace('.', '_') }}"
+              look_id: "wdh_look_{{ repeat.item | replace('.', '_') }}"
           - if:
               - condition: template
-                value_template: "{{ states['scene.' ~ snap_id] is none }}"
+                value_template: >-
+                  {{ states['scene.' ~ snap_id] is none
+                     and states(repeat.item) not in ['unknown', 'unavailable'] }}
             then:
               - service: scene.create
                 data:
                   scene_id: "{{ snap_id }}"
                   snapshot_entities: "{{ [repeat.item] }}"
+              # Der Snapshot einer ausgeschalteten Lampe kennt nur "aus". Farbe,
+              # Effekt und Helligkeit behaelt das Geraet intern, nach der Warnung
+              # kaeme es beim naechsten Einschalten im Warn-Look hoch. Darum kurz
+              # ohne Parameter einschalten (= alter Look) und den Look separat
+              # sichern. Die Geraete-Aktion der Warnung uebermalt ihn gleich.
+              - if:
+                  - condition: template
+                    value_template: >-
+                      {{ repeat.item.startswith('light.')
+                         and is_state(repeat.item, 'off') }}
+                then:
+                  - service: light.turn_on
+                    target:
+                      entity_id: "{{ repeat.item }}"
+                  - wait_template: "{{ is_state(repeat.item, 'on') }}"
+                    timeout: "00:00:03"
+                    continue_on_timeout: true
+                  - if:
+                      - condition: template
+                        value_template: "{{ is_state(repeat.item, 'on') }}"
+                    then:
+                      - service: scene.create
+                        data:
+                          scene_id: "{{ look_id }}"
+                          snapshot_entities: "{{ [repeat.item] }}"
 
     # 2) Slot belegen
     - service: input_text.set_value
@@ -114,6 +159,26 @@ wdh_alarm_set:
       data:
         value: "{{ ziel | int }}"
     - service: script.wdh_apply_current
+
+    # 4) Durchsage — nur wenn die Warnung neu ins Register kam, nicht beim
+    #    erneuten Setzen derselben Warnung. Ein Ausfall von Alexa darf das
+    #    Warnsystem nicht aufhalten.
+    - if:
+        - condition: template
+          value_template: >-
+            {{ durchsage | default(true) and eigene | length == 0
+               and durchsage_ziel | reject('is_state', 'unavailable')
+                                  | list | length > 0 }}
+      then:
+        - service: notify.send_message
+          continue_on_error: true
+          target:
+            entity_id: >-
+              {{ durchsage_ziel | reject('is_state', 'unavailable') | list }}
+          data:
+            message: >-
+              {{ {'wichtig': 'Achtung', 'warnung': 'Warnung',
+                  'hinweis': 'Hinweis'}[stufe_ok] }}: {{ sauber }}
 
 wdh_alarm_clear:
   alias: WDH · Warnung beenden
@@ -169,11 +234,26 @@ wdh_alarm_clear:
               value: ""
 
     # 2) Nur die Geraete zuruecksetzen, die keine andere Warnung mehr belegt.
+    #    Erst den Look (gibt es nur, wenn die Lampe vorher aus war), dann den
+    #    Zustand: so geht sie im alten Look aus statt im Warn-Look.
     - repeat:
         for_each: "{{ frei_ents }}"
         sequence:
           - variables:
               snap: "scene.wdh_snap_{{ repeat.item | replace('.', '_') }}"
+              look: "scene.wdh_look_{{ repeat.item | replace('.', '_') }}"
+          - if:
+              - condition: template
+                value_template: "{{ states[look] is not none }}"
+            then:
+              - service: scene.turn_on
+                target:
+                  entity_id: "{{ look }}"
+              - delay:
+                  milliseconds: 600
+              - service: scene.delete
+                target:
+                  entity_id: "{{ look }}"
           - if:
               - condition: template
                 value_template: "{{ states[snap] is not none }}"
@@ -378,11 +458,11 @@ wdh_reset:
         entity_id: input_text.dashboard_alert_text
       data:
         value: ""
-    # Verwaiste Snapshot-Szenen aus einem harten Abbruch aufraeumen.
+    # Verwaiste Snapshot- und Look-Szenen aus einem harten Abbruch aufraeumen.
     - repeat:
         for_each: >-
           {{ states.scene | map(attribute='entity_id')
-             | select('match', '^scene\\.wdh_snap_') | list }}
+             | select('match', '^scene\\.wdh_(snap|look)_') | list }}
         sequence:
           - service: scene.delete
             target:

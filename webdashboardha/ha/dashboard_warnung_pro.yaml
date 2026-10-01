@@ -49,8 +49,9 @@ blueprint:
           name: Eigener Zustand
           description: >-
             Nur fuer „Zustand ist genau …". Der technische Wert, nicht die
-            Anzeige — z. B. playing, heat, docked. Steht in den
-            Entwicklerwerkzeugen unter „Zustaende".
+            Anzeige — z. B. playing, heat, docked. Mehrere Werte mit Komma
+            trennen (finished, clean). Steht in den Entwicklerwerkzeugen
+            unter „Zustaende".
           default: ""
           selector:
             text:
@@ -189,7 +190,7 @@ triggers:
       {%- elif t_bed == 'unter' -%}
         {{ s | float(1000000000) < t_schwelle | float(0) }}
       {%- else -%}
-        {{ s == t_eigen | lower | trim }}
+        {{ s in (t_eigen | lower).split(',') | map('trim') | list }}
       {%- endif -%}
   # Jede Zustandsaenderung -> neu bewerten (beendet die Warnung von selbst).
   - trigger: state

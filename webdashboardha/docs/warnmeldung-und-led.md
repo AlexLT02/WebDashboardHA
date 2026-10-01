@@ -22,7 +22,10 @@ Die YAML-Dateien dazu liegen im Repo unter [`../ha/`](../ha/).
    der Laufschrift — Licht und Text bleiben so zwangsläufig synchron.
 4. Bevor eine Warnung ein Gerät anfasst, wird dessen **kompletter Zustand als
    Szene gesichert** und am Ende exakt so wiederhergestellt — aber erst, wenn die
-   *letzte* Warnung weg ist, die dieses Gerät belegt.
+   *letzte* Warnung weg ist, die dieses Gerät belegt. Ist eine Lampe dabei aus,
+   wird zusätzlich ihr **Look** gesichert (kurz einschalten, Szene anlegen). Sonst
+   käme sie nach der Warnung beim nächsten Einschalten im Warn-Look hoch, denn die
+   Szene einer ausgeschalteten Lampe kennt nur „aus".
 
 ---
 
@@ -196,11 +199,12 @@ Dort steht, welcher Zweig gelaufen ist und woran eine Bedingung gescheitert ist.
 | `input_text.wdh_slot_1..4_ents` | Geräte, die dieser Slot belegt |
 | `input_number.wdh_index` | welcher Slot gerade angezeigt wird |
 | `scene.wdh_snap_<entity>` | Snapshot eines belegten Geräts (kommt und geht automatisch) |
+| `scene.wdh_look_<entity>` | Look einer Lampe, die beim Auslösen aus war (Farbe, Effekt, Helligkeit) |
 
 | Skript | Zweck |
 |---|---|
-| `script.wdh_alarm_set` | Slot belegen, Snapshot anlegen, Overlay an |
-| `script.wdh_alarm_clear` | Slot freigeben, ggf. restaurieren, Melder informieren |
+| `script.wdh_alarm_set` | Slot belegen, Snapshot (bei ausgeschalteter Lampe + Look) anlegen, Overlay an |
+| `script.wdh_alarm_clear` | Slot freigeben, ggf. erst Look, dann Zustand restaurieren, Melder informieren |
 | `script.wdh_apply_current` | angezeigte Meldung spiegeln + Aktions-Event feuern |
 | `script.wdh_rotate` | zum nächsten belegten Slot wechseln |
 | `script.wdh_ack` | die *angezeigte* Warnung quittieren (OK-Button) |
@@ -218,10 +222,11 @@ existiert dadurch nur an einer Stelle und kann nicht auseinanderlaufen.
 **Grenzen, bewusst gewählt:**
 - **Vier** gleichzeitige Warnungen. Die fünfte wird still verworfen — mehr als
   vier rotierende Meldungen kann ohnehin niemand lesen.
-- Nach einem **HA-Neustart** wird das Register geleert (die Snapshot-Szenen
+- Nach einem **HA-Neustart** wird das Register geleert (Snapshot- und Look-Szenen
   überleben den Neustart nicht). Jede Warnung prüft 20 s nach dem Start selbst,
   ob ihre Ursache noch besteht, und meldet sich neu. Der dabei entstehende
-  Snapshot ist dann allerdings der Zustand *nach* dem Neustart.
+  Snapshot ist dann allerdings der Zustand *nach* dem Neustart. Lief beim
+  Neustart gerade eine Warnung, bleiben ihre Geräte deshalb im Warn-Look stehen.
 - Der Meldungstext wird bei 150 Zeichen gekappt (Slot-Kapazität).
 
 ---
