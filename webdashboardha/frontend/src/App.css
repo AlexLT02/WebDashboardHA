@@ -681,10 +681,14 @@
 .alert__marquee {
   margin-top: 20px;
   overflow: hidden;
-  /* Weiche Kanten links/rechts, damit die Nachbarmeldungen nicht abgehackt
-     wirken. Ohne Maskensupport (Safari 12) fällt das schlicht weg. */
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
+}
+/* Weiche Kanten nur, wenn wirklich Nachbarmeldungen vorbeiziehen. Bei einer
+   einzelnen Meldung ist die Spur so breit wie der Text selbst, die Blende
+   wuerde dann direkt die Buchstaben am Rand abdunkeln. Schmal gehalten,
+   damit auch eine lange aktive Meldung lesbar bleibt. */
+.alert__marquee--multi {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 /* `position: relative` is load-bearing: it makes the track the offsetParent of
    the segments, so `seg.offsetLeft` is measured inside the track. Without it,

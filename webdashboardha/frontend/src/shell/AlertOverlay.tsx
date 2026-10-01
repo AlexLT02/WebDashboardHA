@@ -153,7 +153,10 @@ export function AlertOverlay({ settings }: Props) {
           <div className="alert__icon">
             <AlertIcon level={level} />
           </div>
-          <div className="alert__marquee" ref={viewportRef}>
+          <div
+            className={`alert__marquee${alerts.length > 1 ? " alert__marquee--multi" : ""}`}
+            ref={viewportRef}
+          >
             <div
               className="alert__track"
               ref={trackRef}

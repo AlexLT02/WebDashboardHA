@@ -68,6 +68,25 @@ async def health() -> JSONResponse:
     )
 
 
+class SpaStaticFiles(StaticFiles):
+    """StaticFiles mit expliziten Cache-Headern.
+
+    Ohne Header cacht Safari (vor allem als Homescreen-Web-App) die index.html
+    heuristisch und laedt damit nach einem Update weiter das alte Bundle. Die
+    Assets tragen einen Content-Hash im Namen und duerfen dauerhaft bleiben;
+    alles andere muss per ETag revalidiert werden (kostet nur ein 304).
+    """
+
+    async def get_response(self, path, scope):
+        response = await super().get_response(path, scope)
+        # Starlette passes an OS path here (backslashes on Windows).
+        if path.replace("\\", "/").startswith("assets/"):
+            response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+        else:
+            response.headers["Cache-Control"] = "no-cache"
+        return response
+
+
 def _mount_frontend() -> None:
     """Serviert das gebaute SPA unter "/". Muss NACH allen /api- und /ws-Routen
     registriert werden, damit diese nicht vom Catch-all geschluckt werden."""
@@ -87,7 +106,7 @@ def _mount_frontend() -> None:
 
         return
 
-    app.mount("/", StaticFiles(directory=str(static_dir), html=True), name="spa")
+    app.mount("/", SpaStaticFiles(directory=str(static_dir), html=True), name="spa")
 
 
 _mount_frontend()
