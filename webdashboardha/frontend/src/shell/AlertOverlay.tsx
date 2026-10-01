@@ -113,12 +113,19 @@ export function AlertOverlay({ settings }: Props) {
   // CSS-Animation — so bleibt die Position an HAs Index gekoppelt und läuft
   // nicht mit der Zeit davon.
   const visible = Boolean(alertSwitchEntity) && isAlertOn(sw?.state) && !acked;
+  // `seg.offsetLeft` ist relativ zur Spur, weil `.alert__track` positioniert ist
+  // (siehe App.css). Bei Drehung des iPads neu messen.
   useLayoutEffect(() => {
     if (!visible) return;
-    const seg = segRefs.current[active];
-    const viewport = viewportRef.current;
-    if (!seg || !viewport) return;
-    setShift(viewport.clientWidth / 2 - (seg.offsetLeft + seg.offsetWidth / 2));
+    const measure = () => {
+      const seg = segRefs.current[active];
+      const viewport = viewportRef.current;
+      if (!seg || !viewport) return;
+      setShift(viewport.clientWidth / 2 - (seg.offsetLeft + seg.offsetWidth / 2));
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
   }, [visible, active, alerts.length, fingerprint]);
 
   if (!visible) return null;

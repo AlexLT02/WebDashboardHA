@@ -686,7 +686,12 @@
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
 }
+/* `position: relative` is load-bearing: it makes the track the offsetParent of
+   the segments, so `seg.offsetLeft` is measured inside the track. Without it,
+   Safari 12 measures against `.alert` and the text lands far left of center
+   (Chrome hides the bug because `will-change: transform` already does this). */
 .alert__track {
+  position: relative;
   white-space: nowrap;
   -webkit-transition: -webkit-transform 0.55s ease;
   transition: transform 0.55s ease;
