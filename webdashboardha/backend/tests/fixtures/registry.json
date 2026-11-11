@@ -18,8 +18,8 @@
    "name": "Kinozimmer"
   },
   {
-   "area_id": "ronja_zimmer",
-   "name": "Ronja Zimmer"
+   "area_id": "gast_zimmer",
+   "name": "Gast Zimmer"
   },
   {
    "area_id": "treppenhaus",
@@ -298,7 +298,7 @@
   {
    "id": "a3e44752a774f54128e80c92b28a043d",
    "area_id": "alex_wohnung",
-   "name": "Alexanders Fire TV Stick",
+   "name": "Alex Fire TV Stick",
    "name_by_user": null,
    "model": "Fire TV Stick 4K Plus",
    "manufacturer": "Amazon"
@@ -330,7 +330,7 @@
   {
    "id": "2cc19314e1ccb1f3f3c40faea9a1bf7e",
    "area_id": "alex_wohnung",
-   "name": "Keller Steinenbronn Fire TV Stick",
+   "name": "Keller Ort B Fire TV Stick",
    "name_by_user": null,
    "model": "Amazon Fire TV stick",
    "manufacturer": "Amazon"
@@ -705,7 +705,7 @@
   },
   {
    "id": "38140f345be28402e33a9fe93ea6e3db",
-   "area_id": "ronja_zimmer",
+   "area_id": "gast_zimmer",
    "name": "Lichterkette",
    "name_by_user": null,
    "model": "Smart socket",
@@ -713,7 +713,7 @@
   },
   {
    "id": "8ce2359a071c231ea1a3810d3af3cb82",
-   "area_id": "ronja_zimmer",
+   "area_id": "gast_zimmer",
    "name": "Gebüsch",
    "name_by_user": null,
    "model": "Smart socket",
@@ -753,7 +753,7 @@
   },
   {
    "id": "fef0bad9924ac11db8f2e36a5ecd851f",
-   "area_id": "ronja_zimmer",
+   "area_id": "gast_zimmer",
    "name": "Polarlicht",
    "name_by_user": null,
    "model": "H6159",
@@ -1746,7 +1746,7 @@
    "platform": "alexa_devices",
    "unique_id": "c04a44d5785560bbe6c43f183f7bf2b4",
    "name": null,
-   "original_name": "Alexanders Fire TV Stick"
+   "original_name": "Alex Fire TV Stick"
   },
   {
    "entity_id": "switch.alexanders_fire_tv_stick_durchsagen",
@@ -1762,7 +1762,7 @@
    "platform": "switch",
    "unique_id": "61024107fb0dc0154db857b0fa0c733e",
    "name": null,
-   "original_name": "Alexanders Fire TV Stick Durchsagen"
+   "original_name": "Alex Fire TV Stick Durchsagen"
   },
   {
    "entity_id": "switch.alexanders_fire_tv_stick_kommunikation",
@@ -1778,7 +1778,7 @@
    "platform": "switch",
    "unique_id": "6c35f02e33525131f88a46c1552a5ae9",
    "name": null,
-   "original_name": "Alexanders Fire TV Stick Kommunikation"
+   "original_name": "Alex Fire TV Stick Kommunikation"
   },
   {
    "entity_id": "switch.alex_wohnung_alexanders_fire_tv_stick_bitte_nicht_storen",
@@ -1794,7 +1794,7 @@
    "platform": "alexa_devices",
    "unique_id": "b13a5c6a66df83056459888a7a802f5c",
    "name": null,
-   "original_name": "Alexanders Fire TV Stick Bitte nicht stören"
+   "original_name": "Alex Fire TV Stick Bitte nicht stören"
   },
   {
    "entity_id": "switch.alex_wohnung_alex_wohnung_amazon_fire_tv_stick_bitte_nicht_storen",
@@ -1973,7 +1973,7 @@
    "original_name": "Alex Wohnung Echo Kommunikation"
   },
   {
-   "entity_id": "switch.keller_steinenbronn_fire_tv_stick_durchsagen",
+   "entity_id": "switch.keller_ort_b_fire_tv_stick_durchsagen",
    "id": "982109ffbba3171201de95bfbc09766a",
    "device_id": "2cc19314e1ccb1f3f3c40faea9a1bf7e",
    "area_id": null,
@@ -1986,10 +1986,10 @@
    "platform": "switch",
    "unique_id": "22f86e1bc6afd097391572bdb6654770",
    "name": null,
-   "original_name": "Keller Steinenbronn Fire TV Stick Durchsagen"
+   "original_name": "Keller Ort B Fire TV Stick Durchsagen"
   },
   {
-   "entity_id": "switch.keller_steinenbronn_fire_tv_stick_kommunikation",
+   "entity_id": "switch.keller_ort_b_fire_tv_stick_kommunikation",
    "id": "5d4af60a5edc873a56c4b02ee246009a",
    "device_id": "2cc19314e1ccb1f3f3c40faea9a1bf7e",
    "area_id": null,
@@ -2002,10 +2002,10 @@
    "platform": "switch",
    "unique_id": "ff391273529453463a4bd9e6f020db57",
    "name": null,
-   "original_name": "Keller Steinenbronn Fire TV Stick Kommunikation"
+   "original_name": "Keller Ort B Fire TV Stick Kommunikation"
   },
   {
-   "entity_id": "switch.keller_steinenbronn_fire_tv_stick_bitte_nicht_storen",
+   "entity_id": "switch.keller_ort_b_fire_tv_stick_bitte_nicht_storen",
    "id": "f0a3e6100f8d62eead8e4b0ffcab36ee",
    "device_id": "2cc19314e1ccb1f3f3c40faea9a1bf7e",
    "area_id": null,
@@ -2018,7 +2018,7 @@
    "platform": "alexa_devices",
    "unique_id": "40309144327f0a79696bea412205fc88",
    "name": null,
-   "original_name": "Keller Steinenbronn Fire TV Stick Bitte nicht stören"
+   "original_name": "Keller Ort B Fire TV Stick Bitte nicht stören"
   },
   {
    "entity_id": "media_player.bad_echo_dot_alex_wohnung",
@@ -2085,7 +2085,7 @@
    "original_name": "Bad Echo Dot Alex Wohnung Kommunikation"
   },
   {
-   "entity_id": "switch.alex_wohnung_alexander_s_fire_tv_bitte_nicht_storen",
+   "entity_id": "switch.alex_wohnung_alex_s_fire_tv_bitte_nicht_storen",
    "id": "72db592104ae615b2b6f1b6f033abb1f",
    "device_id": "3f957c790cc65d2835daf09bc9c40bc0",
    "area_id": null,
@@ -2101,7 +2101,7 @@
    "original_name": "Wohnbereich Fire TV Stick (4k Max) Bitte nicht stören"
   },
   {
-   "entity_id": "switch.alexander_s_fire_tv_durchsagen",
+   "entity_id": "switch.alex_s_fire_tv_durchsagen",
    "id": "2e139f4052443fd207369eb2c00799c6",
    "device_id": "3f957c790cc65d2835daf09bc9c40bc0",
    "area_id": null,
@@ -2117,7 +2117,7 @@
    "original_name": "Wohnbereich Fire TV Stick (4k Max) Durchsagen"
   },
   {
-   "entity_id": "switch.alexander_s_fire_tv_kommunikation",
+   "entity_id": "switch.alex_s_fire_tv_kommunikation",
    "id": "911c793a3e5ced490a6aacd64f7f46e2",
    "device_id": "3f957c790cc65d2835daf09bc9c40bc0",
    "area_id": null,

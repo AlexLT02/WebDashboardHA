@@ -1233,7 +1233,7 @@
   "media_player.alexanders_fire_tv_stick": {
    "id": "media_player.alexanders_fire_tv_stick",
    "kind": "media",
-   "name": "Alexanders Fire TV Stick",
+   "name": "Alex Fire TV Stick",
    "zone": null,
    "func": "medien",
    "tier": "hidden",

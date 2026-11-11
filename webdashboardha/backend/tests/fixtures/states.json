@@ -940,7 +940,7 @@
    "volume_level": 0.4,
    "is_volume_muted": false,
    "device_class": "speaker",
-   "friendly_name": "Alexanders Fire TV Stick",
+   "friendly_name": "Alex Fire TV Stick",
    "supported_features": 5644
   },
   "last_changed": "2026-11-11T00:12:27.123456+00:00",
@@ -950,7 +950,7 @@
   "entity_id": "switch.alexanders_fire_tv_stick_durchsagen",
   "state": "unavailable",
   "attributes": {
-   "friendly_name": "Alexanders Fire TV Stick Durchsagen"
+   "friendly_name": "Alex Fire TV Stick Durchsagen"
   },
   "last_changed": "2026-11-11T00:12:27.123456+00:00",
   "last_updated": "2026-11-11T00:12:27.123456+00:00"
@@ -959,7 +959,7 @@
   "entity_id": "switch.alexanders_fire_tv_stick_kommunikation",
   "state": "unavailable",
   "attributes": {
-   "friendly_name": "Alexanders Fire TV Stick Kommunikation"
+   "friendly_name": "Alex Fire TV Stick Kommunikation"
   },
   "last_changed": "2026-11-11T00:12:27.123456+00:00",
   "last_updated": "2026-11-11T00:12:27.123456+00:00"
@@ -968,7 +968,7 @@
   "entity_id": "switch.alex_wohnung_alexanders_fire_tv_stick_bitte_nicht_storen",
   "state": "off",
   "attributes": {
-   "friendly_name": "Alexanders Fire TV Stick Bitte nicht stören"
+   "friendly_name": "Alex Fire TV Stick Bitte nicht stören"
   },
   "last_changed": "2026-11-11T00:12:27.123456+00:00",
   "last_updated": "2026-11-11T00:12:27.123456+00:00"
@@ -1081,28 +1081,28 @@
   "last_updated": "2026-11-11T00:12:27.123456+00:00"
  },
  {
-  "entity_id": "switch.keller_steinenbronn_fire_tv_stick_durchsagen",
+  "entity_id": "switch.keller_ort_b_fire_tv_stick_durchsagen",
   "state": "unavailable",
   "attributes": {
-   "friendly_name": "Keller Steinenbronn Fire TV Stick Durchsagen"
+   "friendly_name": "Keller Ort B Fire TV Stick Durchsagen"
   },
   "last_changed": "2026-11-11T00:12:27.123456+00:00",
   "last_updated": "2026-11-11T00:12:27.123456+00:00"
  },
  {
-  "entity_id": "switch.keller_steinenbronn_fire_tv_stick_kommunikation",
+  "entity_id": "switch.keller_ort_b_fire_tv_stick_kommunikation",
   "state": "unavailable",
   "attributes": {
-   "friendly_name": "Keller Steinenbronn Fire TV Stick Kommunikation"
+   "friendly_name": "Keller Ort B Fire TV Stick Kommunikation"
   },
   "last_changed": "2026-11-11T00:12:27.123456+00:00",
   "last_updated": "2026-11-11T00:12:27.123456+00:00"
  },
  {
-  "entity_id": "switch.keller_steinenbronn_fire_tv_stick_bitte_nicht_storen",
+  "entity_id": "switch.keller_ort_b_fire_tv_stick_bitte_nicht_storen",
   "state": "off",
   "attributes": {
-   "friendly_name": "Keller Steinenbronn Fire TV Stick Bitte nicht stören"
+   "friendly_name": "Keller Ort B Fire TV Stick Bitte nicht stören"
   },
   "last_changed": "2026-11-11T00:12:27.123456+00:00",
   "last_updated": "2026-11-11T00:12:27.123456+00:00"
@@ -1148,7 +1148,7 @@
   "last_updated": "2026-11-11T00:12:27.123456+00:00"
  },
  {
-  "entity_id": "switch.alex_wohnung_alexander_s_fire_tv_bitte_nicht_storen",
+  "entity_id": "switch.alex_wohnung_alex_s_fire_tv_bitte_nicht_storen",
   "state": "off",
   "attributes": {
    "friendly_name": "Wohnbereich Fire TV Stick (4k Max) Bitte nicht stören"
@@ -1157,7 +1157,7 @@
   "last_updated": "2026-11-11T00:12:27.123456+00:00"
  },
  {
-  "entity_id": "switch.alexander_s_fire_tv_durchsagen",
+  "entity_id": "switch.alex_s_fire_tv_durchsagen",
   "state": "unavailable",
   "attributes": {
    "friendly_name": "Wohnbereich Fire TV Stick (4k Max) Durchsagen"
@@ -1166,7 +1166,7 @@
   "last_updated": "2026-11-11T00:12:27.123456+00:00"
  },
  {
-  "entity_id": "switch.alexander_s_fire_tv_kommunikation",
+  "entity_id": "switch.alex_s_fire_tv_kommunikation",
   "state": "unavailable",
   "attributes": {
    "friendly_name": "Wohnbereich Fire TV Stick (4k Max) Kommunikation"
