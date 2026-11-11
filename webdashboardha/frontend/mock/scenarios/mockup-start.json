@@ -1,0 +1,9 @@
+{
+  "description": "Mockup 01-start (Wednesday 14:12): like mockup-day, entrance light off, one light at the back on.",
+  "extends": "mockup-day",
+  "now": "2026-11-11T14:12:00",
+  "states": {
+    "light.alex_wohnung_eingangsbereich": { "state": "off", "attributes": { "brightness": null } },
+    "light.alex_wohnung_bett_deckenlicht": { "state": "on", "attributes": { "brightness": 128, "color_mode": "color_temp", "color_temp_kelvin": 2700 } }
+  }
+}

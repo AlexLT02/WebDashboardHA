@@ -1,0 +1,19 @@
+{
+  "description": "Mockup 04-start-zustaende (Wednesday 18:20): fridge open 3 min, washing machine running, table light offline.",
+  "extends": "mockup-start",
+  "now": "2026-11-11T18:20:00",
+  "states": {
+    "binary_sensor.alex_wohnung_kuhlschranktur_tur": { "state": "on", "lc": "2026-11-11T18:17:00" },
+    "sensor.waschmaschiene_alex_zustand": { "state": "running", "lc": "2026-11-11T17:30:00" },
+    "sensor.waschmaschiene_alex_verbleibende_zeit": { "state": "42" },
+    "sensor.waschmaschiene_alex_fortschritt": { "state": "62" },
+    "sensor.waschmaschiene_alex_aktuelle_phase": { "state": "Spülen" },
+    "light.ty_02_5ch_v5_2": { "state": "unavailable", "lc": "2026-11-11T17:58:00" },
+    "sensor.alex_wohnung_luftwerte_kohlendioxid": { "state": "640" },
+    "sensor.raumtemperatur_wohnbereich": { "state": "23.0" },
+    "sensor.durchschnitt_luftfeuchtigkeit": { "state": "59" },
+    "sensor.alex_wohnung_thermometer_aussen_temperatur": { "state": "9.4" },
+    "weather.forecast_home": { "state": "rainy" },
+    "wdh.forecast_today": { "state": "rainy", "attributes": { "friendly_name": "Vorhersage heute", "temperature": 11, "templow": 6, "condition": "rainy" } }
+  }
+}

@@ -292,7 +292,14 @@ function applyScenario(name: string) {
   sceneSnapshot = {};
   undoSlot = null;
   if (name && name !== "base") {
-    const sc = read(`scenarios/${name}.json`);
+    // "extends": parent scenario, own states/items win.
+    const load = (n: string): any => {
+      const s = read(`scenarios/${n}.json`);
+      if (!s.extends) return s;
+      const p = load(s.extends);
+      return { ...p, ...s, states: { ...p.states, ...s.states }, items: { ...(p.items || {}), ...(s.items || {}) } };
+    };
+    const sc = load(name);
     const base = sc.now ? new Date(sc.now).getTime() : Date.now();
     for (const id in sc.states || {}) {
       const o = sc.states[id];

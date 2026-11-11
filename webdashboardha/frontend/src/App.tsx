@@ -6,9 +6,12 @@ import { setClockOffset, startMinuteClock } from "./state/clock";
 import { installIdleTracking, RETURN_MS, useIdleTimer } from "./state/idle";
 import { useUi, type Popup, type Screen } from "./state/ui";
 import { installGlobalGuards } from "./controls/inputLock";
+import { showOffResult } from "./state/notice";
+import { beginPending } from "./state/pending";
 import { Rail } from "./shell/Rail";
 import { NightShade } from "./shell/NightShade";
 import { AlertOverlay } from "./shell/AlertOverlay";
+import { TopNotice } from "./shell/TopNotice";
 import { StartScreen } from "./screens/StartScreen";
 import { ZoneScreen } from "./screens/ZoneScreen";
 import { AllScreen } from "./screens/AllScreen";
@@ -21,6 +24,8 @@ import { PopupHost } from "./dialogs/PopupHost";
  */
 function applyDeepLink(): void {
   if (!import.meta.env.DEV) return;
+  // Render/test hooks to stage states that only exist mid-gesture (dev/mock only).
+  (window as unknown as { __wdh: unknown }).__wdh = { useStore, useUi, showOffResult, beginPending };
   const q = new URLSearchParams(window.location.search);
   const nowIso = q.get("now");
   if (nowIso) {
@@ -97,6 +102,7 @@ export default function App() {
     <div className="stage">
       <Rail />
       <Content />
+      <TopNotice />
       <PopupHost />
       <NightShade settings={settings} />
       <AlertOverlay settings={settings} />

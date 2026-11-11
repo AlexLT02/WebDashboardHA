@@ -23,6 +23,7 @@ from . import __version__
 from .actions import ActionService
 from .board import Board, build_board, domain_of, slim_state
 from .config import Settings
+from .forecast import ForecastService
 from .ha_client import HAClient
 from .registry import Registry
 from .storage import DashboardStore
@@ -78,6 +79,10 @@ class Hub:
             on_disconnected=self._on_disconnected,
         )
         self.actions = ActionService(self.call_service, scene_id=self.zones.seed.get("undo_scene_id", "wdh_undo"))
+        weather = (self.zones.seed.get("head") or {}).get("weather")
+        self.forecast = (
+            ForecastService(self._call_with_response, self.update_virtual_state, weather) if weather else None
+        )
 
     # ---- Lebenszyklus -----------------------------------------------------
 
@@ -87,6 +92,8 @@ class Hub:
 
     async def stop(self) -> None:
         self.registry.cancel()
+        if self.forecast:
+            self.forecast.cancel()
         for task in [self._rebuild_task, *self._flush_tasks.values()]:
             if task and not task.done():
                 task.cancel()
@@ -124,6 +131,8 @@ class Hub:
         await self._broadcast({"type": "snapshot", "states": snapshot})
         await self._broadcast_v2({"type": "ha_status", "connected": True})
         await self.rebuild(force_send=True)
+        if self.forecast:
+            self.forecast.kick()
 
     async def _on_disconnected(self) -> None:
         await self._broadcast_v2({"type": "ha_status", "connected": False})
@@ -202,6 +211,12 @@ class Hub:
     def set_virtual_state(self, entity_id: str, state: dict[str, Any]) -> None:
         """Hook for wdh.* states (forecast.py, P3)."""
         self._virtual[entity_id] = state
+
+    async def update_virtual_state(self, entity_id: str, state: dict[str, Any]) -> None:
+        """Set a wdh.* state and forward it to v2 clients like any watched entity."""
+        self._virtual[entity_id] = state
+        if self.board is not None and entity_id in self.board.watch:
+            await self._send_state_v2(entity_id, state)
 
     # ---- Frontend-Clients -------------------------------------------------
 
@@ -295,6 +310,13 @@ class Hub:
     ) -> None:
         await self.ha.call_service(
             domain, service, entity_id=entity_id, service_data=service_data
+        )
+
+    async def _call_with_response(
+        self, domain: str, service: str, entity_id: str | None, service_data: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        return await self.ha.call_service(
+            domain, service, entity_id=entity_id, service_data=service_data, return_response=True
         )
 
 

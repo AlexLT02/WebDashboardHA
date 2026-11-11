@@ -164,16 +164,15 @@ button { font-family: inherit; }
   border-radius: var(--r-tile);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
   overflow: hidden;
-  -webkit-transition: background-color 0.15s ease, border-color 0.15s ease;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 .grid3--kg .tile { height: 72px; }
 .badge {
   position: absolute; left: 11px; top: 11px; width: 40px; height: 40px;
   border-radius: var(--r-badge);
   background: var(--badge); color: var(--text-muted);
-  -webkit-transition: opacity 0.15s ease, background-color 0.15s ease, -webkit-transform 0.08s ease;
-  transition: opacity 0.15s ease, background-color 0.15s ease, transform 0.08s ease;
+  /* Only compositor properties animate (02 §8); colour changes are a plain repaint. */
+  -webkit-transition: opacity 0.15s ease, -webkit-transform 0.08s ease;
+  transition: opacity 0.15s ease, transform 0.08s ease;
 }
 .grid3--kg .badge { top: 15px; }
 .badge svg { width: 24px; height: 24px; margin: 8px; }
@@ -278,6 +277,9 @@ button { font-family: inherit; }
 }
 .tile--hold.is-holding { border-color: rgba(236, 238, 242, 0.55); }
 .tile--hold.is-holding .tile__sub { color: var(--text); }
+.hold-on { display: none; }
+.is-holding .hold-on { display: inline; }
+.is-holding .hold-idle { display: none; }
 .is-fired { -webkit-animation: hold-pop 0.16s ease-out; animation: hold-pop 0.16s ease-out; }
 @-webkit-keyframes hold-pop { 50% { -webkit-transform: scale(1.04); } }
 @keyframes hold-pop { 50% { transform: scale(1.04); } }
@@ -365,7 +367,10 @@ button { font-family: inherit; }
 .undo__time {
   position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: var(--cool);
   -webkit-transform-origin: left center; transform-origin: left center;
+  -webkit-animation: undo-time 10s linear forwards; animation: undo-time 10s linear forwards;
 }
+@-webkit-keyframes undo-time { from { -webkit-transform: scaleX(1); } to { -webkit-transform: scaleX(0); } }
+@keyframes undo-time { from { transform: scaleX(1); } to { transform: scaleX(0); } }
 
 /* ---------------- zone view ---------------- */
 .zone {
@@ -478,9 +483,15 @@ button { font-family: inherit; }
 .mrow.is-on .mrow__sub { color: var(--on-text); }
 .mrow__v { position: absolute; right: 8px; top: 0; line-height: 47px; font-size: 14px; color: var(--text-soft); }
 .mrow__v.red { color: var(--alarm-text); }
-.mrow__cb { position: absolute; right: 2px; top: 4px; white-space: nowrap; }
-.mrow__cb .cbtn { width: 52px; height: 40px; margin-left: 4px; }
-.mrow__cb .cbtn svg { width: 22px; height: 22px; margin-top: 8px; }
+.mrow--56 { height: 56px; }
+.mrow--56 .badge { top: 10px; }
+.mrow--56 .mrow__name { top: 8px; }
+.mrow--56 .mrow__sub { top: 29px; }
+.mrow--56 .mrow__v { line-height: 55px; }
+.mrow .cbtns { right: 0; top: 6px; }
+.mrow .cbtn { width: 52px; height: 44px; margin-left: 4px; }
+.mrow .cbtn svg { width: 22px; height: 22px; margin-top: 10px; }
+.mrow:last-child { border-bottom: 0; }
 
 /* ---------------- service panel ---------------- */
 .svc { margin-top: 14px; }

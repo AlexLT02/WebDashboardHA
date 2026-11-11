@@ -5,6 +5,7 @@ import { SwitchPopup } from "./popups/SwitchPopup";
 import { GroupPopup } from "./popups/GroupPopup";
 import { CoverPopup } from "./popups/CoverPopup";
 import { InfoPopup } from "./popups/InfoPopup";
+import { ActivePopup, ContactsPopup, CoversPopup, KgPopup } from "./popups/StartPopups";
 import { ServicePanel } from "../shell/ServicePanel";
 import { SettingsDialog } from "./SettingsDialog";
 import type { Item } from "../state/model";
@@ -41,6 +42,14 @@ export function PopupHost() {
       const item = board.items[popup.id];
       return item ? <ItemPopup key={popup.id} item={item} name={popup.name} /> : null;
     }
+    case "kg":
+      return <KgPopup key={popup.id || popup.role} role={popup.role} id={popup.id} />;
+    case "covers":
+      return <CoversPopup />;
+    case "contacts":
+      return <ContactsPopup />;
+    case "active":
+      return <ActivePopup />;
     case "service":
       return <ServicePanel />;
     case "settings":

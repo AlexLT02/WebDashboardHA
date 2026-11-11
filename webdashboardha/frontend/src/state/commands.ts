@@ -39,7 +39,8 @@ export function runOff(scope: OffScope, item?: Item): Promise<OffResult | null> 
   );
 }
 
-function runOn(item: Item, scope: Parameters<typeof actionOn>[0]): void {
+/** Bulk "on" (Ambiente, groups) with an optimistic record for the tile. */
+export function runOn(item: Item, scope: Parameters<typeof actionOn>[0]): void {
   beginPending(item, true, useStore.getState().board);
   actionOn(scope).catch(() => failPending(item.id));
 }

@@ -155,7 +155,7 @@
   "favorites": [
     { "id": "light.alex_wohnung_eingangsbereich", "name": "Eingang" },
     { "id": "light.zone_sofa_deckenlicht", "name": "Sofa-Decke" },
-    { "id": "light.zone_ambiente_sofa", "name": "Ambiente Sofa" },
+    { "id": "light.zone_ambiente_sofa", "name": "Amb. Sofa" },
     { "id": "light.zone_kueche", "name": "Küche" },
     { "id": "light.kuechenlicht_oben", "name": "Arbeitslicht" },
     { "id": "light.ty_02_5ch_v5_2", "name": "Tischlicht" },
