@@ -1,6 +1,8 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useEntity } from "../state/store";
-import { callService } from "../state/service";
+import { callService } from "../state/api";
+import { pauseIdle, resumeIdle } from "../state/idle";
+import { Press } from "../controls/Press";
 import {
   activeIndex,
   collectAlerts,
@@ -9,10 +11,11 @@ import {
   type ActiveAlert,
   type AlertLevel,
 } from "../state/alert";
-import type { BoardSettings } from "../state/useBoard";
+import type { Settings } from "../state/useSettings";
+import "./AlertOverlay.css";
 
 interface Props {
-  settings: BoardSettings;
+  settings: Settings;
 }
 
 /** Ersatztext, falls kein Meldungstext hinterlegt ist — je Stufe. */
@@ -128,6 +131,13 @@ export function AlertOverlay({ settings }: Props) {
     return () => window.removeEventListener("resize", measure);
   }, [visible, active, alerts.length, fingerprint]);
 
+  // A standing warning pauses the return-to-start timer (04 §5.6).
+  useEffect(() => {
+    if (!visible) return;
+    pauseIdle("alert");
+    return () => resumeIdle("alert");
+  }, [visible]);
+
   if (!visible) return null;
 
   const level = current.level;
@@ -147,18 +157,18 @@ export function AlertOverlay({ settings }: Props) {
   };
 
   return (
-    <div className="alert" role="alertdialog" aria-modal="true">
-      <div className={`alert__body alert--${level}`}>
-        <div className="alert__pulse">
-          <div className="alert__icon">
+    <div className="wov" role="alertdialog" aria-modal="true">
+      <div className={`wov__body wov--${level}`}>
+        <div className="wov__pulse">
+          <div className="wov__icon">
             <AlertIcon level={level} />
           </div>
           <div
-            className={`alert__marquee${alerts.length > 1 ? " alert__marquee--multi" : ""}`}
+            className={`wov__marquee${alerts.length > 1 ? " wov__marquee--multi" : ""}`}
             ref={viewportRef}
           >
             <div
-              className="alert__track"
+              className="wov__track"
               ref={trackRef}
               style={{ transform: `translateX(${shift}px)` }}
             >
@@ -168,7 +178,7 @@ export function AlertOverlay({ settings }: Props) {
                   ref={(el) => {
                     segRefs.current[i] = el;
                   }}
-                  className={`alert__seg alert__seg--${a.level}${
+                  className={`wov__seg wov__seg--${a.level}${
                     i === active ? " is-current" : ""
                   }`}
                 >
@@ -179,18 +189,18 @@ export function AlertOverlay({ settings }: Props) {
           </div>
         </div>
         {alerts.length > 1 && (
-          <div className="alert__dots" aria-hidden="true">
+          <div className="wov__dots" aria-hidden="true">
             {alerts.map((a, i) => (
               <span
                 key={a.slot + "-" + a.id}
-                className={`alert__dot${i === active ? " is-current" : ""}`}
+                className={`wov__dot${i === active ? " is-current" : ""}`}
               />
             ))}
           </div>
         )}
-        <button type="button" className="alert__ok" onClick={dismiss}>
+        <Press className="wov__ok" label="Quittieren" onPress={dismiss}>
           {alerts.length > 1 ? "OK · diese" : "OK"}
-        </button>
+        </Press>
       </div>
     </div>
   );

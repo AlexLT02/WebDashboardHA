@@ -1,258 +1,150 @@
-import { useEntity } from "../state/store";
-import { callService } from "../state/service";
-import { displayName, sensorStateLabel } from "../state/display";
-import { domainOf, withAlpha, ACCENT_WARM, ACCENT_COOL } from "../state/board";
-import {
-  coverActionVerb,
-  coverFeatures,
-  coverIsOpen,
-  coverPosition,
-  coverStateLabel,
-  coverTapService,
-} from "../state/cover";
-import { ArrowDownIcon, ArrowUpIcon, StopIcon, resolveIcon } from "../controls/icons";
-import { useLongPress } from "../controls/useLongPress";
-import type { CoverService } from "../state/cover";
-import type { WidgetConfig } from "../state/dashboards";
-import "./Tile.css";
-
-export type DetailKind = "light" | "media" | "cover" | "info";
+import { useRef, useState } from "react";
+import { Icon } from "../controls/icons";
+import { useTap } from "../controls/useTap";
+import { HOLD_CRITICAL_MS } from "../controls/useHold";
+import { toggleItem, domainOf } from "../state/commands";
+import { pendStatus, useFlash, usePend } from "../state/pending";
+import { markSeen } from "../state/api";
+import { shortName } from "../state/format";
+import { useUi } from "../state/ui";
+import { useTileView } from "./useTileView";
+import type { Item } from "../state/model";
+import type { TileView } from "../state/tileState";
 
 interface Props {
-  widget: WidgetConfig;
-  editMode: boolean;
-  onOpen: (widget: WidgetConfig, kind: DetailKind) => void;
-  onRemove: (widgetId: string) => void;
-  onAction?: (text: string, color: string) => void;
+  item: Item;
+  /** Name override (favorites). */
+  name?: string;
+  /** Kommen & Gehen size (72 px) with the member segment bar. */
+  pips?: boolean;
+  className?: string;
 }
 
-interface TileVM {
-  active: boolean;
-  sub: string;
-  accent: string | null;
-  detail: DetailKind;
-  onTap: (() => void) | null;
-}
-
-/** Kachel-Zustand aus Entity + Domain ableiten (Service-Wiring inklusive). */
-function useTileVM(widget: Props["widget"], name: string, onAction?: Props["onAction"]): TileVM {
-  const entity = useEntity(widget.entity_id);
-  const domain = domainOf(widget);
-  const attrs = entity?.attributes ?? {};
-  const state = entity?.state;
-
-  const svc = (d: string, service: string, data?: Record<string, unknown>) =>
-    callService({ domain: d, service, entity_id: widget.entity_id, data }).catch(console.error);
-  const log = (verb: string, color: string) => onAction?.(`${name} ${verb}`, color);
-
-  if (!entity) {
-    return { active: false, sub: "nicht verfügbar", accent: null, detail: "info", onTap: null };
-  }
-
-  if (domain === "light") {
-    const on = state === "on";
-    const bri = typeof attrs.brightness === "number" ? attrs.brightness : 0;
-    const pct = Math.round((bri / 255) * 100);
-    const rgb = Array.isArray(attrs.rgb_color) ? (attrs.rgb_color as number[]) : null;
-    const accent = on ? (rgb ? `rgb(${rgb[0]},${rgb[1]},${rgb[2]})` : ACCENT_WARM) : null;
-    return {
-      active: on,
-      sub: on ? (bri ? `Ein · ${pct}%` : "Ein") : "Aus",
-      accent,
-      detail: "light",
-      onTap: () => {
-        svc("light", on ? "turn_off" : "turn_on");
-        log(on ? "ausgeschaltet" : "eingeschaltet", on ? "#6b7280" : ACCENT_WARM);
-      },
-    };
-  }
-
-  if (domain === "media_player") {
-    const playing = state === "playing";
-    const on = playing || state === "paused" || state === "on" || state === "buffering";
-    const title = (attrs.media_title as string) || (playing ? "Läuft" : "Pausiert");
-    return {
-      active: on,
-      sub: on ? title : "Aus",
-      accent: on ? ACCENT_COOL : null,
-      detail: "media",
-      onTap: () => svc("media_player", "media_play_pause"),
-    };
-  }
-
-  if (domain === "cover") {
-    const position = coverPosition(attrs);
-    const open = coverIsOpen(state, position);
-    const service = coverTapService(state, position, coverFeatures(attrs));
-    return {
-      active: open,
-      sub: coverStateLabel(state, position),
-      accent: open ? ACCENT_COOL : null,
-      detail: "cover",
-      onTap: () => {
-        svc("cover", service);
-        log(coverActionVerb(service), ACCENT_COOL);
-      },
-    };
-  }
-
-  if (domain === "sensor" || domain === "binary_sensor" || domain === "weather") {
-    return {
-      active: false,
-      sub: sensorStateLabel(entity),
-      accent: null,
-      detail: "info",
-      onTap: null, // Sensoren öffnen per Tap ihren Info-Dialog (siehe unten)
-    };
-  }
-
-  // switch / input_boolean / fan / sonstige schaltbare
-  const on = state === "on";
+/** One background element for "x of n on" (03 §6): segments via background-size. */
+export function pipsStyle(on: number, n: number, onTile: boolean): React.CSSProperties {
+  const count = Math.max(1, n);
+  const p = Math.round((on / count) * 1000) / 10;
+  const gap = onTile ? "var(--tile-on)" : "var(--tile)";
   return {
-    active: on,
-    sub: on ? "Ein" : "Aus",
-    accent: on ? ACCENT_WARM : null,
-    detail: "info",
-    onTap: () => {
-      svc(domain || "switch", on ? "turn_off" : "turn_on");
-      log(on ? "ausgeschaltet" : "eingeschaltet", on ? "#6b7280" : ACCENT_WARM);
-    },
+    background:
+      `linear-gradient(90deg,transparent 0,transparent 78%,${gap} 78%) 0 0/${(100 / count).toFixed(4)}% 100% repeat-x,` +
+      `linear-gradient(90deg,var(--on) ${p}%,rgba(255,255,255,.15) ${p}%)`,
   };
 }
 
-/** Auf/Stopp/Zu direkt auf der Kachel — die Rollladen-Kachel ist dafür 2x2 groß. */
-function CoverActions({
-  attrs,
-  onCommand,
-}: {
-  attrs: Record<string, unknown>;
-  onCommand: (service: CoverService) => void;
-}) {
-  const f = coverFeatures(attrs);
-  // Der Tile-Container hört auf Touch/Maus (Tap + Long-Press) — hier abfangen,
-  // sonst schaltet ein Tastendruck zusätzlich das ganze Gerät um.
-  const stop = (e: React.SyntheticEvent) => e.stopPropagation();
-
-  return (
-    <div
-      className="tile__cover"
-      onTouchStart={stop}
-      onTouchEnd={stop}
-      onMouseDown={stop}
-      onMouseUp={stop}
-      onClick={stop}
-    >
-      <button
-        type="button"
-        className="tile__cbtn"
-        aria-label="Öffnen"
-        disabled={!f.open}
-        onClick={() => onCommand("open_cover")}
-      >
-        <ArrowUpIcon size={22} />
-      </button>
-      <button
-        type="button"
-        className="tile__cbtn"
-        aria-label="Stoppen"
-        disabled={!f.stop}
-        onClick={() => onCommand("stop_cover")}
-      >
-        <StopIcon size={15} />
-      </button>
-      <button
-        type="button"
-        className="tile__cbtn"
-        aria-label="Schließen"
-        disabled={!f.close}
-        onClick={() => onCommand("close_cover")}
-      >
-        <ArrowDownIcon size={22} />
-      </button>
-    </div>
-  );
+/** Status shown on the tile, including optimistic and feedback phases. */
+export function shownView(view: TileView, pendOn: boolean | null, phase: string | null): { on: boolean; status: string } {
+  if (phase === "wait" && pendOn !== null) return { on: pendOn, status: pendStatus({ on: pendOn, phase: "wait", at: 0, until: 0 }) };
+  if (phase === "failed") return { on: view.on, status: "Fehlgeschlagen" };
+  if (phase === "noresp") return { on: view.on, status: "Keine Rückmeldung" };
+  return { on: view.on, status: view.status };
 }
 
-export function Tile({ widget, editMode, onOpen, onRemove, onAction }: Props) {
-  const entity = useEntity(widget.entity_id);
-  const domain = domainOf(widget);
-  const name = displayName(widget, entity);
-  const Icon = resolveIcon(
-    widget.options?.icon as string,
-    domain || widget.type,
-    entity?.attributes.device_class as string,
-    name,
-  );
-  const vm = useTileVM(widget, name, onAction);
+/**
+ * Tile 64 px (04 §5.3): icon zone (left 64 x 64) switches when there is a badge,
+ * the rest opens the popup, holding 0.5 s anywhere opens it too.
+ * DOM: tile, badge, svg, path, text block, name, status (+ pip / new marker).
+ */
+export function Tile({ item, name, pips, className }: Props) {
+  const view = useTileView(item);
+  const pend = usePend(item.id);
+  const flash = useFlash(item.id);
+  const [hint, setHint] = useState(false);
+  const hintTimer = useRef<number | undefined>(undefined);
+  const seenSent = useRef(false);
+  const openPopup = useUi((s) => s.openPopup);
 
-  const isSensor = domain === "sensor" || domain === "binary_sensor" || domain === "weather";
-  const isCover = domain === "cover";
-  const openDetail = () => onOpen(widget, vm.detail);
+  const viewRef = useRef(view);
+  viewRef.current = view;
 
-  const coverCommand = (service: CoverService) => {
-    callService({ domain: "cover", service, entity_id: widget.entity_id }).catch(console.error);
-    onAction?.(`${name} ${coverActionVerb(service)}`, ACCENT_COOL);
+  const open = () => openPopup({ t: "item", id: item.id, name });
+  const noteSeen = () => {
+    if (item.new && !seenSent.current) {
+      seenSent.current = true;
+      markSeen(item.id).catch(() => undefined);
+    }
   };
-  // Sensor: Tap öffnet den Info-Dialog; sonst schaltet Tap.
-  const tap = isSensor ? openDetail : vm.onTap;
+  const showHint = () => {
+    setHint(true);
+    window.clearTimeout(hintTimer.current);
+    hintTimer.current = window.setTimeout(() => setHint(false), 2000);
+  };
 
-  const press = useLongPress({
-    onTap: () => {
-      if (editMode) return;
-      tap?.();
+  const switchable = !!view && view.badge && !view.offline;
+  const ref = useTap({
+    iconWidth: switchable ? 64 : 0,
+    pressSelector: ".badge",
+    pressIconOnly: true,
+    onTap: (zone) => {
+      noteSeen();
+      const v = viewRef.current;
+      if (zone === "icon" && v && v.badge && !v.offline) toggleItem(item, v);
+      else open();
     },
     onLongPress: () => {
-      if (editMode) return;
-      openDetail();
+      noteSeen();
+      open();
     },
-    delay: 300,
+    hold:
+      switchable && view && view.holdOff
+        ? {
+            ms: HOLD_CRITICAL_MS,
+            zone: "icon",
+            onFire: () => {
+              const v = viewRef.current;
+              if (v) toggleItem(item, v);
+            },
+            onShort: showHint,
+          }
+        : null,
   });
 
-  const { accent } = vm;
-  const tileStyle: React.CSSProperties = accent
-    ? {
-        background: `linear-gradient(160deg, ${withAlpha(accent, 0.18)}, ${withAlpha(accent, 0.05)})`,
-        borderColor: withAlpha(accent, 0.28),
-        boxShadow: `0 8px 22px -8px ${withAlpha(accent, 0.5)}`,
-      }
-    : {};
-  const badgeStyle: React.CSSProperties = accent
-    ? { background: accent, color: "#1a1206", boxShadow: `0 4px 14px ${withAlpha(accent, 0.45)}` }
-    : {};
-  const subStyle: React.CSSProperties = accent ? { color: withAlpha(accent, 0.92) } : {};
+  if (!view) return null;
+  const phase = pend ? pend.phase : null;
+  const shown = shownView(view, pend ? pend.on : null, phase);
+  const status = hint ? "Zum Aus 1 s halten" : shown.status;
+
+  const cls = ["tile"];
+  if (className) cls.push(className);
+  if (view.offline) cls.push("is-offline");
+  else if (shown.on) cls.push("is-on");
+  if (phase === "wait") cls.push("is-pending");
+  if (phase === "failed") cls.push("is-failed");
+  if (phase === "noresp") cls.push("is-noresp");
+  if (flash) cls.push("is-flash");
+  if (hint) cls.push("is-hint");
+  if (item.new) cls.push("is-new");
+  if (item.kind === "switch_critical") cls.push("is-critical");
+
+  const bare = !view.badge && !view.offline;
+  const icon = item.kind === "tv" || item.kind === "media" ? item.icon || "tv" : item.icon || iconFallback(item);
 
   return (
-    <div
-      className={`tile${isCover ? " tile--cover" : ""}${vm.active ? " is-active" : ""}${
-        entity ? "" : " is-unavailable"
-      }`}
-      style={tileStyle}
-      {...(editMode ? {} : press)}
-    >
-      {editMode && (
-        <button
-          type="button"
-          className="tile__remove"
-          aria-label={`${name} entfernen`}
-          onClick={() => onRemove(widget.id)}
-        >
-          ✕
-        </button>
-      )}
-      <span className="tile__badge" style={badgeStyle}>
-        <Icon size={23} />
-      </span>
-      <div className="tile__body">
-        <div className="tile__name" style={editMode ? { paddingRight: 24 } : undefined}>
-          {name}
-        </div>
-        <div className="tile__sub" style={subStyle}>
-          {vm.sub}
+    <div ref={ref} className={cls.join(" ")} data-id={item.id}>
+      <div className={bare ? "badge badge--bare" : "badge"}>
+        <Icon name={icon} />
+      </div>
+      {view.pip && shown.on && !view.offline && phase !== "wait" ? (
+        <i className="pip" style={{ background: view.pip }} />
+      ) : null}
+      <div className="tile__t">
+        <div className="tile__name">{name || (item.name_auto ? shortName(item.name) : item.name)}</div>
+        <div className="tile__sub">
+          {view.lock && !hint && phase === null ? <Icon name="lock" size={12} /> : null}
+          {status}
         </div>
       </div>
-      {isCover && entity && !editMode && (
-        <CoverActions attrs={entity.attributes} onCommand={coverCommand} />
-      )}
+      {item.new ? <span className="new">neu</span> : null}
+      {pips && view.members ? (
+        <i className="pips" style={pipsStyle(view.members.on, view.members.n, shown.on)} />
+      ) : null}
     </div>
   );
+}
+
+function iconFallback(item: Item): string {
+  const d = domainOf(item.id);
+  if (d === "light") return "ceiling";
+  if (d === "cover") return "blinds";
+  return "power";
 }

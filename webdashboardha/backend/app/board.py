@@ -204,7 +204,7 @@ def build_board(
             continue  # chip override, merged below
         add_explicit(eid, dict(entry), "items")
     for gid, g in groups_seed.items():
-        merged = {k: g[k] for k in ("zone", "name", "order") if k in g}
+        merged = {k: g[k] for k in ("zone", "name", "order", "icon") if k in g}
         merged.update(local.get(gid) or {})
         merged["_group"] = True
         add_explicit(gid, merged, "groups")

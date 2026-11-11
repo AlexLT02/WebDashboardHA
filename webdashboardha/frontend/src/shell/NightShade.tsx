@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { isNight } from "../state/night";
-import type { BoardSettings } from "../state/useBoard";
+import type { Settings } from "../state/useSettings";
 
 interface Props {
-  settings: BoardSettings;
+  settings: Settings;
 }
 
 const CHECK_MS = 15000; // Minutengenau reicht — der Übergang macht den Rest.

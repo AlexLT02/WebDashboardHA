@@ -1,13 +1,18 @@
 import { wsUrl } from "./basePath";
-import { useStore, type EntityState } from "./store";
+import { useStore } from "./store";
+import type { Board, EntityState } from "./model";
 
 type ServerMessage =
-  | { type: "snapshot"; states: Record<string, EntityState>; ha_connected?: boolean }
-  | { type: "state"; entity_id: string; state: EntityState | null };
+  | { type: "hello"; version: string; ha_connected: boolean }
+  | { type: "board"; rev: number; board: Board }
+  | { type: "snapshot"; states: Record<string, EntityState> }
+  | { type: "state"; entity_id: string; state: EntityState | null }
+  | { type: "ha_status"; connected: boolean };
 
 /**
- * WebSocket-Client zum Backend mit automatischem Reconnect.
- * Empfängt Snapshots + State-Deltas und schreibt sie in den Store.
+ * WebSocket client for /ws?v=2 with automatic reconnect (04 §4.8).
+ * Order on connect: hello, board, snapshot. Before the backend has reached HA
+ * only hello arrives; the app shows its waiting screen until a board is there.
  */
 export function connectWs(): () => void {
   let ws: WebSocket | null = null;
@@ -17,7 +22,7 @@ export function connectWs(): () => void {
 
   const open = () => {
     if (closed) return;
-    ws = new WebSocket(wsUrl("/ws"));
+    ws = new WebSocket(wsUrl("/ws?v=2"));
 
     ws.onopen = () => {
       backoff = 1000;
@@ -32,10 +37,22 @@ export function connectWs(): () => void {
         return;
       }
       const store = useStore.getState();
-      if (msg.type === "snapshot") {
-        store.applySnapshot(msg.states, Boolean(msg.ha_connected));
-      } else if (msg.type === "state") {
-        store.applyState(msg.entity_id, msg.state);
+      switch (msg.type) {
+        case "hello":
+          store.applyHello(msg.version, Boolean(msg.ha_connected));
+          break;
+        case "board":
+          store.applyBoard(msg.board, msg.rev);
+          break;
+        case "snapshot":
+          store.applySnapshot(msg.states || {});
+          break;
+        case "state":
+          store.applyState(msg.entity_id, msg.state);
+          break;
+        case "ha_status":
+          store.setHaConnected(Boolean(msg.connected));
+          break;
       }
     };
 
@@ -47,14 +64,12 @@ export function connectWs(): () => void {
     };
 
     ws.onerror = () => {
-      // onclose übernimmt den Reconnect.
       ws?.close();
     };
   };
 
   open();
 
-  // Cleanup-Funktion.
   return () => {
     closed = true;
     if (reconnectTimer) window.clearTimeout(reconnectTimer);

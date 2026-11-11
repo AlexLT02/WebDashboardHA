@@ -1,32 +1,34 @@
 import { create } from "zustand";
+import type { Board, EntityState } from "./model";
 
-export interface EntityState {
-  entity_id: string;
-  state: string;
-  attributes: Record<string, unknown>;
-}
+export type { EntityState } from "./model";
 
 type HS = [number, number];
 
 interface DashStore {
-  /** Alle Entity-States, gekeyt nach entity_id. */
+  /** Watch-set states from /ws?v=2, keyed by entity_id. */
   states: Record<string, EntityState>;
-  /** Zuletzt bekannte Farbe (hs) je Entity — bleibt erhalten, wenn HA sie beim
-   *  Ausschalten nicht mehr mitschickt, damit das Farbrad nicht in die Mitte springt. */
+  /** Last known hs colour per entity (HA drops it when the light goes off). */
   lastColors: Record<string, HS>;
-  /** Zuletzt bekannte Weißtemperatur (Kelvin) je Entity — selber Grund. */
+  /** Last known colour temperature (kelvin) per entity. */
   lastTemps: Record<string, number>;
-  /** WebSocket zum Backend verbunden? */
+  board: Board | null;
+  rev: number;
+  /** Backend version from the hello message. */
+  version: string | null;
+  /** WebSocket to the add-on backend is open. */
   connected: boolean;
-  /** Backend zu HA verbunden? */
+  /** Backend is connected to HA. */
   haConnected: boolean;
 
-  applySnapshot: (states: Record<string, EntityState>, haConnected: boolean) => void;
+  applyHello: (version: string, haConnected: boolean) => void;
+  applyBoard: (board: Board, rev: number) => void;
+  applySnapshot: (states: Record<string, EntityState>) => void;
   applyState: (entityId: string, state: EntityState | null) => void;
   setConnected: (connected: boolean) => void;
+  setHaConnected: (connected: boolean) => void;
 }
 
-/** hs_color aus einem State ziehen, wenn es eine echte Farbe ist (Sättigung > 0). */
 function colorOf(state: EntityState): HS | null {
   const hs = state.attributes.hs_color;
   if (Array.isArray(hs) && hs.length === 2 && typeof hs[1] === "number" && hs[1] > 0) {
@@ -35,7 +37,6 @@ function colorOf(state: EntityState): HS | null {
   return null;
 }
 
-/** Weißtemperatur (Kelvin) aus einem State ziehen, falls vorhanden. */
 function tempOf(state: EntityState): number | null {
   const k = state.attributes.color_temp_kelvin;
   return typeof k === "number" ? k : null;
@@ -45,10 +46,17 @@ export const useStore = create<DashStore>((set) => ({
   states: {},
   lastColors: {},
   lastTemps: {},
+  board: null,
+  rev: 0,
+  version: null,
   connected: false,
   haConnected: false,
 
-  applySnapshot: (states, haConnected) =>
+  applyHello: (version, haConnected) => set({ version, haConnected }),
+
+  applyBoard: (board, rev) => set({ board: { ...board, rev }, rev }),
+
+  applySnapshot: (states) =>
     set((prev) => {
       const lastColors = { ...prev.lastColors };
       const lastTemps = { ...prev.lastTemps };
@@ -58,7 +66,7 @@ export const useStore = create<DashStore>((set) => ({
         const t = tempOf(states[id]);
         if (t) lastTemps[id] = t;
       }
-      return { states, haConnected, lastColors, lastTemps };
+      return { states, lastColors, lastTemps, haConnected: true };
     }),
 
   applyState: (entityId, state) =>
@@ -78,19 +86,27 @@ export const useStore = create<DashStore>((set) => ({
     }),
 
   setConnected: (connected) => set({ connected }),
+  setHaConnected: (haConnected) => set({ haConnected }),
 }));
 
-/** Selektor-Hook für ein einzelnes Entity (re-rendert nur bei dessen Änderung). */
-export function useEntity(entityId: string): EntityState | undefined {
-  return useStore((s) => s.states[entityId]);
+/** Selector hook for a single entity (re-renders only when it changes). */
+export function useEntity(entityId: string | undefined): EntityState | undefined {
+  return useStore((s) => (entityId ? s.states[entityId] : undefined));
 }
 
-/** Zuletzt bekannte Farbe (hs) eines Entities, falls vorhanden. */
 export function useLastColor(entityId: string): HS | undefined {
   return useStore((s) => s.lastColors[entityId]);
 }
 
-/** Zuletzt bekannte Weißtemperatur (Kelvin) eines Entities, falls vorhanden. */
 export function useLastTemp(entityId: string): number | undefined {
   return useStore((s) => s.lastTemps[entityId]);
+}
+
+/** Non-reactive getter for pure helpers. */
+export function getState(entityId: string): EntityState | undefined {
+  return useStore.getState().states[entityId];
+}
+
+export function useBoard(): Board | null {
+  return useStore((s) => s.board);
 }

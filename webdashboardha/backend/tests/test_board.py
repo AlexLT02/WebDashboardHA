@@ -30,6 +30,17 @@ def test_zone_tile_counts(seed, store, registry, states):
     assert counts == {"wohnbereich": 18, "kueche": 4, "pc": 8, "bett": 9, "bad": 5}
 
 
+def test_seed_icons_reach_items_and_chips(seed, store, registry, states):
+    """P2: chip/favourite groups and LED strips carry the mockup icons (seed `icon`)."""
+    items = _build(seed, store, registry, states).data["items"]
+    assert items["light.zone_tv"]["icon"] == "strip"
+    assert items["light.zone_bad"]["icon"] == "bath"
+    assert items["light.zone_sofa_deckenlicht"]["icon"] == "ceiling"
+    assert items["virtual.pc_platz"]["icon"] == "monitor"
+    assert items["light.regal_alex_wohnung"]["icon"] == "strip"
+    assert items["light.sofa_alex"]["icon"] == "lamp"  # default for func ambiente
+
+
 def test_sections_in_order_and_hidden_excluded(seed, store, registry, states):
     data = _build(seed, store, registry, states).data
     wb = data["zones"][0]

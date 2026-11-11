@@ -1,40 +1,23 @@
-.dragbar {
-  position: relative;
-  width: 100%;
-  border-radius: 14px;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: none; /* Scrollen unterdrücken, während gezogen wird */
+/* Slider (ds.css .bar). The wrapper widens the hit area to >= 56 px. */
+.barhit { position: relative; margin: 2px 0 -6px; padding: 6px 0; }
+.bar { position: relative; height: 56px; border-radius: 14px; background: #262b36; overflow: hidden; }
+.bar__fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--on); min-width: 8px; }
+.bar__fill::after {
+  content: ""; position: absolute; right: 7px; top: 14px; bottom: 14px; width: 4px;
+  border-radius: 2px; background: rgba(58, 29, 16, 0.55);
 }
-
-/* Füllbalken-Modus (Helligkeit): dunkler Track, farbiger Füllbalken links. */
-.dragbar--fill {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  overflow: hidden;
+.bar--k {
+  height: 44px; border-radius: 12px;
+  background: linear-gradient(90deg, #c7824c 0%, #d6ab80 30%, #cfc6b8 55%, #b7c0cf 80%, #9fb5d8 100%);
 }
-.dragbar__fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  border-radius: 13px 0 0 13px;
-  min-width: 4px;
+.bar--hue {
+  height: 44px; border-radius: 12px;
+  background: linear-gradient(90deg, #ff5a5a, #ffd24c, #4cd07d, #4ce0d0, #4c8dff, #a97bff, #ff6ac2, #ff5a5a);
 }
-
-/* Pick-Modus (Farbe/Weißton): voller Verlauf als Track, runder Thumb. */
-.dragbar--pick {
-  border: 1px solid rgba(0, 0, 0, 0.25);
-}
-.dragbar__thumb {
-  position: absolute;
-  top: 50%;
-  width: 20px;
-  height: 20px;
-  margin: -10px 0 0 -10px;
-  border-radius: 50%;
-  background: #fff;
-  border: 2px solid rgba(0, 0, 0, 0.3);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  pointer-events: none;
+.bar--pos { height: 44px; border-radius: 12px; }
+.bar--pos .bar__fill { background: var(--cool); }
+.bar--pos .bar__fill::after { top: 10px; bottom: 10px; background: rgba(13, 16, 22, 0.45); }
+.bar__mark {
+  position: absolute; top: 6px; bottom: 6px; width: 6px; margin-left: -3px; border-radius: 3px;
+  background: #fff; box-shadow: 0 0 0 2px rgba(13, 16, 22, 0.75);
 }

@@ -1,273 +1,138 @@
 import { useEffect, useState } from "react";
-import { fetchHostInfo } from "../state/dashboards";
-import { DURATION_UNITS, splitDuration, toSeconds, type DurationUnit } from "../state/night";
-import { DragBar } from "../controls/DragBar";
 import { Dialog } from "./Dialog";
-import type { BoardSettings } from "../state/useBoard";
+import { Press } from "../controls/Press";
+import { DragBar } from "../controls/DragBar";
+import { fetchHostInfo } from "../state/api";
+import { DURATION_UNITS, splitDuration, toSeconds, type DurationUnit } from "../state/night";
+import { useSettings, useSettingsStore, type Settings } from "../state/useSettings";
 
-interface Props {
-  settings: BoardSettings;
-  onSetting: <K extends keyof BoardSettings>(key: K, value: BoardSettings[K]) => void;
-  onClose: () => void;
-}
-
-const DIM_GRADIENT = "linear-gradient(90deg,rgba(110,168,254,0.35),#0b0d12)";
-
-function Switch({
-  on,
-  onToggle,
-  disabled,
-  label,
-}: {
-  on: boolean;
-  onToggle?: () => void;
-  disabled?: boolean;
-  label: string;
-}) {
+function Toggle({ on, label, onToggle }: { on: boolean; label: string; onToggle: () => void }) {
   return (
-    <button
-      type="button"
-      className={`dlg__switch${on ? " is-on" : ""}`}
-      aria-label={label}
-      aria-pressed={on}
-      disabled={disabled}
-      style={disabled ? { opacity: 0.7, cursor: "default" } : undefined}
-      onClick={onToggle}
-    >
+    <Press className={`dlg__switch${on ? " is-on" : ""}`} label={label} onPress={onToggle}>
       <span className="dlg__switch-knob" />
-    </button>
+    </Press>
   );
 }
 
-export function SettingsDialog({ settings, onSetting, onClose }: Props) {
-  // Kiosk-Adresse: die echte Host-IP kennt nur der Supervisor. Klappt das nicht
-  // (Dev-Modus), tut es der Hostname der aktuellen Seite genauso gut.
+function EntityField({ k, label, placeholder }: { k: keyof Settings; label: string; placeholder: string }) {
+  const settings = useSettings();
+  const set = useSettingsStore((s) => s.set);
+  return (
+    <>
+      <div className="dlg__label">{label}</div>
+      <input
+        type="text"
+        className="dlg__input"
+        value={String(settings[k])}
+        placeholder={placeholder}
+        spellCheck={false}
+        autoCapitalize="off"
+        autoCorrect="off"
+        onChange={(e) => set(k, e.target.value.trim() as never)}
+      />
+      <div className="dlg__gap--sm" />
+    </>
+  );
+}
+
+/**
+ * Settings (existing dialog, shortened: dark design, screen saver and kiosk are
+ * gone, D16). Night shade options stay until P6 replaces the shade (D13).
+ */
+export function SettingsDialog() {
+  const settings = useSettings();
+  const set = useSettingsStore((s) => s.set);
   const [kioskUrl, setKioskUrl] = useState<string | null>(null);
 
   useEffect(() => {
     let alive = true;
     fetchHostInfo()
-      .then((info) => {
-        if (!alive) return;
-        setKioskUrl(`http://${info.host ?? window.location.hostname}:${info.port}`);
-      })
-      .catch(() => {
-        if (alive) setKioskUrl(`http://${window.location.hostname}:8099`);
-      });
+      .then((info) => alive && setKioskUrl(`http://${info.host || window.location.hostname}:${info.port}`))
+      .catch(() => alive && setKioskUrl(`http://${window.location.hostname}:8099`));
     return () => {
       alive = false;
     };
   }, []);
 
   const fade = splitDuration(settings.nightFadeSec);
-  const dimPercent = Math.round(settings.nightDim * 100);
 
   return (
-    <Dialog title="Einstellungen" onClose={onClose}>
-      <div className="dlg__setting">
-        <div>
-          <div className="dlg__setting-t">Dunkles Design</div>
-          <div className="dlg__setting-d">Für das Wand-iPad dauerhaft aktiv</div>
-        </div>
-        <Switch on disabled label="Dunkles Design" />
-      </div>
-
-      <div className="dlg__setting">
-        <div>
-          <div className="dlg__setting-t">Bildschirmschoner (Uhr)</div>
-          <div className="dlg__setting-d">Nach 1 Min Inaktivität große Uhr zeigen</div>
-        </div>
-        <Switch
-          on={settings.screensaver}
-          label="Bildschirmschoner"
-          onToggle={() => onSetting("screensaver", !settings.screensaver)}
-        />
-      </div>
-
-      <div className="dlg__setting">
-        <div>
-          <div className="dlg__setting-t">Kiosk / Vollbild</div>
-          <div className="dlg__setting-d">Vollbild anfordern (sofern unterstützt)</div>
-        </div>
-        <Switch
-          on={settings.kiosk}
-          label="Kiosk"
-          onToggle={() => onSetting("kiosk", !settings.kiosk)}
-        />
-      </div>
-
-      <div className="dlg__setting">
-        <div>
+    <Dialog name="Einstellungen" idleMs={120000}>
+      <div className="dlg__scroll">
+        <div className="dlg__setting">
           <div className="dlg__setting-t">Nachtmodus</div>
           <div className="dlg__setting-d">Anzeige im Zeitfenster abdunkeln</div>
+          <Toggle on={settings.night} label="Nachtmodus" onToggle={() => set("night", !settings.night)} />
         </div>
-        <Switch
-          on={settings.night}
-          label="Nachtmodus"
-          onToggle={() => onSetting("night", !settings.night)}
-        />
-      </div>
-
-      {settings.night && (
-        <>
-          <div className="dlg__gap--sm" />
-          <div className="dlg__duo">
-            <div>
-              <div className="dlg__label">Beginnt</div>
-              <input
-                type="time"
-                className="dlg__input"
-                value={settings.nightStart}
-                onChange={(e) => onSetting("nightStart", e.target.value)}
-              />
+        {settings.night ? (
+          <>
+            <div className="dlg__duo">
+              <div>
+                <div className="dlg__label">Beginnt</div>
+                <input type="time" className="dlg__input" value={settings.nightStart} onChange={(e) => set("nightStart", e.target.value)} />
+              </div>
+              <div>
+                <div className="dlg__label">Endet</div>
+                <input type="time" className="dlg__input" value={settings.nightEnd} onChange={(e) => set("nightEnd", e.target.value)} />
+              </div>
             </div>
-            <div>
-              <div className="dlg__label">Endet</div>
-              <input
-                type="time"
-                className="dlg__input"
-                value={settings.nightEnd}
-                onChange={(e) => onSetting("nightEnd", e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="dlg__gap" />
-
-          <div className="dlg__label">Stärke · {dimPercent}% abgedunkelt</div>
-          <DragBar
-            mode="fill"
-            gradient={DIM_GRADIENT}
-            value={settings.nightDim}
-            aria-label="Stärke der Abdunklung"
-            onChange={(v) => onSetting("nightDim", Math.round(v * 100) / 100)}
-          />
-          <div className="dlg__gap" />
-
-          <div className="dlg__label">Übergang</div>
-          <div className="dlg__duo">
-            <input
-              type="number"
-              className="dlg__input"
-              min={0}
-              value={fade.value}
-              onChange={(e) => onSetting("nightFadeSec", toSeconds(Number(e.target.value), fade.unit))}
+            <div className="dlg__gap" />
+            <div className="dlg__label">{`Stärke, ${Math.round(settings.nightDim * 100)} % abgedunkelt`}</div>
+            <DragBar
+              mode="fill"
+              value={settings.nightDim}
+              throttleMs={0}
+              timeoutMs={1000}
+              confirm={(t, r) => r !== null && Math.abs(t - r) < 0.02}
+              label="Stärke der Abdunklung"
+              onCommit={(v) => set("nightDim", Math.round(v * 100) / 100)}
             />
-            <select
-              className="dlg__select"
-              value={fade.unit}
-              aria-label="Einheit des Übergangs"
-              onChange={(e) =>
-                onSetting("nightFadeSec", toSeconds(fade.value, e.target.value as DurationUnit))
-              }
-            >
-              {DURATION_UNITS.map((u) => (
-                <option key={u.key} value={u.key}>
-                  {u.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="dlg__hint">
-            So lange dauert das Ab- und wieder Aufblenden an den Grenzen des Fensters.
-          </div>
-        </>
-      )}
+            <div className="dlg__gap" />
+            <div className="dlg__label">Übergang</div>
+            <div className="dlg__duo">
+              <input
+                type="number"
+                className="dlg__input"
+                min={0}
+                value={fade.value}
+                onChange={(e) => set("nightFadeSec", toSeconds(Number(e.target.value), fade.unit))}
+              />
+              <select
+                className="dlg__select"
+                value={fade.unit}
+                aria-label="Einheit des Übergangs"
+                onChange={(e) => set("nightFadeSec", toSeconds(fade.value, e.target.value as DurationUnit))}
+              >
+                {DURATION_UNITS.map((u) => (
+                  <option key={u.key} value={u.key}>
+                    {u.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="dlg__gap" />
+          </>
+        ) : null}
 
-      <div className="dlg__gap" />
-      <div className="dlg__label">Warnmeldung — HA-Helfer</div>
-      <div className="dlg__hint">
-        Entitäten, die das Vollbild-Overlay steuern. Switch an = anzeigen.
-      </div>
-      <div className="dlg__gap--sm" />
-      <div className="dlg__label">Switch (an = anzeigen)</div>
-      <input
-        type="text"
-        className="dlg__input"
-        value={settings.alertSwitchEntity}
-        placeholder="input_boolean.dashboard_alert"
-        spellCheck={false}
-        autoCapitalize="off"
-        autoCorrect="off"
-        onChange={(e) => onSetting("alertSwitchEntity", e.target.value.trim())}
-      />
-      <div className="dlg__gap--sm" />
-      <div className="dlg__label">Text</div>
-      <input
-        type="text"
-        className="dlg__input"
-        value={settings.alertTextEntity}
-        placeholder="input_text.dashboard_alert_text"
-        spellCheck={false}
-        autoCapitalize="off"
-        autoCorrect="off"
-        onChange={(e) => onSetting("alertTextEntity", e.target.value.trim())}
-      />
-      <div className="dlg__gap--sm" />
-      <div className="dlg__label">Dringlichkeit</div>
-      <input
-        type="text"
-        className="dlg__input"
-        value={settings.alertLevelEntity}
-        placeholder="input_select.dashboard_alert_level"
-        spellCheck={false}
-        autoCapitalize="off"
-        autoCorrect="off"
-        onChange={(e) => onSetting("alertLevelEntity", e.target.value.trim())}
-      />
-      <div className="dlg__hint">Stufen: wichtig (rot) · warnung (gelb) · hinweis (hellblau).</div>
+        <div className="dlg__label">Warnmeldung, HA-Helfer</div>
+        <div className="dlg__hint">Entitäten, die die Warnmeldung steuern. Schalter an heißt anzeigen.</div>
+        <div className="dlg__gap--sm" />
+        <EntityField k="alertSwitchEntity" label="Schalter" placeholder="input_boolean.dashboard_alert" />
+        <EntityField k="alertTextEntity" label="Text" placeholder="input_text.dashboard_alert_text" />
+        <EntityField k="alertLevelEntity" label="Dringlichkeit" placeholder="input_select.dashboard_alert_level" />
+        <EntityField k="alertSlotPrefix" label="Register, Slot-Präfix" placeholder="input_text.wdh_slot_" />
+        <EntityField k="alertIndexEntity" label="Index" placeholder="input_number.wdh_index" />
+        <EntityField k="alertAckScript" label="Quittier-Skript" placeholder="script.wdh_ack" />
 
-      <div className="dlg__gap" />
-      <div className="dlg__label">Mehrere Warnungen — Register</div>
-      <div className="dlg__hint">
-        Sind die Slot-Helfer da, laufen mehrere Meldungen gleichzeitig als Laufschrift.
-        Feld leeren = nur eine Meldung (alte Betriebsart).
-      </div>
-      <div className="dlg__gap--sm" />
-      <div className="dlg__label">Slot-Präfix</div>
-      <input
-        type="text"
-        className="dlg__input"
-        value={settings.alertSlotPrefix}
-        placeholder="input_text.wdh_slot_"
-        spellCheck={false}
-        autoCapitalize="off"
-        autoCorrect="off"
-        onChange={(e) => onSetting("alertSlotPrefix", e.target.value.trim())}
-      />
-      <div className="dlg__gap--sm" />
-      <div className="dlg__label">Index (welche Meldung ist dran)</div>
-      <input
-        type="text"
-        className="dlg__input"
-        value={settings.alertIndexEntity}
-        placeholder="input_number.wdh_index"
-        spellCheck={false}
-        autoCapitalize="off"
-        autoCorrect="off"
-        onChange={(e) => onSetting("alertIndexEntity", e.target.value.trim())}
-      />
-      <div className="dlg__gap--sm" />
-      <div className="dlg__label">Quittier-Skript</div>
-      <input
-        type="text"
-        className="dlg__input"
-        value={settings.alertAckScript}
-        placeholder="script.wdh_ack"
-        spellCheck={false}
-        autoCapitalize="off"
-        autoCorrect="off"
-        onChange={(e) => onSetting("alertAckScript", e.target.value.trim())}
-      />
-
-      <div className="dlg__gap" />
-      <div className="dlg__label">Adresse</div>
-      <div className="dlg__row">
-        <span className="dlg__row-k">Kiosk (iPad)</span>
-        <span className="dlg__row-v dlg__row-v--pick">{kioskUrl ?? "…"}</span>
-      </div>
-      <div className="dlg__row">
-        <span className="dlg__row-k">Diese Seite</span>
-        <span className="dlg__row-v dlg__row-v--pick">{window.location.host}</span>
+        <div className="dlg__label">Adresse</div>
+        <div className="dlg__row">
+          <span className="dlg__row-k">Kiosk (iPad)</span>
+          <span className="dlg__row-v">{kioskUrl || "…"}</span>
+        </div>
+        <div className="dlg__row">
+          <span className="dlg__row-k">Diese Seite</span>
+          <span className="dlg__row-v">{window.location.host}</span>
+        </div>
       </div>
     </Dialog>
   );

@@ -1,0 +1,142 @@
+/* Full-screen warning (moved unchanged from the 1.4.2 App.css; classes renamed
+   .alert -> .wov because ds.css uses .alert for the Lage blocks). Above the
+   night shade (z 300): a warning must come through at full size and colour.
+   Long-form offsets instead of `inset` (Safari < 14.1). Banner variant: P6. */
+.wov {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 500;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 32px;
+  background: rgba(6, 8, 12, 0.94);
+  -webkit-animation: fade-in 0.25s ease;
+  animation: fade-in 0.25s ease;
+}
+.wov__body {
+  max-width: 82%;
+  text-align: center;
+}
+/* Only this block pulses (opacity, compositor). The OK button stays calm. */
+.wov__pulse {
+  -webkit-animation-name: wov-pulse;
+  animation-name: wov-pulse;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+}
+.wov__icon svg {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto;
+  color: inherit;
+}
+/* Marquee for several warnings: all texts in one line, the whole track moves so
+   the active one is centred. inline-block + nowrap instead of flex gap. */
+.wov__marquee {
+  margin-top: 20px;
+  overflow: hidden;
+}
+.wov__marquee--multi {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+/* `position: relative` is load-bearing: it makes the track the offsetParent of
+   the segments, so `seg.offsetLeft` is measured inside the track. Without it,
+   Safari 12 measures against `.wov` and the text lands far left of center
+   (Chrome hides the bug because `will-change: transform` already does this). */
+.wov__track {
+  position: relative;
+  white-space: nowrap;
+  -webkit-transition: -webkit-transform 0.55s ease;
+  transition: transform 0.55s ease;
+  will-change: transform;
+}
+.wov__seg {
+  display: inline-block;
+  padding: 0 46px;
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  opacity: 0.28;
+  -webkit-transition: opacity 0.55s ease;
+  transition: opacity 0.55s ease;
+}
+.wov__seg.is-current {
+  opacity: 1;
+}
+.wov__seg--wichtig { color: #ff6b6b; }
+.wov__seg--warnung { color: #f4c542; }
+.wov__seg--hinweis { color: #7cc4ff; }
+.wov__dots {
+  margin-top: 26px;
+  text-align: center;
+}
+.wov__dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin: 0 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.3;
+}
+.wov__dot.is-current { opacity: 1; }
+/* OK 240 x 64, at least 120 px below the text (02 §6). */
+.wov__ok {
+  display: inline-block;
+  margin-top: 120px;
+  width: 240px;
+  height: 64px;
+  line-height: 62px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  background: #222733;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+}
+.wov__ok.is-press { background: #2a303c; }
+.wov--wichtig { color: #ff6b6b; }
+.wov--wichtig .wov__pulse { -webkit-animation-duration: 0.8s; animation-duration: 0.8s; }
+.wov--warnung { color: #f4c542; }
+.wov--warnung .wov__pulse { -webkit-animation-duration: 1.4s; animation-duration: 1.4s; }
+.wov--hinweis { color: #7cc4ff; }
+.wov--hinweis .wov__pulse { -webkit-animation-duration: 2.4s; animation-duration: 2.4s; }
+@-webkit-keyframes wov-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+@keyframes wov-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Night shade (behaviour unchanged until P6). */
+.nightshade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 300;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-timing-function: linear;
+  transition-timing-function: linear;
+}
