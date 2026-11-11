@@ -107,6 +107,13 @@ describe("climate (D8)", () => {
     expect(tileView(k, ctx([st("climate.k", "off", { temperature: 21 })])).status).toBe("Aus");
     expect(tileView(k, ctx([st("climate.k", "cool", { temperature: 21 })]))).toMatchObject({ on: true, status: "Kühlt auf 21°" });
   });
+  it("only the allowlisted air conditioner gets a switch badge (PL B2)", () => {
+    const ac = item("climate.klima", "climate");
+    expect(tileView(ac, ctx([st("climate.klima", "off", { temperature: 21 })]))).toMatchObject({ badge: true, on: false });
+    expect(tileView(ac, ctx([st("climate.klima", "cool", { temperature: 21 })]))).toMatchObject({ badge: true, on: true });
+    expect(tileView(item("climate.k", "climate"), ctx([st("climate.k", "cool")])).badge).toBe(false);
+    expect(tileView(h, ctx([st("climate.t", "heat_cool", { temperature: 23 }), st("sensor.ist", "22")], { heating })).badge).toBe(false);
+  });
 });
 
 describe("media and music", () => {

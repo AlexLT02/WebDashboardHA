@@ -9,7 +9,7 @@ import type { Board, EntityState, LageCfg, StateGetter } from "./model";
 
 export type Tone = "red" | "amber" | "warm";
 
-export type LageTap = { t: "contacts" } | { t: "active" } | { t: "item"; id: string } | null;
+export type LageTap = { t: "contacts" } | { t: "active" } | { t: "vacuum" } | { t: "item"; id: string } | null;
 
 export interface LageBlock {
   key: string;
@@ -171,12 +171,13 @@ const VACUUM_ROW: Record<string, string> = {
 
 function vacuum(cfg: LageCfg, get: StateGetter): Entry {
   const st = cfg.vacuum ? get(cfg.vacuum as string) : undefined;
-  const row: LageRow = { key: cfg.key, icon: cfg.icon, name: cfg.name, value: "offline", tap: null };
+  const tap: LageTap = { t: "vacuum" };
+  const row: LageRow = { key: cfg.key, icon: cfg.icon, name: cfg.name, value: "offline", tap };
   if (!st || st.state === "unavailable") return { key: cfg.key, row };
   row.value = VACUUM_ROW[st.state] || st.state;
   const err = cfg.error ? get(cfg.error as string)?.state : undefined;
   if (err && err !== "no_error" && err !== "unknown" && err !== "unavailable") {
-    return { key: cfg.key, row, block: { key: cfg.key, tone: "amber", icon: cfg.icon, head: cfg.name, big: "Fehler", sub: err.replace(/_/g, " "), tap: null } };
+    return { key: cfg.key, row, block: { key: cfg.key, tone: "amber", icon: cfg.icon, head: cfg.name, big: "Fehler", sub: err.replace(/_/g, " "), tap } };
   }
   if (st.state === "cleaning" || st.state === "returning") {
     const room = cfg.room ? get(cfg.room as string)?.state : undefined;
@@ -186,7 +187,7 @@ function vacuum(cfg: LageCfg, get: StateGetter): Entry {
       block: {
         key: cfg.key, tone: "warm", icon: cfg.icon, head: cfg.name,
         big: st.state === "returning" ? "Rückfahrt" : room && room !== "unknown" ? room : "Saugt",
-        sub: st.state === "returning" ? "fährt zur Station" : "saugt", progress: prog, tap: null,
+        sub: st.state === "returning" ? "fährt zur Station" : "saugt", progress: prog, tap,
       },
     };
   }

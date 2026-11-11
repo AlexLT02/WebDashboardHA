@@ -149,6 +149,30 @@ function applyService(domain: string, service: string, entity: any, data: any = 
       else if (service === "turn_off") setState(id, "off");
       else if (service === "volume_mute") setState(id, null, { is_volume_muted: !!data.is_volume_muted });
       else if (service === "volume_set") setState(id, null, { volume_level: data.volume_level });
+      else if (service === "media_play_pause") setState(id, states[id]?.state === "playing" ? "paused" : "playing");
+    } else if (domain === "climate") {
+      if (service === "set_temperature") setState(id, null, { temperature: data.temperature });
+      else if (service === "set_hvac_mode") setState(id, data.hvac_mode);
+    } else if (domain === "timer") {
+      const t = clone(states[id] || { entity_id: id, state: "idle", attributes: {} });
+      t.state = service === "start" ? "active" : "idle";
+      t.finishes_ts = service === "start" ? Date.now() + 30 * 60000 : null;
+      t.lc_ts = Date.now();
+      states[id] = t;
+      broadcast({ type: "state", entity_id: id, state: t });
+    } else if (domain === "input_select" && service === "select_option") {
+      setState(id, data.option);
+    } else if (domain === "vacuum") {
+      if (service === "start") setState(id, "cleaning");
+      else if (service === "pause") setState(id, "paused");
+      else if (service === "return_to_base") {
+        setState(id, "returning");
+        setTimeout(() => setState(id, "docked"), 3000);
+      } else if (service === "set_fan_speed") setState(id, null, { fan_speed: data.fan_speed });
+    } else if (domain === "dreame_vacuum" && service === "vacuum_clean_segment") {
+      setState(id, "cleaning");
+    } else if (domain === "button" && service === "press") {
+      for (const vid in board.items) if (board.items[vid].unload_button === id && board.items[vid].state) setState(board.items[vid].state, "off");
     } else if (domain === "cover") {
       if (service === "open_cover" || service === "close_cover") {
         const opening = service === "open_cover";
@@ -156,8 +180,6 @@ function applyService(domain: string, service: string, entity: any, data: any = 
         setTimeout(() => setState(id, opening ? "open" : "closed", opening ? undefined : undefined), 1500);
       } else if (service === "stop_cover") setState(id, "open");
       else if (service === "set_cover_position") setState(id, data.position > 0 ? "open" : "closed", { current_position: data.position });
-    } else if (domain === "climate" && service === "set_temperature") {
-      setState(id, null, { temperature: data.temperature });
     } else if (domain === "scene" && service === "turn_on" && id === `scene.${board.undo_scene_id || "wdh_undo"}`) {
       for (const sid in sceneSnapshot) {
         const s = sceneSnapshot[sid];

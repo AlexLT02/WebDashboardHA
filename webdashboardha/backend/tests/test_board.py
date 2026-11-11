@@ -148,6 +148,31 @@ def test_kinds_features_cloud(seed, store, registry, states):
     assert items["switch.alex_wohnung_monitore"]["power"] == "sensor.alex_wohnung_monitore_leistung"
 
 
+def test_washer_is_a_system_appliance(seed, store, registry, states):
+    """P4 (D18): the washing machine is an item for the Lage popup, never a zone tile or inbox entry."""
+    board = _build(seed, store, registry, states)
+    data = board.data
+    w = data["items"]["virtual.waesche"]
+    assert w["kind"] == "appliance" and w["system"] is True and w["zone"] is None
+    assert w["name"] == "Wäsche" and w["icon"] == "washer" and w["count"] is False
+    assert w["state"] == "sensor.waschmaschiene_alex_zustand"
+    assert w["unload_button"].startswith("button.") and "power" not in w
+    assert "virtual.waesche" not in {i["id"] for i in data["inbox"]}
+    assert "virtual.waesche" not in {i for z in data["zones"] for i in _tile_ids(z) + z["chips"]}
+    lage = next(b for b in data["start"]["lage"] if b["key"] == "waesche")
+    assert lage["virtual"] == "virtual.waesche"
+    for eid in ("sensor.waschmaschiene_alex_zustand", "sensor.waschmaschiene_alex_verbleibende_zeit",
+                "button.alex_wohnung_waschmaschiene_alex_als_entladen_markieren"):
+        assert eid in board.watch, eid
+
+
+def test_washer_orphaned_when_sensor_missing(seed, store, registry, states):
+    states = {k: v for k, v in states.items() if k != "sensor.waschmaschiene_alex_zustand"}
+    data = _build(seed, store, registry, states).data
+    assert "virtual.waesche" not in data["items"]
+    assert {"id": "sensor.waschmaschiene_alex_zustand", "where": "virtual.waesche"} in data["orphans"]
+
+
 # ---- filter chain, one rule per test (synthetic) -------------------------------------
 
 

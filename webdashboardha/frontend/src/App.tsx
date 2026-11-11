@@ -4,7 +4,7 @@ import { useStore } from "./state/store";
 import { useSettingsStore } from "./state/useSettings";
 import { setClockOffset, startMinuteClock } from "./state/clock";
 import { installIdleTracking, RETURN_MS, useIdleTimer } from "./state/idle";
-import { useUi, type Popup, type Screen } from "./state/ui";
+import { useUi, type AllTab, type Popup, type Screen } from "./state/ui";
 import { installGlobalGuards } from "./controls/inputLock";
 import { showOffResult } from "./state/notice";
 import { beginPending } from "./state/pending";
@@ -18,8 +18,9 @@ import { AllScreen } from "./screens/AllScreen";
 import { PopupHost } from "./dialogs/PopupHost";
 
 /**
- * Deep links for renders and touch tests: ?screen=start|zone:<id>|alle|alle:neu
- * &popup=<id>|covers|contacts|active|service|kg:ambiente|kg:<group id>&now=<ISO>.
+ * Deep links for renders and touch tests: ?screen=start|zone:<id>|alle|alle:<tab>
+ * &popup=<id>|covers|contacts|active|vacuum|service|settings|orphans|kg:ambiente|kg:<group id>
+ * |edit:<id>(&from=fav)&edit=1&now=<ISO>.
  * Only in dev/mock builds (import.meta.env.DEV), never in the add-on bundle.
  */
 function applyDeepLink(): void {
@@ -35,15 +36,21 @@ function applyDeepLink(): void {
   const screen = q.get("screen");
   let s: Screen | null = null;
   if (screen === "start") s = { t: "start" };
-  else if (screen === "alle" || screen === "alle:neu") s = { t: "alle", tab: screen === "alle:neu" ? "neu" : undefined };
+  else if (screen === "alle") s = { t: "alle" };
+  else if (screen && screen.indexOf("alle:") === 0) s = { t: "alle", tab: screen.slice(5) as AllTab };
   else if (screen && screen.indexOf("zone:") === 0) s = { t: "zone", id: screen.slice(5) };
   if (s) useUi.setState({ screen: s });
+  if (q.get("edit") === "1") useUi.getState().startEdit();
   const popup = q.get("popup");
   if (popup) {
     let p: Popup;
-    if (popup === "covers" || popup === "contacts" || popup === "active" || popup === "service" || popup === "settings") {
+    if (
+      popup === "covers" || popup === "contacts" || popup === "active" || popup === "service" ||
+      popup === "settings" || popup === "vacuum" || popup === "orphans"
+    ) {
       p = { t: popup };
-    } else if (popup === "kg:ambiente") p = { t: "kg", role: "ambiente" };
+    } else if (popup.indexOf("edit:") === 0) p = { t: "edit", id: popup.slice(5), from: q.get("from") === "fav" ? "fav" : "zone" };
+    else if (popup === "kg:ambiente") p = { t: "kg", role: "ambiente" };
     else if (popup.indexOf("kg:") === 0) p = { t: "kg", role: "group", id: popup.slice(3) };
     else p = { t: "item", id: popup, name: q.get("name") || undefined };
     useUi.setState({ popup: p });

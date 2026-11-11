@@ -70,13 +70,23 @@ export function DragBar(p: Props) {
     };
     let latest = 0;
     let trail: number | undefined;
+    let finalTimer: number | undefined;
     const tick = () => {
       trail = undefined;
       const c = cfg.current;
       if (s.dragging && c.throttleMs > 0) send(latest, false);
     };
+    const sendFinal = () => {
+      finalTimer = undefined;
+      send(latest, true);
+    };
     const start = (x: number) => {
       if (cfg.current.disabled) return false;
+      // A pending final value of the previous drag goes out first (keeps the order).
+      if (finalTimer !== undefined) {
+        window.clearTimeout(finalTimer);
+        sendFinal();
+      }
       s.dragging = true;
       s.last = -1;
       latest = valueAt(x);
@@ -102,7 +112,11 @@ export function DragBar(p: Props) {
       trail = undefined;
       resumeIdle("drag");
       s.waitUntil = Date.now() + cfg.current.timeoutMs;
-      send(latest, true);
+      // The final value also respects the throttle, so a drag never exceeds
+      // one call per throttleMs (music: at most 4 per second, 04 §6 P4).
+      const wait = cfg.current.throttleMs > 0 && s.last !== -1 ? cfg.current.throttleMs - (Date.now() - s.sentAt) : 0;
+      if (wait > 0) finalTimer = window.setTimeout(sendFinal, wait);
+      else send(latest, true);
       window.clearTimeout(s.timer);
       s.timer = window.setTimeout(() => {
         if (!s.dragging) show(null);
@@ -147,6 +161,11 @@ export function DragBar(p: Props) {
       el.removeEventListener("mousedown", onMouseDown);
       window.clearTimeout(trail);
       window.clearTimeout(s.timer);
+      // Popup closed right after release: the final value still goes out.
+      if (finalTimer !== undefined) {
+        window.clearTimeout(finalTimer);
+        sendFinal();
+      }
       if (s.dragging) resumeIdle("drag");
     };
   }, []);

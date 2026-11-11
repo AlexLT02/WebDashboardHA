@@ -4,7 +4,11 @@ import { LightPopup } from "./popups/LightPopup";
 import { SwitchPopup } from "./popups/SwitchPopup";
 import { GroupPopup } from "./popups/GroupPopup";
 import { CoverPopup } from "./popups/CoverPopup";
-import { InfoPopup } from "./popups/InfoPopup";
+import { HeatingPopup, SimpleClimatePopup } from "./popups/ClimatePopup";
+import { MediaPopup, TvPopup } from "./popups/MediaPopup";
+import { MusicPopup } from "./popups/MusicPopup";
+import { VacuumPopup } from "./popups/VacuumPopup";
+import { AppliancePopup } from "./popups/AppliancePopup";
 import { ActivePopup, ContactsPopup, CoversPopup, KgPopup } from "./popups/StartPopups";
 import { ServicePanel } from "../shell/ServicePanel";
 import { SettingsDialog } from "./SettingsDialog";
@@ -27,9 +31,23 @@ export function ItemPopup({ item, name }: { item: Item; name?: string }) {
     case "cover":
     case "cover_pos":
       return <CoverPopup item={item} name={name} />;
-    default:
-      return <InfoPopup item={item} name={name} />;
+    case "climate_tuya":
+      return <HeatingPopup item={item} name={name} />;
+    case "climate":
+      return <SimpleClimatePopup item={item} name={name} />;
+    case "tv":
+      return <TvPopup item={item} name={name} />;
+    case "media":
+      return <MediaPopup item={item} name={name} />;
+    case "music_room":
+    case "multiroom":
+      return <MusicPopup item={item} name={name} />;
+    case "appliance":
+      return <AppliancePopup item={item} name={name} />;
+    case "vacuum":
+      return <VacuumPopup entityId={item.id} />;
   }
+  return null;
 }
 
 /** The one popup slot; closed popups are unmounted (04 §5.1 DOM budget). */
@@ -50,6 +68,8 @@ export function PopupHost() {
       return <ContactsPopup />;
     case "active":
       return <ActivePopup />;
+    case "vacuum":
+      return <VacuumPopup entityId={popup.id} />;
     case "service":
       return <ServicePanel />;
     case "settings":

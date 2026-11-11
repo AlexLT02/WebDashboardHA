@@ -34,6 +34,15 @@ describe("buildLage, quiet", () => {
     expect(v).toMatchObject({ oeffnungen: "alles zu", waesche: "aus", sauger: "in der Station", luft: "gut", musik: "aus", einkauf: "2 offen" });
     expect(v.lichter).toMatch(/^\d+ an$/);
   });
+  it("P4: washer, dishwasher and vacuum rows open their popups", () => {
+    const taps: Record<string, unknown> = {};
+    for (const r of buildLage(board, states(), NOW).rows) taps[r.key] = r.tap;
+    expect(taps.waesche).toEqual({ t: "item", id: "virtual.waesche" });
+    expect(taps.spuelmaschine).toEqual({ t: "item", id: "virtual.spuelmaschine" });
+    expect(taps.sauger).toEqual({ t: "vacuum" });
+    const off = buildLage(board, states({ "vacuum.dreame": { state: "unavailable" } }), NOW).rows.filter((r) => r.key === "sauger")[0];
+    expect(off).toMatchObject({ value: "offline", tap: { t: "vacuum" } });
+  });
   it("an opening below its threshold stays a row", () => {
     const l = buildLage(board, states({ "binary_sensor.alex_wohnung_kuhlschranktur_tur": { state: "on", lc_ts: NOW - 20000 } }), NOW);
     expect(l.blocks).toEqual([]);

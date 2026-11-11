@@ -4,6 +4,7 @@
  */
 import { briPct, hhmm, parseNum, pct, temp, watts } from "./format";
 import { coverStatus } from "./cover";
+import { hvacAllowed } from "./climate";
 import type { EntityState, Heating, Item, MusicCfg, StateGetter } from "./model";
 
 export interface TileCtx {
@@ -204,7 +205,13 @@ export function tileView(item: Item, ctx: TileCtx): TileView {
       return v;
     }
     case "climate": {
+      // Badge only for the allowlisted air conditioner (PL decision B2), never a thermostat.
+      v.badge = hvacAllowed(item.id);
       if (st.state === "off") return v;
+      if (st.state === "unknown") {
+        v.status = "Zustand unbekannt";
+        return v;
+      }
       const soll = parseNum(st.attributes.temperature);
       v.on = true;
       v.status = st.state === "cool" ? `Kühlt auf ${soll !== null ? Math.round(soll) : "–"}°` : "An";

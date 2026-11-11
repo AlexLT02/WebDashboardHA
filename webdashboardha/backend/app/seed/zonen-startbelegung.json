@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "seed_version": 1,
+  "seed_version": 2,
   "generated": "2026-11-11",
   "source": "Live-Abgleich HA 2026.11 per MCP, nur Entitaeten, die am 2026-11-11 existieren",
   "scope_areas": ["alex_wohnung", "alex_zimmer"],
@@ -105,6 +105,7 @@
     "media_player.bad_echo_dot_alex_wohnung": { "zone": "bad", "tier": "hidden", "reason": "Echo, nur im Musik-Popup" },
 
     "input_boolean.multiroom": { "system": true, "name": "Musik", "kind": "multiroom", "reason": "Systemplatz: Favorit, Lage Musik, Musik-Popup. Nie Eingangskorb" },
+    "virtual.waesche": { "system": true, "name": "Wäsche", "func": "medien", "icon": "washer", "reason": "D18: nur Lage-Zeile und Popup, Standort der Maschine unbekannt. Nie Eingangskorb" },
     "media_player.alex_wohnung_echo": { "tier": "hidden", "reason": "Echo ohne Standort, nur im Musik-Popup" },
     "media_player.alexanders_fire_tv_stick": { "tier": "hidden", "reason": "Alexa-Lautsprecher-Endpunkt eines Fire TV Stick 4K Plus, nur Lautstärke" },
     "switch.alex_zimmer_lichtschalter_eingang_alex_wohnung_deckenlicht_1_alex_wohnung": { "tier": "hidden", "reason": "SONOFF-Relais, Zustand lügt, Gruppe light.zone_wohnlicht nutzen" },
@@ -135,6 +136,15 @@
       "phase": "sensor.alex_wohnung_spulmaschiene_aktuelle_phase",
       "power": "sensor.alex_wohnung_spulmaschiene_aktuelle_leistung",
       "unload_button": "button.alex_wohnung_spulmaschiene_als_entladen_markieren"
+    },
+    "virtual.waesche": {
+      "kind": "appliance",
+      "state": "sensor.waschmaschiene_alex_zustand",
+      "remaining": "sensor.waschmaschiene_alex_verbleibende_zeit",
+      "progress": "sensor.waschmaschiene_alex_fortschritt",
+      "program": "sensor.waschmaschiene_alex_programm",
+      "phase": "sensor.waschmaschiene_alex_aktuelle_phase",
+      "unload_button": "button.alex_wohnung_waschmaschiene_alex_als_entladen_markieren"
     },
     "virtual.pc_platz": {
       "kind": "switch_group",
@@ -195,13 +205,7 @@
         { "id": "binary_sensor.alex_wohnung_gefrierschrank_tur", "name": "Gefrierfach", "zone": "kueche", "alarm_after_s": 60 }
       ],
       "vent_minutes": "sensor.luftungsdauer_empfohlen" },
-    { "key": "waesche", "name": "Wäsche", "icon": "washer",
-      "state": "sensor.waschmaschiene_alex_zustand",
-      "remaining": "sensor.waschmaschiene_alex_verbleibende_zeit",
-      "progress": "sensor.waschmaschiene_alex_fortschritt",
-      "program": "sensor.waschmaschiene_alex_programm",
-      "phase": "sensor.waschmaschiene_alex_aktuelle_phase",
-      "unload_button": "button.alex_wohnung_waschmaschiene_alex_als_entladen_markieren" },
+    { "key": "waesche", "name": "Wäsche", "icon": "washer", "virtual": "virtual.waesche" },
     { "key": "spuelmaschine", "name": "Spülmaschine", "icon": "dishwasher", "virtual": "virtual.spuelmaschine" },
     { "key": "sauger", "name": "Sauger", "icon": "vacuum",
       "vacuum": "vacuum.dreame",

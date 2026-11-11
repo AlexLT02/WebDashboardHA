@@ -1216,6 +1216,26 @@
    "cloud": false,
    "system": true
   },
+  "virtual.waesche": {
+   "id": "virtual.waesche",
+   "kind": "appliance",
+   "name": "Wäsche",
+   "zone": null,
+   "func": "medien",
+   "tier": "zone",
+   "order": null,
+   "icon": "washer",
+   "count": false,
+   "new": false,
+   "cloud": false,
+   "state": "sensor.waschmaschiene_alex_zustand",
+   "remaining": "sensor.waschmaschiene_alex_verbleibende_zeit",
+   "progress": "sensor.waschmaschiene_alex_fortschritt",
+   "program": "sensor.waschmaschiene_alex_programm",
+   "phase": "sensor.waschmaschiene_alex_aktuelle_phase",
+   "unload_button": "button.alex_wohnung_waschmaschiene_alex_als_entladen_markieren",
+   "system": true
+  },
   "media_player.alex_wohnung_echo": {
    "id": "media_player.alex_wohnung_echo",
    "kind": "media",
@@ -1836,12 +1856,7 @@
     "key": "waesche",
     "name": "Wäsche",
     "icon": "washer",
-    "state": "sensor.waschmaschiene_alex_zustand",
-    "remaining": "sensor.waschmaschiene_alex_verbleibende_zeit",
-    "progress": "sensor.waschmaschiene_alex_fortschritt",
-    "program": "sensor.waschmaschiene_alex_programm",
-    "phase": "sensor.waschmaschiene_alex_aktuelle_phase",
-    "unload_button": "button.alex_wohnung_waschmaschiene_alex_als_entladen_markieren"
+    "virtual": "virtual.waesche"
    },
    {
     "key": "spuelmaschine",

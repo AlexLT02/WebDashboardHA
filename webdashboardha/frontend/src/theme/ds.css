@@ -501,6 +501,91 @@ button { font-family: inherit; }
 .svc__row b.bad { color: var(--alarm-text); }
 .svc__btns { margin-top: 16px; }
 
+/* ---------------- P4 popups ---------------- */
+/* Big value (climate Ist 48 px, appliance remaining time) with a side text. */
+.pbig { margin-top: 16px; height: 56px; white-space: nowrap; }
+.pbig__num { font-size: 48px; font-weight: 600; line-height: 56px; letter-spacing: -0.03em; }
+.pbig__num small { font-size: 20px; color: var(--text-muted); margin-left: 4px; font-weight: 600; letter-spacing: 0; }
+.pbig__k { float: right; font-size: 15px; color: var(--text-muted); line-height: 56px; }
+.pbig--on .pbig__num { color: var(--on-text); }
+.psub { margin-top: 18px; height: 18px; font-size: 13px; font-weight: 600; color: var(--text-muted); line-height: 18px; white-space: nowrap; }
+.psub span { float: right; font-weight: 400; }
+/* [ − ] 23,0° [ + ], buttons 64 x 64 */
+.stepper { position: relative; height: 64px; margin-top: 8px; }
+.seg + .stepper { margin-top: 12px; }
+.stepper__btn {
+  position: absolute; top: 0; width: 64px; height: 64px; border-radius: 14px;
+  background: var(--btn); border: 1px solid var(--line-strong); color: var(--text-soft);
+}
+.stepper__btn svg { width: 28px; height: 28px; margin: 17px auto 0; }
+.stepper__btn--l { left: 0; }
+.stepper__btn--r { right: 0; }
+.stepper__btn.is-press { background: #2a303c; }
+.stepper__btn.is-disabled { color: var(--text-faint); border-style: dashed; }
+.stepper__v { position: absolute; left: 76px; right: 76px; top: 0; height: 64px; border-radius: 14px; background: #11141b; border: 1px solid var(--line); text-align: center; line-height: 62px; font-size: 30px; font-weight: 600; letter-spacing: -0.02em; }
+.stepper__v small { font-size: 14px; font-weight: 600; color: var(--text-muted); letter-spacing: 0; margin-right: 10px; vertical-align: 4px; }
+.stepper__v.is-local { color: var(--on-text); }
+/* wide action button (Boost, XP700, Ton neu abgleichen, Auswahl saugen) */
+.pbtn {
+  position: relative; height: 48px; margin-top: 10px; border-radius: 12px;
+  background: var(--btn); border: 1px solid var(--line-strong);
+  text-align: center; line-height: 46px; font-size: 15px; font-weight: 600; color: var(--text-soft);
+  white-space: nowrap; overflow: hidden;
+}
+.pbtn.is-on { background: var(--tile-on); border-color: var(--on-line); color: var(--on-text); }
+.pbtn.is-press { background: #2a303c; }
+.pbtn.is-on.is-press { background: #33281f; }
+.pbtn.is-disabled { color: var(--text-faint); }
+.pbtn--cool { border-color: rgba(127, 178, 255, 0.45); color: var(--cool); background: #172133; }
+.pbtn svg { display: inline-block; width: 20px; height: 20px; vertical-align: -5px; margin-right: 6px; }
+.pbtns { display: grid; grid-template-columns: 1fr 1fr; grid-gap: 8px; }
+.pbtns .pbtn { margin-top: 10px; }
+.pbtns--3 { grid-template-columns: 1fr 1fr 1fr; }
+/* transport and IR volume buttons (>= 96 x 56) */
+.tbtns { display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 8px; margin-top: 10px; }
+.tbtn {
+  height: 56px; border-radius: 12px; background: var(--btn); border: 1px solid var(--line-strong);
+  color: var(--text-soft); text-align: center; font-size: 15px; font-weight: 600; line-height: 54px; white-space: nowrap; overflow: hidden;
+}
+.tbtn svg { display: inline-block; width: 26px; height: 26px; vertical-align: -7px; }
+.tbtn svg + span { margin-left: 6px; }
+.tbtn.is-press { background: #2a303c; }
+.tbtn.is-disabled { color: var(--text-faint); border-style: dashed; }
+.tbtn.is-sel { border-color: var(--on-line); color: var(--on-text); background: var(--tile-on); }
+.tbtn--big { height: 64px; line-height: 62px; }
+/* light toggles in the TV popup: icon on top, name below */
+.ltogs { display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 8px; margin-top: 10px; }
+.ltog { position: relative; height: 76px; border-radius: 12px; background: var(--tile); border: 1px solid var(--line); text-align: center; }
+.ltog .badge { left: 50%; top: 8px; margin-left: -18px; width: 36px; height: 36px; }
+.ltog .badge svg { width: 20px; height: 20px; margin: 8px; }
+.ltog__name { position: absolute; left: 4px; right: 4px; bottom: 8px; font-size: 13px; font-weight: 600; line-height: 17px; color: var(--text-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ltog.is-on { background: var(--tile-on); border-color: var(--on-line); }
+.ltog.is-on .badge { background: var(--on); color: var(--on-ink); }
+.ltog.is-on .ltog__name { color: var(--on-text); }
+.ltog.is-offline { background: transparent; border-style: dashed; }
+.ltog.is-offline .badge { background: transparent; color: var(--text-faint); }
+/* music room row: name + %, mute 48 x 48, volume bar 44 */
+.vrows { margin-top: 8px; }
+.vrow { position: relative; height: 56px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.vrow:last-child { border-bottom: 0; }
+.vrow__name { position: absolute; left: 0; top: 8px; width: 112px; font-size: 15px; font-weight: 600; line-height: 20px; overflow: hidden; text-overflow: ellipsis; }
+.vrow__pct { position: absolute; left: 0; top: 29px; width: 112px; font-size: 13px; line-height: 17px; color: var(--text-muted); }
+.vrow__pct.amber { color: var(--hint); }
+.vrow__mute { position: absolute; left: 116px; top: 4px; width: 48px; height: 48px; border-radius: 10px; background: var(--btn); border: 1px solid var(--line-strong); color: var(--text-soft); }
+.vrow__mute svg { width: 22px; height: 22px; margin: 12px; }
+.vrow__mute.is-muted { color: var(--hint); border-color: rgba(227, 178, 91, 0.45); }
+.vrow__mute.is-press { background: #2a303c; }
+.vrow .barhit { position: absolute; left: 176px; right: 0; top: 0; margin: 0; padding: 6px 0; }
+.vrow--echo .vrow__name, .vrow--echo .vrow__pct { width: 168px; }
+.pbtn .chev { margin: 0 0 0 4px; -webkit-transform: rotate(90deg); transform: rotate(90deg); }
+.pbtn .chev--up { -webkit-transform: rotate(-90deg); transform: rotate(-90deg); }
+.vrow.is-offline .vrow__name, .vrow.is-offline .vrow__pct { color: var(--text-faint); }
+.bar--vol { height: 44px; border-radius: 12px; }
+/* chips that toggle (vacuum rooms) */
+.qchip.is-on { border-color: rgba(127, 178, 255, 0.55); color: var(--cool); background: #172133; }
+.progress--6 { height: 6px; border-radius: 3px; margin-top: 14px; }
+.progress--6 i { height: 6px; border-radius: 3px; }
+
 /* ---------------- waiting screen ---------------- */
 .wait { position: absolute; left: 112px; top: 300px; width: 896px; text-align: center; }
 .wait__t { font-size: 26px; font-weight: 600; }

@@ -6,6 +6,7 @@
 import { actionOff, actionOn, callService, type OffResult, type OffScope, type ServiceCall } from "./api";
 import { beginPending, failPending } from "./pending";
 import { showOffResult, showText } from "./notice";
+import { hvacAllowed } from "./climate";
 import { useStore } from "./store";
 import type { Item } from "./model";
 import type { TileView } from "./tileState";
@@ -64,6 +65,8 @@ export function toggleItem(item: Item, view: TileView): void {
     case "switch_critical":
     case "input_boolean":
     case "multiroom":
+      // Never a climate entity, even with a wrong kind override (D8).
+      if (domainOf(id) === "climate") return;
       send(item, want, [{ domain: domainOf(id), service: want ? "turn_on" : "turn_off", entity_id: id }]);
       return;
     case "tv": {
@@ -84,7 +87,22 @@ export function toggleItem(item: Item, view: TileView): void {
         { domain: "media_player", service: "volume_mute", entity_id: id, data: { is_volume_muted: !want } },
       ]);
       return;
+    case "climate": {
+      const call = hvacCall(id, want ? "cool" : "off");
+      if (call) send(item, want, [call], true);
+      return;
+    }
   }
+}
+
+/**
+ * The ONLY place that builds an hvac mode call. Refuses every entity outside
+ * HVAC_ALLOWLIST (the air conditioner): the heating thermostats never get a
+ * mode or on/off, only set_temperature (04 D8, PL decision B2).
+ */
+export function hvacCall(entityId: string, mode: "cool" | "off"): ServiceCall | null {
+  if (!hvacAllowed(entityId)) return null;
+  return { domain: "climate", service: "set_hvac_mode", entity_id: entityId, data: { hvac_mode: mode } };
 }
 
 /** Plain fire-and-forget service call (cover buttons, popup controls). */

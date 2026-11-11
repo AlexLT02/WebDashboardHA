@@ -52,6 +52,18 @@ def test_newer_seed_adds_missing_but_never_overwrites(store, seed, tmp_path):
     assert s2.seed_version == seed2["seed_version"]
 
 
+def test_seed_v2_brings_the_washer_to_a_v1_install(seed, tmp_path):
+    """P4: an existing zones.json from seed v1 gets virtual.waesche (system) on the next start."""
+    seed1 = copy.deepcopy(seed)
+    seed1["seed_version"] = 1
+    del seed1["items"]["virtual.waesche"]
+    _reload(tmp_path, seed1)
+    assert seed["seed_version"] >= 2
+    s2 = _reload(tmp_path, seed)
+    assert s2.items["virtual.waesche"]["system"] is True
+    assert s2.items["virtual.waesche"]["name"] == "Wäsche"
+
+
 def test_same_seed_version_does_not_merge(store, seed, tmp_path):
     store.reset("light.kuechenlicht_oben")
     del store.items["light.kuechenlicht_oben"]
