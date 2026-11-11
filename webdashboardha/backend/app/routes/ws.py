@@ -14,7 +14,11 @@ router = APIRouter()
 @router.websocket("/ws")
 async def dashboard_ws(ws: WebSocket) -> None:
     hub = ws.app.state.hub
-    await hub.connect_client(ws)
+    # /ws?v=2: board + filtered stream; plain /ws stays the 1.4.2 full stream.
+    if ws.query_params.get("v") == "2":
+        await hub.connect_client_v2(ws)
+    else:
+        await hub.connect_client(ws)
     try:
         while True:
             # Wir erwarten keine Kommandos über diesen Kanal (Steuerung läuft über

@@ -1,0 +1,2083 @@
+{
+ "binary_sensor.alex_wohnung_einganstur_tur": {
+  "entity_id": "binary_sensor.alex_wohnung_einganstur_tur",
+  "state": "off",
+  "attributes": {
+   "device_class": "door",
+   "friendly_name": "Einganstür Tür"
+  },
+  "lc_ts": 1794397729123
+ },
+ "binary_sensor.alex_wohnung_fenster_bad_alex_wohnung_fenster_bad": {
+  "entity_id": "binary_sensor.alex_wohnung_fenster_bad_alex_wohnung_fenster_bad",
+  "state": "off",
+  "attributes": {
+   "device_class": "window",
+   "friendly_name": "Fenster Bad Alex Wohnung"
+  },
+  "lc_ts": 1794389755123
+ },
+ "binary_sensor.alex_wohnung_fenster_bett_alex_wohnung_fenster_rechts_wohnbereich_alex": {
+  "entity_id": "binary_sensor.alex_wohnung_fenster_bett_alex_wohnung_fenster_rechts_wohnbereich_alex",
+  "state": "off",
+  "attributes": {
+   "device_class": "window",
+   "friendly_name": "Fenster Rechts Wohnbereich Alex"
+  },
+  "lc_ts": 1794389633123
+ },
+ "binary_sensor.alex_wohnung_fenster_bett_alex_wohnung_tur": {
+  "entity_id": "binary_sensor.alex_wohnung_fenster_bett_alex_wohnung_tur",
+  "state": "off",
+  "attributes": {
+   "device_class": "window",
+   "friendly_name": "Fenster Bett Alex Wohnung"
+  },
+  "lc_ts": 1794389739123
+ },
+ "binary_sensor.alex_wohnung_fenster_links_wohnbereich_alex_tur": {
+  "entity_id": "binary_sensor.alex_wohnung_fenster_links_wohnbereich_alex_tur",
+  "state": "off",
+  "attributes": {
+   "device_class": "window",
+   "friendly_name": "Fenster Links Wohnbereich Alex"
+  },
+  "lc_ts": 1794389642123
+ },
+ "binary_sensor.alex_wohnung_gefrierschrank_tur": {
+  "entity_id": "binary_sensor.alex_wohnung_gefrierschrank_tur",
+  "state": "off",
+  "attributes": {
+   "device_class": "door",
+   "friendly_name": "Gefrierschrank Tür"
+  },
+  "lc_ts": 1794355935123
+ },
+ "binary_sensor.alex_wohnung_kuhlschranktur_tur": {
+  "entity_id": "binary_sensor.alex_wohnung_kuhlschranktur_tur",
+  "state": "off",
+  "attributes": {
+   "device_class": "door",
+   "friendly_name": "Kühlschranktür Tür"
+  },
+  "lc_ts": 1794395431123
+ },
+ "binary_sensor.luften_lohnt_sich": {
+  "entity_id": "binary_sensor.luften_lohnt_sich",
+  "state": "on",
+  "attributes": {
+   "icon": "mdi:window-open-variant",
+   "friendly_name": "Lüften lohnt sich"
+  },
+  "lc_ts": 1794357797123
+ },
+ "button.alex_wohnung_spulmaschiene_als_entladen_markieren": {
+  "entity_id": "button.alex_wohnung_spulmaschiene_als_entladen_markieren",
+  "state": "unavailable",
+  "attributes": {
+   "icon": "mdi:basket-check-outline",
+   "friendly_name": "Spülmaschiene Als entladen markieren"
+  },
+  "lc_ts": 1794358665123
+ },
+ "button.alex_wohnung_waschmaschiene_alex_als_entladen_markieren": {
+  "entity_id": "button.alex_wohnung_waschmaschiene_alex_als_entladen_markieren",
+  "state": "unavailable",
+  "attributes": {
+   "icon": "mdi:basket-check-outline",
+   "friendly_name": "Waschmaschine Alex Als entladen markieren"
+  },
+  "lc_ts": 1794355936123
+ },
+ "climate.alex_wohnung_thermostat_bad": {
+  "entity_id": "climate.alex_wohnung_thermostat_bad",
+  "state": "unknown",
+  "attributes": {
+   "hvac_modes": [
+    "off",
+    "heat_cool"
+   ],
+   "min_temp": 5.0,
+   "max_temp": 95.0,
+   "target_temp_step": 0.5,
+   "current_temperature": 23.8,
+   "temperature_unit": "°C",
+   "temperature": 24.0,
+   "friendly_name": "Thermostat Bad",
+   "supported_features": 385
+  },
+  "lc_ts": 1794355938123
+ },
+ "climate.klima": {
+  "entity_id": "climate.klima",
+  "state": "off",
+  "attributes": {
+   "hvac_modes": [
+    "off",
+    "cool"
+   ],
+   "min_temp": 16.0,
+   "max_temp": 86.0,
+   "target_temp_step": 1.0,
+   "current_temperature": 23.0,
+   "temperature_unit": "°C",
+   "temperature": 16.0,
+   "friendly_name": "Klima",
+   "supported_features": 393
+  },
+  "lc_ts": 1794389746123
+ },
+ "climate.thermostat_wohnbereich_alex": {
+  "entity_id": "climate.thermostat_wohnbereich_alex",
+  "state": "unknown",
+  "attributes": {
+   "hvac_modes": [
+    "off",
+    "heat_cool"
+   ],
+   "min_temp": 5.0,
+   "max_temp": 95.0,
+   "target_temp_step": 0.5,
+   "current_temperature": 24.0,
+   "temperature_unit": "°C",
+   "temperature": 23.0,
+   "friendly_name": "Thermostat Wohnbereich Alex",
+   "supported_features": 385
+  },
+  "lc_ts": 1794355938123
+ },
+ "cover.alex_zimmer_rolladen_lichtschacht": {
+  "entity_id": "cover.alex_zimmer_rolladen_lichtschacht",
+  "state": "closed",
+  "attributes": {
+   "assumed_state": true,
+   "device_class": "shutter",
+   "friendly_name": "Rollladen Lichtschacht",
+   "supported_features": 11
+  },
+  "lc_ts": 1794355936123
+ },
+ "cover.rolladen_treppe_alex_wohnung": {
+  "entity_id": "cover.rolladen_treppe_alex_wohnung",
+  "state": "closed",
+  "attributes": {
+   "assumed_state": true,
+   "device_class": "shutter",
+   "friendly_name": "Rolladen Treppe Alex Wohnung Rollladen Wohnbereich",
+   "supported_features": 11
+  },
+  "lc_ts": 1794355936123
+ },
+ "cover.rollladen_alex": {
+  "entity_id": "cover.rollladen_alex",
+  "state": "closed",
+  "attributes": {
+   "current_position": 0,
+   "device_class": "shade",
+   "friendly_name": "Rollladen",
+   "supported_features": 15
+  },
+  "lc_ts": 1794355938123
+ },
+ "input_boolean.ambilight": {
+  "entity_id": "input_boolean.ambilight",
+  "state": "on",
+  "attributes": {
+   "icon": "mdi:television-ambient-light",
+   "friendly_name": "Ambilight"
+  },
+  "lc_ts": 1794355932123
+ },
+ "input_boolean.dashboard_alert": {
+  "entity_id": "input_boolean.dashboard_alert",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Dashboard Alert"
+  },
+  "lc_ts": 1794355932123
+ },
+ "input_boolean.lichtshow": {
+  "entity_id": "input_boolean.lichtshow",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "lichtshow"
+  },
+  "lc_ts": 1794355932123
+ },
+ "input_boolean.multiroom": {
+  "entity_id": "input_boolean.multiroom",
+  "state": "off",
+  "attributes": {
+   "icon": "mdi:speaker-multiple",
+   "friendly_name": "Multiroom"
+  },
+  "lc_ts": 1794355932123
+ },
+ "input_number.heizung_bad_soll": {
+  "entity_id": "input_number.heizung_bad_soll",
+  "state": "24.0",
+  "attributes": {
+   "min": 0.0,
+   "max": 30.0,
+   "step": 0.5,
+   "unit_of_measurement": "°C",
+   "icon": "mdi:thermostat-auto",
+   "friendly_name": "Heizung Bad Soll"
+  },
+  "lc_ts": 1794389755123
+ },
+ "input_number.heizung_wohnbereich_soll": {
+  "entity_id": "input_number.heizung_wohnbereich_soll",
+  "state": "23.0",
+  "attributes": {
+   "min": 0.0,
+   "max": 30.0,
+   "step": 0.5,
+   "unit_of_measurement": "°C",
+   "icon": "mdi:thermostat-auto",
+   "friendly_name": "Heizung Wohnbereich Soll"
+  },
+  "lc_ts": 1794391114123
+ },
+ "input_number.wdh_index": {
+  "entity_id": "input_number.wdh_index",
+  "state": "1.0",
+  "attributes": {
+   "min": 1.0,
+   "max": 4.0,
+   "step": 1.0,
+   "icon": "mdi:rotate-right",
+   "friendly_name": "WDH Rotationsindex"
+  },
+  "lc_ts": 1794355932123
+ },
+ "input_select.dashboard_alert_level": {
+  "entity_id": "input_select.dashboard_alert_level",
+  "state": "wichtig",
+  "attributes": {
+   "options": [
+    "hinweis",
+    "warnung",
+    "wichtig"
+   ],
+   "friendly_name": "Dashboard Alert Level"
+  },
+  "lc_ts": 1794355932123
+ },
+ "input_select.heizung_modus": {
+  "entity_id": "input_select.heizung_modus",
+  "state": "Komfort",
+  "attributes": {
+   "options": [
+    "Automatik",
+    "Komfort",
+    "Eco",
+    "Aus",
+    "Urlaub"
+   ],
+   "icon": "mdi:radiator",
+   "friendly_name": "Heizung Modus"
+  },
+  "lc_ts": 1794384641123
+ },
+ "input_select.soundanlage_modus": {
+  "entity_id": "input_select.soundanlage_modus",
+  "state": "aus",
+  "attributes": {
+   "options": [
+    "aus",
+    "tv",
+    "multiroom"
+   ],
+   "icon": "mdi:soundbar",
+   "friendly_name": "Soundanlage Modus"
+  },
+  "lc_ts": 1794355932123
+ },
+ "input_text.dashboard_alert_text": {
+  "entity_id": "input_text.dashboard_alert_text",
+  "state": "",
+  "attributes": {
+   "min": 0,
+   "max": 100,
+   "friendly_name": "Dashboard Alert Text"
+  },
+  "lc_ts": 1794355932123
+ },
+ "input_text.heizung_bad_grund": {
+  "entity_id": "input_text.heizung_bad_grund",
+  "state": "Modus Komfort, dauerhaft",
+  "attributes": {
+   "min": 0,
+   "max": 255,
+   "icon": "mdi:comment-text-outline",
+   "friendly_name": "Heizung Bad Grund"
+  },
+  "lc_ts": 1794389755123
+ },
+ "input_text.heizung_wohnbereich_grund": {
+  "entity_id": "input_text.heizung_wohnbereich_grund",
+  "state": "Modus Komfort, dauerhaft",
+  "attributes": {
+   "min": 0,
+   "max": 255,
+   "icon": "mdi:comment-text-outline",
+   "friendly_name": "Heizung Wohnbereich Grund"
+  },
+  "lc_ts": 1794389740123
+ },
+ "input_text.wdh_slot_1": {
+  "entity_id": "input_text.wdh_slot_1",
+  "state": "",
+  "attributes": {
+   "min": 0,
+   "max": 255,
+   "icon": "mdi:numeric-1-box-outline",
+   "friendly_name": "WDH Slot 1"
+  },
+  "lc_ts": 1794355932123
+ },
+ "input_text.wdh_slot_2": {
+  "entity_id": "input_text.wdh_slot_2",
+  "state": "",
+  "attributes": {
+   "min": 0,
+   "max": 255,
+   "icon": "mdi:numeric-2-box-outline",
+   "friendly_name": "WDH Slot 2"
+  },
+  "lc_ts": 1794355932123
+ },
+ "input_text.wdh_slot_3": {
+  "entity_id": "input_text.wdh_slot_3",
+  "state": "",
+  "attributes": {
+   "min": 0,
+   "max": 255,
+   "icon": "mdi:numeric-3-box-outline",
+   "friendly_name": "WDH Slot 3"
+  },
+  "lc_ts": 1794355932123
+ },
+ "input_text.wdh_slot_4": {
+  "entity_id": "input_text.wdh_slot_4",
+  "state": "",
+  "attributes": {
+   "min": 0,
+   "max": 255,
+   "icon": "mdi:numeric-4-box-outline",
+   "friendly_name": "WDH Slot 4"
+  },
+  "lc_ts": 1794355932123
+ },
+ "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_1": {
+  "entity_id": "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_1",
+  "state": "off",
+  "attributes": {
+   "supported_color_modes": [
+    "onoff"
+   ],
+   "color_mode": null,
+   "friendly_name": "Bad Decke",
+   "supported_features": 0
+  },
+  "lc_ts": 1794355934123
+ },
+ "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_2": {
+  "entity_id": "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_2",
+  "state": "off",
+  "attributes": {
+   "supported_color_modes": [
+    "onoff"
+   ],
+   "color_mode": null,
+   "friendly_name": "Bad Spiegel",
+   "supported_features": 0
+  },
+  "lc_ts": 1794366820123
+ },
+ "light.alex_wohnung_bett_deckenlicht": {
+  "entity_id": "light.alex_wohnung_bett_deckenlicht",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Bett Deckenlicht",
+   "supported_features": 32
+  },
+  "lc_ts": 1794355934123
+ },
+ "light.alex_wohnung_eingangsbereich": {
+  "entity_id": "light.alex_wohnung_eingangsbereich",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Eingangsbereich",
+   "supported_features": 32
+  },
+  "lc_ts": 1794355934123
+ },
+ "light.alex_wohnung_kleiderschrank_licht_rechts": {
+  "entity_id": "light.alex_wohnung_kleiderschrank_licht_rechts",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Kleiderschrank Licht Rechts",
+   "supported_features": 32
+  },
+  "lc_ts": 1794394571123
+ },
+ "light.alex_wohnung_kuche_ambiente_alex_wohnung": {
+  "entity_id": "light.alex_wohnung_kuche_ambiente_alex_wohnung",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6500,
+   "supported_color_modes": [
+    "color_temp",
+    "hs"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 84,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "friendly_name": "Küchen Ambiente",
+   "supported_features": 0
+  },
+  "lc_ts": 1794379142123
+ },
+ "light.alex_wohnung_kuchendeckenlicht": {
+  "entity_id": "light.alex_wohnung_kuchendeckenlicht",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Küchendeckenlicht",
+   "supported_features": 32
+  },
+  "lc_ts": 1794355934123
+ },
+ "light.alex_wohnung_nachtlicht": {
+  "entity_id": "light.alex_wohnung_nachtlicht",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6500,
+   "supported_color_modes": [
+    "color_temp",
+    "hs"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 23,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "friendly_name": "Nachtlicht",
+   "supported_features": 0
+  },
+  "lc_ts": 1794379142123
+ },
+ "light.alex_wohnung_schrank_ambiente": {
+  "entity_id": "light.alex_wohnung_schrank_ambiente",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6500,
+   "supported_color_modes": [
+    "color_temp",
+    "hs"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 23,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "friendly_name": "Schrank Ambiente",
+   "supported_features": 0
+  },
+  "lc_ts": 1794379142123
+ },
+ "light.alex_wohnung_schreibtisch_licht_links": {
+  "entity_id": "light.alex_wohnung_schreibtisch_licht_links",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 28,
+   "color_temp_kelvin": 5714,
+   "hs_color": [
+    28.745,
+    10.321
+   ],
+   "friendly_name": "Schreibtisch Licht Links",
+   "supported_features": 32
+  },
+  "lc_ts": 1794391190123
+ },
+ "light.alex_wohnung_schreibtisch_licht_rechts": {
+  "entity_id": "light.alex_wohnung_schreibtisch_licht_rechts",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 28,
+   "color_temp_kelvin": 5714,
+   "hs_color": [
+    28.745,
+    10.321
+   ],
+   "friendly_name": "Schreibtisch Licht Rechts",
+   "supported_features": 32
+  },
+  "lc_ts": 1794391190123
+ },
+ "light.alex_wohnung_sofa_links": {
+  "entity_id": "light.alex_wohnung_sofa_links",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Sofa Links",
+   "supported_features": 32
+  },
+  "lc_ts": 1794355934123
+ },
+ "light.alex_wohnung_sofa_rechts": {
+  "entity_id": "light.alex_wohnung_sofa_rechts",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Sofa Rechts",
+   "supported_features": 32
+  },
+  "lc_ts": 1794355934123
+ },
+ "light.alex_wohnung_tv_beleuchtung": {
+  "entity_id": "light.alex_wohnung_tv_beleuchtung",
+  "state": "on",
+  "attributes": {
+   "supported_color_modes": [
+    "rgb"
+   ],
+   "color_mode": "rgb",
+   "brightness": 23,
+   "hs_color": [
+    53.824,
+    80.0
+   ],
+   "friendly_name": "Tv Beleuchtung",
+   "supported_features": 44
+  },
+  "lc_ts": 1794379142123
+ },
+ "light.alex_wohnung_tv_lowboard_beleuchtung": {
+  "entity_id": "light.alex_wohnung_tv_lowboard_beleuchtung",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 3000,
+   "max_color_temp_kelvin": 6000,
+   "supported_color_modes": [
+    "color_temp",
+    "rgb"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 23,
+   "color_temp_kelvin": 3474,
+   "hs_color": [
+    27.199,
+    45.342
+   ],
+   "friendly_name": "Tv Lowboard Beleuchtung",
+   "supported_features": 44
+  },
+  "lc_ts": 1794379141123
+ },
+ "light.alex_wohnung_wohnbereich_links": {
+  "entity_id": "light.alex_wohnung_wohnbereich_links",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Wohnbereich Links",
+   "supported_features": 32
+  },
+  "lc_ts": 1794355934123
+ },
+ "light.alex_wohnung_wohnbereich_rechts": {
+  "entity_id": "light.alex_wohnung_wohnbereich_rechts",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Wohnbereich Rechts",
+   "supported_features": 32
+  },
+  "lc_ts": 1794355934123
+ },
+ "light.alex_wohnung_wohnflache": {
+  "entity_id": "light.alex_wohnung_wohnflache",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Wohnfläche",
+   "supported_features": 32
+  },
+  "lc_ts": 1794355934123
+ },
+ "light.alex_zimmer_kleiderschrank_licht_links": {
+  "entity_id": "light.alex_zimmer_kleiderschrank_licht_links",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Kleiderschrank Licht Links",
+   "supported_features": 32
+  },
+  "lc_ts": 1794394558123
+ },
+ "light.ambiente_ecklampe": {
+  "entity_id": "light.ambiente_ecklampe",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 15,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 4,
+   "color_temp_kelvin": 3484,
+   "hs_color": [
+    27.189,
+    45.123
+   ],
+   "friendly_name": "Ecklampe",
+   "supported_features": 32
+  },
+  "lc_ts": 1794379141123
+ },
+ "light.bad_ambiente_alex_wohnung": {
+  "entity_id": "light.bad_ambiente_alex_wohnung",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6500,
+   "supported_color_modes": [
+    "color_temp",
+    "hs"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 204,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "friendly_name": "Bad Ambiente",
+   "supported_features": 0
+  },
+  "lc_ts": 1794379141123
+ },
+ "light.bett_bereich": {
+  "entity_id": "light.bett_bereich",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2702,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "rgb"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 255,
+   "color_temp_kelvin": 2702,
+   "hs_color": [
+    28.391,
+    65.659
+   ],
+   "friendly_name": "Bett Bereich",
+   "supported_features": 44
+  },
+  "lc_ts": 1794357692123
+ },
+ "light.ipad_backlights": {
+  "entity_id": "light.ipad_backlights",
+  "state": "on",
+  "attributes": {
+   "supported_color_modes": [
+    "rgb"
+   ],
+   "color_mode": "rgb",
+   "brightness": 130,
+   "hs_color": [
+    29.072,
+    38.039
+   ],
+   "friendly_name": "Ipad Backlights",
+   "supported_features": 36
+  },
+  "lc_ts": 1794379141123
+ },
+ "light.kuechenlicht_oben": {
+  "entity_id": "light.kuechenlicht_oben",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6500,
+   "supported_color_modes": [
+    "color_temp",
+    "hs"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Küchenlicht Alex Wohnung Küche Arbeitslicht",
+   "supported_features": 0
+  },
+  "lc_ts": 1794395610123
+ },
+ "light.lichtschacht_licht": {
+  "entity_id": "light.lichtschacht_licht",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 9009,
+   "supported_color_modes": [
+    "color_temp",
+    "rgb"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Lichtschacht Licht",
+   "supported_features": 44
+  },
+  "lc_ts": 1794379147123
+ },
+ "light.regal_alex_wohnung": {
+  "entity_id": "light.regal_alex_wohnung",
+  "state": "on",
+  "attributes": {
+   "supported_color_modes": [
+    "rgb"
+   ],
+   "color_mode": "rgb",
+   "brightness": 155,
+   "hs_color": [
+    50.4,
+    49.02
+   ],
+   "friendly_name": "Regal Alex Wohnung Regal Ambiente",
+   "supported_features": 36
+  },
+  "lc_ts": 1794379143123
+ },
+ "light.rollladen_alex_hintergrundbeleuchtung": {
+  "entity_id": "light.rollladen_alex_hintergrundbeleuchtung",
+  "state": "off",
+  "attributes": {
+   "supported_color_modes": [
+    "onoff"
+   ],
+   "color_mode": null,
+   "friendly_name": "Rollladen Alex Hintergrundbeleuchtung",
+   "supported_features": 0
+  },
+  "lc_ts": 1794355938123
+ },
+ "light.schrank_ambiente": {
+  "entity_id": "light.schrank_ambiente",
+  "state": "off",
+  "attributes": {
+   "supported_color_modes": [
+    "rgb"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "hs_color": null,
+   "friendly_name": "Kleiderschrank Ambiente",
+   "supported_features": 36
+  },
+  "lc_ts": 1794355936123
+ },
+ "light.sofa_alex": {
+  "entity_id": "light.sofa_alex",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6500,
+   "supported_color_modes": [
+    "color_temp",
+    "hs"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 23,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "friendly_name": "Sofa Ambiente",
+   "supported_features": 0
+  },
+  "lc_ts": 1794379142123
+ },
+ "light.ty_02_5ch_v5_2": {
+  "entity_id": "light.ty_02_5ch_v5_2",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6500,
+   "supported_color_modes": [
+    "color_temp",
+    "hs"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 128,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "friendly_name": "Tisch Ambiente",
+   "supported_features": 0
+  },
+  "lc_ts": 1794379142123
+ },
+ "light.zone_ambiente": {
+  "entity_id": "light.zone_ambiente",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 15,
+   "max_color_temp_kelvin": 9009,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "rgb",
+    "xy"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 74,
+   "color_temp_kelvin": 3476,
+   "hs_color": [
+    27.197,
+    45.298
+   ],
+   "entity_id": [
+    "light.regal_alex_wohnung",
+    "light.ty_02_5ch_v5_2",
+    "light.alex_wohnung_nachtlicht",
+    "light.alex_wohnung_schrank_ambiente",
+    "light.sofa_alex",
+    "light.ambiente_ecklampe",
+    "light.lichtschacht_licht",
+    "light.bad_ambiente_alex_wohnung",
+    "light.ipad_backlights",
+    "light.alex_wohnung_kuche_ambiente_alex_wohnung",
+    "light.alex_wohnung_tv_beleuchtung",
+    "light.alex_wohnung_tv_lowboard_beleuchtung"
+   ],
+   "friendly_name": "Zone Ambiente Global",
+   "supported_features": 44
+  },
+  "lc_ts": 1794378909123
+ },
+ "light.zone_ambiente_sofa": {
+  "entity_id": "light.zone_ambiente_sofa",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 15,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "rgb",
+    "xy"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 58,
+   "color_temp_kelvin": 3476,
+   "hs_color": [
+    27.197,
+    45.298
+   ],
+   "entity_id": [
+    "light.ambiente_ecklampe",
+    "light.ipad_backlights",
+    "light.alex_wohnung_kuche_ambiente_alex_wohnung",
+    "light.alex_wohnung_schrank_ambiente",
+    "light.regal_alex_wohnung",
+    "light.sofa_alex",
+    "light.alex_wohnung_tv_beleuchtung",
+    "light.alex_wohnung_tv_lowboard_beleuchtung"
+   ],
+   "friendly_name": "Zone Ambiente Sofa",
+   "supported_features": 44
+  },
+  "lc_ts": 1794379141123
+ },
+ "light.zone_bad": {
+  "entity_id": "light.zone_bad",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6500,
+   "supported_color_modes": [
+    "color_temp",
+    "hs"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 204,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "entity_id": [
+    "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_1",
+    "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_2",
+    "light.bad_ambiente_alex_wohnung"
+   ],
+   "friendly_name": "Zone Bad",
+   "supported_features": 0
+  },
+  "lc_ts": 1794379141123
+ },
+ "light.zone_hinten": {
+  "entity_id": "light.zone_hinten",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 9009,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "rgb",
+    "xy"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 23,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "entity_id": [
+    "light.alex_wohnung_kuchendeckenlicht",
+    "light.alex_zimmer_kleiderschrank_licht_links",
+    "light.alex_wohnung_kleiderschrank_licht_rechts",
+    "light.alex_wohnung_bett_deckenlicht",
+    "light.lichtschacht_licht",
+    "light.alex_wohnung_nachtlicht"
+   ],
+   "friendly_name": "Bett Bereich",
+   "supported_features": 44
+  },
+  "lc_ts": 1794378909123
+ },
+ "light.zone_kueche": {
+  "entity_id": "light.zone_kueche",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 84,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "entity_id": [
+    "light.kuechenlicht_oben",
+    "light.alex_wohnung_kuche_ambiente_alex_wohnung",
+    "light.alex_wohnung_kuchendeckenlicht"
+   ],
+   "friendly_name": "Zone Kueche",
+   "supported_features": 32
+  },
+  "lc_ts": 1794379142123
+ },
+ "light.zone_schreibtisch": {
+  "entity_id": "light.zone_schreibtisch",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 28,
+   "color_temp_kelvin": 5714,
+   "hs_color": [
+    28.745,
+    10.321
+   ],
+   "entity_id": [
+    "light.alex_wohnung_schreibtisch_licht_links",
+    "light.alex_wohnung_schreibtisch_licht_rechts"
+   ],
+   "friendly_name": "Zone Schreibtisch",
+   "supported_features": 32
+  },
+  "lc_ts": 1794391190123
+ },
+ "light.zone_sofa_deckenlicht": {
+  "entity_id": "light.zone_sofa_deckenlicht",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "entity_id": [
+    "light.alex_wohnung_sofa_links",
+    "light.alex_wohnung_sofa_rechts",
+    "light.alex_wohnung_wohnbereich_links",
+    "light.alex_wohnung_wohnbereich_rechts"
+   ],
+   "friendly_name": "Zone Sofa Deckenlicht",
+   "supported_features": 32
+  },
+  "lc_ts": 1794355947123
+ },
+ "light.zone_tv": {
+  "entity_id": "light.zone_tv",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 3000,
+   "max_color_temp_kelvin": 6000,
+   "supported_color_modes": [
+    "color_temp",
+    "rgb"
+   ],
+   "color_mode": "rgb",
+   "brightness": 23,
+   "color_temp_kelvin": null,
+   "hs_color": [
+    44.25,
+    62.745
+   ],
+   "entity_id": [
+    "light.alex_wohnung_tv_beleuchtung",
+    "light.alex_wohnung_tv_lowboard_beleuchtung"
+   ],
+   "friendly_name": "Zone TV",
+   "supported_features": 44
+  },
+  "lc_ts": 1794379141123
+ },
+ "light.zone_wohnlicht": {
+  "entity_id": "light.zone_wohnlicht",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "entity_id": [
+    "light.alex_wohnung_wohnbereich_links",
+    "light.alex_wohnung_wohnbereich_rechts",
+    "light.alex_wohnung_wohnflache",
+    "light.alex_wohnung_sofa_links",
+    "light.alex_wohnung_sofa_rechts",
+    "light.alex_wohnung_eingangsbereich"
+   ],
+   "friendly_name": "Zone Wohnlicht Decke",
+   "supported_features": 32
+  },
+  "lc_ts": 1794355947123
+ },
+ "media_player.alex_wohnung_alex_tv_wohnbereich": {
+  "entity_id": "media_player.alex_wohnung_alex_tv_wohnbereich",
+  "state": "off",
+  "attributes": {
+   "device_class": "tv",
+   "friendly_name": "Alex TV Wohnbereich",
+   "supported_features": 24381
+  },
+  "lc_ts": 1794355943123
+ },
+ "media_player.alex_wohnung_echo": {
+  "entity_id": "media_player.alex_wohnung_echo",
+  "state": "idle",
+  "attributes": {
+   "volume_level": 0.3,
+   "is_volume_muted": false,
+   "device_class": "speaker",
+   "friendly_name": "Alex Wohnung Echo",
+   "supported_features": 5644
+  },
+  "lc_ts": 1794355947123
+ },
+ "media_player.alex_wohnung_echo_dot": {
+  "entity_id": "media_player.alex_wohnung_echo_dot",
+  "state": "idle",
+  "attributes": {
+   "volume_level": 0.21,
+   "is_volume_muted": false,
+   "device_class": "speaker",
+   "friendly_name": "Alex Wohnung Echo Dot",
+   "supported_features": 5644
+  },
+  "lc_ts": 1794355947123
+ },
+ "media_player.alex_wohnung_fire_tv_max_alex_wohnung_wohnbereich": {
+  "entity_id": "media_player.alex_wohnung_fire_tv_max_alex_wohnung_wohnbereich",
+  "state": "off",
+  "attributes": {
+   "device_class": "tv",
+   "friendly_name": "Fire TV Max Alex Wohnung Wohnbereich",
+   "supported_features": 22961
+  },
+  "lc_ts": 1794355947123
+ },
+ "media_player.alex_wohnung_firetv_stick_bett_alex": {
+  "entity_id": "media_player.alex_wohnung_firetv_stick_bett_alex",
+  "state": "off",
+  "attributes": {
+   "device_class": "tv",
+   "friendly_name": "FireTV Stick Bett Alex",
+   "supported_features": 22961
+  },
+  "lc_ts": 1794378755123
+ },
+ "media_player.alexanders_fire_tv_stick": {
+  "entity_id": "media_player.alexanders_fire_tv_stick",
+  "state": "idle",
+  "attributes": {
+   "volume_level": 0.4,
+   "is_volume_muted": false,
+   "device_class": "speaker",
+   "friendly_name": "Alexanders Fire TV Stick",
+   "supported_features": 5644
+  },
+  "lc_ts": 1794355947123
+ },
+ "media_player.bad_echo_dot_alex_wohnung": {
+  "entity_id": "media_player.bad_echo_dot_alex_wohnung",
+  "state": "idle",
+  "attributes": {
+   "volume_level": 0.33,
+   "is_volume_muted": false,
+   "device_class": "speaker",
+   "friendly_name": "Bad Echo Dot Alex Wohnung",
+   "supported_features": 5644
+  },
+  "lc_ts": 1794355947123
+ },
+ "media_player.bad_snapcast_client": {
+  "entity_id": "media_player.bad_snapcast_client",
+  "state": "idle",
+  "attributes": {
+   "volume_level": 1.0,
+   "is_volume_muted": true,
+   "source": "AirPlay",
+   "device_class": "speaker",
+   "friendly_name": "Bad Snapcast Client",
+   "supported_features": 526348
+  },
+  "lc_ts": 1794355936123
+ },
+ "media_player.pc_bereich_snapcast_client": {
+  "entity_id": "media_player.pc_bereich_snapcast_client",
+  "state": "idle",
+  "attributes": {
+   "volume_level": 1.0,
+   "is_volume_muted": true,
+   "source": "AirPlay",
+   "device_class": "speaker",
+   "friendly_name": "PC-Bereich Snapcast Client",
+   "supported_features": 526348
+  },
+  "lc_ts": 1794355936123
+ },
+ "media_player.wohnbereich_snapcast_client": {
+  "entity_id": "media_player.wohnbereich_snapcast_client",
+  "state": "idle",
+  "attributes": {
+   "volume_level": 0.9,
+   "is_volume_muted": true,
+   "source": "AirPlay",
+   "device_class": "speaker",
+   "friendly_name": "Wohnbereich Snapcast Client",
+   "supported_features": 526348
+  },
+  "lc_ts": 1794355936123
+ },
+ "script.alles_aus": {
+  "entity_id": "script.alles_aus",
+  "state": "off",
+  "attributes": {
+   "icon": "mdi:power",
+   "friendly_name": "Alles aus · Alex Wohnung"
+  },
+  "lc_ts": 1794360788123
+ },
+ "script.soundanlage_anwenden": {
+  "entity_id": "script.soundanlage_anwenden",
+  "state": "off",
+  "attributes": {
+   "max": 5,
+   "icon": "mdi:soundbar",
+   "friendly_name": "Soundanlage · Sollzustand anwenden"
+  },
+  "lc_ts": 1794355932123
+ },
+ "script.soundanlage_ir_taste": {
+  "entity_id": "script.soundanlage_ir_taste",
+  "state": "off",
+  "attributes": {
+   "max": 10,
+   "icon": "mdi:remote",
+   "friendly_name": "Soundanlage · IR-Taste drücken"
+  },
+  "lc_ts": 1794355932123
+ },
+ "script.xp700_einschalten": {
+  "entity_id": "script.xp700_einschalten",
+  "state": "off",
+  "attributes": {
+   "icon": "mdi:speaker-wireless",
+   "friendly_name": "XP700 einschalten"
+  },
+  "lc_ts": 1794355932123
+ },
+ "select.test_led_controller_farbpalette": {
+  "entity_id": "select.test_led_controller_farbpalette",
+  "state": "* Color Gradient",
+  "attributes": {
+   "options": [
+    "* Color 1",
+    "* Color Gradient",
+    "* Colors 1&2",
+    "* Colors Only",
+    "* Random Cycle",
+    "Analogous",
+    "April Night",
+    "Aqua Flash",
+    "Atlantica",
+    "Aurora",
+    "Aurora 2",
+    "Autumn",
+    "Beach",
+    "Beech",
+    "Blink Red",
+    "Breeze",
+    "C9",
+    "C9 2",
+    "C9 New",
+    "Candy",
+    "Candy2",
+    "Cloud",
+    "Custom 1",
+    "Custom 2",
+    "Cyane",
+    "Default",
+    "Departure",
+    "Drywet",
+    "Fairy Reaf",
+    "Fire",
+    "Forest",
+    "Grintage",
+    "Hult",
+    "Hult 64",
+    "Icefire",
+    "Jul",
+    "Landscape",
+    "Lava",
+    "Light Pink",
+    "Lite Light",
+    "Magenta",
+    "Magred",
+    "Ocean",
+    "Orange & Teal",
+    "Orangery",
+    "Party",
+    "Pastel",
+    "Pink Candy",
+    "Rainbow",
+    "Rainbow Bands",
+    "Red & Blue",
+    "Red Flash",
+    "Red Reaf",
+    "Red Shift",
+    "Red Tide",
+    "Retro Clown",
+    "Rewhi",
+    "Rivendell",
+    "Sakura",
+    "Semi Blue",
+    "Sherbet",
+    "Splash",
+    "Sunset",
+    "Sunset 2",
+    "Temperature",
+    "Tertiary",
+    "Tiamat",
+    "Toxy Reaf",
+    "Traffic Light",
+    "Vintage",
+    "Yelblu",
+    "Yelblu Hot",
+    "Yellowout",
+    "Yelmag"
+   ],
+   "friendly_name": "Ipad Backlights Farbpalette"
+  },
+  "lc_ts": 1794355936123
+ },
+ "sensor.alex_wohnung_interface_leistung": {
+  "entity_id": "sensor.alex_wohnung_interface_leistung",
+  "state": "5.3",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "W",
+   "device_class": "power",
+   "friendly_name": "Interface Leistung"
+  },
+  "lc_ts": 1794381816123
+ },
+ "sensor.alex_wohnung_luftwerte_kohlendioxid": {
+  "entity_id": "sensor.alex_wohnung_luftwerte_kohlendioxid",
+  "state": "2139.0",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "ppm",
+   "device_class": "carbon_dioxide",
+   "friendly_name": "Luftwerte Kohlendioxid"
+  },
+  "lc_ts": 1794400495123
+ },
+ "sensor.alex_wohnung_monitore_leistung": {
+  "entity_id": "sensor.alex_wohnung_monitore_leistung",
+  "state": "126.4",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "W",
+   "device_class": "power",
+   "friendly_name": "Monitore Leistung"
+  },
+  "lc_ts": 1794400385123
+ },
+ "sensor.alex_wohnung_spulmaschiene_aktuelle_leistung": {
+  "entity_id": "sensor.alex_wohnung_spulmaschiene_aktuelle_leistung",
+  "state": "11.3",
+  "attributes": {
+   "unit_of_measurement": "W",
+   "device_class": "power",
+   "icon": "mdi:flash",
+   "friendly_name": "Spülmaschiene Aktuelle Leistung"
+  },
+  "lc_ts": 1794400468123
+ },
+ "sensor.alex_wohnung_spulmaschiene_aktuelle_phase": {
+  "entity_id": "sensor.alex_wohnung_spulmaschiene_aktuelle_phase",
+  "state": "unknown",
+  "attributes": {
+   "icon": "mdi:water-sync",
+   "friendly_name": "Spülmaschiene Aktuelle Phase"
+  },
+  "lc_ts": 1794358664123
+ },
+ "sensor.alex_wohnung_spulmaschiene_fortschritt": {
+  "entity_id": "sensor.alex_wohnung_spulmaschiene_fortschritt",
+  "state": "0",
+  "attributes": {
+   "unit_of_measurement": "%",
+   "icon": "mdi:progress-clock",
+   "friendly_name": "Spülmaschiene Fortschritt"
+  },
+  "lc_ts": 1794358664123
+ },
+ "sensor.alex_wohnung_spulmaschiene_programm": {
+  "entity_id": "sensor.alex_wohnung_spulmaschiene_programm",
+  "state": "detecting...",
+  "attributes": {
+   "options": [
+    "detecting...",
+    "none",
+    "unknown"
+   ],
+   "device_class": "enum",
+   "icon": "mdi:file-document-outline",
+   "friendly_name": "Spülmaschiene Programm"
+  },
+  "lc_ts": 1794394529123
+ },
+ "sensor.alex_wohnung_spulmaschiene_verbleibende_zeit": {
+  "entity_id": "sensor.alex_wohnung_spulmaschiene_verbleibende_zeit",
+  "state": "unknown",
+  "attributes": {
+   "unit_of_measurement": "min",
+   "device_class": "duration",
+   "icon": "mdi:timer-sand",
+   "friendly_name": "Spülmaschiene Verbleibende Zeit"
+  },
+  "lc_ts": 1794358664123
+ },
+ "sensor.alex_wohnung_spulmaschiene_zustand": {
+  "entity_id": "sensor.alex_wohnung_spulmaschiene_zustand",
+  "state": "running",
+  "attributes": {
+   "options": [
+    "off",
+    "idle",
+    "starting",
+    "running",
+    "paused",
+    "user_paused",
+    "ending",
+    "finished",
+    "anti_wrinkle",
+    "delay_wait",
+    "interrupted",
+    "force_stopped",
+    "unknown",
+    "clean"
+   ],
+   "device_class": "enum",
+   "icon": "mdi:dishwasher",
+   "friendly_name": "Spülmaschiene Zustand"
+  },
+  "lc_ts": 1794394529123
+ },
+ "sensor.alex_wohnung_thermometer_aussen_temperatur": {
+  "entity_id": "sensor.alex_wohnung_thermometer_aussen_temperatur",
+  "state": "12.94",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "°C",
+   "device_class": "temperature",
+   "friendly_name": "Thermometer Außen Temperatur"
+  },
+  "lc_ts": 1794400202123
+ },
+ "sensor.alex_wohnung_thermometer_bad_luftfeuchtigkeit": {
+  "entity_id": "sensor.alex_wohnung_thermometer_bad_luftfeuchtigkeit",
+  "state": "56.86",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "%",
+   "device_class": "humidity",
+   "friendly_name": "Thermometer Bad Luftfeuchtigkeit"
+  },
+  "lc_ts": 1794400376123
+ },
+ "sensor.alex_wohnung_thermometer_wohnbereich_luftfeuchtigkeit": {
+  "entity_id": "sensor.alex_wohnung_thermometer_wohnbereich_luftfeuchtigkeit",
+  "state": "66.67",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "%",
+   "device_class": "humidity",
+   "friendly_name": "Thermometer Wohnbereich Luftfeuchtigkeit"
+  },
+  "lc_ts": 1794400513123
+ },
+ "sensor.alex_wohnung_timmerflotte_luftfeuchtigkeit": {
+  "entity_id": "sensor.alex_wohnung_timmerflotte_luftfeuchtigkeit",
+  "state": "55.43",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "%",
+   "device_class": "humidity",
+   "friendly_name": "Thermometer Schreibtisch Alex Luftfeuchtigkeit"
+  },
+  "lc_ts": 1794400389123
+ },
+ "sensor.alex_wohnung_timmerflotte_temperatur": {
+  "entity_id": "sensor.alex_wohnung_timmerflotte_temperatur",
+  "state": "25.24",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "°C",
+   "device_class": "temperature",
+   "friendly_name": "Thermometer Schreibtisch Alex Temperatur"
+  },
+  "lc_ts": 1794400389123
+ },
+ "sensor.dreame_battery_level": {
+  "entity_id": "sensor.dreame_battery_level",
+  "state": "100",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "%",
+   "device_class": "battery",
+   "icon": "mdi:battery",
+   "friendly_name": "Dreame Batteriestand"
+  },
+  "lc_ts": 1794367244123
+ },
+ "sensor.dreame_current_room": {
+  "entity_id": "sensor.dreame_current_room",
+  "state": "Pc Bereich",
+  "attributes": {
+   "icon": "mdi:home-map-marker",
+   "friendly_name": "Dreame Aktueller Raum"
+  },
+  "lc_ts": 1794355937123
+ },
+ "sensor.dreame_error": {
+  "entity_id": "sensor.dreame_error",
+  "state": "no_error",
+  "attributes": {
+   "icon": "mdi:check-circle-outline",
+   "friendly_name": "Dreame Fehler"
+  },
+  "lc_ts": 1794355937123
+ },
+ "sensor.dreame_status": {
+  "entity_id": "sensor.dreame_status",
+  "state": "sleeping",
+  "attributes": {
+   "icon": "mdi:vacuum",
+   "friendly_name": "Dreame Status"
+  },
+  "lc_ts": 1794366900123
+ },
+ "sensor.durchschnitt_luftfeuchtigkeit": {
+  "entity_id": "sensor.durchschnitt_luftfeuchtigkeit",
+  "state": "58.2",
+  "attributes": {
+   "state_class": "measurement",
+   "entity_id": [
+    "sensor.alex_wohnung_luftwerte_luftfeuchtigkeit",
+    "sensor.alex_wohnung_thermometer_bad_luftfeuchtigkeit",
+    "sensor.alex_wohnung_thermometer_wohnbereich_luftfeuchtigkeit",
+    "sensor.alex_wohnung_timmerflotte_luftfeuchtigkeit",
+    "sensor.thermometer_alex_humidity"
+   ],
+   "unit_of_measurement": "%",
+   "device_class": "humidity",
+   "icon": "mdi:water-percent",
+   "friendly_name": "Durchschnitt Luftfeuchtigkeit"
+  },
+  "lc_ts": 1794400436123
+ },
+ "sensor.luftungsdauer_empfohlen": {
+  "entity_id": "sensor.luftungsdauer_empfohlen",
+  "state": "15",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "min",
+   "device_class": "duration",
+   "icon": "mdi:timer-outline",
+   "friendly_name": "Lüftungsdauer empfohlen"
+  },
+  "lc_ts": 1794357797123
+ },
+ "sensor.mischpult_alex_leistung": {
+  "entity_id": "sensor.mischpult_alex_leistung",
+  "state": "27.2",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "W",
+   "device_class": "power",
+   "friendly_name": "Mischpult Alex Leistung"
+  },
+  "lc_ts": 1794395774123
+ },
+ "sensor.pc_2_strom_leistung": {
+  "entity_id": "sensor.pc_2_strom_leistung",
+  "state": "0.0",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "W",
+   "device_class": "power",
+   "friendly_name": "Pc 2 Strom Leistung"
+  },
+  "lc_ts": 1794355938123
+ },
+ "sensor.raumtemperatur_bad": {
+  "entity_id": "sensor.raumtemperatur_bad",
+  "state": "24.1",
+  "attributes": {
+   "state_class": "measurement",
+   "entity_id": [
+    "sensor.alex_wohnung_thermometer_bad_temperatur",
+    "sensor.bad_echo_dot_alex_wohnung_temperatur"
+   ],
+   "unit_of_measurement": "°C",
+   "device_class": "temperature",
+   "icon": "mdi:home-thermometer",
+   "friendly_name": "Raumtemperatur Bad"
+  },
+  "lc_ts": 1794400376123
+ },
+ "sensor.raumtemperatur_wohnbereich": {
+  "entity_id": "sensor.raumtemperatur_wohnbereich",
+  "state": "24.1",
+  "attributes": {
+   "state_class": "measurement",
+   "entity_id": [
+    "sensor.alex_wohnung_thermometer_wohnbereich_temperatur",
+    "sensor.thermometer_alex_temperature",
+    "sensor.alex_wohnung_alex_wohnung_echo_dot_temperatur",
+    "sensor.alex_wohnung_timmerflotte_temperatur",
+    "sensor.alex_wohnung_luftwerte_temperatur"
+   ],
+   "unit_of_measurement": "°C",
+   "device_class": "temperature",
+   "icon": "mdi:home-thermometer",
+   "friendly_name": "Raumtemperatur Wohnbereich"
+  },
+  "lc_ts": 1794399991123
+ },
+ "sensor.schimmelrisiko_bad": {
+  "entity_id": "sensor.schimmelrisiko_bad",
+  "state": "70",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "%",
+   "device_class": "humidity",
+   "friendly_name": "Thermometer Bad Feuchte Außenwand"
+  },
+  "lc_ts": 1794400376123
+ },
+ "sensor.schimmelrisiko_wohnbereich": {
+  "entity_id": "sensor.schimmelrisiko_wohnbereich",
+  "state": "78",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "%",
+   "device_class": "humidity",
+   "friendly_name": "Thermometer Wohnbereich Feuchte Außenwand"
+  },
+  "lc_ts": 1794399927123
+ },
+ "sensor.studioboxen_leistung": {
+  "entity_id": "sensor.studioboxen_leistung",
+  "state": "0.0",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "W",
+   "device_class": "power",
+   "friendly_name": "Studioboxen Leistung"
+  },
+  "lc_ts": 1794355938123
+ },
+ "sensor.switch_alex_leistung": {
+  "entity_id": "sensor.switch_alex_leistung",
+  "state": "0.0",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "W",
+   "device_class": "power",
+   "friendly_name": "Lan-Switch Alex Leistung"
+  },
+  "lc_ts": 1794355938123
+ },
+ "sensor.thermometer_alex_humidity": {
+  "entity_id": "sensor.thermometer_alex_humidity",
+  "state": "61.50",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "%",
+   "device_class": "humidity",
+   "friendly_name": "Thermometer Bett Alex Humidity"
+  },
+  "lc_ts": 1794399932123
+ },
+ "sensor.thermometer_alex_temperature": {
+  "entity_id": "sensor.thermometer_alex_temperature",
+  "state": "23.10",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "°C",
+   "device_class": "temperature",
+   "friendly_name": "Thermometer Bett Alex Temperature"
+  },
+  "lc_ts": 1794399030123
+ },
+ "sensor.waschmaschiene_alex_aktuelle_phase": {
+  "entity_id": "sensor.waschmaschiene_alex_aktuelle_phase",
+  "state": "unknown",
+  "attributes": {
+   "icon": "mdi:water-sync",
+   "friendly_name": "Waschmaschine Alex Aktuelle Phase"
+  },
+  "lc_ts": 1794355936123
+ },
+ "sensor.waschmaschiene_alex_fortschritt": {
+  "entity_id": "sensor.waschmaschiene_alex_fortschritt",
+  "state": "49",
+  "attributes": {
+   "unit_of_measurement": "%",
+   "icon": "mdi:progress-clock",
+   "friendly_name": "Waschmaschine Alex Fortschritt"
+  },
+  "lc_ts": 1794400325123
+ },
+ "sensor.waschmaschiene_alex_programm": {
+  "entity_id": "sensor.waschmaschiene_alex_programm",
+  "state": "Buntwäsche 40 grad mit Schranktrocken",
+  "attributes": {
+   "options": [
+    "Buntwäsche 40 grad",
+    "Buntwäsche 40 grad mit Schranktrocken",
+    "Waschtrocknen mit Schranktrocken",
+    "none",
+    "unknown"
+   ],
+   "device_class": "enum",
+   "icon": "mdi:file-document-outline",
+   "friendly_name": "Waschmaschine Alex Programm"
+  },
+  "lc_ts": 1794395666123
+ },
+ "sensor.waschmaschiene_alex_verbleibende_zeit": {
+  "entity_id": "sensor.waschmaschiene_alex_verbleibende_zeit",
+  "state": "96",
+  "attributes": {
+   "unit_of_measurement": "min",
+   "device_class": "duration",
+   "icon": "mdi:timer-sand",
+   "friendly_name": "Waschmaschine Alex Verbleibende Zeit"
+  },
+  "lc_ts": 1794400459123
+ },
+ "sensor.waschmaschiene_alex_zustand": {
+  "entity_id": "sensor.waschmaschiene_alex_zustand",
+  "state": "running",
+  "attributes": {
+   "options": [
+    "off",
+    "idle",
+    "starting",
+    "running",
+    "paused",
+    "user_paused",
+    "ending",
+    "finished",
+    "anti_wrinkle",
+    "delay_wait",
+    "interrupted",
+    "force_stopped",
+    "unknown",
+    "clean"
+   ],
+   "device_class": "enum",
+   "icon": "mdi:washing-machine",
+   "friendly_name": "Waschmaschine Alex Zustand"
+  },
+  "lc_ts": 1794396006123
+ },
+ "switch.alex_wohnung_fernseher_bett": {
+  "entity_id": "switch.alex_wohnung_fernseher_bett",
+  "state": "unavailable",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Fernseher Bett"
+  },
+  "lc_ts": 1794355934123
+ },
+ "switch.alex_wohnung_interface": {
+  "entity_id": "switch.alex_wohnung_interface",
+  "state": "on",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Interface"
+  },
+  "lc_ts": 1794381326123
+ },
+ "switch.alex_wohnung_lichtschalter_eingang_hinten": {
+  "entity_id": "switch.alex_wohnung_lichtschalter_eingang_hinten",
+  "state": "off",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Licht Hinten"
+  },
+  "lc_ts": 1794355934123
+ },
+ "switch.alex_wohnung_monitore": {
+  "entity_id": "switch.alex_wohnung_monitore",
+  "state": "on",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Monitore"
+  },
+  "lc_ts": 1794381326123
+ },
+ "switch.alex_zimmer_lichtschalter_eingang_alex_wohnung_deckenlicht_1_alex_wohnung": {
+  "entity_id": "switch.alex_zimmer_lichtschalter_eingang_alex_wohnung_deckenlicht_1_alex_wohnung",
+  "state": "on",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Wohnlicht"
+  },
+  "lc_ts": 1794355934123
+ },
+ "switch.lichtschacht_schalter": {
+  "entity_id": "switch.lichtschacht_schalter",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Lichtschacht Schalter"
+  },
+  "lc_ts": 1794379141123
+ },
+ "switch.mischpult_alex_steckdose_1": {
+  "entity_id": "switch.mischpult_alex_steckdose_1",
+  "state": "on",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Mischpult"
+  },
+  "lc_ts": 1794381326123
+ },
+ "switch.pc_2_strom_steckdose_1": {
+  "entity_id": "switch.pc_2_strom_steckdose_1",
+  "state": "off",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Pc 2 Strom"
+  },
+  "lc_ts": 1794355938123
+ },
+ "switch.pc_power_switch": {
+  "entity_id": "switch.pc_power_switch",
+  "state": "unknown",
+  "attributes": {
+   "friendly_name": "Pc Power Switch"
+  },
+  "lc_ts": 1794357687123
+ },
+ "switch.studioboxen_steckdose_1": {
+  "entity_id": "switch.studioboxen_steckdose_1",
+  "state": "off",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Studioboxen"
+  },
+  "lc_ts": 1794355938123
+ },
+ "switch.switch_alex_steckdose_1": {
+  "entity_id": "switch.switch_alex_steckdose_1",
+  "state": "off",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Lan-Switch"
+  },
+  "lc_ts": 1794355938123
+ },
+ "switch.vol_tv_soundanlage": {
+  "entity_id": "switch.vol_tv_soundanlage",
+  "state": "off",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Vol- TV Soundanlage"
+  },
+  "lc_ts": 1794355934123
+ },
+ "switch.vol_tv_soundanlage_2": {
+  "entity_id": "switch.vol_tv_soundanlage_2",
+  "state": "off",
+  "attributes": {
+   "device_class": "switch",
+   "friendly_name": "Vol+ TV Soundanlage"
+  },
+  "lc_ts": 1794355934123
+ },
+ "timer.heizung_bad_boost": {
+  "entity_id": "timer.heizung_bad_boost",
+  "state": "idle",
+  "attributes": {
+   "duration": "0:30:00",
+   "icon": "mdi:rocket-launch-outline",
+   "friendly_name": "Heizung Bad Boost"
+  },
+  "lc_ts": 1794364181123,
+  "finishes_ts": null
+ },
+ "timer.heizung_wohnbereich_boost": {
+  "entity_id": "timer.heizung_wohnbereich_boost",
+  "state": "idle",
+  "attributes": {
+   "duration": "0:30:00",
+   "icon": "mdi:rocket-launch-outline",
+   "friendly_name": "Heizung Wohnbereich Boost"
+  },
+  "lc_ts": 1794364180123,
+  "finishes_ts": null
+ },
+ "todo.einkaufsliste_2": {
+  "entity_id": "todo.einkaufsliste_2",
+  "state": "0",
+  "attributes": {
+   "friendly_name": "Einkaufsliste",
+   "supported_features": 15
+  },
+  "lc_ts": 1794355936123
+ },
+ "vacuum.dreame": {
+  "entity_id": "vacuum.dreame",
+  "state": "docked",
+  "attributes": {
+   "friendly_name": "Dreame",
+   "status": "sleeping",
+   "battery": 100,
+   "fan_speed": "strong",
+   "fan_speed_list": [
+    "silent",
+    "standard",
+    "strong",
+    "turbo"
+   ],
+   "cleaning_progress": 0,
+   "error": "No error",
+   "supported_features": 31676
+  },
+  "lc_ts": 1794355937123
+ },
+ "weather.forecast_home": {
+  "entity_id": "weather.forecast_home",
+  "state": "cloudy",
+  "attributes": {
+   "temperature": 15.2,
+   "temperature_unit": "°C",
+   "humidity": 95,
+   "friendly_name": "Home",
+   "supported_features": 3
+  },
+  "lc_ts": 1794400400123
+ }
+}

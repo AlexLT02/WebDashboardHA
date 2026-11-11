@@ -1,0 +1,4 @@
+-r requirements.txt
+# Tests only (not installed in the add-on image). httpx backs FastAPI's TestClient.
+pytest==9.1.1
+httpx==0.28.1

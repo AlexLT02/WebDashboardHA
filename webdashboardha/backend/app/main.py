@@ -15,7 +15,7 @@ from fastapi.staticfiles import StaticFiles
 
 from .config import load_settings
 from .hub import Hub
-from .routes import control, dashboards, ws
+from .routes import board, control, dashboards, ws
 from .storage import DashboardStore
 
 logging.basicConfig(
@@ -36,7 +36,7 @@ async def lifespan(app: FastAPI):
     store.init()
     app.state.store = store
 
-    hub = Hub(settings)
+    hub = Hub(settings, dashboards=store)
     app.state.hub = hub
     hub.start()
 
@@ -52,6 +52,7 @@ app = FastAPI(title="WebDashboardHA", lifespan=lifespan)
 # API-/WS-Router VOR dem Static-Mount registrieren.
 app.include_router(control.router)
 app.include_router(dashboards.router)
+app.include_router(board.router)
 app.include_router(ws.router)
 
 

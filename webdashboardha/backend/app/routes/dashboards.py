@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from fastapi import APIRouter, HTTPException, Response, status
+from fastapi import APIRouter, HTTPException, Request, Response, status
 
 from ..dependencies import StoreDep
 from ..schemas import Dashboard, DashboardCreate
@@ -30,11 +30,15 @@ async def create_dashboard(payload: DashboardCreate, store: StoreDep) -> Dashboa
 
 @router.put("/{dashboard_id}")
 async def update_dashboard(
-    dashboard_id: str, payload: DashboardCreate, store: StoreDep
+    dashboard_id: str, payload: DashboardCreate, store: StoreDep, request: Request
 ) -> Dashboard:
     dashboard = store.update(dashboard_id, payload)
     if dashboard is None:
         raise HTTPException(status_code=404, detail="Dashboard nicht gefunden")
+    # Alert helpers in meta.settings belong to the v2 watch-set.
+    hub = getattr(request.app.state, "hub", None)
+    if hub is not None and hub.board is not None:
+        hub.schedule_rebuild()
     return dashboard
 
 

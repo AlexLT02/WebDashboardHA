@@ -26,6 +26,10 @@ log = logging.getLogger("webdashboardha.ha")
 # Typ-Aliase für die Callbacks, die der Hub registriert.
 StateChangeCb = Callable[[str, dict[str, Any] | None], Awaitable[None]]
 ConnectedCb = Callable[[dict[str, dict[str, Any]]], Awaitable[None]]
+HookCb = Callable[[], Awaitable[None]]
+# Non-state events (registry updates). Must not await commands: it runs inside
+# the read loop, a command result could never arrive.
+EventCb = Callable[[str, dict[str, Any]], Awaitable[None]]
 
 _CMD_TIMEOUT = 10.0  # Sekunden auf eine Kommando-Antwort warten
 _MAX_BACKOFF = 30.0
@@ -43,11 +47,17 @@ class HAClient:
         *,
         on_state_change: StateChangeCb,
         on_connected: ConnectedCb,
+        on_authenticated: HookCb | None = None,
+        on_event: EventCb | None = None,
+        on_disconnected: HookCb | None = None,
     ) -> None:
         self._ws_url = ws_url
         self._token = token
         self._on_state_change = on_state_change
         self._on_connected = on_connected
+        self._on_authenticated = on_authenticated
+        self._on_event = on_event
+        self._on_disconnected = on_disconnected
 
         self._session: aiohttp.ClientSession | None = None
         self._ws: aiohttp.ClientWebSocketResponse | None = None
@@ -89,7 +99,14 @@ class HAClient:
             except Exception as exc:  # noqa: BLE001 — Reconnect auf alles
                 log.warning("HA-Verbindung verloren (%s). Reconnect in %.0fs.", exc, backoff)
             finally:
+                was_connected = self.connected
                 self.connected = False
+                self._ws = None
+                if was_connected and self._on_disconnected:
+                    try:
+                        await self._on_disconnected()
+                    except Exception:  # noqa: BLE001 — never break the reconnect loop
+                        log.exception("on_disconnected fehlgeschlagen")
 
             if self._stopped:
                 break
@@ -112,6 +129,9 @@ class HAClient:
             # dispatcht. Andernfalls laufen die Kommandos in den Timeout.
             read_task = asyncio.create_task(self._read_loop(ws))
             try:
+                # v2: registry first (board needs it), then states.
+                if self._on_authenticated:
+                    await self._on_authenticated()
                 # Erst Subscription, dann Snapshot — so entgeht uns kein Event.
                 await self._send_command(
                     {"type": "subscribe_events", "event_type": "state_changed"}
@@ -145,6 +165,13 @@ class HAClient:
         self._id += 1
         return self._id
 
+    async def send_command(self, payload: dict[str, Any]) -> dict[str, Any]:
+        """Send any WS command and return the full result message."""
+        return await self._send_command(payload)
+
+    async def subscribe_events(self, event_type: str) -> None:
+        await self._send_command({"type": "subscribe_events", "event_type": event_type})
+
     async def _send_command(self, payload: dict[str, Any]) -> dict[str, Any]:
         """Sendet ein Kommando und wartet auf das zugehörige result."""
         if self._ws is None:
@@ -170,6 +197,7 @@ class HAClient:
         *,
         entity_id: str | list[str] | None = None,
         service_data: dict[str, Any] | None = None,
+        return_response: bool = False,
     ) -> dict[str, Any]:
         payload: dict[str, Any] = {
             "type": "call_service",
@@ -180,6 +208,8 @@ class HAClient:
             payload["service_data"] = service_data
         if entity_id is not None:
             payload["target"] = {"entity_id": entity_id}
+        if return_response:
+            payload["return_response"] = True
         return await self._send_command(payload)
 
     # ---- Empfang ----------------------------------------------------------
@@ -200,9 +230,12 @@ class HAClient:
                 fut.set_result(data)
         elif mtype == "event":
             event = data.get("event", {})
-            if event.get("event_type") == "state_changed":
+            etype = event.get("event_type")
+            if etype == "state_changed":
                 ev = event.get("data", {})
                 entity_id = ev.get("entity_id")
                 new_state = ev.get("new_state")  # None = Entity gelöscht
                 if entity_id:
                     await self._on_state_change(entity_id, new_state)
+            elif etype and self._on_event:
+                await self._on_event(etype, event.get("data", {}))

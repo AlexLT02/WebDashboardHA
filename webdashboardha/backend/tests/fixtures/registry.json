@@ -1,0 +1,5009 @@
+{
+ "_source": "HA 2026.11 read-only via MCP template, 2026-11-11; ids anonymised; entity_category not readable via templates (null everywhere)",
+ "areas": [
+  {
+   "area_id": "alex_zimmer",
+   "name": "Alex_Zimmer"
+  },
+  {
+   "area_id": "bad",
+   "name": "Bad"
+  },
+  {
+   "area_id": "garagentore",
+   "name": "Garagentore"
+  },
+  {
+   "area_id": "kinozimmer",
+   "name": "Kinozimmer"
+  },
+  {
+   "area_id": "ronja_zimmer",
+   "name": "Ronja Zimmer"
+  },
+  {
+   "area_id": "treppenhaus",
+   "name": "Treppenhaus"
+  },
+  {
+   "area_id": "system",
+   "name": "System"
+  },
+  {
+   "area_id": "alex_wohnung",
+   "name": "Alex Wohnung"
+  },
+  {
+   "area_id": "server",
+   "name": "Server"
+  }
+ ],
+ "devices": [
+  {
+   "id": "67ae729c14c97c36ddf75527003654f6",
+   "area_id": "alex_zimmer",
+   "name": "Studioboxen",
+   "name_by_user": null,
+   "model": "Smart plug",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "cea099a8f5ac3e289e317d461beb9261",
+   "area_id": "alex_zimmer",
+   "name": "Mischpult Alex",
+   "name_by_user": null,
+   "model": "ANTELA Smart Plug",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "f77648e5d3e027222417fcba0f7291cb",
+   "area_id": "alex_wohnung",
+   "name": "shelly1minig3-d885ac07abd0",
+   "name_by_user": "Lichtschacht Schalter",
+   "model": "Shelly 1 Mini Gen3",
+   "manufacturer": "Shelly"
+  },
+  {
+   "id": "8ed7dfcff4e017e4f61d36bbbf1f08bc",
+   "area_id": "alex_zimmer",
+   "name": "shellyplus2pm-90150644a0f0",
+   "name_by_user": "Rolladen Lichtschacht",
+   "model": "Shelly Plus 2PM",
+   "manufacturer": "Shelly"
+  },
+  {
+   "id": "9dee81e1c2bb17a59f6e0241090350c5",
+   "area_id": "alex_wohnung",
+   "name": "WiFi Smart Switch",
+   "name_by_user": "Lichtschalter Eingang Alex Wohnung",
+   "model": "WiFi Smart Switch",
+   "manufacturer": "SONOFF"
+  },
+  {
+   "id": "75706eaf340c3d991a21dc9f2eaa8a85",
+   "area_id": "alex_wohnung",
+   "name": "WiFi Smart Switch",
+   "name_by_user": "Badlichtschalter Alex Wohnung",
+   "model": "WiFi Smart Switch",
+   "manufacturer": "SONOFF"
+  },
+  {
+   "id": "27a7f1bbf75185089c78d4c3ad580f88",
+   "area_id": "alex_wohnung",
+   "name": "shellyplus2pm-8813bfd0bbb8",
+   "name_by_user": "Rolladen Treppe Alex Wohnung",
+   "model": "Shelly Plus 2PM",
+   "manufacturer": "Shelly"
+  },
+  {
+   "id": "e62772da872e813423bd10dc5a7f63ab",
+   "area_id": "alex_wohnung",
+   "name": "Controller RGB 19527F",
+   "name_by_user": "Regal Alex Wohnung",
+   "model": "Controller RGB (0x33)",
+   "manufacturer": "Zengge"
+  },
+  {
+   "id": "7ede573891e98ba810d19067695e1561",
+   "area_id": null,
+   "name": "Küchenlicht Alex Wohnung ",
+   "name_by_user": "Küchenlicht Alex Wohnung",
+   "model": "TY-02-5CH.V5",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "de0389042df40699ae3c78bd9b18d953",
+   "area_id": "alex_wohnung",
+   "name": "H6076",
+   "name_by_user": "Ecklampe",
+   "model": "H6076",
+   "manufacturer": "Shenzhen Qianyan Technology"
+  },
+  {
+   "id": "a854761e8f22fa481372c4f8479a6d7d",
+   "area_id": "alex_wohnung",
+   "name": "Lichtschacht Licht",
+   "name_by_user": null,
+   "model": "H6008",
+   "manufacturer": "Govee"
+  },
+  {
+   "id": "1c082f75be8b52471e19bc82800a2f47",
+   "area_id": "alex_wohnung",
+   "name": "WLED",
+   "name_by_user": "Ipad Backlights",
+   "model": "FOSS",
+   "manufacturer": "WLED"
+  },
+  {
+   "id": "56cb4228b5440e1911bb9c9f93b7f14a",
+   "area_id": null,
+   "name": "Tischlicht",
+   "name_by_user": null,
+   "model": "TY-02-5CH.V5",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "daba5f7e4fee6a846c970a8192731726",
+   "area_id": "alex_wohnung",
+   "name": "Bad Ambiente Alex Wohnung",
+   "name_by_user": null,
+   "model": "00176632/00176664",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "05d471fa9580bc9286aff2624ac43c7a",
+   "area_id": "alex_wohnung",
+   "name": "Küche Ambiente Alex Wohnung",
+   "name_by_user": null,
+   "model": "TY-02-5CH-V6.1",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "87233fa95cc3be4b70097da0bfc43775",
+   "area_id": "alex_wohnung",
+   "name": "Thermostat Wohnbereich Alex",
+   "name_by_user": null,
+   "model": "M5-G",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "e2e1b1cdf2541a974fa9e1cbcbcc3906",
+   "area_id": null,
+   "name": "Sofaambiente Alex Wohnung",
+   "name_by_user": null,
+   "model": "TY-02-5CH-V6.1",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "337ad2b0018cfb341b72482ed39da238",
+   "area_id": "alex_zimmer",
+   "name": "H600D",
+   "name_by_user": "Sofa rechts",
+   "model": "H600D",
+   "manufacturer": "Shenzhen Qianyan Technology"
+  },
+  {
+   "id": "e31bbe8b43d28b0204ba2c059da08749",
+   "area_id": "alex_zimmer",
+   "name": "H600D",
+   "name_by_user": "Setup 1 Licht",
+   "model": "H600D",
+   "manufacturer": "Shenzhen Qianyan Technology"
+  },
+  {
+   "id": "2e88ef1ac2867a8ea487b5edd8dafaf2",
+   "area_id": "alex_zimmer",
+   "name": "H600D",
+   "name_by_user": "Kleiderschrank Licht Links",
+   "model": "H600D",
+   "manufacturer": "Shenzhen Qianyan Technology"
+  },
+  {
+   "id": "1d8d420a17c6219273d2b968746019fe",
+   "area_id": "alex_wohnung",
+   "name": "Thermostat Bad Alex",
+   "name_by_user": "Thermostat Bad",
+   "model": "M5-G",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "6727efa2c4e2e02eae4410a0ab82156f",
+   "area_id": "alex_wohnung",
+   "name": "Ambilight WS2812B",
+   "name_by_user": null,
+   "model": "WS2812B 5 m, 300 LEDs",
+   "manufacturer": "Eigenbau"
+  },
+  {
+   "id": "9f61662bc977accb779f9bac4f627e15",
+   "area_id": "alex_wohnung",
+   "name": "Ambilight COB",
+   "name_by_user": null,
+   "model": "BTF FCOB RGBCCT WS2811 Dual IC 3 m",
+   "manufacturer": "Eigenbau"
+  },
+  {
+   "id": "e7ba70d0641eea3de7be213f2fb2caef",
+   "area_id": "alex_wohnung",
+   "name": "Fernseher LED",
+   "name_by_user": null,
+   "model": "H6182",
+   "manufacturer": "Govee"
+  },
+  {
+   "id": "e67286ab16363841b68cfe605d8b2647",
+   "area_id": "alex_wohnung",
+   "name": "H600D",
+   "name_by_user": "Kleiderschrank Licht Rechts",
+   "model": "H600D",
+   "manufacturer": "Shenzhen Qianyan Technology"
+  },
+  {
+   "id": "d2b1e9494ece9589abf28c10fbd799ed",
+   "area_id": "alex_wohnung",
+   "name": "WiFi Smart Switch",
+   "name_by_user": "Küchenschalter",
+   "model": "WiFi Smart Switch",
+   "manufacturer": "SONOFF"
+  },
+  {
+   "id": "14d2ce045b181d7e6ebb2d9ad258bb19",
+   "area_id": "alex_wohnung",
+   "name": "Waschmaschine ",
+   "name_by_user": "Waschmaschine",
+   "model": "Smart plug",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "a84558423e0bc01038283b5071e2a1ae",
+   "area_id": "alex_wohnung",
+   "name": "Nachtlicht",
+   "name_by_user": null,
+   "model": "00176632/00176664",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "853db7f4f82d4ac9fc7c50168ee9b849",
+   "area_id": "alex_wohnung",
+   "name": "SLZB-06P10",
+   "name_by_user": "Zigbee Alex Wohnung",
+   "model": "SLZB-06p10",
+   "manufacturer": "SMLIGHT"
+  },
+  {
+   "id": "6f4097d1c820a2eb1802ce635c4ddde1",
+   "area_id": "alex_wohnung",
+   "name": "Plug Mini EU",
+   "name_by_user": "Fernseher Bett",
+   "model": "Plug Mini EU",
+   "manufacturer": "SwitchBot"
+  },
+  {
+   "id": "4e5e1bdf1faf8bbb69e5c6b5a8eb29bf",
+   "area_id": "alex_wohnung",
+   "name": "Fire TV 192.168.2.34",
+   "name_by_user": "FireTV Stick Bett Alex",
+   "model": "AFTMA08C15 (Fire TV)",
+   "manufacturer": "Amazon"
+  },
+  {
+   "id": "e63a8b2ea9948fd2d98ab91a41a944ae",
+   "area_id": "alex_wohnung",
+   "name": "Schrank Ambiente",
+   "name_by_user": null,
+   "model": "TY-02-5CH-V6.1",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "a3e44752a774f54128e80c92b28a043d",
+   "area_id": "alex_wohnung",
+   "name": "Alexanders Fire TV Stick",
+   "name_by_user": null,
+   "model": "Fire TV Stick 4K Plus",
+   "manufacturer": "Amazon"
+  },
+  {
+   "id": "f29110a8fda2ae3c6dd5d821c0100090",
+   "area_id": "alex_wohnung",
+   "name": "Alex Wohnung Amazon Fire TV stick",
+   "name_by_user": null,
+   "model": "Amazon Fire TV stick",
+   "manufacturer": "Amazon"
+  },
+  {
+   "id": "f72488398b68302dea0c212190c75e58",
+   "area_id": "alex_wohnung",
+   "name": "Alex Wohnung Echo Dot",
+   "name_by_user": null,
+   "model": "Echo Dot",
+   "manufacturer": "Amazon"
+  },
+  {
+   "id": "56ab86bbd28800f785f79d44f7d28bee",
+   "area_id": "alex_wohnung",
+   "name": "Alex Wohnung Echo",
+   "name_by_user": null,
+   "model": "Echo",
+   "manufacturer": "Amazon"
+  },
+  {
+   "id": "2cc19314e1ccb1f3f3c40faea9a1bf7e",
+   "area_id": "alex_wohnung",
+   "name": "Keller Steinenbronn Fire TV Stick",
+   "name_by_user": null,
+   "model": "Amazon Fire TV stick",
+   "manufacturer": "Amazon"
+  },
+  {
+   "id": "6e36c84df89ad536cceddd18767af447",
+   "area_id": "alex_wohnung",
+   "name": "Bad Echo Dot Alex Wohnung",
+   "name_by_user": null,
+   "model": "Echo Dot",
+   "manufacturer": "Amazon"
+  },
+  {
+   "id": "3f957c790cc65d2835daf09bc9c40bc0",
+   "area_id": "alex_wohnung",
+   "name": "Fire TV 4K Max Alex Wohnung Wohnbereich",
+   "name_by_user": "Wohnbereich Fire TV Stick (4k Max)",
+   "model": "Fire TV Stick 4K Max",
+   "manufacturer": "Amazon"
+  },
+  {
+   "id": "753871d1ae2b13993a49a4886c79cbca",
+   "area_id": "alex_wohnung",
+   "name": "H600D",
+   "name_by_user": "Küchendeckenlicht",
+   "model": "H600D",
+   "manufacturer": "Shenzhen Qianyan Technology"
+  },
+  {
+   "id": "96d33860c9ece608b16d54c6a3d25ca4",
+   "area_id": "alex_wohnung",
+   "name": "H600D",
+   "name_by_user": "Eingangsbereich",
+   "model": "H600D",
+   "manufacturer": "Shenzhen Qianyan Technology"
+  },
+  {
+   "id": "18c4b53dd79d09ef84da02cbc9bded3e",
+   "area_id": "alex_wohnung",
+   "name": "H600D",
+   "name_by_user": "Wohnbereich Links",
+   "model": "H600D",
+   "manufacturer": "Shenzhen Qianyan Technology"
+  },
+  {
+   "id": "6fb6eb564408a66329f1477ab0668ad6",
+   "area_id": "alex_wohnung",
+   "name": "H600D",
+   "name_by_user": "Wohnbereich Rechts",
+   "model": "H600D",
+   "manufacturer": "Shenzhen Qianyan Technology"
+  },
+  {
+   "id": "6d39b18697f9b3521db8467c247d5472",
+   "area_id": "alex_wohnung",
+   "name": "H600D",
+   "name_by_user": "Bett Deckenlicht",
+   "model": "H600D",
+   "manufacturer": "Shenzhen Qianyan Technology"
+  },
+  {
+   "id": "df348474803ce1801cb7bd7b95d76371",
+   "area_id": "alex_wohnung",
+   "name": "H600D",
+   "name_by_user": "Wohnfläche",
+   "model": "H600D",
+   "manufacturer": "Shenzhen Qianyan Technology"
+  },
+  {
+   "id": "5cbddd69974492294eb5bd32d4da9439",
+   "area_id": "alex_wohnung",
+   "name": "H600D",
+   "name_by_user": "Schreibtisch Licht Rechts",
+   "model": "H600D",
+   "manufacturer": "Shenzhen Qianyan Technology"
+  },
+  {
+   "id": "ea34af16b0c247b1e4ef533b06808365",
+   "area_id": "alex_wohnung",
+   "name": "H600D",
+   "name_by_user": "Schreibtisch Licht Links",
+   "model": "H600D",
+   "manufacturer": "Shenzhen Qianyan Technology"
+  },
+  {
+   "id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": "alex_wohnung",
+   "name": "Dreame",
+   "name_by_user": null,
+   "model": "dreame.vacuum.r9419h",
+   "manufacturer": "Dreametech™"
+  },
+  {
+   "id": "28d4e4b163654a4d12b608e0a8d1fd92",
+   "area_id": "alex_wohnung",
+   "name": "Fire TV 192.168.2.158",
+   "name_by_user": "Fire TV Max Alex Wohnung Wohnbereich",
+   "model": "AFTKRT (Fire TV)",
+   "manufacturer": "Amazon"
+  },
+  {
+   "id": "5cf99131b1199a2a89f106843cc3faa6",
+   "area_id": "alex_wohnung",
+   "name": "Alex TV (GU50TU7179UXZG)",
+   "name_by_user": "Alex TV Wohnbereich",
+   "model": null,
+   "manufacturer": "Samsung"
+  },
+  {
+   "id": "144ea1540943f87e22dbd2e7ef7f7414",
+   "area_id": "alex_wohnung",
+   "name": "Pc",
+   "name_by_user": null,
+   "model": "BaseGroup",
+   "manufacturer": "Govee"
+  },
+  {
+   "id": "3a79b38e9fd709f5a1b87fa72c8c333e",
+   "area_id": "alex_wohnung",
+   "name": "Wohnfläche Alex",
+   "name_by_user": null,
+   "model": "H600D",
+   "manufacturer": "Govee"
+  },
+  {
+   "id": "c55a70ac631a0949f5e5ff2d518aa87b",
+   "area_id": "alex_wohnung",
+   "name": "Bett Bereich",
+   "name_by_user": null,
+   "model": "H600D",
+   "manufacturer": "Govee"
+  },
+  {
+   "id": "ba1d0a6ba7cdeb33a1222c1482886e1f",
+   "area_id": "alex_wohnung",
+   "name": "Schreibtisch R Alex",
+   "name_by_user": null,
+   "model": "H600D",
+   "manufacturer": "Govee"
+  },
+  {
+   "id": "96207802060a819a0248182677c1ed7f",
+   "area_id": "alex_wohnung",
+   "name": "GRILLPLATS Plug",
+   "name_by_user": "Interface",
+   "model": "GRILLPLATS Plug",
+   "manufacturer": "IKEA of Sweden"
+  },
+  {
+   "id": "3cba62c6370189525bd68c6e9b4b50bb",
+   "area_id": "alex_wohnung",
+   "name": "GRILLPLATS Plug",
+   "name_by_user": "Monitore",
+   "model": "GRILLPLATS Plug",
+   "manufacturer": "IKEA of Sweden"
+  },
+  {
+   "id": "983d4fcdcbf1813738a5c492f321a85a",
+   "area_id": "alex_wohnung",
+   "name": "ALPSTUGA air quality monitor",
+   "name_by_user": "Luftwerte",
+   "model": "ALPSTUGA air quality monitor",
+   "manufacturer": "IKEA of Sweden"
+  },
+  {
+   "id": "fe05dbdcb34a2b04cb01576a9f1a897c",
+   "area_id": "alex_zimmer",
+   "name": "Switch Alex",
+   "name_by_user": "Lan-Switch Alex",
+   "model": "ANTELA Smart Plug",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "5d8b546c5adffa4a2a02d55df0b3cd47",
+   "area_id": "alex_zimmer",
+   "name": "Controller RGB IR C2B681",
+   "name_by_user": "Kleiderschrank Ambiente",
+   "model": "Controller RGB IR (0x33)",
+   "manufacturer": "Zengge"
+  },
+  {
+   "id": "5bf34967b7a34692998ed1a160ec958f",
+   "area_id": "alex_zimmer",
+   "name": "Rollladen Alex",
+   "name_by_user": null,
+   "model": "Roller Switch（WIFI+BLE)",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "0dfc5d581c0b6a863e875b7fb959c97e",
+   "area_id": "alex_zimmer",
+   "name": "Klima",
+   "name_by_user": null,
+   "model": "YPK-Air Condition",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "3215b3fbee32f966d62da665a92b2c63",
+   "area_id": "alex_wohnung",
+   "name": "K. Schrank L Alex",
+   "name_by_user": null,
+   "model": "H600D",
+   "manufacturer": "Govee"
+  },
+  {
+   "id": "fa57e1273868b16f8e4f76d9c2fafbc3",
+   "area_id": "alex_zimmer",
+   "name": "shelly1minig3-d0cf13c4d0dc",
+   "name_by_user": "Zimmerlicht Relay Alex",
+   "model": "Shelly 1 Mini Gen3",
+   "manufacturer": "Shelly"
+  },
+  {
+   "id": "5444b0e35c0515f36585f9854e0227c6",
+   "area_id": "alex_zimmer",
+   "name": "Pc 2 Strom",
+   "name_by_user": null,
+   "model": "Smart plug",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "05c715bb6e3a563768f0b1e99c38831a",
+   "area_id": "alex_wohnung",
+   "name": "MYGGBETT door/window sensor",
+   "name_by_user": "Einganstür",
+   "model": "MYGGBETT door/window sensor",
+   "manufacturer": "IKEA of Sweden"
+  },
+  {
+   "id": "772d05aa858ee9cab617f71e52bd6525",
+   "area_id": "alex_wohnung",
+   "name": "MYGGBETT door/window sensor",
+   "name_by_user": "Fenster Bad Alex Wohnung",
+   "model": "MYGGBETT door/window sensor",
+   "manufacturer": "IKEA of Sweden"
+  },
+  {
+   "id": "2e8a610b960da40b242e29269bbc855a",
+   "area_id": "alex_wohnung",
+   "name": "MYGGBETT door/window sensor",
+   "name_by_user": "Fenster Bett Alex Wohnung",
+   "model": "MYGGBETT door/window sensor",
+   "manufacturer": "IKEA of Sweden"
+  },
+  {
+   "id": "ff63724ec33290cb02f7469a3b6bf138",
+   "area_id": "alex_wohnung",
+   "name": "MYGGBETT door/window sensor",
+   "name_by_user": "Fenster Bett Alex Wohnung",
+   "model": "MYGGBETT door/window sensor",
+   "manufacturer": "IKEA of Sweden"
+  },
+  {
+   "id": "f570f2901f091710285079527fee1fff",
+   "area_id": "alex_wohnung",
+   "name": "MYGGBETT door/window sensor",
+   "name_by_user": "Fenster Links Wohnbereich Alex",
+   "model": "MYGGBETT door/window sensor",
+   "manufacturer": "IKEA of Sweden"
+  },
+  {
+   "id": "3b6c00d0866d45848d03ff96063285a0",
+   "area_id": "alex_wohnung",
+   "name": "MYGGBETT door/window sensor",
+   "name_by_user": "Gefrierschrank",
+   "model": "MYGGBETT door/window sensor",
+   "manufacturer": "IKEA of Sweden"
+  },
+  {
+   "id": "326078dd5dbcf19d4bf185d48ea93751",
+   "area_id": "alex_wohnung",
+   "name": "MYGGBETT door/window sensor",
+   "name_by_user": "Kühlschranktür",
+   "model": "MYGGBETT door/window sensor",
+   "manufacturer": "IKEA of Sweden"
+  },
+  {
+   "id": "e26060c171801651c6b177019db0bdef",
+   "area_id": "alex_wohnung",
+   "name": "Spülmaschiene",
+   "name_by_user": null,
+   "model": null,
+   "manufacturer": "WashData"
+  },
+  {
+   "id": "e3006e17b24c49f787c2b0ed90a86eda",
+   "area_id": "alex_wohnung",
+   "name": "Waschmaschine Alex",
+   "name_by_user": "Waschmaschine Alex",
+   "model": null,
+   "manufacturer": "WashData"
+  },
+  {
+   "id": "20c1a4c85315ff6e01d094775a8d7f9f",
+   "area_id": "alex_wohnung",
+   "name": "TIMMERFLOTTE temp/hmd sensor",
+   "name_by_user": "Thermometer Außen",
+   "model": "TIMMERFLOTTE temp/hmd sensor",
+   "manufacturer": "IKEA of Sweden"
+  },
+  {
+   "id": "10e10f9a7823877ac5637d98db0daf0a",
+   "area_id": "alex_wohnung",
+   "name": "TIMMERFLOTTE temp/hmd sensor",
+   "name_by_user": "Thermometer Bad",
+   "model": "TIMMERFLOTTE temp/hmd sensor",
+   "manufacturer": "IKEA of Sweden"
+  },
+  {
+   "id": "a1931c20fc43d77a212cf6121f246544",
+   "area_id": "alex_wohnung",
+   "name": "TIMMERFLOTTE temp/hmd sensor",
+   "name_by_user": "Thermometer Wohnbereich",
+   "model": "TIMMERFLOTTE temp/hmd sensor",
+   "manufacturer": "IKEA of Sweden"
+  },
+  {
+   "id": "d31cdeba16bad50fb63d207cf682de3e",
+   "area_id": "alex_wohnung",
+   "name": "TIMMERFLOTTE temp/hmd sensor",
+   "name_by_user": "Thermometer Schreibtisch Alex",
+   "model": "TIMMERFLOTTE temp/hmd sensor",
+   "manufacturer": "IKEA of Sweden"
+  },
+  {
+   "id": "7e2d17b0aba569789a810319d7f3ceec",
+   "area_id": "alex_wohnung",
+   "name": "Thermometer Alex",
+   "name_by_user": "Thermometer Bett Alex",
+   "model": "H5103",
+   "manufacturer": "Govee"
+  },
+  {
+   "id": "f90531d92891c00dd64a30191245a452",
+   "area_id": null,
+   "name": "Vol- TV Soundanlage",
+   "name_by_user": null,
+   "model": "Vol- TV Soundanlage",
+   "manufacturer": "Aqara"
+  },
+  {
+   "id": "900f710c9f075c7c1b6220f16f540031",
+   "area_id": null,
+   "name": "Vol+ TV Soundanlage",
+   "name_by_user": null,
+   "model": "Vol+ TV Soundanlage",
+   "manufacturer": "Aqara"
+  },
+  {
+   "id": "435df543c97ac227958b38868593d526",
+   "area_id": null,
+   "name": "Home",
+   "name_by_user": null,
+   "model": "Forecast",
+   "manufacturer": "Met.no"
+  },
+  {
+   "id": "c5d276b2dad8de371616a7664aeaa952",
+   "area_id": "kinozimmer",
+   "name": "Ecklampe",
+   "name_by_user": null,
+   "model": "smart socket",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "38a7e7adae3b1286a329ad2c1ba18f71",
+   "area_id": "kinozimmer",
+   "name": "Glasschrank Kinozimmer",
+   "name_by_user": null,
+   "model": "smart socket",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "38140f345be28402e33a9fe93ea6e3db",
+   "area_id": "ronja_zimmer",
+   "name": "Lichterkette",
+   "name_by_user": null,
+   "model": "Smart socket",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "8ce2359a071c231ea1a3810d3af3cb82",
+   "area_id": "ronja_zimmer",
+   "name": "Gebüsch",
+   "name_by_user": null,
+   "model": "Smart socket",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "9c828614ed0bd150dcba63f6c9d353e6",
+   "area_id": "kinozimmer",
+   "name": "Tauchlampe ",
+   "name_by_user": "Tauchlampe",
+   "model": "Smart plug",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "9bade080a1933f6ed9dbca3c4096e289",
+   "area_id": "alex_zimmer",
+   "name": "Tisch LED Strom",
+   "name_by_user": null,
+   "model": "Smart plug",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "e713cb8bfe2633eeb158d50fdd77a9f7",
+   "area_id": "kinozimmer",
+   "name": "Controller RGB IR 9FA516",
+   "name_by_user": "Kino TV LED",
+   "model": "Controller RGB IR (0x33)",
+   "manufacturer": "Zengge"
+  },
+  {
+   "id": "7e51b45a440163dfc00574da5ab600a8",
+   "area_id": "kinozimmer",
+   "name": "Rollladen Kinozimmer ",
+   "name_by_user": "Rollladen Kinozimmer",
+   "model": "Roller Switch（WIFI+BLE)",
+   "manufacturer": "Tuya"
+  },
+  {
+   "id": "fef0bad9924ac11db8f2e36a5ecd851f",
+   "area_id": "ronja_zimmer",
+   "name": "Polarlicht",
+   "name_by_user": null,
+   "model": "H6159",
+   "manufacturer": "Govee"
+  },
+  {
+   "id": "91b3cddeaebfa11955a06926ad9150f4",
+   "area_id": "kinozimmer",
+   "name": "Blech",
+   "name_by_user": null,
+   "model": "H6163",
+   "manufacturer": "Govee"
+  },
+  {
+   "id": "6cbaef677814163fc0345cd58fbfaae7",
+   "area_id": "alex_wohnung",
+   "name": "Sofa Alex",
+   "name_by_user": "Sofa Alex",
+   "model": "H6163",
+   "manufacturer": "Govee"
+  }
+ ],
+ "entities": [
+  {
+   "entity_id": "switch.studioboxen_steckdose_1",
+   "id": "fb6ca86b5ac3c10b2961c2a1ad100bae",
+   "device_id": "67ae729c14c97c36ddf75527003654f6",
+   "area_id": "alex_wohnung",
+   "labels": [
+    "alles_aus",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "fa5445f3e6878008b5192cb43b1a6858",
+   "name": null,
+   "original_name": "Studioboxen"
+  },
+  {
+   "entity_id": "switch.mischpult_alex_steckdose_1",
+   "id": "e8714828c069713614dc58ff22b0d71c",
+   "device_id": "cea099a8f5ac3e289e317d461beb9261",
+   "area_id": "alex_wohnung",
+   "labels": [
+    "alles_aus",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "bc84cec67b7fd035ff609dd451454e6c",
+   "name": null,
+   "original_name": "Mischpult"
+  },
+  {
+   "entity_id": "switch.lichtschacht_schalter",
+   "id": "baa4e0ae81cab0d8eee2f396fbee7c19",
+   "device_id": "f77648e5d3e027222417fcba0f7291cb",
+   "area_id": null,
+   "labels": [
+    "ambiente",
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "604024a726d259b7f4320740d36a2534",
+   "name": null,
+   "original_name": "Lichtschacht Schalter"
+  },
+  {
+   "entity_id": "cover.alex_zimmer_rolladen_lichtschacht",
+   "id": "c7cb3afcb02a0245f84a28987225f20b",
+   "device_id": "8ed7dfcff4e017e4f61d36bbbf1f08bc",
+   "area_id": "alex_wohnung",
+   "labels": [
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "cover",
+   "unique_id": "f720a4360a6bfd508a38be75bf125fd5",
+   "name": null,
+   "original_name": "Rollladen Lichtschacht"
+  },
+  {
+   "entity_id": "switch.alex_zimmer_lichtschalter_eingang_alex_wohnung_deckenlicht_1_alex_wohnung",
+   "id": "cce28a363c27cb2233f2000dbb17ccf1",
+   "device_id": "9dee81e1c2bb17a59f6e0241090350c5",
+   "area_id": null,
+   "labels": [
+    "licht"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "b4c437c05cd8ce167f31bb612f4195b1",
+   "name": null,
+   "original_name": "Wohnlicht"
+  },
+  {
+   "entity_id": "switch.badlichtschalter_alex_wohnung_schalter_1",
+   "id": "ccd638a99632f49409908e5e31361df1",
+   "device_id": "75706eaf340c3d991a21dc9f2eaa8a85",
+   "area_id": null,
+   "labels": [
+    "alles_aus",
+    "strom"
+   ],
+   "hidden_by": "integration",
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "35df1ce9fa47e75d09ac170736f4ad22",
+   "name": null,
+   "original_name": "Badlichtschalter Alex Wohnung Schalter (1)"
+  },
+  {
+   "entity_id": "switch.badlichtschalter_alex_wohnung_schalter_2",
+   "id": "835fbdcfdba10a460f313d3f3bf9c747",
+   "device_id": "75706eaf340c3d991a21dc9f2eaa8a85",
+   "area_id": null,
+   "labels": [
+    "alles_aus",
+    "strom"
+   ],
+   "hidden_by": "integration",
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "0a436ad74e971a52f591d6d648b9117e",
+   "name": null,
+   "original_name": "Badlichtschalter Alex Wohnung Schalter (2)"
+  },
+  {
+   "entity_id": "cover.rolladen_treppe_alex_wohnung",
+   "id": "19f8ed3a475f18f13fc529706a745bd7",
+   "device_id": "27a7f1bbf75185089c78d4c3ad580f88",
+   "area_id": null,
+   "labels": [
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "cover",
+   "unique_id": "14b7b68c3a01660a74a40651e1dfdcd9",
+   "name": null,
+   "original_name": "Rolladen Treppe Alex Wohnung Rollladen Wohnbereich"
+  },
+  {
+   "entity_id": "light.regal_alex_wohnung",
+   "id": "801db1c65a977c25848c0f8673cbd7b8",
+   "device_id": "e62772da872e813423bd10dc5a7f63ab",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "flux_led",
+   "unique_id": "cb68500628150e10915430436454e6a9",
+   "name": null,
+   "original_name": "Regal Alex Wohnung Regal Ambiente"
+  },
+  {
+   "entity_id": "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_1",
+   "id": "c6bd76e678350c36b75f3c5f15a576fd",
+   "device_id": "75706eaf340c3d991a21dc9f2eaa8a85",
+   "area_id": null,
+   "labels": [
+    "licht",
+    "alles_aus"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "light",
+   "unique_id": "848ade379b278f60167518046b6c4d65",
+   "name": null,
+   "original_name": "Bad Decke"
+  },
+  {
+   "entity_id": "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_2",
+   "id": "d9a1262ffd9d468d7fc1276147e21ca0",
+   "device_id": "75706eaf340c3d991a21dc9f2eaa8a85",
+   "area_id": null,
+   "labels": [
+    "licht",
+    "alles_aus"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "light",
+   "unique_id": "2f38423f93cca7b534041924fce0e3e2",
+   "name": null,
+   "original_name": "Bad Spiegel"
+  },
+  {
+   "entity_id": "light.kuechenlicht_oben",
+   "id": "d90836e605471abd55c44db23a24a390",
+   "device_id": "7ede573891e98ba810d19067695e1561",
+   "area_id": "alex_wohnung",
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "e7f5343c9b5904e9aff6e5786add4fc4",
+   "name": null,
+   "original_name": "Küchenlicht Alex Wohnung Küche Arbeitslicht"
+  },
+  {
+   "entity_id": "light.ambiente_ecklampe",
+   "id": "cbba254d6e7b1f6c87335a917b4efb19",
+   "device_id": "de0389042df40699ae3c78bd9b18d953",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "d226e25aba897c4ed02e8e648fb92c47",
+   "name": null,
+   "original_name": "Ecklampe"
+  },
+  {
+   "entity_id": "input_boolean.lichtschachtlicht_sensor",
+   "id": "aeef7c892018169d028a21231b985556",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_boolean",
+   "unique_id": "9574139ad9888447224baf966ed4a517",
+   "name": null,
+   "original_name": "Lichtschachtlicht sensor"
+  },
+  {
+   "entity_id": "light.lichtschacht_licht",
+   "id": "eef32b0ae0ea2c92970518aea44f13a7",
+   "device_id": "a854761e8f22fa481372c4f8479a6d7d",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "gv2mqtt-EEF32B0AE0EA2C92",
+   "name": null,
+   "original_name": "Lichtschacht Licht"
+  },
+  {
+   "entity_id": "light.ipad_backlights",
+   "id": "8d8e3864cfdce29f34890ffbfcd2c62a",
+   "device_id": "1c082f75be8b52471e19bc82800a2f47",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "light",
+   "unique_id": "8821aaf2bb6d76f0217f2d8506fc3440",
+   "name": null,
+   "original_name": "Ipad Backlights"
+  },
+  {
+   "entity_id": "input_boolean.dashboard_alert",
+   "id": "76f8e256ba19c750126694363cdbd264",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_boolean",
+   "unique_id": "3798e83556dbc134b431d9253fd2dfb6",
+   "name": null,
+   "original_name": "Dashboard Alert"
+  },
+  {
+   "entity_id": "light.ty_02_5ch_v5_2",
+   "id": "3a0897e986d11c29d82a47483fafd885",
+   "device_id": "56cb4228b5440e1911bb9c9f93b7f14a",
+   "area_id": "alex_wohnung",
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "3de667cf01be6a48a960a4b093fba2c1",
+   "name": null,
+   "original_name": "Tisch Ambiente"
+  },
+  {
+   "entity_id": "light.bad_ambiente_alex_wohnung",
+   "id": "de46a94a2901769ad53a87ffcc343fdf",
+   "device_id": "daba5f7e4fee6a846c970a8192731726",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "6de7321aaa963d7976711e045ce1e933",
+   "name": null,
+   "original_name": "Bad Ambiente"
+  },
+  {
+   "entity_id": "light.alex_wohnung_kuche_ambiente_alex_wohnung",
+   "id": "1049a4b5551d019fc86a4a7f90745eb6",
+   "device_id": "05d471fa9580bc9286aff2624ac43c7a",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "48dd82fde4fc2e0fd563c37bb06e81e0",
+   "name": null,
+   "original_name": "Küchen Ambiente"
+  },
+  {
+   "entity_id": "climate.thermostat_wohnbereich_alex",
+   "id": "8b3f63433c226c8a0c086f32ddbb0242",
+   "device_id": "87233fa95cc3be4b70097da0bfc43775",
+   "area_id": null,
+   "labels": [
+    "klima"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "3b6836bd5824a1e37c11c74da0534a01",
+   "name": null,
+   "original_name": "Thermostat Wohnbereich Alex"
+  },
+  {
+   "entity_id": "light.sofa_alex",
+   "id": "2d78850298e0f9772e17847da7962807",
+   "device_id": "e2e1b1cdf2541a974fa9e1cbcbcc3906",
+   "area_id": "alex_wohnung",
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "977598c2adb191499a5974a432b1336b",
+   "name": null,
+   "original_name": "Sofa Ambiente"
+  },
+  {
+   "entity_id": "input_boolean.ambilight",
+   "id": "e3f36eedaf5bce03a734a03786b551f3",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_boolean",
+   "unique_id": "769f65ab5ab16f89f90058ba65667479",
+   "name": null,
+   "original_name": "Ambilight"
+  },
+  {
+   "entity_id": "light.alex_wohnung_sofa_rechts",
+   "id": "5dfec8c47b218069fbd3756e02eeb7be",
+   "device_id": "337ad2b0018cfb341b72482ed39da238",
+   "area_id": "alex_wohnung",
+   "labels": [
+    "licht"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "8c595184c30338d26c5238f3ca29e293",
+   "name": null,
+   "original_name": "Sofa Rechts"
+  },
+  {
+   "entity_id": "light.alex_wohnung_sofa_links",
+   "id": "4aef8df9c63e3fd5086cf287633fb010",
+   "device_id": "e31bbe8b43d28b0204ba2c059da08749",
+   "area_id": "alex_wohnung",
+   "labels": [
+    "licht"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "ddef7be4a92191f0f7da59a8188647f4",
+   "name": null,
+   "original_name": "Sofa Links"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_lichtschalter_eingang_hinten",
+   "id": "6b6d023e59e90c3390696f8fb5d81120",
+   "device_id": "9dee81e1c2bb17a59f6e0241090350c5",
+   "area_id": null,
+   "labels": [
+    "licht"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "bf847aabf7f6c3f31c306926b3404ee2",
+   "name": null,
+   "original_name": "Licht Hinten"
+  },
+  {
+   "entity_id": "light.alex_zimmer_kleiderschrank_licht_links",
+   "id": "f17df4749886a4afe60d4957684377d8",
+   "device_id": "2e88ef1ac2867a8ea487b5edd8dafaf2",
+   "area_id": "alex_wohnung",
+   "labels": [
+    "licht"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "96f94eac2c7cdc763bcc348d5e48c756",
+   "name": null,
+   "original_name": "Kleiderschrank Licht Links"
+  },
+  {
+   "entity_id": "climate.alex_wohnung_thermostat_bad",
+   "id": "60b4416973908a0875ef560eb7ccf585",
+   "device_id": "1d8d420a17c6219273d2b968746019fe",
+   "area_id": null,
+   "labels": [
+    "klima"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "1e0995809f5d22a24f1649dbe60d51b1",
+   "name": null,
+   "original_name": "Thermostat Bad"
+  },
+  {
+   "entity_id": "light.alex_wohnung_tv_beleuchtung",
+   "id": "fb53463b30cbfb58c74e75194d36ee32",
+   "device_id": "6727efa2c4e2e02eae4410a0ab82156f",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "6a4730f6832e3bcaf5b685a671d76d21",
+   "name": null,
+   "original_name": "Tv Beleuchtung"
+  },
+  {
+   "entity_id": "light.alex_wohnung_tv_lowboard_beleuchtung",
+   "id": "a696afe88445842539f891f6346b3deb",
+   "device_id": "9f61662bc977accb779f9bac4f627e15",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "8740d4d926e03faf97b6c1f5aa69b3a7",
+   "name": null,
+   "original_name": "Tv Lowboard Beleuchtung"
+  },
+  {
+   "entity_id": "light.fernseher_led",
+   "id": "f81844240fd5a2fe8003bc38273db5fc",
+   "device_id": "e7ba70d0641eea3de7be213f2fb2caef",
+   "area_id": null,
+   "labels": [
+    "ambiente",
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": "device",
+   "entity_category": null,
+   "platform": "light",
+   "unique_id": "d25e6bf80c9f5000ee47558c049fd218",
+   "name": null,
+   "original_name": null
+  },
+  {
+   "entity_id": "input_boolean.multiroom",
+   "id": "13b052097b96081add6db2631d77f139",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_boolean",
+   "unique_id": "0a9bdf924e4edf30664f0d64d9496ba5",
+   "name": null,
+   "original_name": "Multiroom"
+  },
+  {
+   "entity_id": "light.zone_wohnlicht",
+   "id": "492ca2b4ec824c37d891161a44887754",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "group",
+   "unique_id": "1f3859a1535f615060e86c5247e57bf3",
+   "name": null,
+   "original_name": "Zone Wohnlicht Decke"
+  },
+  {
+   "entity_id": "light.zone_hinten",
+   "id": "bb92c730b3d9b5c9b4fc044d41a323ce",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "group",
+   "unique_id": "02f923fa8e509461bfb63b37717d87e0",
+   "name": null,
+   "original_name": "Bett Bereich"
+  },
+  {
+   "entity_id": "light.zone_schreibtisch",
+   "id": "e1e0a67847c227df06b8e8ad6ce05cfb",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "group",
+   "unique_id": "d8a1d3a58be4afe03e68e0179e78fa99",
+   "name": null,
+   "original_name": "Zone Schreibtisch"
+  },
+  {
+   "entity_id": "light.zone_kueche",
+   "id": "baddebdfd869cb12252714eb14939ce8",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "group",
+   "unique_id": "4ff36d195af1fc22bd7ed251e9d16c34",
+   "name": null,
+   "original_name": "Zone Kueche"
+  },
+  {
+   "entity_id": "light.zone_bad",
+   "id": "3bb54469ec4d191b263c7fc3c01c47ef",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "group",
+   "unique_id": "6e6047f47e02fe1cb21ee71d4c65c60d",
+   "name": null,
+   "original_name": "Zone Bad"
+  },
+  {
+   "entity_id": "light.zone_tv",
+   "id": "4ec92a49cf8130d18d1a24349c91b582",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "group",
+   "unique_id": "cc517845858ef0f2b83a34fdfe30feb5",
+   "name": null,
+   "original_name": "Zone TV"
+  },
+  {
+   "entity_id": "light.zone_ambiente",
+   "id": "c0ed3e48993a4b2c5a52905646d30731",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "group",
+   "unique_id": "a513171ee19c1bd415a52b9b3f2fbce9",
+   "name": null,
+   "original_name": "Zone Ambiente Global"
+  },
+  {
+   "entity_id": "light.alex_wohnung_kleiderschrank_licht_rechts",
+   "id": "5c366706b939d63bf12dc002d85ae673",
+   "device_id": "e67286ab16363841b68cfe605d8b2647",
+   "area_id": null,
+   "labels": [
+    "licht"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "16774b7471542f938a26c744182e7f6d",
+   "name": null,
+   "original_name": "Kleiderschrank Licht Rechts"
+  },
+  {
+   "entity_id": "switch.test_led_controller_nachtlicht",
+   "id": "8875f1e06a59d79cd3aedaeedbe6bc6d",
+   "device_id": "1c082f75be8b52471e19bc82800a2f47",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "40fa6749ecc6a9a398869a3008f4d826",
+   "name": null,
+   "original_name": "Ipad Backlights Nachtlicht"
+  },
+  {
+   "entity_id": "switch.test_led_controller_senden_synchronisieren",
+   "id": "cee1c4741b6742ff963b73057e3a224c",
+   "device_id": "1c082f75be8b52471e19bc82800a2f47",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "84692dd4749490ae7a857c4f446c94a7",
+   "name": null,
+   "original_name": "Ipad Backlights Senden synchronisieren"
+  },
+  {
+   "entity_id": "switch.test_led_controller_empfang_synchronisieren",
+   "id": "a2d5c7053c80e0311328579b1812782b",
+   "device_id": "1c082f75be8b52471e19bc82800a2f47",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "0c7e88db454f2d1d4e940c4159c9c76b",
+   "name": null,
+   "original_name": "Ipad Backlights Empfang synchronisieren"
+  },
+  {
+   "entity_id": "switch.test_led_controller_umkehren",
+   "id": "28e31b472e434887fa7082471137e577",
+   "device_id": "1c082f75be8b52471e19bc82800a2f47",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "386e4936d1c430a41991305d145d7efb",
+   "name": null,
+   "original_name": "Ipad Backlights Umkehren"
+  },
+  {
+   "entity_id": "switch.alex_zimmer_test_led_controller_einfrieren",
+   "id": "65815165b21733de04a63127cce421c9",
+   "device_id": "1c082f75be8b52471e19bc82800a2f47",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "07d5b35fe8e1d48e96da3ca93415e795",
+   "name": null,
+   "original_name": "Ipad Backlights Einfrieren"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_ipad_backlights_auf_gerausche_reagierend",
+   "id": "ac188c9377675aeb6541dc333d0fcd73",
+   "device_id": "1c082f75be8b52471e19bc82800a2f47",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "680e9872c66a3b43119866421548a9c5",
+   "name": null,
+   "original_name": "Ipad Backlights Auf Geräusche reagierend"
+  },
+  {
+   "entity_id": "switch.regal_alex_wohnung_remotezugriff",
+   "id": "6b97eb8a299de0ae203c4fc3053317d6",
+   "device_id": "e62772da872e813423bd10dc5a7f63ab",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "flux_led",
+   "unique_id": "0a52e2afb879d2ec5bf5269517a4c96d",
+   "name": null,
+   "original_name": "Regal Alex Wohnung Remotezugriff"
+  },
+  {
+   "entity_id": "switch.kuchenschalter_schalter_1",
+   "id": "a3f4f19d3193ed014f31958083a44cd5",
+   "device_id": "d2b1e9494ece9589abf28c10fbd799ed",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "alles_aus",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "fba6bf3c3f0682cb50c7d6ee3f936a01",
+   "name": null,
+   "original_name": "Küchenschalter Schalter (1)"
+  },
+  {
+   "entity_id": "switch.kuchenschalter_schalter_2",
+   "id": "ac8a9048fd3e1893dd303372bee6f081",
+   "device_id": "d2b1e9494ece9589abf28c10fbd799ed",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "alles_aus"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "efd397b3ae3d3e4263e92600f4c91263",
+   "name": null,
+   "original_name": "Küchenschalter Schalter (2)"
+  },
+  {
+   "entity_id": "switch.lichtschacht_licht_power_switch",
+   "id": "94eeab14e0a4f612bc775f8a6de8c728",
+   "device_id": "a854761e8f22fa481372c4f8479a6d7d",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "gv2mqtt-94EEAB14E0A4F612",
+   "name": null,
+   "original_name": "Lichtschacht Licht Power Switch"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_waschmaschiene_kindersicherung",
+   "id": "e38f382d6213c3630e3994c662d89d4e",
+   "device_id": "14d2ce045b181d7e6ebb2d9ad258bb19",
+   "area_id": null,
+   "labels": [
+    "sensorik",
+    "dontshowindashboard",
+    "dontshowinaktive"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "d05505edfd8ac37abb004e84c015dd5a",
+   "name": null,
+   "original_name": "Waschmaschine Kindersicherung"
+  },
+  {
+   "entity_id": "light.alex_wohnung_nachtlicht",
+   "id": "cea746f7165eef699b271a5acabd1d95",
+   "device_id": "a84558423e0bc01038283b5071e2a1ae",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "db716edb0f45a672e1df27ca629a05e8",
+   "name": null,
+   "original_name": "Nachtlicht"
+  },
+  {
+   "entity_id": "switch.zigbee_alex_wohnung_leds_deaktivieren",
+   "id": "e6faab79a733fdf3c767bdd27c630ff4",
+   "device_id": "853db7f4f82d4ac9fc7c50168ee9b849",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "0004a48c5b6106216df43203e6c893f2",
+   "name": null,
+   "original_name": "Zigbee Alex Wohnung LEDs deaktivieren"
+  },
+  {
+   "entity_id": "switch.zigbee_alex_wohnung_led_nachtmodus",
+   "id": "a6e7f380af5d40d85f01180b46786045",
+   "device_id": "853db7f4f82d4ac9fc7c50168ee9b849",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "ad90c166add9bad07eb6cef5138ec614",
+   "name": null,
+   "original_name": "Zigbee Alex Wohnung LED-Nachtmodus"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_fernseher_bett",
+   "id": "32d695591687d938a293841e8211e47a",
+   "device_id": "6f4097d1c820a2eb1802ce635c4ddde1",
+   "area_id": null,
+   "labels": [
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "c147797c82aacba809ee74e490e1e170",
+   "name": null,
+   "original_name": "Fernseher Bett"
+  },
+  {
+   "entity_id": "media_player.alex_wohnung_firetv_stick_bett_alex",
+   "id": "58de7da45021a8d103542edecb1a6d24",
+   "device_id": "4e5e1bdf1faf8bbb69e5c6b5a8eb29bf",
+   "area_id": null,
+   "labels": [
+    "media"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "media_player",
+   "unique_id": "f152b3dbe9ca13ce7c330d598987bf9a",
+   "name": null,
+   "original_name": "FireTV Stick Bett Alex"
+  },
+  {
+   "entity_id": "light.alex_wohnung_schrank_ambiente",
+   "id": "9a92b581ad0b2ad07c9b464bfbcc34dd",
+   "device_id": "e63a8b2ea9948fd2d98ab91a41a944ae",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "2aeb43858040029c6cdc0464a0580fae",
+   "name": null,
+   "original_name": "Schrank Ambiente"
+  },
+  {
+   "entity_id": "switch.m5_g_kindersicherung",
+   "id": "40f75c4df53459df091286d277e3bd24",
+   "device_id": "87233fa95cc3be4b70097da0bfc43775",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "3dc9abfbe9edd4420b1c8d2ab0f28808",
+   "name": null,
+   "original_name": "Thermostat Wohnbereich Alex Kindersicherung"
+  },
+  {
+   "entity_id": "switch.m5_g_frostschutz",
+   "id": "85c2ddb7f6f77b478e9de1c842e5a7b5",
+   "device_id": "87233fa95cc3be4b70097da0bfc43775",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "2d3de073de295961b76445614f0ab897",
+   "name": null,
+   "original_name": "Thermostat Wohnbereich Alex Frostschutz"
+  },
+  {
+   "entity_id": "media_player.alexanders_fire_tv_stick",
+   "id": "3e9ba08bdba16b150aad1595368fe73f",
+   "device_id": "a3e44752a774f54128e80c92b28a043d",
+   "area_id": null,
+   "labels": [
+    "media"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "alexa_devices",
+   "unique_id": "c04a44d5785560bbe6c43f183f7bf2b4",
+   "name": null,
+   "original_name": "Alexanders Fire TV Stick"
+  },
+  {
+   "entity_id": "switch.alexanders_fire_tv_stick_durchsagen",
+   "id": "d68b319491cdd1f31ded9946179674e1",
+   "device_id": "a3e44752a774f54128e80c92b28a043d",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "61024107fb0dc0154db857b0fa0c733e",
+   "name": null,
+   "original_name": "Alexanders Fire TV Stick Durchsagen"
+  },
+  {
+   "entity_id": "switch.alexanders_fire_tv_stick_kommunikation",
+   "id": "e28cfd289beb6a7d3ff66fae14fcefd4",
+   "device_id": "a3e44752a774f54128e80c92b28a043d",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "6c35f02e33525131f88a46c1552a5ae9",
+   "name": null,
+   "original_name": "Alexanders Fire TV Stick Kommunikation"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_alexanders_fire_tv_stick_bitte_nicht_storen",
+   "id": "55b5286f6ec210406472969d08ee8313",
+   "device_id": "a3e44752a774f54128e80c92b28a043d",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "alexa_devices",
+   "unique_id": "b13a5c6a66df83056459888a7a802f5c",
+   "name": null,
+   "original_name": "Alexanders Fire TV Stick Bitte nicht stören"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_alex_wohnung_amazon_fire_tv_stick_bitte_nicht_storen",
+   "id": "b5eef4a5ef924f0d869bcf148ca839e5",
+   "device_id": "f29110a8fda2ae3c6dd5d821c0100090",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "alexa_devices",
+   "unique_id": "f3aa44220a22d6ebe1c71e224a2625e1",
+   "name": null,
+   "original_name": "Alex Wohnung Amazon Fire TV stick Bitte nicht stören"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_alex_wohnung_amazon_fire_tv_stick_durchsagen",
+   "id": "e3a603d7f079010950160a44e776bf7a",
+   "device_id": "f29110a8fda2ae3c6dd5d821c0100090",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "f77ac13dcbcf1873e54a08885e6432f3",
+   "name": null,
+   "original_name": "Alex Wohnung Amazon Fire TV stick Durchsagen"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_alex_wohnung_amazon_fire_tv_stick_kommunikation",
+   "id": "bc6d8725a1554f403b43bdedef8f93f0",
+   "device_id": "f29110a8fda2ae3c6dd5d821c0100090",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "eb35cafa9fa6f50a0b9b1c81f4862db5",
+   "name": null,
+   "original_name": "Alex Wohnung Amazon Fire TV stick Kommunikation"
+  },
+  {
+   "entity_id": "media_player.alex_wohnung_echo_dot",
+   "id": "6d2f83a6f218fcec7ba7eab2514e9a0a",
+   "device_id": "f72488398b68302dea0c212190c75e58",
+   "area_id": null,
+   "labels": [
+    "media"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "alexa_devices",
+   "unique_id": "a0d1d363040f4efdd4e49165b58e1464",
+   "name": null,
+   "original_name": "Alex Wohnung Echo Dot"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_alex_wohnung_echo_dot_bitte_nicht_storen",
+   "id": "55665954a4ec8a829b86c043c5cbad49",
+   "device_id": "f72488398b68302dea0c212190c75e58",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "alexa_devices",
+   "unique_id": "9f649d20f509755fddfa667a88995e22",
+   "name": null,
+   "original_name": "Alex Wohnung Echo Dot Bitte nicht stören"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_echo_dot_durchsagen",
+   "id": "ae5dff67b0194eee3e2b41cdf720d174",
+   "device_id": "f72488398b68302dea0c212190c75e58",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "35abcf836124c526f22e2bd955626de9",
+   "name": null,
+   "original_name": "Alex Wohnung Echo Dot Durchsagen"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_echo_dot_kommunikation",
+   "id": "c1a37a55343e02586d0d6f2ec407d4d4",
+   "device_id": "f72488398b68302dea0c212190c75e58",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "e262f267057bfcb5bbd56866cacc0ede",
+   "name": null,
+   "original_name": "Alex Wohnung Echo Dot Kommunikation"
+  },
+  {
+   "entity_id": "media_player.alex_wohnung_echo",
+   "id": "5fb1bacc02f0c6d81fa3e4dd274613f4",
+   "device_id": "56ab86bbd28800f785f79d44f7d28bee",
+   "area_id": null,
+   "labels": [
+    "media"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "alexa_devices",
+   "unique_id": "e4bf0228fe530a0b3186d2351bab00d5",
+   "name": null,
+   "original_name": "Alex Wohnung Echo"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_alex_wohnung_echo_bitte_nicht_storen",
+   "id": "0213cb10bc7848aa137d22c2aefc8769",
+   "device_id": "56ab86bbd28800f785f79d44f7d28bee",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "alexa_devices",
+   "unique_id": "61e628656918729e68d5e2d1a2af24c2",
+   "name": null,
+   "original_name": "Alex Wohnung Echo Bitte nicht stören"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_echo_durchsagen",
+   "id": "8cba3703fbace186cc7863e36aadad46",
+   "device_id": "56ab86bbd28800f785f79d44f7d28bee",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "1ceaff8b7eb27070fb2b858df5263926",
+   "name": null,
+   "original_name": "Alex Wohnung Echo Durchsagen"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_echo_kommunikation",
+   "id": "1f13cdc2e7acd81135a65ab2a03c33ae",
+   "device_id": "56ab86bbd28800f785f79d44f7d28bee",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "c57616b13c83c722db09b3b1dbf9781d",
+   "name": null,
+   "original_name": "Alex Wohnung Echo Kommunikation"
+  },
+  {
+   "entity_id": "switch.keller_steinenbronn_fire_tv_stick_durchsagen",
+   "id": "982109ffbba3171201de95bfbc09766a",
+   "device_id": "2cc19314e1ccb1f3f3c40faea9a1bf7e",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "22f86e1bc6afd097391572bdb6654770",
+   "name": null,
+   "original_name": "Keller Steinenbronn Fire TV Stick Durchsagen"
+  },
+  {
+   "entity_id": "switch.keller_steinenbronn_fire_tv_stick_kommunikation",
+   "id": "5d4af60a5edc873a56c4b02ee246009a",
+   "device_id": "2cc19314e1ccb1f3f3c40faea9a1bf7e",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "ff391273529453463a4bd9e6f020db57",
+   "name": null,
+   "original_name": "Keller Steinenbronn Fire TV Stick Kommunikation"
+  },
+  {
+   "entity_id": "switch.keller_steinenbronn_fire_tv_stick_bitte_nicht_storen",
+   "id": "f0a3e6100f8d62eead8e4b0ffcab36ee",
+   "device_id": "2cc19314e1ccb1f3f3c40faea9a1bf7e",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "alexa_devices",
+   "unique_id": "40309144327f0a79696bea412205fc88",
+   "name": null,
+   "original_name": "Keller Steinenbronn Fire TV Stick Bitte nicht stören"
+  },
+  {
+   "entity_id": "media_player.bad_echo_dot_alex_wohnung",
+   "id": "5661f9a482a08f22e05721159bb72c19",
+   "device_id": "6e36c84df89ad536cceddd18767af447",
+   "area_id": null,
+   "labels": [
+    "media"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "alexa_devices",
+   "unique_id": "64cb4cd2f1cdad6ff3856274c53176bb",
+   "name": null,
+   "original_name": "Bad Echo Dot Alex Wohnung"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_bad_echo_dot_alex_wohnung_bitte_nicht_storen",
+   "id": "ac12b467a91ef16c3dc8ae97fd7ba3f5",
+   "device_id": "6e36c84df89ad536cceddd18767af447",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "alexa_devices",
+   "unique_id": "168e2d9e4579c26880e63bebc017ff6f",
+   "name": null,
+   "original_name": "Bad Echo Dot Alex Wohnung Bitte nicht stören"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_bad_echo_dot_alex_wohnung_durchsagen",
+   "id": "424212afd1ff679b123727fb4aba3f0a",
+   "device_id": "6e36c84df89ad536cceddd18767af447",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "440be734aef41f687d75aca6965ceeb4",
+   "name": null,
+   "original_name": "Bad Echo Dot Alex Wohnung Durchsagen"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_bad_echo_dot_alex_wohnung_kommunikation",
+   "id": "aea61d5d0fb1322099c93564a07d83a2",
+   "device_id": "6e36c84df89ad536cceddd18767af447",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "e8d5cf7c5199a0eb0235e75f0b8021ea",
+   "name": null,
+   "original_name": "Bad Echo Dot Alex Wohnung Kommunikation"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_alexander_s_fire_tv_bitte_nicht_storen",
+   "id": "72db592104ae615b2b6f1b6f033abb1f",
+   "device_id": "3f957c790cc65d2835daf09bc9c40bc0",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "alexa_devices",
+   "unique_id": "af8adb7c7f3862647777d2bd4239a97b",
+   "name": null,
+   "original_name": "Wohnbereich Fire TV Stick (4k Max) Bitte nicht stören"
+  },
+  {
+   "entity_id": "switch.alexander_s_fire_tv_durchsagen",
+   "id": "2e139f4052443fd207369eb2c00799c6",
+   "device_id": "3f957c790cc65d2835daf09bc9c40bc0",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "46aef7b14dd41824b6df12d417c5372f",
+   "name": null,
+   "original_name": "Wohnbereich Fire TV Stick (4k Max) Durchsagen"
+  },
+  {
+   "entity_id": "switch.alexander_s_fire_tv_kommunikation",
+   "id": "911c793a3e5ced490a6aacd64f7f46e2",
+   "device_id": "3f957c790cc65d2835daf09bc9c40bc0",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "5c944f9bc59347f68c283f0e5cd9c5ef",
+   "name": null,
+   "original_name": "Wohnbereich Fire TV Stick (4k Max) Kommunikation"
+  },
+  {
+   "entity_id": "switch.ambilight_ws2812b_ambilight",
+   "id": "12e171ed656c6971c89efba4309f0e52",
+   "device_id": "6727efa2c4e2e02eae4410a0ab82156f",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "249e92f375cca12854275b1b7c9f4159",
+   "name": null,
+   "original_name": "Ambilight WS2812B Ambilight"
+  },
+  {
+   "entity_id": "switch.ambilight_ws2812b_gruppe",
+   "id": "9d29bbc4d6819eeade233b2387eb674f",
+   "device_id": "6727efa2c4e2e02eae4410a0ab82156f",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "53e52331a36114dfac84501ab8bef627",
+   "name": null,
+   "original_name": "Ambilight WS2812B Folgt Ambilight-Schalter"
+  },
+  {
+   "entity_id": "switch.ambilight_cob_ambilight",
+   "id": "a4bef241948bc869f7f08b7ca2c58c8d",
+   "device_id": "9f61662bc977accb779f9bac4f627e15",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "4399cd93c35415a46b7fa6412e414b11",
+   "name": null,
+   "original_name": "Ambilight COB Ambilight"
+  },
+  {
+   "entity_id": "switch.ambilight_cob_gruppe",
+   "id": "f9bb5da718c7c73f4f76d8c0e4f4ef27",
+   "device_id": "9f61662bc977accb779f9bac4f627e15",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "c94f906fc56e051ede00cc87c1ce064c",
+   "name": null,
+   "original_name": "Ambilight COB Folgt Ambilight-Schalter"
+  },
+  {
+   "entity_id": "light.alex_wohnung_kuchendeckenlicht",
+   "id": "03654980012accdfb50c698a077b0b29",
+   "device_id": "753871d1ae2b13993a49a4886c79cbca",
+   "area_id": null,
+   "labels": [
+    "licht"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "28764c6e73555e501e34e464787504fa",
+   "name": null,
+   "original_name": "Küchendeckenlicht"
+  },
+  {
+   "entity_id": "light.alex_wohnung_eingangsbereich",
+   "id": "80b2e1fc5d72a2f680ba2f5d93e58ff5",
+   "device_id": "96d33860c9ece608b16d54c6a3d25ca4",
+   "area_id": null,
+   "labels": [
+    "licht"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "a5160d7cd7fa2f9997b5bf0e4b861629",
+   "name": null,
+   "original_name": "Eingangsbereich"
+  },
+  {
+   "entity_id": "light.alex_wohnung_wohnbereich_links",
+   "id": "b6c1d41365082a57bd7ee859e517c39e",
+   "device_id": "18c4b53dd79d09ef84da02cbc9bded3e",
+   "area_id": null,
+   "labels": [
+    "licht"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "0802b26bd5847c84ccbd7de30d0dcc5a",
+   "name": null,
+   "original_name": "Wohnbereich Links"
+  },
+  {
+   "entity_id": "light.alex_wohnung_wohnbereich_rechts",
+   "id": "9eae75864e84ce147b610e59f35a6d0f",
+   "device_id": "6fb6eb564408a66329f1477ab0668ad6",
+   "area_id": null,
+   "labels": [
+    "licht"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "e0c732441c92ecf69f2a0fcd7941cca6",
+   "name": null,
+   "original_name": "Wohnbereich Rechts"
+  },
+  {
+   "entity_id": "light.alex_wohnung_bett_deckenlicht",
+   "id": "e2aa1273db0574fec6adfffe2134aa64",
+   "device_id": "6d39b18697f9b3521db8467c247d5472",
+   "area_id": null,
+   "labels": [
+    "licht"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "4b02df2603cf008e38c54c0fe809c424",
+   "name": null,
+   "original_name": "Bett Deckenlicht"
+  },
+  {
+   "entity_id": "light.alex_wohnung_wohnflache",
+   "id": "41f80c18616e332b39bf13a7919dd5a2",
+   "device_id": "df348474803ce1801cb7bd7b95d76371",
+   "area_id": null,
+   "labels": [
+    "licht"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "cb1ff252310045b3ca54f0b8f1396bcb",
+   "name": null,
+   "original_name": "Wohnfläche"
+  },
+  {
+   "entity_id": "light.alex_wohnung_schreibtisch_licht_rechts",
+   "id": "ae6b608546be536a400b4f88eaac97c8",
+   "device_id": "5cbddd69974492294eb5bd32d4da9439",
+   "area_id": null,
+   "labels": [
+    "licht"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "c3e09e2bd259111cf89d4d1bb0386406",
+   "name": null,
+   "original_name": "Schreibtisch Licht Rechts"
+  },
+  {
+   "entity_id": "light.alex_wohnung_schreibtisch_licht_links",
+   "id": "1d2d979b3b993337d41e3923881cec64",
+   "device_id": "ea34af16b0c247b1e4ef533b06808365",
+   "area_id": null,
+   "labels": [
+    "licht"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "4a8f86f1f4950b2079fd0a2f4442fbb2",
+   "name": null,
+   "original_name": "Schreibtisch Licht Links"
+  },
+  {
+   "entity_id": "switch.m5_g_2_kindersicherung",
+   "id": "461524a8ea7b3a91521e5ac90e9e0491",
+   "device_id": "1d8d420a17c6219273d2b968746019fe",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "eaf374f1e862aa352d8a7b65524c57cf",
+   "name": null,
+   "original_name": "Thermostat Bad Kindersicherung"
+  },
+  {
+   "entity_id": "switch.m5_g_2_frostschutz",
+   "id": "08d6d0a40d41a12e63d627f982409e68",
+   "device_id": "1d8d420a17c6219273d2b968746019fe",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "0bdf81a5b482b7a538b1cb526df56bca",
+   "name": null,
+   "original_name": "Thermostat Bad Frostschutz"
+  },
+  {
+   "entity_id": "vacuum.dreame",
+   "id": "12906cea1b0ec3ce5b4ad81765845393",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "staubsauger",
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "vacuum",
+   "unique_id": "eea4a484cb192593db6bff9939f75588",
+   "name": null,
+   "original_name": "Dreame"
+  },
+  {
+   "entity_id": "switch.dreame_resume_cleaning",
+   "id": "2a467fed3fd9b0c6dc7a4dc2e4803001",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "e344dbb034c8419522938c637a103c06",
+   "name": null,
+   "original_name": "Dreame Reinigung fortsetzen"
+  },
+  {
+   "entity_id": "switch.dreame_carpet_boost",
+   "id": "187de80215ab74ced9f090fc35c1564e",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "a65664b63d3f90e628c6b2ed72a63447",
+   "name": null,
+   "original_name": "Dreame Teppich-Boost"
+  },
+  {
+   "entity_id": "switch.dreame_obstacle_avoidance",
+   "id": "ffaf4c8ad70efb95e52de061ac32063d",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "2154b7cba46e7c5c27d0ef993131b3e6",
+   "name": null,
+   "original_name": "Dreame Hindernisumgehung"
+  },
+  {
+   "entity_id": "switch.dreame_customized_cleaning",
+   "id": "7467f635259db197939c05009f4fdb80",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "e786ea7a7b7083c65661a94bdcaa0899",
+   "name": null,
+   "original_name": "Dreame Individuelle Reinigung"
+  },
+  {
+   "entity_id": "switch.dreame_child_lock",
+   "id": "f4031c04963423821ceeb154e8c1c568",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "f91bc20e4a901abd97fc1bc0c2c96527",
+   "name": null,
+   "original_name": "Dreame Kindersicherung"
+  },
+  {
+   "entity_id": "switch.dreame_dnd",
+   "id": "7160b8e65cbb8620f95da41f411a6af4",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "9029b4e7ba4191421e0ec52ca0e81e67",
+   "name": null,
+   "original_name": "Dreame DnD"
+  },
+  {
+   "entity_id": "switch.dreame_dnd_disable_resume_cleaning",
+   "id": "67cef1b44355cbe600d75aba6acd441d",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "c0a0134b7df515f47d0b974fff7b2efa",
+   "name": null,
+   "original_name": "Dreame Fortsetzung der Reinigung deaktivieren"
+  },
+  {
+   "entity_id": "switch.dreame_dnd_disable_auto_empty",
+   "id": "2368634da5992275d456da3035913515",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "af4b85afdb15296ff3c09d928e08a225",
+   "name": null,
+   "original_name": "Dreame Automatische Entleerung deaktivieren"
+  },
+  {
+   "entity_id": "switch.dreame_dnd_reduce_volume",
+   "id": "b6036700e7a289da2c2b204966dde695",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "c81ed9be0b71a1014fde619b97b57b81",
+   "name": null,
+   "original_name": "Dreame Lautstärke reduzieren"
+  },
+  {
+   "entity_id": "switch.dreame_multi_floor_map",
+   "id": "ba5ec6b3528186c1a3cd8767a1b918c8",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "2bc920563496e0b9a9e8c05b5afae882",
+   "name": null,
+   "original_name": "Dreame Mehrkartenspeicherung"
+  },
+  {
+   "entity_id": "switch.dreame_self_clean",
+   "id": "3dce76e2e2ca24c92aaf9cb8c4301fb6",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "875541830f0e085e397ade9918f179b6",
+   "name": null,
+   "original_name": "Dreame Selbstreinigung"
+  },
+  {
+   "entity_id": "switch.dreame_auto_water_refilling",
+   "id": "eb07f378e881b138a9f6fa5480fba3f9",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "8f3772e09197f2044ddaf641124824f6",
+   "name": null,
+   "original_name": "Dreame Automatische Wasserzufuhr"
+  },
+  {
+   "entity_id": "switch.dreame_intelligent_recognition",
+   "id": "500776cc714532fa92dfbc742dd01c24",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "59e53cc63045f1ea17ea1a674fe60299",
+   "name": null,
+   "original_name": "Dreame Intelligente Erkennung"
+  },
+  {
+   "entity_id": "switch.dreame_auto_drying",
+   "id": "32a6aecd4c37ac0ecd3ddb09395e7fe9",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "277d2e5950d161119a54c3d9b83df2e7",
+   "name": null,
+   "original_name": "Dreame Automatische Trocknung"
+  },
+  {
+   "entity_id": "switch.dreame_auto_add_detergent",
+   "id": "4781101f88fb988a7f20bc84b9afc2f3",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "0ff02724ba561f16e836520ed4385078",
+   "name": null,
+   "original_name": "Dreame Auto-Add Detergent"
+  },
+  {
+   "entity_id": "switch.dreame_auto_mount_mop",
+   "id": "5b31d9bca3871db0dc984b6e52ef00d8",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "11ccd37a6b751d4386ef034f7e61741f",
+   "name": null,
+   "original_name": "Dreame Automatische Moppmontage"
+  },
+  {
+   "entity_id": "switch.dreame_voice_assistant",
+   "id": "0edba55e5efbea9335f9dad2ff232303",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "d22efaf71ea814e6a9cd43fe5be832c2",
+   "name": null,
+   "original_name": "Dreame Sprachassistent"
+  },
+  {
+   "entity_id": "switch.dreame_ai_obstacle_detection",
+   "id": "5e34936d95c654dd0258f0914f66118f",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "f41addf163e9aab08522d731cbf555ba",
+   "name": null,
+   "original_name": "Dreame KI-Hinderniserkennung"
+  },
+  {
+   "entity_id": "switch.dreame_ai_obstacle_image_upload",
+   "id": "ba93a8e210697f9621e1393bafb504a6",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "ec521fed64ef94f7fd1aa20646594bd6",
+   "name": null,
+   "original_name": "Dreame KI-Hindernisbild-Upload"
+  },
+  {
+   "entity_id": "switch.dreame_ai_obstacle_picture",
+   "id": "9eda1e461c1d03412dd00a2efd06b59d",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "d6ed1194090f22b0d9e60db5f42926a8",
+   "name": null,
+   "original_name": "Dreame Hindernisbilder"
+  },
+  {
+   "entity_id": "switch.dreame_ai_pet_detection",
+   "id": "1263a673a66f90840724dac31a89459b",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "0474779eb851fba73780f652fc03ff3a",
+   "name": null,
+   "original_name": "Dreame Haustiererkennung"
+  },
+  {
+   "entity_id": "switch.dreame_ai_furniture_detection",
+   "id": "17759963f4a617ec3944c73e081c457e",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "a2b9b3ff453139a8b3a5b616b74491cc",
+   "name": null,
+   "original_name": "Dreame KI-Möbelerkennung"
+  },
+  {
+   "entity_id": "switch.dreame_ai_fluid_detection",
+   "id": "745ddf94dc3aada0d23f5bc172229d7d",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "46282ea83f4ddbf6f0f0b990f9c8c596",
+   "name": null,
+   "original_name": "Dreame KI-Flüssigkeitserkennung"
+  },
+  {
+   "entity_id": "switch.dreame_fuzzy_obstacle_detection",
+   "id": "61c0e1ab82322737d217ae6a6422d66a",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "9cf2022f56bb1516da54c1de4139388a",
+   "name": null,
+   "original_name": "Dreame Unscharfe Hinderniserkennung"
+  },
+  {
+   "entity_id": "switch.dreame_pet_picture",
+   "id": "947a735cacb4dabe57c223d86707c1b9",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "ec684c4733e4e44795deaf8c27d8a628",
+   "name": null,
+   "original_name": "Dreame Haustierbilder"
+  },
+  {
+   "entity_id": "switch.dreame_pet_focused_detection",
+   "id": "3bd2d46813552afa1a170ff3a14b4b23",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "c72f25e4461332c459cc7033a8d2abc6",
+   "name": null,
+   "original_name": "Dreame Haustierfokussierte Erkennung"
+  },
+  {
+   "entity_id": "switch.dreame_large_particles_boost",
+   "id": "2d055a8be8ea1d59e9b4160f700fd7c3",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "92d1048020d9e80674f655af355c1910",
+   "name": null,
+   "original_name": "Dreame Boost für große Partikel"
+  },
+  {
+   "entity_id": "switch.dreame_fill_light",
+   "id": "216a8636e38c1f53bca442a25eff7cd0",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "29fd6c391a26e1864ac85ae877144851",
+   "name": null,
+   "original_name": "Dreame Kameralicht"
+  },
+  {
+   "entity_id": "switch.dreame_collision_avoidance",
+   "id": "234896fa9a94f154e2412a4b9f4e02a5",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "7047ca95b68ac8f776fc3031c75cc1be",
+   "name": null,
+   "original_name": "Dreame Kollisionsvermeidung"
+  },
+  {
+   "entity_id": "switch.dreame_stain_avoidance",
+   "id": "34d952de67dcc1693158d3167ae25555",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "67ce38c0f9518ae3c99641bb4e956609",
+   "name": null,
+   "original_name": "Dreame Fleckenvermeidung"
+  },
+  {
+   "entity_id": "switch.dreame_floor_direction_cleaning",
+   "id": "9941fdd72cbaa4389438548c81ff07e6",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "d98630bbc1db010d73623d062be5d44e",
+   "name": null,
+   "original_name": "Dreame Reinigung in Bodenrichtung"
+  },
+  {
+   "entity_id": "switch.dreame_intensive_carpet_cleaning",
+   "id": "15d8a9426bcd705f6de092c53a79e159",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "6819b19b8c25ca1d69de05ad7fa7e27d",
+   "name": null,
+   "original_name": "Dreame Intensive Teppichreinigung"
+  },
+  {
+   "entity_id": "switch.dreame_side_reach",
+   "id": "3468e430337af37bb4fbabb1191a469a",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "1e406226ecd2b868d494e0f640f327ff",
+   "name": null,
+   "original_name": "Dreame Seitenbürsten-Ausfahren"
+  },
+  {
+   "entity_id": "switch.dreame_mop_extend",
+   "id": "c758518b118f4006ad18707b58129ff9",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "66e3a70ea9ee0c6c5448dba92d81b7ac",
+   "name": null,
+   "original_name": "Dreame Mopp-Ausfahren"
+  },
+  {
+   "entity_id": "switch.dreame_gap_cleaning_extension",
+   "id": "02bf5724a28851c8b06599f970150086",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "69585fa09a4f4132e50a9fc72b3056df",
+   "name": null,
+   "original_name": "Dreame Lückenreinigungserweiterung"
+  },
+  {
+   "entity_id": "switch.dreame_mopping_under_furnitures",
+   "id": "375544efadcc0b4546ac3a356203fd36",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "f07a5b8b817153a8f2e1fefb7ab3e711",
+   "name": null,
+   "original_name": "Dreame Wischen unter Möbeln"
+  },
+  {
+   "entity_id": "switch.dreame_off_peak_charging",
+   "id": "1f2d1a1fe91350cde47bd5a3320849bb",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "6490ed789006105d605a0f34a14a06db",
+   "name": null,
+   "original_name": "Dreame Laden außerhalb der Stoßzeiten"
+  },
+  {
+   "entity_id": "switch.dreame_human_follow",
+   "id": "95d9e98ae016f22d0405954c1802f114",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "a59bb2a20cf8d4c18956f4ccc2470b40",
+   "name": null,
+   "original_name": "Dreame Personenverfolgung"
+  },
+  {
+   "entity_id": "switch.dreame_max_suction_power",
+   "id": "0e6e2d8921ac3624f72ccbc89ea5e0dc",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "0ba01c720954a594ee5760c12eb0bdd7",
+   "name": null,
+   "original_name": "Dreame Maximale Saugkraft"
+  },
+  {
+   "entity_id": "switch.dreame_streaming_voice_prompt",
+   "id": "523256fa87e4ad9eff37c226795b536e",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "32aabcbc1a4f865c5ef3bd50fbd65d2d",
+   "name": null,
+   "original_name": "Dreame Streaming-Sprachansage"
+  },
+  {
+   "entity_id": "switch.dreame_clean_carpets_first",
+   "id": "9beee893d30167cde540658bd25b1571",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "354f63f2515aba916d84e088a20b54d9",
+   "name": null,
+   "original_name": "Dreame Teppiche zuerst reinigen"
+  },
+  {
+   "entity_id": "switch.dreame_smart_mop_washing",
+   "id": "680ab96c450ad28ffb91ddc14a85736b",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "5732c71517929ea817efd42af355c8f1",
+   "name": null,
+   "original_name": "Dreame Intelligente Moppwäsche"
+  },
+  {
+   "entity_id": "switch.dreame_silent_drying",
+   "id": "c4a72b9a1c54c8f251f14dece0251be3",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "40a5fdc07ed1405285b0108471c55949",
+   "name": null,
+   "original_name": "Dreame Leise Trocknung"
+  },
+  {
+   "entity_id": "switch.dreame_hair_compression",
+   "id": "70b9a7b7844c17d56a7461ceae547223",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "ed9397e22523c42c0414e06a5c11b211",
+   "name": null,
+   "original_name": "Dreame Haarkompression"
+  },
+  {
+   "entity_id": "switch.dreame_side_brush_carpet_rotate",
+   "id": "d33ba7c8b5c58af4d15c65e336a82f1d",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "c30584b972ae0aacc9147c4070ea7a0a",
+   "name": null,
+   "original_name": "Dreame Seitenbürstendrehung auf Teppich"
+  },
+  {
+   "entity_id": "switch.dreame_ring_light_always_on",
+   "id": "33c03fce35f54c3bc71de4334ad5c8a6",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "9f1a69c8e37891016124ee4063b8284d",
+   "name": null,
+   "original_name": "Dreame Ringlicht immer an"
+  },
+  {
+   "entity_id": "switch.dreame_dynamic_obstacle_cleaning",
+   "id": "6c040d9fbdbb47893f23c268faec36b4",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "d5a79b0da3061fc912d8286ece93706d",
+   "name": null,
+   "original_name": "Dreame Dynamische Hindernisreinigung"
+  },
+  {
+   "entity_id": "switch.dreame_camera_light_brightness_auto",
+   "id": "86741d571366c67d05adcbca36279bd6",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "f901c1c6b5b58aab787d3ba881b53746",
+   "name": null,
+   "original_name": "Dreame Kameralicht-Helligkeit automatisch"
+  },
+  {
+   "entity_id": "media_player.alex_wohnung_fire_tv_max_alex_wohnung_wohnbereich",
+   "id": "1a39bf3d43b6bda14a53a3aa152dd793",
+   "device_id": "28d4e4b163654a4d12b608e0a8d1fd92",
+   "area_id": null,
+   "labels": [
+    "media"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "media_player",
+   "unique_id": "72f529be49d8da2a7acedb6a7f4e6118",
+   "name": null,
+   "original_name": "Fire TV Max Alex Wohnung Wohnbereich"
+  },
+  {
+   "entity_id": "media_player.alex_wohnung_alex_tv_wohnbereich",
+   "id": "eadfa05128fba7af00552ffe415aea20",
+   "device_id": "5cf99131b1199a2a89f106843cc3faa6",
+   "area_id": null,
+   "labels": [
+    "alles_aus",
+    "media"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "media_player",
+   "unique_id": "6a90403fff563a231525993f07ddebfc",
+   "name": null,
+   "original_name": "Alex TV Wohnbereich"
+  },
+  {
+   "entity_id": "switch.pc_power_switch",
+   "id": "1ab872e56cf3cb88a427199c9a0e3284",
+   "device_id": "144ea1540943f87e22dbd2e7ef7f7414",
+   "area_id": null,
+   "labels": [
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "gv2mqtt-1AB872E56CF3CB88",
+   "name": null,
+   "original_name": "Pc Power Switch"
+  },
+  {
+   "entity_id": "light.wohnflache_alex",
+   "id": "13ec40d2089b80bf59040b6140ceb52b",
+   "device_id": "3a79b38e9fd709f5a1b87fa72c8c333e",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "gv2mqtt-13EC40D2089B80BF",
+   "name": null,
+   "original_name": "Wohnfläche Alex"
+  },
+  {
+   "entity_id": "switch.wohnflache_alex_power_switch",
+   "id": "3d5eeb9c05882270adfc1dad62906b3f",
+   "device_id": "3a79b38e9fd709f5a1b87fa72c8c333e",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "gv2mqtt-3D5EEB9C05882270",
+   "name": null,
+   "original_name": "Wohnfläche Alex Power Switch"
+  },
+  {
+   "entity_id": "light.bett_bereich",
+   "id": "6b419dc9110702bfe9450ee07d12be5a",
+   "device_id": "c55a70ac631a0949f5e5ff2d518aa87b",
+   "area_id": null,
+   "labels": [
+    "licht"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "gv2mqtt-6B419DC9110702BF",
+   "name": null,
+   "original_name": "Bett Bereich"
+  },
+  {
+   "entity_id": "switch.bett_bereich_power_switch",
+   "id": "ab10632ea5f225d0eeedb633c3f6ae73",
+   "device_id": "c55a70ac631a0949f5e5ff2d518aa87b",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "gv2mqtt-AB10632EA5F225D0",
+   "name": null,
+   "original_name": "Bett Bereich Power Switch"
+  },
+  {
+   "entity_id": "light.schreibtisch_r_alex",
+   "id": "0acd19f062c5840b360176ecd42a250b",
+   "device_id": "ba1d0a6ba7cdeb33a1222c1482886e1f",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "gv2mqtt-0ACD19F062C5840B",
+   "name": null,
+   "original_name": "Schreibtisch R Alex"
+  },
+  {
+   "entity_id": "switch.schreibtisch_r_alex_power_switch",
+   "id": "5ea7cf2266bb3d6548c0e97882b4bb66",
+   "device_id": "ba1d0a6ba7cdeb33a1222c1482886e1f",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "gv2mqtt-5EA7CF2266BB3D65",
+   "name": null,
+   "original_name": "Schreibtisch R Alex Power Switch"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_interface",
+   "id": "184b6018b8720b1112ea57c1d9ed9dbd",
+   "device_id": "96207802060a819a0248182677c1ed7f",
+   "area_id": null,
+   "labels": [
+    "alles_aus",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "8fdde419fd973c0dd8a074bc4be47825",
+   "name": null,
+   "original_name": "Interface"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_monitore",
+   "id": "5e45dfbb6c54689c1feaf0b2f39a4286",
+   "device_id": "3cba62c6370189525bd68c6e9b4b50bb",
+   "area_id": null,
+   "labels": [
+    "alles_aus",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "b6d1377541475134a9f3f896f5d97492",
+   "name": null,
+   "original_name": "Monitore"
+  },
+  {
+   "entity_id": "switch.alex_wohnung_luftwerte_display",
+   "id": "512f0d7483c899e291e6977dd6609a2a",
+   "device_id": "983d4fcdcbf1813738a5c492f321a85a",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "db805d49caee6c5aa266ba38369f26db",
+   "name": null,
+   "original_name": "Luftwerte Display"
+  },
+  {
+   "entity_id": "switch.switch_alex_steckdose_1",
+   "id": "3eb5de6f77c9be3f4f80aa63fa28e7aa",
+   "device_id": "fe05dbdcb34a2b04cb01576a9f1a897c",
+   "area_id": null,
+   "labels": [
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "81e4d6c949566a76b3afd64895ae0950",
+   "name": null,
+   "original_name": "Lan-Switch"
+  },
+  {
+   "entity_id": "light.schrank_ambiente",
+   "id": "84ba5d4372707b6a3344f9169dce3d06",
+   "device_id": "5d8b546c5adffa4a2a02d55df0b3cd47",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "flux_led",
+   "unique_id": "261103285ef2d10cc4f8774ff2969858",
+   "name": null,
+   "original_name": "Kleiderschrank Ambiente"
+  },
+  {
+   "entity_id": "cover.rollladen_alex",
+   "id": "6963445737742c2249b8fd087f4d6cd1",
+   "device_id": "5bf34967b7a34692998ed1a160ec958f",
+   "area_id": null,
+   "labels": [
+    "dontshowinaktive",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "b488c09dfe498c9762a619bd4be5e3ae",
+   "name": null,
+   "original_name": "Rollladen"
+  },
+  {
+   "entity_id": "input_boolean.lichtshow",
+   "id": "e4e1a06c374767734ca5f62f171811a4",
+   "device_id": null,
+   "area_id": "alex_zimmer",
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_boolean",
+   "unique_id": "40ce55c3be69527f4036dac505f9364c",
+   "name": null,
+   "original_name": "lichtshow"
+  },
+  {
+   "entity_id": "climate.klima",
+   "id": "6434718f1319447da16a80214feba356",
+   "device_id": "0dfc5d581c0b6a863e875b7fb959c97e",
+   "area_id": null,
+   "labels": [
+    "klima"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "ff516f6e7dd8af0650132e69e2db25d4",
+   "name": null,
+   "original_name": "Klima"
+  },
+  {
+   "entity_id": "light.bettlampe_alex",
+   "id": "27d567a1577addb645148f37946fc1e5",
+   "device_id": "3215b3fbee32f966d62da665a92b2c63",
+   "area_id": "alex_zimmer",
+   "labels": [
+    "licht"
+   ],
+   "hidden_by": null,
+   "disabled_by": "user",
+   "entity_category": null,
+   "platform": "light",
+   "unique_id": "14c37750322e3dbc01a210c9c077e182",
+   "name": null,
+   "original_name": null
+  },
+  {
+   "entity_id": "switch.zimmerlicht_relay_alex",
+   "id": "bff9c9d29289c36f3159b576b4dc9873",
+   "device_id": "fa57e1273868b16f8e4f76d9c2fafbc3",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "licht",
+    "dontshowinaktive"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "84236b01a2ae7d93d8a8780480ace93b",
+   "name": null,
+   "original_name": "Zimmerlicht Relay Alex"
+  },
+  {
+   "entity_id": "switch.studioboxen_kindersicherung",
+   "id": "98154c52ac2752d4dad793010f333757",
+   "device_id": "67ae729c14c97c36ddf75527003654f6",
+   "area_id": null,
+   "labels": [
+    "sensorik",
+    "dontshowindashboard",
+    "dontshowinaktive"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "f7c57c50dfe2d084375a586f5b5daa5a",
+   "name": null,
+   "original_name": "Studioboxen Kindersicherung"
+  },
+  {
+   "entity_id": "switch.mischpult_alex_kindersicherung",
+   "id": "5c27fb2319ff4479e7cb3a7a6232bc9c",
+   "device_id": "cea099a8f5ac3e289e317d461beb9261",
+   "area_id": null,
+   "labels": [
+    "sensorik",
+    "dontshowindashboard",
+    "dontshowinaktive"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "d2956b0e0bf0e46f84ad62b46ec93ee2",
+   "name": null,
+   "original_name": "Mischpult Alex Kindersicherung"
+  },
+  {
+   "entity_id": "switch.pc_2_strom_kindersicherung",
+   "id": "0f6efd0e579b7fe62423a0805ecad24f",
+   "device_id": "5444b0e35c0515f36585f9854e0227c6",
+   "area_id": null,
+   "labels": [
+    "sensorik",
+    "dontshowindashboard",
+    "dontshowinaktive"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "3b888eecaa04e65bae908826f361fc15",
+   "name": null,
+   "original_name": "Pc 2 Strom Kindersicherung"
+  },
+  {
+   "entity_id": "switch.pc_2_strom_steckdose_1",
+   "id": "b667d647712ce79d53947e7b12b2925c",
+   "device_id": "5444b0e35c0515f36585f9854e0227c6",
+   "area_id": null,
+   "labels": [
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "03c02b650c464b13a54aca0838adc683",
+   "name": null,
+   "original_name": "Pc 2 Strom"
+  },
+  {
+   "entity_id": "switch.switch_alex_kindersicherung",
+   "id": "773f31d7637b43415af72201cbd6b34c",
+   "device_id": "fe05dbdcb34a2b04cb01576a9f1a897c",
+   "area_id": null,
+   "labels": [
+    "sensorik",
+    "dontshowindashboard",
+    "dontshowinaktive"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "8295343551f9e7754e3cb72eb49415b9",
+   "name": null,
+   "original_name": "Lan-Switch Alex Kindersicherung"
+  },
+  {
+   "entity_id": "switch.controller_rgb_ir_c2b681_remotezugriff",
+   "id": "94255b1bfe461c3355796d9f889de7e3",
+   "device_id": "5d8b546c5adffa4a2a02d55df0b3cd47",
+   "area_id": null,
+   "labels": [
+    "sensorik",
+    "dontshowindashboard",
+    "dontshowinaktive"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "flux_led",
+   "unique_id": "3346f1a94de06108a5da74d59ad84244",
+   "name": null,
+   "original_name": "Kleiderschrank Ambiente Remotezugriff"
+  },
+  {
+   "entity_id": "light.rollladen_alex_hintergrundbeleuchtung",
+   "id": "0ef38409ea80721bcc17ea9862d1df5c",
+   "device_id": "5bf34967b7a34692998ed1a160ec958f",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "1a3ccb0a75b95198281d10cefa79864d",
+   "name": null,
+   "original_name": "Rollladen Alex Hintergrundbeleuchtung"
+  },
+  {
+   "entity_id": "binary_sensor.alex_wohnung_einganstur_tur",
+   "id": "9efd559effabee9bac002995d7251204",
+   "device_id": "05c715bb6e3a563768f0b1e99c38831a",
+   "area_id": null,
+   "labels": [
+    "sensorik"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "68fb88bccfda7131a51f37e84ee6c9e2",
+   "name": null,
+   "original_name": "Einganstür Tür"
+  },
+  {
+   "entity_id": "binary_sensor.alex_wohnung_fenster_bad_alex_wohnung_fenster_bad",
+   "id": "e2658410223e4510a3606daf6fcbda6b",
+   "device_id": "772d05aa858ee9cab617f71e52bd6525",
+   "area_id": null,
+   "labels": [
+    "sensorik"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "2d77913f03e957c4150d7da2827f0d1e",
+   "name": null,
+   "original_name": "Fenster Bad Alex Wohnung"
+  },
+  {
+   "entity_id": "binary_sensor.alex_wohnung_fenster_bett_alex_wohnung_fenster_rechts_wohnbereich_alex",
+   "id": "da532730b5767c5787d6eaa84815c2c6",
+   "device_id": "2e8a610b960da40b242e29269bbc855a",
+   "area_id": null,
+   "labels": [
+    "sensorik"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "2841e04a10e6de2a551cca87cd4ecbf2",
+   "name": null,
+   "original_name": "Fenster Rechts Wohnbereich Alex"
+  },
+  {
+   "entity_id": "binary_sensor.alex_wohnung_fenster_bett_alex_wohnung_tur",
+   "id": "fefc24e295f24ca3930ecaf010df090d",
+   "device_id": "ff63724ec33290cb02f7469a3b6bf138",
+   "area_id": null,
+   "labels": [
+    "sensorik"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "a62a39e1efd68012befae8f0783771a4",
+   "name": null,
+   "original_name": "Fenster Bett Alex Wohnung"
+  },
+  {
+   "entity_id": "binary_sensor.alex_wohnung_fenster_links_wohnbereich_alex_tur",
+   "id": "0a4079ba227b9a99bfa3b26ec89d3fad",
+   "device_id": "f570f2901f091710285079527fee1fff",
+   "area_id": null,
+   "labels": [
+    "sensorik"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "af91e5cc1d7034a592178514c46bb189",
+   "name": null,
+   "original_name": "Fenster Links Wohnbereich Alex"
+  },
+  {
+   "entity_id": "binary_sensor.alex_wohnung_gefrierschrank_tur",
+   "id": "16adfb9dc564abf02ee955251dc25c94",
+   "device_id": "3b6c00d0866d45848d03ff96063285a0",
+   "area_id": null,
+   "labels": [
+    "sensorik"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "920141e74502d71aa1288ad2a5eeccaa",
+   "name": null,
+   "original_name": "Gefrierschrank Tür"
+  },
+  {
+   "entity_id": "binary_sensor.alex_wohnung_kuhlschranktur_tur",
+   "id": "52309cec68c79da9fe35fb9619e96d6d",
+   "device_id": "326078dd5dbcf19d4bf185d48ea93751",
+   "area_id": null,
+   "labels": [
+    "sensorik"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "1ce5f181a72e6d4bdaa2b4067299383f",
+   "name": null,
+   "original_name": "Kühlschranktür Tür"
+  },
+  {
+   "entity_id": "binary_sensor.luften_lohnt_sich",
+   "id": "393fdac4f1e9e307455ae8fd80dc1cc8",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "template",
+   "unique_id": "e0f9eb0e058eef6358816852e7fcb405",
+   "name": null,
+   "original_name": "Lüften lohnt sich"
+  },
+  {
+   "entity_id": "button.alex_wohnung_spulmaschiene_als_entladen_markieren",
+   "id": "6b1940d38192d95da6c3920888b0ecde",
+   "device_id": "e26060c171801651c6b177019db0bdef",
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "button",
+   "unique_id": "f484508b9387f75ca80bf0bf2da02350",
+   "name": null,
+   "original_name": "Spülmaschiene Als entladen markieren"
+  },
+  {
+   "entity_id": "button.alex_wohnung_waschmaschiene_alex_als_entladen_markieren",
+   "id": "9ebbf8b18b5236f259bb14b48e190864",
+   "device_id": "e3006e17b24c49f787c2b0ed90a86eda",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "button",
+   "unique_id": "7b91e13e9b1e7ac2706826f4138e6a55",
+   "name": null,
+   "original_name": "Waschmaschine Alex Als entladen markieren"
+  },
+  {
+   "entity_id": "input_number.heizung_bad_soll",
+   "id": "7d8ec356df42226ee03a17dc9616296c",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_number",
+   "unique_id": "cb00ad4e2e92289acbb055faf621a730",
+   "name": null,
+   "original_name": "Heizung Bad Soll"
+  },
+  {
+   "entity_id": "input_number.heizung_wohnbereich_soll",
+   "id": "8f037026fe52afec874ba056b19c265a",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_number",
+   "unique_id": "994b14dc9990fbcc83d71a49fd40d67d",
+   "name": null,
+   "original_name": "Heizung Wohnbereich Soll"
+  },
+  {
+   "entity_id": "input_select.heizung_modus",
+   "id": "2cd735e711913d239666834bddc340b5",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_select",
+   "unique_id": "432f2498be95acc9f31c0c2c68b25f60",
+   "name": null,
+   "original_name": "Heizung Modus"
+  },
+  {
+   "entity_id": "input_select.soundanlage_modus",
+   "id": "4348b6748cde85e07106b2cb98638596",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_select",
+   "unique_id": "2097563b4f2b6effcf79475e270ec035",
+   "name": null,
+   "original_name": "Soundanlage Modus"
+  },
+  {
+   "entity_id": "input_text.heizung_bad_grund",
+   "id": "78413273f494bfc4b286ef575a0e1ecb",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_text",
+   "unique_id": "9e57a352a7a777e1fe63dcbfe057ddcd",
+   "name": null,
+   "original_name": "Heizung Bad Grund"
+  },
+  {
+   "entity_id": "input_text.heizung_wohnbereich_grund",
+   "id": "7d72e38506e6cc454a403b5707654355",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_text",
+   "unique_id": "d03b5684441133118bf4fc1964059c60",
+   "name": null,
+   "original_name": "Heizung Wohnbereich Grund"
+  },
+  {
+   "entity_id": "light.zone_ambiente_sofa",
+   "id": "00c57784d1baad7b9315f0cdecc99e05",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "group",
+   "unique_id": "aebeb216eda4511ab85a462a2fb231d7",
+   "name": null,
+   "original_name": "Zone Ambiente Sofa"
+  },
+  {
+   "entity_id": "light.zone_sofa_deckenlicht",
+   "id": "9fb125ee0b52a5cca64c8d41f0dec30b",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "group",
+   "unique_id": "fa7ece8ab3fc7eb8a86dc5fe736b5db0",
+   "name": null,
+   "original_name": "Zone Sofa Deckenlicht"
+  },
+  {
+   "entity_id": "media_player.bad_snapcast_client",
+   "id": "fd68953896db65537c1b17909c81f0f8",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "media_player",
+   "unique_id": "5207966e56c380566d70f4d0c58e09fa",
+   "name": null,
+   "original_name": "Bad Snapcast Client"
+  },
+  {
+   "entity_id": "media_player.pc_bereich_snapcast_client",
+   "id": "6927f2cba60f4cb1ba4277b89114a35f",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "media_player",
+   "unique_id": "6c80db02893dc1ba4a58c302d2fc8da1",
+   "name": null,
+   "original_name": "PC-Bereich Snapcast Client"
+  },
+  {
+   "entity_id": "media_player.wohnbereich_snapcast_client",
+   "id": "df01d0b7d715484244b14fc85c76a228",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "media_player",
+   "unique_id": "f013f849225c99e3fce1dd0d40cf44f9",
+   "name": null,
+   "original_name": "Wohnbereich Snapcast Client"
+  },
+  {
+   "entity_id": "script.alles_aus",
+   "id": "dec2b128c551a13697039bfd0d2da30d",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "script",
+   "unique_id": "3d50dee42ef7e6e5da0a4a7767ccc8db",
+   "name": null,
+   "original_name": "Alles aus · Alex Wohnung"
+  },
+  {
+   "entity_id": "script.soundanlage_anwenden",
+   "id": "702e0db2061a1b35c53e31516a2827c1",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "script",
+   "unique_id": "cfd2a9e06b7e45d9a35307575f9e9af8",
+   "name": null,
+   "original_name": "Soundanlage · Sollzustand anwenden"
+  },
+  {
+   "entity_id": "script.soundanlage_ir_taste",
+   "id": "3bb64ae6a461fc23e0aef826493341f4",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "script",
+   "unique_id": "ba9f849c1c4ee69d94fe92abc1ddedda",
+   "name": null,
+   "original_name": "Soundanlage · IR-Taste drücken"
+  },
+  {
+   "entity_id": "script.xp700_einschalten",
+   "id": "145ff9274c8de0407578fffbb935718c",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "script",
+   "unique_id": "a360c28acdf227ad277b49bc0851c227",
+   "name": null,
+   "original_name": "XP700 einschalten"
+  },
+  {
+   "entity_id": "select.test_led_controller_farbpalette",
+   "id": "245ffaadbfa70514f58d180daa020cb4",
+   "device_id": "1c082f75be8b52471e19bc82800a2f47",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "select",
+   "unique_id": "a08b6acb55bb77679ecdabb40ceeba57",
+   "name": null,
+   "original_name": "Ipad Backlights Farbpalette"
+  },
+  {
+   "entity_id": "sensor.alex_wohnung_interface_leistung",
+   "id": "c3d5e90e58359941995d70a0aa564e0c",
+   "device_id": "96207802060a819a0248182677c1ed7f",
+   "area_id": null,
+   "labels": [
+    "sensorik",
+    "dontshowindashboard",
+    "dontshowinaktive"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "1e2d98bbefe48b44c551bae405ecd838",
+   "name": null,
+   "original_name": "Interface Leistung"
+  },
+  {
+   "entity_id": "sensor.alex_wohnung_luftwerte_kohlendioxid",
+   "id": "98c298998e3db9d166d571330d241730",
+   "device_id": "983d4fcdcbf1813738a5c492f321a85a",
+   "area_id": null,
+   "labels": [
+    "klima"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "2b4d96bdd1e83261ca9b4497bcbcbcb6",
+   "name": null,
+   "original_name": "Luftwerte Kohlendioxid"
+  },
+  {
+   "entity_id": "sensor.alex_wohnung_monitore_leistung",
+   "id": "607ce34ee3695de2cfd7d3e9db0efb13",
+   "device_id": "3cba62c6370189525bd68c6e9b4b50bb",
+   "area_id": null,
+   "labels": [
+    "sensorik",
+    "dontshowindashboard",
+    "dontshowinaktive"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "28931c2f789d80be96f1f6581ca651e4",
+   "name": null,
+   "original_name": "Monitore Leistung"
+  },
+  {
+   "entity_id": "sensor.alex_wohnung_spulmaschiene_aktuelle_leistung",
+   "id": "4af798fc7d25555b0fe1b0462ba698ef",
+   "device_id": "e26060c171801651c6b177019db0bdef",
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "10997a9f01b6687cf7524577ffa4d2f3",
+   "name": null,
+   "original_name": "Spülmaschiene Aktuelle Leistung"
+  },
+  {
+   "entity_id": "sensor.alex_wohnung_spulmaschiene_aktuelle_phase",
+   "id": "1515ebaa22c342f4bc7d68e4e70ee544",
+   "device_id": "e26060c171801651c6b177019db0bdef",
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "3a2e93cdb9a04c6860b463d6b2ce435e",
+   "name": null,
+   "original_name": "Spülmaschiene Aktuelle Phase"
+  },
+  {
+   "entity_id": "sensor.alex_wohnung_spulmaschiene_fortschritt",
+   "id": "cdb518edbb737bc3147b964c2f5b633f",
+   "device_id": "e26060c171801651c6b177019db0bdef",
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "a72c247cd37d692e20f7b76d8f87b979",
+   "name": null,
+   "original_name": "Spülmaschiene Fortschritt"
+  },
+  {
+   "entity_id": "sensor.alex_wohnung_spulmaschiene_programm",
+   "id": "bded4bdaa0dfd94b2149a6396bc53268",
+   "device_id": "e26060c171801651c6b177019db0bdef",
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "8538a9014fa071d1b3e1117dc3469d15",
+   "name": null,
+   "original_name": "Spülmaschiene Programm"
+  },
+  {
+   "entity_id": "sensor.alex_wohnung_spulmaschiene_verbleibende_zeit",
+   "id": "f0297bf42552b5aa416a70e2205033db",
+   "device_id": "e26060c171801651c6b177019db0bdef",
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "94e894d805ab1ab4c9810e34f11a1c1c",
+   "name": null,
+   "original_name": "Spülmaschiene Verbleibende Zeit"
+  },
+  {
+   "entity_id": "sensor.alex_wohnung_spulmaschiene_zustand",
+   "id": "d0048024b2a861d33dbcfe67e1bb4c7b",
+   "device_id": "e26060c171801651c6b177019db0bdef",
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "a8b6b94d7783bdbad0361cb814031f05",
+   "name": null,
+   "original_name": "Spülmaschiene Zustand"
+  },
+  {
+   "entity_id": "sensor.alex_wohnung_thermometer_aussen_temperatur",
+   "id": "4fb7862554df036e2a33979cf5c71e8a",
+   "device_id": "20c1a4c85315ff6e01d094775a8d7f9f",
+   "area_id": null,
+   "labels": [
+    "klima"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "6dfae037557b75d73d387672630a55ac",
+   "name": null,
+   "original_name": "Thermometer Außen Temperatur"
+  },
+  {
+   "entity_id": "sensor.alex_wohnung_thermometer_bad_luftfeuchtigkeit",
+   "id": "9dc8936666020ae37be6de35ee357109",
+   "device_id": "10e10f9a7823877ac5637d98db0daf0a",
+   "area_id": null,
+   "labels": [
+    "klima"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "44fa119e53f04ea609c37d76e6bf5f53",
+   "name": null,
+   "original_name": "Thermometer Bad Luftfeuchtigkeit"
+  },
+  {
+   "entity_id": "sensor.alex_wohnung_thermometer_wohnbereich_luftfeuchtigkeit",
+   "id": "ef98be05360b6fc358e5c2b83b48f934",
+   "device_id": "a1931c20fc43d77a212cf6121f246544",
+   "area_id": null,
+   "labels": [
+    "klima"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "0027775ddbcf9c5698d932af614e1b23",
+   "name": null,
+   "original_name": "Thermometer Wohnbereich Luftfeuchtigkeit"
+  },
+  {
+   "entity_id": "sensor.alex_wohnung_timmerflotte_luftfeuchtigkeit",
+   "id": "ed3af80e17ee1e59aa9d6aa5776202c3",
+   "device_id": "d31cdeba16bad50fb63d207cf682de3e",
+   "area_id": null,
+   "labels": [
+    "klima"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "3c9bc44f3f25930e9fc46311d278dde4",
+   "name": null,
+   "original_name": "Thermometer Schreibtisch Alex Luftfeuchtigkeit"
+  },
+  {
+   "entity_id": "sensor.alex_wohnung_timmerflotte_temperatur",
+   "id": "55e3c91c16cafccf2d41c89fd037d429",
+   "device_id": "d31cdeba16bad50fb63d207cf682de3e",
+   "area_id": null,
+   "labels": [
+    "klima"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "88cd6990896d512b3c1fdcf41279c3ef",
+   "name": null,
+   "original_name": "Thermometer Schreibtisch Alex Temperatur"
+  },
+  {
+   "entity_id": "sensor.dreame_battery_level",
+   "id": "0f9d5501af735345a763e2b656ef9810",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "9ca2b070be5aff357bda30df76d10281",
+   "name": null,
+   "original_name": "Dreame Batteriestand"
+  },
+  {
+   "entity_id": "sensor.dreame_current_room",
+   "id": "5199a2245355309b28630f6c3e0d3da5",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "0c42d350ff22dd19d9ed1baeb4217725",
+   "name": null,
+   "original_name": "Dreame Aktueller Raum"
+  },
+  {
+   "entity_id": "sensor.dreame_error",
+   "id": "1a2f61df3551d988334624172a4e4893",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "ad74809e040a71cfca89c492a6f9f757",
+   "name": null,
+   "original_name": "Dreame Fehler"
+  },
+  {
+   "entity_id": "sensor.dreame_status",
+   "id": "9825372b6b8382e6dca584f29eceaa07",
+   "device_id": "02469f94fed493f90ffb1dd73eb0b430",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard",
+    "strom"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "6dd65312fbc828168f94c844e2d655e7",
+   "name": null,
+   "original_name": "Dreame Status"
+  },
+  {
+   "entity_id": "sensor.durchschnitt_luftfeuchtigkeit",
+   "id": "e3d783d086445641fb8551962463a3b4",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "klima"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "ba69e9ec533399c3e6d28b029709945a",
+   "name": null,
+   "original_name": "Durchschnitt Luftfeuchtigkeit"
+  },
+  {
+   "entity_id": "sensor.luftungsdauer_empfohlen",
+   "id": "f6e36260dc783e7fcfc14904ba56fb3e",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "template",
+   "unique_id": "481f9ee0acdda56570b625b2fb99742d",
+   "name": null,
+   "original_name": "Lüftungsdauer empfohlen"
+  },
+  {
+   "entity_id": "sensor.mischpult_alex_leistung",
+   "id": "1c27b84278b806ce44c88a61ba12e1f2",
+   "device_id": "cea099a8f5ac3e289e317d461beb9261",
+   "area_id": null,
+   "labels": [
+    "sensorik",
+    "dontshowindashboard",
+    "dontshowinaktive"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "d2ad8c9ae84ab0cf3e5db6367def3066",
+   "name": null,
+   "original_name": "Mischpult Alex Leistung"
+  },
+  {
+   "entity_id": "sensor.pc_2_strom_leistung",
+   "id": "6d61d95cba6ba85849eb5d34e2f8bdbe",
+   "device_id": "5444b0e35c0515f36585f9854e0227c6",
+   "area_id": null,
+   "labels": [
+    "sensorik",
+    "dontshowindashboard",
+    "dontshowinaktive"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "d27d71d907844d00afcfc53bf0b3be9d",
+   "name": null,
+   "original_name": "Pc 2 Strom Leistung"
+  },
+  {
+   "entity_id": "sensor.raumtemperatur_bad",
+   "id": "0709e62394efbdc7555daf0f6ddaaed8",
+   "device_id": null,
+   "area_id": null,
+   "labels": [
+    "helfer"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "da41882189404cf20312e2d3e7d87d57",
+   "name": null,
+   "original_name": "Raumtemperatur Bad"
+  },
+  {
+   "entity_id": "sensor.raumtemperatur_wohnbereich",
+   "id": "b142edbb9f5717319187205f6ff32760",
+   "device_id": null,
+   "area_id": null,
+   "labels": [
+    "helfer"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "089b4d2708c8446ebe6398b42102c0cc",
+   "name": null,
+   "original_name": "Raumtemperatur Wohnbereich"
+  },
+  {
+   "entity_id": "sensor.schimmelrisiko_bad",
+   "id": "247fae91144c834c981f59e4769bb411",
+   "device_id": "10e10f9a7823877ac5637d98db0daf0a",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "3c96f35f93d29bc19d211e9ba4497119",
+   "name": null,
+   "original_name": "Thermometer Bad Feuchte Außenwand"
+  },
+  {
+   "entity_id": "sensor.schimmelrisiko_wohnbereich",
+   "id": "e6cd73fd2acb778d479c71b72265ae85",
+   "device_id": "a1931c20fc43d77a212cf6121f246544",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "6809a5dcf91a50144cd0394d86cf12ec",
+   "name": null,
+   "original_name": "Thermometer Wohnbereich Feuchte Außenwand"
+  },
+  {
+   "entity_id": "sensor.studioboxen_leistung",
+   "id": "c23c6b5162778aad701e3d671d7b408d",
+   "device_id": "67ae729c14c97c36ddf75527003654f6",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "c28df6faa609c4f6605dba0ddf056ef9",
+   "name": null,
+   "original_name": "Studioboxen Leistung"
+  },
+  {
+   "entity_id": "sensor.switch_alex_leistung",
+   "id": "fd946ba309213a6d18b47c0b092c0184",
+   "device_id": "fe05dbdcb34a2b04cb01576a9f1a897c",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "6024e9335c5d76730b61adf7baf3ff4d",
+   "name": null,
+   "original_name": "Lan-Switch Alex Leistung"
+  },
+  {
+   "entity_id": "sensor.thermometer_alex_humidity",
+   "id": "752d55fc65b3593c88fb88f8928bd6b4",
+   "device_id": "7e2d17b0aba569789a810319d7f3ceec",
+   "area_id": null,
+   "labels": [
+    "klima"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "gv2mqtt-752D55FC65B3593C",
+   "name": null,
+   "original_name": "Thermometer Bett Alex Humidity"
+  },
+  {
+   "entity_id": "sensor.thermometer_alex_temperature",
+   "id": "355d026f371b279b4acf8666ec78f1bd",
+   "device_id": "7e2d17b0aba569789a810319d7f3ceec",
+   "area_id": null,
+   "labels": [
+    "klima"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "gv2mqtt-355D026F371B279B",
+   "name": null,
+   "original_name": "Thermometer Bett Alex Temperature"
+  },
+  {
+   "entity_id": "sensor.waschmaschiene_alex_aktuelle_phase",
+   "id": "03e3b618b6bf822717ba50880ac09db9",
+   "device_id": "e3006e17b24c49f787c2b0ed90a86eda",
+   "area_id": null,
+   "labels": [
+    "sensorik"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "60ff4a1a573330b42498b3f1f61cf7b4",
+   "name": null,
+   "original_name": "Waschmaschine Alex Aktuelle Phase"
+  },
+  {
+   "entity_id": "sensor.waschmaschiene_alex_fortschritt",
+   "id": "249af2331c9db96902565ebe0a452523",
+   "device_id": "e3006e17b24c49f787c2b0ed90a86eda",
+   "area_id": null,
+   "labels": [
+    "sensorik"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "a65bff4106c34eddb57500d99ad52288",
+   "name": null,
+   "original_name": "Waschmaschine Alex Fortschritt"
+  },
+  {
+   "entity_id": "sensor.waschmaschiene_alex_programm",
+   "id": "f0ac27a9bfc7db7b2a0ba40dfec544f9",
+   "device_id": "e3006e17b24c49f787c2b0ed90a86eda",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "496fd9a36455a5513ee68ce230557395",
+   "name": null,
+   "original_name": "Waschmaschine Alex Programm"
+  },
+  {
+   "entity_id": "sensor.waschmaschiene_alex_verbleibende_zeit",
+   "id": "1edb3578a13f83917f12f5e97b9c7d7a",
+   "device_id": "e3006e17b24c49f787c2b0ed90a86eda",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "7e6f34986d1fc2d831b9e216640b4354",
+   "name": null,
+   "original_name": "Waschmaschine Alex Verbleibende Zeit"
+  },
+  {
+   "entity_id": "sensor.waschmaschiene_alex_zustand",
+   "id": "9628fbb6979c22b2e194d112707ece0b",
+   "device_id": "e3006e17b24c49f787c2b0ed90a86eda",
+   "area_id": null,
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "sensor",
+   "unique_id": "4c278fc99a269aa41576588a5254d518",
+   "name": null,
+   "original_name": "Waschmaschine Alex Zustand"
+  },
+  {
+   "entity_id": "switch.vol_tv_soundanlage",
+   "id": "02422e7306691ad28f1e1d493fd3d42e",
+   "device_id": "f90531d92891c00dd64a30191245a452",
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "1d48528b01066295d41ecab4bb8c424f",
+   "name": null,
+   "original_name": "Vol- TV Soundanlage"
+  },
+  {
+   "entity_id": "switch.vol_tv_soundanlage_2",
+   "id": "f2b8d67215cc0c2c9b3537edb02d17c9",
+   "device_id": "900f710c9f075c7c1b6220f16f540031",
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "matter",
+   "unique_id": "8867b0010db182e69a9aa516b63502ce",
+   "name": null,
+   "original_name": "Vol+ TV Soundanlage"
+  },
+  {
+   "entity_id": "timer.heizung_bad_boost",
+   "id": "671ca422566b47a46fae0c4d9bd105a4",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "timer",
+   "unique_id": "6e288fedc4ac1c3cee46a26eeab25206",
+   "name": null,
+   "original_name": "Heizung Bad Boost"
+  },
+  {
+   "entity_id": "timer.heizung_wohnbereich_boost",
+   "id": "7e1575df27b3b5a836d86fb6f9f838b7",
+   "device_id": null,
+   "area_id": null,
+   "labels": [],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "timer",
+   "unique_id": "f9e0c6abd5d9e61ec6f3410b1d360c65",
+   "name": null,
+   "original_name": "Heizung Wohnbereich Boost"
+  },
+  {
+   "entity_id": "todo.einkaufsliste_2",
+   "id": "5f9d7e45f067fc04312588c5ec9369f8",
+   "device_id": null,
+   "area_id": "system",
+   "labels": [
+    "helfer"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "todo",
+   "unique_id": "6c40a2cca71fdae78d02bb537f1296b3",
+   "name": null,
+   "original_name": "Einkaufsliste"
+  },
+  {
+   "entity_id": "weather.forecast_home",
+   "id": "b379794e02391be1b5e2e358007a125d",
+   "device_id": "435df543c97ac227958b38868593d526",
+   "area_id": "alex_zimmer",
+   "labels": [
+    "sensorik",
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "weather",
+   "unique_id": "b385f14cec2b8a20ac1ffe986d53c1c2",
+   "name": null,
+   "original_name": "Home"
+  },
+  {
+   "entity_id": "input_text.dashboard_alert_text",
+   "id": "c6269706029f13c190252aceec6ce7fa",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_text",
+   "unique_id": "e73fd97f2720eaa4b2a082a030c074cc",
+   "name": null,
+   "original_name": "Dashboard Alert Text"
+  },
+  {
+   "entity_id": "input_select.dashboard_alert_level",
+   "id": "5771141e52edc8f4f76105a7670c1554",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_select",
+   "unique_id": "9e11f3d88d9347f8a5cba7b563879901",
+   "name": null,
+   "original_name": "Dashboard Alert Level"
+  },
+  {
+   "entity_id": "input_text.wdh_slot_1",
+   "id": "fa5e69bf27896c3cb8233109f58cfc71",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_text",
+   "unique_id": "419cace03bd091b86876530eac647409",
+   "name": null,
+   "original_name": "WDH Slot 1"
+  },
+  {
+   "entity_id": "input_text.wdh_slot_2",
+   "id": "73c6128b3db1b5bb502314fc4a3d26a8",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_text",
+   "unique_id": "1a4114ad2d23d4397d3477e903653e52",
+   "name": null,
+   "original_name": "WDH Slot 2"
+  },
+  {
+   "entity_id": "input_text.wdh_slot_3",
+   "id": "d8bf6c7e3ac9d9907d4f3e2000610958",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_text",
+   "unique_id": "b8eed80683278f8fb86d17d6f3e2d4a5",
+   "name": null,
+   "original_name": "WDH Slot 3"
+  },
+  {
+   "entity_id": "input_text.wdh_slot_4",
+   "id": "0c5a7e0b600ba15c00b492330bcd31d2",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_text",
+   "unique_id": "709d73bb001e388d8a1d1c37d3990b46",
+   "name": null,
+   "original_name": "WDH Slot 4"
+  },
+  {
+   "entity_id": "input_number.wdh_index",
+   "id": "ac37baf05ab281775fed3f5c1bf861a6",
+   "device_id": null,
+   "area_id": "alex_wohnung",
+   "labels": [
+    "dontshowindashboard"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "input_number",
+   "unique_id": "0cb315a1d71cb3133dcbd543e0860dce",
+   "name": null,
+   "original_name": "WDH Rotationsindex"
+  },
+  {
+   "entity_id": "switch.ecklampe_steckdose_1",
+   "id": "b8e183e2016b29d8660fc7c8b1d5625f",
+   "device_id": "c5d276b2dad8de371616a7664aeaa952",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "771d761908ff32a117e265b2b6bd9936",
+   "name": null,
+   "original_name": "Ecklampe"
+  },
+  {
+   "entity_id": "switch.glasschrank_kinozimmer_steckdose_1",
+   "id": "55656248bce8b792926dd4f1405d6975",
+   "device_id": "38a7e7adae3b1286a329ad2c1ba18f71",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "f5d0ad3df6d9eb7045f3a21e891f4ca3",
+   "name": null,
+   "original_name": "Glasschrank Ambbiente"
+  },
+  {
+   "entity_id": "switch.lichterkette_steckdose_1",
+   "id": "cb012e890b052bf54274810e69e446d3",
+   "device_id": "38140f345be28402e33a9fe93ea6e3db",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "d353433620f3ca9cfb86c1ecd6717efe",
+   "name": null,
+   "original_name": "Lichterkette"
+  },
+  {
+   "entity_id": "switch.gebusch_steckdose_1",
+   "id": "fe60591540d22c89310925dea3c49abe",
+   "device_id": "8ce2359a071c231ea1a3810d3af3cb82",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "d24ff48b927cb0c6993e8a4535c87f4e",
+   "name": null,
+   "original_name": "Gebüsch"
+  },
+  {
+   "entity_id": "switch.tauchlampe_steckdose_1",
+   "id": "fe9fb20bc522159ae4b1d72add2bb8e4",
+   "device_id": "9c828614ed0bd150dcba63f6c9d353e6",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": "integration",
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "b3c97be63dd2c9755055743c0036f509",
+   "name": null,
+   "original_name": "Tauchlampe"
+  },
+  {
+   "entity_id": "switch.tisch_led_steckdose_1",
+   "id": "081f551957088facd4ca63bc87760e79",
+   "device_id": "9bade080a1933f6ed9dbca3c4096e289",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": "device",
+   "entity_category": null,
+   "platform": "switch",
+   "unique_id": "17e7a6d54796a815a2e0b635a5f8eefe",
+   "name": null,
+   "original_name": null
+  },
+  {
+   "entity_id": "light.kino_tv_led",
+   "id": "029fa7ae1abd34ea2c4cf1b690c85b18",
+   "device_id": "e713cb8bfe2633eeb158d50fdd77a9f7",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "flux_led",
+   "unique_id": "b24b21dd668b5e49d80ec2321961ff62",
+   "name": null,
+   "original_name": "Kino TV LED"
+  },
+  {
+   "entity_id": "light.tauchlampe_steckdose_1",
+   "id": "2beb3f921894d7b594533af87d388d46",
+   "device_id": "9c828614ed0bd150dcba63f6c9d353e6",
+   "area_id": null,
+   "labels": [
+    "ambiente",
+    "dontshowindashboard",
+    "dontshowinaktive"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "light",
+   "unique_id": "21fb920521aacdec6387b3076083fd25",
+   "name": null,
+   "original_name": "Tauchlampe"
+  },
+  {
+   "entity_id": "light.roller_switch_wifi_ble_hintergrundbeleuchtung",
+   "id": "35d2abfab0e7bcb60b02442aca4bbd27",
+   "device_id": "7e51b45a440163dfc00574da5ab600a8",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "tuya",
+   "unique_id": "66dfe93f0bb035d73516d09cbbad4a34",
+   "name": null,
+   "original_name": "Rollladen Kinozimmer Hintergrundbeleuchtung"
+  },
+  {
+   "entity_id": "light.polarlicht",
+   "id": "b5e91fac4822dee8c000e168d6aff500",
+   "device_id": "fef0bad9924ac11db8f2e36a5ecd851f",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "gv2mqtt-B5E91FAC4822DEE8",
+   "name": null,
+   "original_name": "Polarlicht"
+  },
+  {
+   "entity_id": "light.blech",
+   "id": "0c847bdbaa895da9fb706a4812983d16",
+   "device_id": "91b3cddeaebfa11955a06926ad9150f4",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": null,
+   "entity_category": null,
+   "platform": "mqtt",
+   "unique_id": "gv2mqtt-0C847BDBAA895DA9",
+   "name": null,
+   "original_name": "Blech"
+  },
+  {
+   "entity_id": "light.alex_wohnung_sofa_alex_sofa_ambiente",
+   "id": "ae042fa1fb366af9baa5b1029c2ed1de",
+   "device_id": "6cbaef677814163fc0345cd58fbfaae7",
+   "area_id": null,
+   "labels": [
+    "ambiente"
+   ],
+   "hidden_by": null,
+   "disabled_by": "device",
+   "entity_category": null,
+   "platform": "light",
+   "unique_id": "7da717d290c789bd31dfe05cd3ada426",
+   "name": null,
+   "original_name": null
+  }
+ ],
+ "labels": [
+  {
+   "label_id": "alles_aus",
+   "name": "alles_aus"
+  },
+  {
+   "label_id": "ambiente",
+   "name": "ambiente"
+  },
+  {
+   "label_id": "dontshowinaktive",
+   "name": "dontshowinaktive"
+  },
+  {
+   "label_id": "dontshowindashboard",
+   "name": "dontshowindashboard"
+  },
+  {
+   "label_id": "helfer",
+   "name": "helfer"
+  },
+  {
+   "label_id": "klima",
+   "name": "klima"
+  },
+  {
+   "label_id": "licht",
+   "name": "licht"
+  },
+  {
+   "label_id": "media",
+   "name": "media"
+  },
+  {
+   "label_id": "sensorik",
+   "name": "sensorik"
+  },
+  {
+   "label_id": "staubsauger",
+   "name": "staubsauger"
+  },
+  {
+   "label_id": "strom",
+   "name": "strom"
+  }
+ ]
+}

@@ -1,0 +1,3312 @@
+[
+ {
+  "entity_id": "switch.studioboxen_steckdose_1",
+  "state": "off",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Studioboxen"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "switch.mischpult_alex_steckdose_1",
+  "state": "on",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Mischpult"
+  },
+  "last_changed": "2026-11-11T07:15:26.123456+00:00",
+  "last_updated": "2026-11-11T07:15:26.123456+00:00"
+ },
+ {
+  "entity_id": "switch.lichtschacht_schalter",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Lichtschacht Schalter"
+  },
+  "last_changed": "2026-11-11T06:39:01.123456+00:00",
+  "last_updated": "2026-11-11T06:39:01.123456+00:00"
+ },
+ {
+  "entity_id": "cover.alex_zimmer_rolladen_lichtschacht",
+  "state": "closed",
+  "attributes": {
+   "assumed_state": true,
+   "device_class": "shutter",
+   "friendly_name": "Rollladen Lichtschacht",
+   "supported_features": 11
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_zimmer_lichtschalter_eingang_alex_wohnung_deckenlicht_1_alex_wohnung",
+  "state": "on",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Wohnlicht"
+  },
+  "last_changed": "2026-11-11T00:12:14.123456+00:00",
+  "last_updated": "2026-11-11T00:12:14.123456+00:00"
+ },
+ {
+  "entity_id": "switch.badlichtschalter_alex_wohnung_schalter_1",
+  "state": "off",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Badlichtschalter Alex Wohnung Schalter (1)"
+  },
+  "last_changed": "2026-11-11T00:12:14.123456+00:00",
+  "last_updated": "2026-11-11T00:12:14.123456+00:00"
+ },
+ {
+  "entity_id": "switch.badlichtschalter_alex_wohnung_schalter_2",
+  "state": "off",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Badlichtschalter Alex Wohnung Schalter (2)"
+  },
+  "last_changed": "2026-11-11T03:13:40.123456+00:00",
+  "last_updated": "2026-11-11T03:13:40.123456+00:00"
+ },
+ {
+  "entity_id": "cover.rolladen_treppe_alex_wohnung",
+  "state": "closed",
+  "attributes": {
+   "assumed_state": true,
+   "device_class": "shutter",
+   "friendly_name": "Rolladen Treppe Alex Wohnung Rollladen Wohnbereich",
+   "supported_features": 11
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "light.regal_alex_wohnung",
+  "state": "on",
+  "attributes": {
+   "supported_color_modes": [
+    "rgb"
+   ],
+   "color_mode": "rgb",
+   "brightness": 155,
+   "hs_color": [
+    50.4,
+    49.02
+   ],
+   "friendly_name": "Regal Alex Wohnung Regal Ambiente",
+   "supported_features": 36
+  },
+  "last_changed": "2026-11-11T06:39:03.123456+00:00",
+  "last_updated": "2026-11-11T06:39:03.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_1",
+  "state": "off",
+  "attributes": {
+   "supported_color_modes": [
+    "onoff"
+   ],
+   "color_mode": null,
+   "friendly_name": "Bad Decke",
+   "supported_features": 0
+  },
+  "last_changed": "2026-11-11T00:12:14.123456+00:00",
+  "last_updated": "2026-11-11T00:12:14.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_2",
+  "state": "off",
+  "attributes": {
+   "supported_color_modes": [
+    "onoff"
+   ],
+   "color_mode": null,
+   "friendly_name": "Bad Spiegel",
+   "supported_features": 0
+  },
+  "last_changed": "2026-11-11T03:13:40.123456+00:00",
+  "last_updated": "2026-11-11T03:13:40.123456+00:00"
+ },
+ {
+  "entity_id": "light.kuechenlicht_oben",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6500,
+   "supported_color_modes": [
+    "color_temp",
+    "hs"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Küchenlicht Alex Wohnung Küche Arbeitslicht",
+   "supported_features": 0
+  },
+  "last_changed": "2026-11-11T11:13:30.123456+00:00",
+  "last_updated": "2026-11-11T11:13:30.123456+00:00"
+ },
+ {
+  "entity_id": "light.ambiente_ecklampe",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 15,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 4,
+   "color_temp_kelvin": 3484,
+   "hs_color": [
+    27.189,
+    45.123
+   ],
+   "friendly_name": "Ecklampe",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T06:39:01.123456+00:00",
+  "last_updated": "2026-11-11T06:39:01.123456+00:00"
+ },
+ {
+  "entity_id": "input_boolean.lichtschachtlicht_sensor",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Lichtschachtlicht sensor"
+  },
+  "last_changed": "2026-11-11T00:12:12.123456+00:00",
+  "last_updated": "2026-11-11T00:12:12.123456+00:00"
+ },
+ {
+  "entity_id": "light.lichtschacht_licht",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 9009,
+   "supported_color_modes": [
+    "color_temp",
+    "rgb"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Lichtschacht Licht",
+   "supported_features": 44
+  },
+  "last_changed": "2026-11-11T06:39:07.123456+00:00",
+  "last_updated": "2026-11-11T06:39:07.123456+00:00"
+ },
+ {
+  "entity_id": "light.ipad_backlights",
+  "state": "on",
+  "attributes": {
+   "supported_color_modes": [
+    "rgb"
+   ],
+   "color_mode": "rgb",
+   "brightness": 130,
+   "hs_color": [
+    29.072,
+    38.039
+   ],
+   "friendly_name": "Ipad Backlights",
+   "supported_features": 36
+  },
+  "last_changed": "2026-11-11T06:39:01.123456+00:00",
+  "last_updated": "2026-11-11T06:39:01.123456+00:00"
+ },
+ {
+  "entity_id": "input_boolean.dashboard_alert",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Dashboard Alert"
+  },
+  "last_changed": "2026-11-11T00:12:12.123456+00:00",
+  "last_updated": "2026-11-11T00:12:12.123456+00:00"
+ },
+ {
+  "entity_id": "light.ty_02_5ch_v5_2",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6500,
+   "supported_color_modes": [
+    "color_temp",
+    "hs"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 128,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "friendly_name": "Tisch Ambiente",
+   "supported_features": 0
+  },
+  "last_changed": "2026-11-11T06:39:02.123456+00:00",
+  "last_updated": "2026-11-11T06:39:02.123456+00:00"
+ },
+ {
+  "entity_id": "light.bad_ambiente_alex_wohnung",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6500,
+   "supported_color_modes": [
+    "color_temp",
+    "hs"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 204,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "friendly_name": "Bad Ambiente",
+   "supported_features": 0
+  },
+  "last_changed": "2026-11-11T06:39:01.123456+00:00",
+  "last_updated": "2026-11-11T06:39:01.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_kuche_ambiente_alex_wohnung",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6500,
+   "supported_color_modes": [
+    "color_temp",
+    "hs"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 84,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "friendly_name": "Küchen Ambiente",
+   "supported_features": 0
+  },
+  "last_changed": "2026-11-11T06:39:02.123456+00:00",
+  "last_updated": "2026-11-11T06:39:02.123456+00:00"
+ },
+ {
+  "entity_id": "climate.thermostat_wohnbereich_alex",
+  "state": "unknown",
+  "attributes": {
+   "hvac_modes": [
+    "off",
+    "heat_cool"
+   ],
+   "min_temp": 5.0,
+   "max_temp": 95.0,
+   "target_temp_step": 0.5,
+   "current_temperature": 24.0,
+   "temperature_unit": "°C",
+   "temperature": 23.0,
+   "friendly_name": "Thermostat Wohnbereich Alex",
+   "supported_features": 385
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "light.sofa_alex",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6500,
+   "supported_color_modes": [
+    "color_temp",
+    "hs"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 23,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "friendly_name": "Sofa Ambiente",
+   "supported_features": 0
+  },
+  "last_changed": "2026-11-11T06:39:02.123456+00:00",
+  "last_updated": "2026-11-11T06:39:02.123456+00:00"
+ },
+ {
+  "entity_id": "input_boolean.ambilight",
+  "state": "on",
+  "attributes": {
+   "icon": "mdi:television-ambient-light",
+   "friendly_name": "Ambilight"
+  },
+  "last_changed": "2026-11-11T00:12:12.123456+00:00",
+  "last_updated": "2026-11-11T00:12:12.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_sofa_rechts",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Sofa Rechts",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T00:12:14.123456+00:00",
+  "last_updated": "2026-11-11T00:12:14.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_sofa_links",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Sofa Links",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T00:12:14.123456+00:00",
+  "last_updated": "2026-11-11T00:12:14.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_lichtschalter_eingang_hinten",
+  "state": "off",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Licht Hinten"
+  },
+  "last_changed": "2026-11-11T00:12:14.123456+00:00",
+  "last_updated": "2026-11-11T00:12:14.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_zimmer_kleiderschrank_licht_links",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Kleiderschrank Licht Links",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T10:55:58.123456+00:00",
+  "last_updated": "2026-11-11T10:55:58.123456+00:00"
+ },
+ {
+  "entity_id": "climate.alex_wohnung_thermostat_bad",
+  "state": "unknown",
+  "attributes": {
+   "hvac_modes": [
+    "off",
+    "heat_cool"
+   ],
+   "min_temp": 5.0,
+   "max_temp": 95.0,
+   "target_temp_step": 0.5,
+   "current_temperature": 23.8,
+   "temperature_unit": "°C",
+   "temperature": 24.0,
+   "friendly_name": "Thermostat Bad",
+   "supported_features": 385
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_tv_beleuchtung",
+  "state": "on",
+  "attributes": {
+   "supported_color_modes": [
+    "rgb"
+   ],
+   "color_mode": "rgb",
+   "brightness": 23,
+   "hs_color": [
+    53.824,
+    80.0
+   ],
+   "friendly_name": "Tv Beleuchtung",
+   "supported_features": 44
+  },
+  "last_changed": "2026-11-11T06:39:02.123456+00:00",
+  "last_updated": "2026-11-11T06:39:02.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_tv_lowboard_beleuchtung",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 3000,
+   "max_color_temp_kelvin": 6000,
+   "supported_color_modes": [
+    "color_temp",
+    "rgb"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 23,
+   "color_temp_kelvin": 3474,
+   "hs_color": [
+    27.199,
+    45.342
+   ],
+   "friendly_name": "Tv Lowboard Beleuchtung",
+   "supported_features": 44
+  },
+  "last_changed": "2026-11-11T06:39:01.123456+00:00",
+  "last_updated": "2026-11-11T06:39:01.123456+00:00"
+ },
+ {
+  "entity_id": "input_boolean.multiroom",
+  "state": "off",
+  "attributes": {
+   "icon": "mdi:speaker-multiple",
+   "friendly_name": "Multiroom"
+  },
+  "last_changed": "2026-11-11T00:12:12.123456+00:00",
+  "last_updated": "2026-11-11T00:12:12.123456+00:00"
+ },
+ {
+  "entity_id": "light.zone_wohnlicht",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "entity_id": [
+    "light.alex_wohnung_wohnbereich_links",
+    "light.alex_wohnung_wohnbereich_rechts",
+    "light.alex_wohnung_wohnflache",
+    "light.alex_wohnung_sofa_links",
+    "light.alex_wohnung_sofa_rechts",
+    "light.alex_wohnung_eingangsbereich"
+   ],
+   "friendly_name": "Zone Wohnlicht Decke",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "light.zone_hinten",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 9009,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "rgb",
+    "xy"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 23,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "entity_id": [
+    "light.alex_wohnung_kuchendeckenlicht",
+    "light.alex_zimmer_kleiderschrank_licht_links",
+    "light.alex_wohnung_kleiderschrank_licht_rechts",
+    "light.alex_wohnung_bett_deckenlicht",
+    "light.lichtschacht_licht",
+    "light.alex_wohnung_nachtlicht"
+   ],
+   "friendly_name": "Bett Bereich",
+   "supported_features": 44
+  },
+  "last_changed": "2026-11-11T06:35:09.123456+00:00",
+  "last_updated": "2026-11-11T06:35:09.123456+00:00"
+ },
+ {
+  "entity_id": "light.zone_schreibtisch",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 28,
+   "color_temp_kelvin": 5714,
+   "hs_color": [
+    28.745,
+    10.321
+   ],
+   "entity_id": [
+    "light.alex_wohnung_schreibtisch_licht_links",
+    "light.alex_wohnung_schreibtisch_licht_rechts"
+   ],
+   "friendly_name": "Zone Schreibtisch",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T09:59:50.123456+00:00",
+  "last_updated": "2026-11-11T09:59:50.123456+00:00"
+ },
+ {
+  "entity_id": "light.zone_kueche",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 84,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "entity_id": [
+    "light.kuechenlicht_oben",
+    "light.alex_wohnung_kuche_ambiente_alex_wohnung",
+    "light.alex_wohnung_kuchendeckenlicht"
+   ],
+   "friendly_name": "Zone Kueche",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T06:39:02.123456+00:00",
+  "last_updated": "2026-11-11T06:39:02.123456+00:00"
+ },
+ {
+  "entity_id": "light.zone_bad",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6500,
+   "supported_color_modes": [
+    "color_temp",
+    "hs"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 204,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "entity_id": [
+    "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_1",
+    "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_2",
+    "light.bad_ambiente_alex_wohnung"
+   ],
+   "friendly_name": "Zone Bad",
+   "supported_features": 0
+  },
+  "last_changed": "2026-11-11T06:39:01.123456+00:00",
+  "last_updated": "2026-11-11T06:39:01.123456+00:00"
+ },
+ {
+  "entity_id": "light.zone_tv",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 3000,
+   "max_color_temp_kelvin": 6000,
+   "supported_color_modes": [
+    "color_temp",
+    "rgb"
+   ],
+   "color_mode": "rgb",
+   "brightness": 23,
+   "color_temp_kelvin": null,
+   "hs_color": [
+    44.25,
+    62.745
+   ],
+   "entity_id": [
+    "light.alex_wohnung_tv_beleuchtung",
+    "light.alex_wohnung_tv_lowboard_beleuchtung"
+   ],
+   "friendly_name": "Zone TV",
+   "supported_features": 44
+  },
+  "last_changed": "2026-11-11T06:39:01.123456+00:00",
+  "last_updated": "2026-11-11T06:39:01.123456+00:00"
+ },
+ {
+  "entity_id": "light.zone_ambiente",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 15,
+   "max_color_temp_kelvin": 9009,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "rgb",
+    "xy"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 74,
+   "color_temp_kelvin": 3476,
+   "hs_color": [
+    27.197,
+    45.298
+   ],
+   "entity_id": [
+    "light.regal_alex_wohnung",
+    "light.ty_02_5ch_v5_2",
+    "light.alex_wohnung_nachtlicht",
+    "light.alex_wohnung_schrank_ambiente",
+    "light.sofa_alex",
+    "light.ambiente_ecklampe",
+    "light.lichtschacht_licht",
+    "light.bad_ambiente_alex_wohnung",
+    "light.ipad_backlights",
+    "light.alex_wohnung_kuche_ambiente_alex_wohnung",
+    "light.alex_wohnung_tv_beleuchtung",
+    "light.alex_wohnung_tv_lowboard_beleuchtung"
+   ],
+   "friendly_name": "Zone Ambiente Global",
+   "supported_features": 44
+  },
+  "last_changed": "2026-11-11T06:35:09.123456+00:00",
+  "last_updated": "2026-11-11T06:35:09.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_kleiderschrank_licht_rechts",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Kleiderschrank Licht Rechts",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T10:56:11.123456+00:00",
+  "last_updated": "2026-11-11T10:56:11.123456+00:00"
+ },
+ {
+  "entity_id": "switch.test_led_controller_nachtlicht",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Ipad Backlights Nachtlicht"
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "switch.test_led_controller_senden_synchronisieren",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Ipad Backlights Senden synchronisieren"
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "switch.test_led_controller_empfang_synchronisieren",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Ipad Backlights Empfang synchronisieren"
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "switch.test_led_controller_umkehren",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Ipad Backlights Umkehren"
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_zimmer_test_led_controller_einfrieren",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Ipad Backlights Einfrieren"
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_ipad_backlights_auf_gerausche_reagierend",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Ipad Backlights Auf Geräusche reagierend"
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "switch.regal_alex_wohnung_remotezugriff",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Regal Alex Wohnung Remotezugriff"
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "switch.kuchenschalter_schalter_1",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Küchenschalter Schalter (1)"
+  },
+  "last_changed": "2026-11-11T11:13:30.123456+00:00",
+  "last_updated": "2026-11-11T11:13:30.123456+00:00"
+ },
+ {
+  "entity_id": "switch.kuchenschalter_schalter_2",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Küchenschalter Schalter (2)"
+  },
+  "last_changed": "2026-11-11T06:39:04.123456+00:00",
+  "last_updated": "2026-11-11T06:39:04.123456+00:00"
+ },
+ {
+  "entity_id": "switch.lichtschacht_licht_power_switch",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Lichtschacht Licht Power Switch"
+  },
+  "last_changed": "2026-11-11T06:39:07.123456+00:00",
+  "last_updated": "2026-11-11T06:39:07.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_waschmaschiene_kindersicherung",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Waschmaschine Kindersicherung"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_nachtlicht",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6500,
+   "supported_color_modes": [
+    "color_temp",
+    "hs"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 23,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "friendly_name": "Nachtlicht",
+   "supported_features": 0
+  },
+  "last_changed": "2026-11-11T06:39:02.123456+00:00",
+  "last_updated": "2026-11-11T06:39:02.123456+00:00"
+ },
+ {
+  "entity_id": "switch.zigbee_alex_wohnung_leds_deaktivieren",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Zigbee Alex Wohnung LEDs deaktivieren"
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "switch.zigbee_alex_wohnung_led_nachtmodus",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Zigbee Alex Wohnung LED-Nachtmodus"
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_fernseher_bett",
+  "state": "unavailable",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Fernseher Bett"
+  },
+  "last_changed": "2026-11-11T00:12:14.123456+00:00",
+  "last_updated": "2026-11-11T00:12:14.123456+00:00"
+ },
+ {
+  "entity_id": "media_player.alex_wohnung_firetv_stick_bett_alex",
+  "state": "off",
+  "attributes": {
+   "device_class": "tv",
+   "friendly_name": "FireTV Stick Bett Alex",
+   "supported_features": 22961
+  },
+  "last_changed": "2026-11-11T06:32:35.123456+00:00",
+  "last_updated": "2026-11-11T06:32:35.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_schrank_ambiente",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 6500,
+   "supported_color_modes": [
+    "color_temp",
+    "hs"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 23,
+   "color_temp_kelvin": 3475,
+   "hs_color": [
+    27.198,
+    45.32
+   ],
+   "friendly_name": "Schrank Ambiente",
+   "supported_features": 0
+  },
+  "last_changed": "2026-11-11T06:39:02.123456+00:00",
+  "last_updated": "2026-11-11T06:39:02.123456+00:00"
+ },
+ {
+  "entity_id": "switch.m5_g_kindersicherung",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Thermostat Wohnbereich Alex Kindersicherung"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "switch.m5_g_frostschutz",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Thermostat Wohnbereich Alex Frostschutz"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "media_player.alexanders_fire_tv_stick",
+  "state": "idle",
+  "attributes": {
+   "volume_level": 0.4,
+   "is_volume_muted": false,
+   "device_class": "speaker",
+   "friendly_name": "Alexanders Fire TV Stick",
+   "supported_features": 5644
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alexanders_fire_tv_stick_durchsagen",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Alexanders Fire TV Stick Durchsagen"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alexanders_fire_tv_stick_kommunikation",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Alexanders Fire TV Stick Kommunikation"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_alexanders_fire_tv_stick_bitte_nicht_storen",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Alexanders Fire TV Stick Bitte nicht stören"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_alex_wohnung_amazon_fire_tv_stick_bitte_nicht_storen",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Alex Wohnung Amazon Fire TV stick Bitte nicht stören"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_alex_wohnung_amazon_fire_tv_stick_durchsagen",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Alex Wohnung Amazon Fire TV stick Durchsagen"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_alex_wohnung_amazon_fire_tv_stick_kommunikation",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Alex Wohnung Amazon Fire TV stick Kommunikation"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "media_player.alex_wohnung_echo_dot",
+  "state": "idle",
+  "attributes": {
+   "volume_level": 0.21,
+   "is_volume_muted": false,
+   "device_class": "speaker",
+   "friendly_name": "Alex Wohnung Echo Dot",
+   "supported_features": 5644
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_alex_wohnung_echo_dot_bitte_nicht_storen",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Alex Wohnung Echo Dot Bitte nicht stören"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_echo_dot_durchsagen",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Alex Wohnung Echo Dot Durchsagen"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_echo_dot_kommunikation",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Alex Wohnung Echo Dot Kommunikation"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "media_player.alex_wohnung_echo",
+  "state": "idle",
+  "attributes": {
+   "volume_level": 0.3,
+   "is_volume_muted": false,
+   "device_class": "speaker",
+   "friendly_name": "Alex Wohnung Echo",
+   "supported_features": 5644
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_alex_wohnung_echo_bitte_nicht_storen",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Alex Wohnung Echo Bitte nicht stören"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_echo_durchsagen",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Alex Wohnung Echo Durchsagen"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_echo_kommunikation",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Alex Wohnung Echo Kommunikation"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.keller_steinenbronn_fire_tv_stick_durchsagen",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Keller Steinenbronn Fire TV Stick Durchsagen"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.keller_steinenbronn_fire_tv_stick_kommunikation",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Keller Steinenbronn Fire TV Stick Kommunikation"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.keller_steinenbronn_fire_tv_stick_bitte_nicht_storen",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Keller Steinenbronn Fire TV Stick Bitte nicht stören"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "media_player.bad_echo_dot_alex_wohnung",
+  "state": "idle",
+  "attributes": {
+   "volume_level": 0.33,
+   "is_volume_muted": false,
+   "device_class": "speaker",
+   "friendly_name": "Bad Echo Dot Alex Wohnung",
+   "supported_features": 5644
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_bad_echo_dot_alex_wohnung_bitte_nicht_storen",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Bad Echo Dot Alex Wohnung Bitte nicht stören"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_bad_echo_dot_alex_wohnung_durchsagen",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Bad Echo Dot Alex Wohnung Durchsagen"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_bad_echo_dot_alex_wohnung_kommunikation",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Bad Echo Dot Alex Wohnung Kommunikation"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_alexander_s_fire_tv_bitte_nicht_storen",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Wohnbereich Fire TV Stick (4k Max) Bitte nicht stören"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alexander_s_fire_tv_durchsagen",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Wohnbereich Fire TV Stick (4k Max) Durchsagen"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alexander_s_fire_tv_kommunikation",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Wohnbereich Fire TV Stick (4k Max) Kommunikation"
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "switch.ambilight_ws2812b_ambilight",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Ambilight WS2812B Ambilight"
+  },
+  "last_changed": "2026-11-11T00:40:44.123456+00:00",
+  "last_updated": "2026-11-11T00:40:44.123456+00:00"
+ },
+ {
+  "entity_id": "switch.ambilight_ws2812b_gruppe",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Ambilight WS2812B Folgt Ambilight-Schalter"
+  },
+  "last_changed": "2026-11-11T00:40:44.123456+00:00",
+  "last_updated": "2026-11-11T00:40:44.123456+00:00"
+ },
+ {
+  "entity_id": "switch.ambilight_cob_ambilight",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Ambilight COB Ambilight"
+  },
+  "last_changed": "2026-11-11T00:40:44.123456+00:00",
+  "last_updated": "2026-11-11T00:40:44.123456+00:00"
+ },
+ {
+  "entity_id": "switch.ambilight_cob_gruppe",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Ambilight COB Folgt Ambilight-Schalter"
+  },
+  "last_changed": "2026-11-11T00:40:44.123456+00:00",
+  "last_updated": "2026-11-11T00:40:44.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_kuchendeckenlicht",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Küchendeckenlicht",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T00:12:14.123456+00:00",
+  "last_updated": "2026-11-11T00:12:14.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_eingangsbereich",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Eingangsbereich",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T00:12:14.123456+00:00",
+  "last_updated": "2026-11-11T00:12:14.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_wohnbereich_links",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Wohnbereich Links",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T00:12:14.123456+00:00",
+  "last_updated": "2026-11-11T00:12:14.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_wohnbereich_rechts",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Wohnbereich Rechts",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T00:12:14.123456+00:00",
+  "last_updated": "2026-11-11T00:12:14.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_bett_deckenlicht",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Bett Deckenlicht",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T00:12:14.123456+00:00",
+  "last_updated": "2026-11-11T00:12:14.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_wohnflache",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "friendly_name": "Wohnfläche",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T00:12:14.123456+00:00",
+  "last_updated": "2026-11-11T00:12:14.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_schreibtisch_licht_rechts",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 28,
+   "color_temp_kelvin": 5714,
+   "hs_color": [
+    28.745,
+    10.321
+   ],
+   "friendly_name": "Schreibtisch Licht Rechts",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T09:59:50.123456+00:00",
+  "last_updated": "2026-11-11T09:59:50.123456+00:00"
+ },
+ {
+  "entity_id": "light.alex_wohnung_schreibtisch_licht_links",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 28,
+   "color_temp_kelvin": 5714,
+   "hs_color": [
+    28.745,
+    10.321
+   ],
+   "friendly_name": "Schreibtisch Licht Links",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T09:59:50.123456+00:00",
+  "last_updated": "2026-11-11T09:59:50.123456+00:00"
+ },
+ {
+  "entity_id": "switch.m5_g_2_kindersicherung",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Thermostat Bad Kindersicherung"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "switch.m5_g_2_frostschutz",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Thermostat Bad Frostschutz"
+  },
+  "last_changed": "2026-11-11T01:16:24.123456+00:00",
+  "last_updated": "2026-11-11T01:16:24.123456+00:00"
+ },
+ {
+  "entity_id": "vacuum.dreame",
+  "state": "docked",
+  "attributes": {
+   "fan_speed_list": [
+    "silent",
+    "standard",
+    "strong",
+    "turbo"
+   ],
+   "fan_speed": "strong",
+   "status": "sleeping",
+   "error": "No error",
+   "cleaning_progress": 0,
+   "battery": 100,
+   "device_class": "dreame_vacuum",
+   "icon": "mdi:sleep",
+   "friendly_name": "Dreame",
+   "supported_features": 31676
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_resume_cleaning",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Reinigung fortsetzen"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_carpet_boost",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Teppich-Boost"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_obstacle_avoidance",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Hindernisumgehung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_customized_cleaning",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Dreame Individuelle Reinigung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_child_lock",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Dreame Kindersicherung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_dnd",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Dreame DnD"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_dnd_disable_resume_cleaning",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Dreame Fortsetzung der Reinigung deaktivieren"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_dnd_disable_auto_empty",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Dreame Automatische Entleerung deaktivieren"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_dnd_reduce_volume",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Dreame Lautstärke reduzieren"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_multi_floor_map",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Dreame Mehrkartenspeicherung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_self_clean",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Selbstreinigung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_auto_water_refilling",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Dreame Automatische Wasserzufuhr"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_intelligent_recognition",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Dreame Intelligente Erkennung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_auto_drying",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Automatische Trocknung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_auto_add_detergent",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Auto-Add Detergent"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_auto_mount_mop",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Automatische Moppmontage"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_voice_assistant",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Sprachassistent"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_ai_obstacle_detection",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame KI-Hinderniserkennung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_ai_obstacle_image_upload",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Dreame KI-Hindernisbild-Upload"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_ai_obstacle_picture",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Hindernisbilder"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_ai_pet_detection",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Dreame Haustiererkennung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_ai_furniture_detection",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame KI-Möbelerkennung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_ai_fluid_detection",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame KI-Flüssigkeitserkennung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_fuzzy_obstacle_detection",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Unscharfe Hinderniserkennung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_pet_picture",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Dreame Haustierbilder"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_pet_focused_detection",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Dreame Haustierfokussierte Erkennung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_large_particles_boost",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Boost für große Partikel"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_fill_light",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Kameralicht"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_collision_avoidance",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Kollisionsvermeidung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_stain_avoidance",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Dreame Fleckenvermeidung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_floor_direction_cleaning",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Dreame Reinigung in Bodenrichtung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_intensive_carpet_cleaning",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Intensive Teppichreinigung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_side_reach",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Seitenbürsten-Ausfahren"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_mop_extend",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Mopp-Ausfahren"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_gap_cleaning_extension",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Lückenreinigungserweiterung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_mopping_under_furnitures",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Wischen unter Möbeln"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_off_peak_charging",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Dreame Laden außerhalb der Stoßzeiten"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_human_follow",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Dreame Personenverfolgung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_max_suction_power",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Dreame Maximale Saugkraft"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_streaming_voice_prompt",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Streaming-Sprachansage"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_clean_carpets_first",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Dreame Teppiche zuerst reinigen"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_smart_mop_washing",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Intelligente Moppwäsche"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_silent_drying",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Leise Trocknung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_hair_compression",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Haarkompression"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_side_brush_carpet_rotate",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Seitenbürstendrehung auf Teppich"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_ring_light_always_on",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Dreame Ringlicht immer an"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_dynamic_obstacle_cleaning",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Dreame Dynamische Hindernisreinigung"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "switch.dreame_camera_light_brightness_auto",
+  "state": "unavailable",
+  "attributes": {
+   "friendly_name": "Dreame Kameralicht-Helligkeit automatisch"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "media_player.alex_wohnung_fire_tv_max_alex_wohnung_wohnbereich",
+  "state": "off",
+  "attributes": {
+   "device_class": "tv",
+   "friendly_name": "Fire TV Max Alex Wohnung Wohnbereich",
+   "supported_features": 22961
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "media_player.alex_wohnung_alex_tv_wohnbereich",
+  "state": "off",
+  "attributes": {
+   "device_class": "tv",
+   "friendly_name": "Alex TV Wohnbereich",
+   "supported_features": 24381
+  },
+  "last_changed": "2026-11-11T00:12:23.123456+00:00",
+  "last_updated": "2026-11-11T00:12:23.123456+00:00"
+ },
+ {
+  "entity_id": "switch.pc_power_switch",
+  "state": "unknown",
+  "attributes": {
+   "friendly_name": "Pc Power Switch"
+  },
+  "last_changed": "2026-11-11T00:41:27.123456+00:00",
+  "last_updated": "2026-11-11T00:41:27.123456+00:00"
+ },
+ {
+  "entity_id": "light.wohnflache_alex",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Wohnfläche Alex"
+  },
+  "last_changed": "2026-11-11T00:41:33.123456+00:00",
+  "last_updated": "2026-11-11T00:41:33.123456+00:00"
+ },
+ {
+  "entity_id": "switch.wohnflache_alex_power_switch",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Wohnfläche Alex Power Switch"
+  },
+  "last_changed": "2026-11-11T00:41:33.123456+00:00",
+  "last_updated": "2026-11-11T00:41:33.123456+00:00"
+ },
+ {
+  "entity_id": "light.bett_bereich",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2702,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "rgb"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 255,
+   "color_temp_kelvin": 2702,
+   "hs_color": [
+    28.391,
+    65.659
+   ],
+   "friendly_name": "Bett Bereich",
+   "supported_features": 44
+  },
+  "last_changed": "2026-11-11T00:41:32.123456+00:00",
+  "last_updated": "2026-11-11T00:41:32.123456+00:00"
+ },
+ {
+  "entity_id": "switch.bett_bereich_power_switch",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Bett Bereich Power Switch"
+  },
+  "last_changed": "2026-11-11T00:41:32.123456+00:00",
+  "last_updated": "2026-11-11T00:41:32.123456+00:00"
+ },
+ {
+  "entity_id": "light.schreibtisch_r_alex",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Schreibtisch R Alex"
+  },
+  "last_changed": "2026-11-11T00:41:31.123456+00:00",
+  "last_updated": "2026-11-11T00:41:31.123456+00:00"
+ },
+ {
+  "entity_id": "switch.schreibtisch_r_alex_power_switch",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Schreibtisch R Alex Power Switch"
+  },
+  "last_changed": "2026-11-11T00:41:31.123456+00:00",
+  "last_updated": "2026-11-11T00:41:31.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_interface",
+  "state": "on",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Interface"
+  },
+  "last_changed": "2026-11-11T07:15:26.123456+00:00",
+  "last_updated": "2026-11-11T07:15:26.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_monitore",
+  "state": "on",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Monitore"
+  },
+  "last_changed": "2026-11-11T07:15:26.123456+00:00",
+  "last_updated": "2026-11-11T07:15:26.123456+00:00"
+ },
+ {
+  "entity_id": "switch.alex_wohnung_luftwerte_display",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Luftwerte Display"
+  },
+  "last_changed": "2026-11-11T12:22:53.123456+00:00",
+  "last_updated": "2026-11-11T12:22:53.123456+00:00"
+ },
+ {
+  "entity_id": "switch.switch_alex_steckdose_1",
+  "state": "off",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Lan-Switch"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "light.schrank_ambiente",
+  "state": "off",
+  "attributes": {
+   "supported_color_modes": [
+    "rgb"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "hs_color": null,
+   "friendly_name": "Kleiderschrank Ambiente",
+   "supported_features": 36
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "cover.rollladen_alex",
+  "state": "closed",
+  "attributes": {
+   "current_position": 0,
+   "device_class": "shade",
+   "friendly_name": "Rollladen",
+   "supported_features": 15
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "input_boolean.lichtshow",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "lichtshow"
+  },
+  "last_changed": "2026-11-11T00:12:12.123456+00:00",
+  "last_updated": "2026-11-11T00:12:12.123456+00:00"
+ },
+ {
+  "entity_id": "climate.klima",
+  "state": "off",
+  "attributes": {
+   "hvac_modes": [
+    "off",
+    "cool"
+   ],
+   "min_temp": 16.0,
+   "max_temp": 86.0,
+   "target_temp_step": 1.0,
+   "current_temperature": 23.0,
+   "temperature_unit": "°C",
+   "temperature": 16.0,
+   "friendly_name": "Klima",
+   "supported_features": 393
+  },
+  "last_changed": "2026-11-11T09:35:46.123456+00:00",
+  "last_updated": "2026-11-11T09:35:46.123456+00:00"
+ },
+ {
+  "entity_id": "switch.zimmerlicht_relay_alex",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Zimmerlicht Relay Alex"
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "switch.studioboxen_kindersicherung",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Studioboxen Kindersicherung"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "switch.mischpult_alex_kindersicherung",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Mischpult Alex Kindersicherung"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "switch.pc_2_strom_kindersicherung",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Pc 2 Strom Kindersicherung"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "switch.pc_2_strom_steckdose_1",
+  "state": "off",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Pc 2 Strom"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "switch.switch_alex_kindersicherung",
+  "state": "off",
+  "attributes": {
+   "friendly_name": "Lan-Switch Alex Kindersicherung"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "switch.controller_rgb_ir_c2b681_remotezugriff",
+  "state": "on",
+  "attributes": {
+   "friendly_name": "Kleiderschrank Ambiente Remotezugriff"
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "light.rollladen_alex_hintergrundbeleuchtung",
+  "state": "off",
+  "attributes": {
+   "supported_color_modes": [
+    "onoff"
+   ],
+   "color_mode": null,
+   "friendly_name": "Rollladen Alex Hintergrundbeleuchtung",
+   "supported_features": 0
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "binary_sensor.alex_wohnung_einganstur_tur",
+  "state": "off",
+  "attributes": {
+   "device_class": "door",
+   "friendly_name": "Einganstür Tür"
+  },
+  "last_changed": "2026-11-11T11:48:49.123456+00:00",
+  "last_updated": "2026-11-11T11:48:49.123456+00:00"
+ },
+ {
+  "entity_id": "binary_sensor.alex_wohnung_fenster_bad_alex_wohnung_fenster_bad",
+  "state": "off",
+  "attributes": {
+   "device_class": "window",
+   "friendly_name": "Fenster Bad Alex Wohnung"
+  },
+  "last_changed": "2026-11-11T09:35:55.123456+00:00",
+  "last_updated": "2026-11-11T09:35:55.123456+00:00"
+ },
+ {
+  "entity_id": "binary_sensor.alex_wohnung_fenster_bett_alex_wohnung_fenster_rechts_wohnbereich_alex",
+  "state": "off",
+  "attributes": {
+   "device_class": "window",
+   "friendly_name": "Fenster Rechts Wohnbereich Alex"
+  },
+  "last_changed": "2026-11-11T09:33:53.123456+00:00",
+  "last_updated": "2026-11-11T09:33:53.123456+00:00"
+ },
+ {
+  "entity_id": "binary_sensor.alex_wohnung_fenster_bett_alex_wohnung_tur",
+  "state": "off",
+  "attributes": {
+   "device_class": "window",
+   "friendly_name": "Fenster Bett Alex Wohnung"
+  },
+  "last_changed": "2026-11-11T09:35:39.123456+00:00",
+  "last_updated": "2026-11-11T09:35:39.123456+00:00"
+ },
+ {
+  "entity_id": "binary_sensor.alex_wohnung_fenster_links_wohnbereich_alex_tur",
+  "state": "off",
+  "attributes": {
+   "device_class": "window",
+   "friendly_name": "Fenster Links Wohnbereich Alex"
+  },
+  "last_changed": "2026-11-11T09:34:02.123456+00:00",
+  "last_updated": "2026-11-11T09:34:02.123456+00:00"
+ },
+ {
+  "entity_id": "binary_sensor.alex_wohnung_gefrierschrank_tur",
+  "state": "off",
+  "attributes": {
+   "device_class": "door",
+   "friendly_name": "Gefrierschrank Tür"
+  },
+  "last_changed": "2026-11-11T00:12:15.123456+00:00",
+  "last_updated": "2026-11-11T00:12:15.123456+00:00"
+ },
+ {
+  "entity_id": "binary_sensor.alex_wohnung_kuhlschranktur_tur",
+  "state": "off",
+  "attributes": {
+   "device_class": "door",
+   "friendly_name": "Kühlschranktür Tür"
+  },
+  "last_changed": "2026-11-11T11:10:31.123456+00:00",
+  "last_updated": "2026-11-11T11:10:31.123456+00:00"
+ },
+ {
+  "entity_id": "binary_sensor.luften_lohnt_sich",
+  "state": "on",
+  "attributes": {
+   "icon": "mdi:window-open-variant",
+   "friendly_name": "Lüften lohnt sich"
+  },
+  "last_changed": "2026-11-11T00:43:17.123456+00:00",
+  "last_updated": "2026-11-11T00:43:17.123456+00:00"
+ },
+ {
+  "entity_id": "button.alex_wohnung_spulmaschiene_als_entladen_markieren",
+  "state": "unavailable",
+  "attributes": {
+   "icon": "mdi:basket-check-outline",
+   "friendly_name": "Spülmaschiene Als entladen markieren"
+  },
+  "last_changed": "2026-11-11T00:57:45.123456+00:00",
+  "last_updated": "2026-11-11T00:57:45.123456+00:00"
+ },
+ {
+  "entity_id": "button.alex_wohnung_waschmaschiene_alex_als_entladen_markieren",
+  "state": "unavailable",
+  "attributes": {
+   "icon": "mdi:basket-check-outline",
+   "friendly_name": "Waschmaschine Alex Als entladen markieren"
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "input_number.heizung_bad_soll",
+  "state": "24.0",
+  "attributes": {
+   "min": 0.0,
+   "max": 30.0,
+   "step": 0.5,
+   "unit_of_measurement": "°C",
+   "icon": "mdi:thermostat-auto",
+   "friendly_name": "Heizung Bad Soll"
+  },
+  "last_changed": "2026-11-11T09:35:55.123456+00:00",
+  "last_updated": "2026-11-11T09:35:55.123456+00:00"
+ },
+ {
+  "entity_id": "input_number.heizung_wohnbereich_soll",
+  "state": "23.0",
+  "attributes": {
+   "min": 0.0,
+   "max": 30.0,
+   "step": 0.5,
+   "unit_of_measurement": "°C",
+   "icon": "mdi:thermostat-auto",
+   "friendly_name": "Heizung Wohnbereich Soll"
+  },
+  "last_changed": "2026-11-11T09:58:34.123456+00:00",
+  "last_updated": "2026-11-11T09:58:34.123456+00:00"
+ },
+ {
+  "entity_id": "input_select.heizung_modus",
+  "state": "Komfort",
+  "attributes": {
+   "options": [
+    "Automatik",
+    "Komfort",
+    "Eco",
+    "Aus",
+    "Urlaub"
+   ],
+   "icon": "mdi:radiator",
+   "friendly_name": "Heizung Modus"
+  },
+  "last_changed": "2026-11-11T08:10:41.123456+00:00",
+  "last_updated": "2026-11-11T08:10:41.123456+00:00"
+ },
+ {
+  "entity_id": "input_select.soundanlage_modus",
+  "state": "aus",
+  "attributes": {
+   "options": [
+    "aus",
+    "tv",
+    "multiroom"
+   ],
+   "icon": "mdi:soundbar",
+   "friendly_name": "Soundanlage Modus"
+  },
+  "last_changed": "2026-11-11T00:12:12.123456+00:00",
+  "last_updated": "2026-11-11T00:12:12.123456+00:00"
+ },
+ {
+  "entity_id": "input_text.heizung_bad_grund",
+  "state": "Modus Komfort, dauerhaft",
+  "attributes": {
+   "min": 0,
+   "max": 255,
+   "icon": "mdi:comment-text-outline",
+   "friendly_name": "Heizung Bad Grund"
+  },
+  "last_changed": "2026-11-11T09:35:55.123456+00:00",
+  "last_updated": "2026-11-11T09:35:55.123456+00:00"
+ },
+ {
+  "entity_id": "input_text.heizung_wohnbereich_grund",
+  "state": "Modus Komfort, dauerhaft",
+  "attributes": {
+   "min": 0,
+   "max": 255,
+   "icon": "mdi:comment-text-outline",
+   "friendly_name": "Heizung Wohnbereich Grund"
+  },
+  "last_changed": "2026-11-11T09:35:40.123456+00:00",
+  "last_updated": "2026-11-11T09:35:40.123456+00:00"
+ },
+ {
+  "entity_id": "light.zone_ambiente_sofa",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 15,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "rgb",
+    "xy"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 58,
+   "color_temp_kelvin": 3476,
+   "hs_color": [
+    27.197,
+    45.298
+   ],
+   "entity_id": [
+    "light.ambiente_ecklampe",
+    "light.ipad_backlights",
+    "light.alex_wohnung_kuche_ambiente_alex_wohnung",
+    "light.alex_wohnung_schrank_ambiente",
+    "light.regal_alex_wohnung",
+    "light.sofa_alex",
+    "light.alex_wohnung_tv_beleuchtung",
+    "light.alex_wohnung_tv_lowboard_beleuchtung"
+   ],
+   "friendly_name": "Zone Ambiente Sofa",
+   "supported_features": 44
+  },
+  "last_changed": "2026-11-11T06:39:01.123456+00:00",
+  "last_updated": "2026-11-11T06:39:01.123456+00:00"
+ },
+ {
+  "entity_id": "light.zone_sofa_deckenlicht",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2695,
+   "max_color_temp_kelvin": 6535,
+   "supported_color_modes": [
+    "color_temp",
+    "hs",
+    "xy"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "entity_id": [
+    "light.alex_wohnung_sofa_links",
+    "light.alex_wohnung_sofa_rechts",
+    "light.alex_wohnung_wohnbereich_links",
+    "light.alex_wohnung_wohnbereich_rechts"
+   ],
+   "friendly_name": "Zone Sofa Deckenlicht",
+   "supported_features": 32
+  },
+  "last_changed": "2026-11-11T00:12:27.123456+00:00",
+  "last_updated": "2026-11-11T00:12:27.123456+00:00"
+ },
+ {
+  "entity_id": "media_player.bad_snapcast_client",
+  "state": "idle",
+  "attributes": {
+   "volume_level": 1.0,
+   "is_volume_muted": true,
+   "source": "AirPlay",
+   "device_class": "speaker",
+   "friendly_name": "Bad Snapcast Client",
+   "supported_features": 526348
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "media_player.pc_bereich_snapcast_client",
+  "state": "idle",
+  "attributes": {
+   "volume_level": 1.0,
+   "is_volume_muted": true,
+   "source": "AirPlay",
+   "device_class": "speaker",
+   "friendly_name": "PC-Bereich Snapcast Client",
+   "supported_features": 526348
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "media_player.wohnbereich_snapcast_client",
+  "state": "idle",
+  "attributes": {
+   "volume_level": 0.9,
+   "is_volume_muted": true,
+   "source": "AirPlay",
+   "device_class": "speaker",
+   "friendly_name": "Wohnbereich Snapcast Client",
+   "supported_features": 526348
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "script.alles_aus",
+  "state": "off",
+  "attributes": {
+   "icon": "mdi:power",
+   "friendly_name": "Alles aus · Alex Wohnung"
+  },
+  "last_changed": "2026-11-11T01:33:08.123456+00:00",
+  "last_updated": "2026-11-11T01:33:08.123456+00:00"
+ },
+ {
+  "entity_id": "script.soundanlage_anwenden",
+  "state": "off",
+  "attributes": {
+   "max": 5,
+   "icon": "mdi:soundbar",
+   "friendly_name": "Soundanlage · Sollzustand anwenden"
+  },
+  "last_changed": "2026-11-11T00:12:12.123456+00:00",
+  "last_updated": "2026-11-11T00:12:12.123456+00:00"
+ },
+ {
+  "entity_id": "script.soundanlage_ir_taste",
+  "state": "off",
+  "attributes": {
+   "max": 10,
+   "icon": "mdi:remote",
+   "friendly_name": "Soundanlage · IR-Taste drücken"
+  },
+  "last_changed": "2026-11-11T00:12:12.123456+00:00",
+  "last_updated": "2026-11-11T00:12:12.123456+00:00"
+ },
+ {
+  "entity_id": "script.xp700_einschalten",
+  "state": "off",
+  "attributes": {
+   "icon": "mdi:speaker-wireless",
+   "friendly_name": "XP700 einschalten"
+  },
+  "last_changed": "2026-11-11T00:12:12.123456+00:00",
+  "last_updated": "2026-11-11T00:12:12.123456+00:00"
+ },
+ {
+  "entity_id": "select.test_led_controller_farbpalette",
+  "state": "* Color Gradient",
+  "attributes": {
+   "options": [
+    "* Color 1",
+    "* Color Gradient",
+    "* Colors 1&2",
+    "* Colors Only",
+    "* Random Cycle",
+    "Analogous",
+    "April Night",
+    "Aqua Flash",
+    "Atlantica",
+    "Aurora",
+    "Aurora 2",
+    "Autumn",
+    "Beach",
+    "Beech",
+    "Blink Red",
+    "Breeze",
+    "C9",
+    "C9 2",
+    "C9 New",
+    "Candy",
+    "Candy2",
+    "Cloud",
+    "Custom 1",
+    "Custom 2",
+    "Cyane",
+    "Default",
+    "Departure",
+    "Drywet",
+    "Fairy Reaf",
+    "Fire",
+    "Forest",
+    "Grintage",
+    "Hult",
+    "Hult 64",
+    "Icefire",
+    "Jul",
+    "Landscape",
+    "Lava",
+    "Light Pink",
+    "Lite Light",
+    "Magenta",
+    "Magred",
+    "Ocean",
+    "Orange & Teal",
+    "Orangery",
+    "Party",
+    "Pastel",
+    "Pink Candy",
+    "Rainbow",
+    "Rainbow Bands",
+    "Red & Blue",
+    "Red Flash",
+    "Red Reaf",
+    "Red Shift",
+    "Red Tide",
+    "Retro Clown",
+    "Rewhi",
+    "Rivendell",
+    "Sakura",
+    "Semi Blue",
+    "Sherbet",
+    "Splash",
+    "Sunset",
+    "Sunset 2",
+    "Temperature",
+    "Tertiary",
+    "Tiamat",
+    "Toxy Reaf",
+    "Traffic Light",
+    "Vintage",
+    "Yelblu",
+    "Yelblu Hot",
+    "Yellowout",
+    "Yelmag"
+   ],
+   "friendly_name": "Ipad Backlights Farbpalette"
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.alex_wohnung_interface_leistung",
+  "state": "5.3",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "W",
+   "device_class": "power",
+   "friendly_name": "Interface Leistung"
+  },
+  "last_changed": "2026-11-11T07:23:36.123456+00:00",
+  "last_updated": "2026-11-11T07:23:36.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.alex_wohnung_luftwerte_kohlendioxid",
+  "state": "2139.0",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "ppm",
+   "device_class": "carbon_dioxide",
+   "friendly_name": "Luftwerte Kohlendioxid"
+  },
+  "last_changed": "2026-11-11T12:34:55.123456+00:00",
+  "last_updated": "2026-11-11T12:34:55.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.alex_wohnung_monitore_leistung",
+  "state": "126.4",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "W",
+   "device_class": "power",
+   "friendly_name": "Monitore Leistung"
+  },
+  "last_changed": "2026-11-11T12:33:05.123456+00:00",
+  "last_updated": "2026-11-11T12:33:05.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.alex_wohnung_spulmaschiene_aktuelle_leistung",
+  "state": "11.3",
+  "attributes": {
+   "unit_of_measurement": "W",
+   "device_class": "power",
+   "icon": "mdi:flash",
+   "friendly_name": "Spülmaschiene Aktuelle Leistung"
+  },
+  "last_changed": "2026-11-11T12:34:28.123456+00:00",
+  "last_updated": "2026-11-11T12:34:28.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.alex_wohnung_spulmaschiene_aktuelle_phase",
+  "state": "unknown",
+  "attributes": {
+   "icon": "mdi:water-sync",
+   "friendly_name": "Spülmaschiene Aktuelle Phase"
+  },
+  "last_changed": "2026-11-11T00:57:44.123456+00:00",
+  "last_updated": "2026-11-11T00:57:44.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.alex_wohnung_spulmaschiene_fortschritt",
+  "state": "0",
+  "attributes": {
+   "unit_of_measurement": "%",
+   "icon": "mdi:progress-clock",
+   "friendly_name": "Spülmaschiene Fortschritt"
+  },
+  "last_changed": "2026-11-11T00:57:44.123456+00:00",
+  "last_updated": "2026-11-11T00:57:44.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.alex_wohnung_spulmaschiene_programm",
+  "state": "detecting...",
+  "attributes": {
+   "options": [
+    "detecting...",
+    "none",
+    "unknown"
+   ],
+   "device_class": "enum",
+   "icon": "mdi:file-document-outline",
+   "friendly_name": "Spülmaschiene Programm"
+  },
+  "last_changed": "2026-11-11T10:55:29.123456+00:00",
+  "last_updated": "2026-11-11T10:55:29.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.alex_wohnung_spulmaschiene_verbleibende_zeit",
+  "state": "unknown",
+  "attributes": {
+   "unit_of_measurement": "min",
+   "device_class": "duration",
+   "icon": "mdi:timer-sand",
+   "friendly_name": "Spülmaschiene Verbleibende Zeit"
+  },
+  "last_changed": "2026-11-11T00:57:44.123456+00:00",
+  "last_updated": "2026-11-11T00:57:44.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.alex_wohnung_spulmaschiene_zustand",
+  "state": "running",
+  "attributes": {
+   "options": [
+    "off",
+    "idle",
+    "starting",
+    "running",
+    "paused",
+    "user_paused",
+    "ending",
+    "finished",
+    "anti_wrinkle",
+    "delay_wait",
+    "interrupted",
+    "force_stopped",
+    "unknown",
+    "clean"
+   ],
+   "device_class": "enum",
+   "icon": "mdi:dishwasher",
+   "friendly_name": "Spülmaschiene Zustand"
+  },
+  "last_changed": "2026-11-11T10:55:29.123456+00:00",
+  "last_updated": "2026-11-11T10:55:29.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.alex_wohnung_thermometer_aussen_temperatur",
+  "state": "12.94",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "°C",
+   "device_class": "temperature",
+   "friendly_name": "Thermometer Außen Temperatur"
+  },
+  "last_changed": "2026-11-11T12:30:02.123456+00:00",
+  "last_updated": "2026-11-11T12:30:02.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.alex_wohnung_thermometer_bad_luftfeuchtigkeit",
+  "state": "56.86",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "%",
+   "device_class": "humidity",
+   "friendly_name": "Thermometer Bad Luftfeuchtigkeit"
+  },
+  "last_changed": "2026-11-11T12:32:56.123456+00:00",
+  "last_updated": "2026-11-11T12:32:56.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.alex_wohnung_thermometer_wohnbereich_luftfeuchtigkeit",
+  "state": "66.67",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "%",
+   "device_class": "humidity",
+   "friendly_name": "Thermometer Wohnbereich Luftfeuchtigkeit"
+  },
+  "last_changed": "2026-11-11T12:35:13.123456+00:00",
+  "last_updated": "2026-11-11T12:35:13.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.alex_wohnung_timmerflotte_luftfeuchtigkeit",
+  "state": "55.43",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "%",
+   "device_class": "humidity",
+   "friendly_name": "Thermometer Schreibtisch Alex Luftfeuchtigkeit"
+  },
+  "last_changed": "2026-11-11T12:33:09.123456+00:00",
+  "last_updated": "2026-11-11T12:33:09.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.alex_wohnung_timmerflotte_temperatur",
+  "state": "25.24",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "°C",
+   "device_class": "temperature",
+   "friendly_name": "Thermometer Schreibtisch Alex Temperatur"
+  },
+  "last_changed": "2026-11-11T12:33:09.123456+00:00",
+  "last_updated": "2026-11-11T12:33:09.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.dreame_battery_level",
+  "state": "100",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "%",
+   "device_class": "battery",
+   "icon": "mdi:battery",
+   "friendly_name": "Dreame Batteriestand"
+  },
+  "last_changed": "2026-11-11T03:20:44.123456+00:00",
+  "last_updated": "2026-11-11T03:20:44.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.dreame_current_room",
+  "state": "Pc Bereich",
+  "attributes": {
+   "icon": "mdi:home-map-marker",
+   "friendly_name": "Dreame Aktueller Raum"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.dreame_error",
+  "state": "no_error",
+  "attributes": {
+   "icon": "mdi:check-circle-outline",
+   "friendly_name": "Dreame Fehler"
+  },
+  "last_changed": "2026-11-11T00:12:17.123456+00:00",
+  "last_updated": "2026-11-11T00:12:17.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.dreame_status",
+  "state": "sleeping",
+  "attributes": {
+   "icon": "mdi:vacuum",
+   "friendly_name": "Dreame Status"
+  },
+  "last_changed": "2026-11-11T03:15:00.123456+00:00",
+  "last_updated": "2026-11-11T03:15:00.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.durchschnitt_luftfeuchtigkeit",
+  "state": "58.2",
+  "attributes": {
+   "state_class": "measurement",
+   "entity_id": [
+    "sensor.alex_wohnung_luftwerte_luftfeuchtigkeit",
+    "sensor.alex_wohnung_thermometer_bad_luftfeuchtigkeit",
+    "sensor.alex_wohnung_thermometer_wohnbereich_luftfeuchtigkeit",
+    "sensor.alex_wohnung_timmerflotte_luftfeuchtigkeit",
+    "sensor.thermometer_alex_humidity"
+   ],
+   "unit_of_measurement": "%",
+   "device_class": "humidity",
+   "icon": "mdi:water-percent",
+   "friendly_name": "Durchschnitt Luftfeuchtigkeit"
+  },
+  "last_changed": "2026-11-11T12:33:56.123456+00:00",
+  "last_updated": "2026-11-11T12:33:56.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.luftungsdauer_empfohlen",
+  "state": "15",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "min",
+   "device_class": "duration",
+   "icon": "mdi:timer-outline",
+   "friendly_name": "Lüftungsdauer empfohlen"
+  },
+  "last_changed": "2026-11-11T00:43:17.123456+00:00",
+  "last_updated": "2026-11-11T00:43:17.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.mischpult_alex_leistung",
+  "state": "27.2",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "W",
+   "device_class": "power",
+   "friendly_name": "Mischpult Alex Leistung"
+  },
+  "last_changed": "2026-11-11T11:16:14.123456+00:00",
+  "last_updated": "2026-11-11T11:16:14.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.pc_2_strom_leistung",
+  "state": "0.0",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "W",
+   "device_class": "power",
+   "friendly_name": "Pc 2 Strom Leistung"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.raumtemperatur_bad",
+  "state": "24.1",
+  "attributes": {
+   "state_class": "measurement",
+   "entity_id": [
+    "sensor.alex_wohnung_thermometer_bad_temperatur",
+    "sensor.bad_echo_dot_alex_wohnung_temperatur"
+   ],
+   "unit_of_measurement": "°C",
+   "device_class": "temperature",
+   "icon": "mdi:home-thermometer",
+   "friendly_name": "Raumtemperatur Bad"
+  },
+  "last_changed": "2026-11-11T12:32:56.123456+00:00",
+  "last_updated": "2026-11-11T12:32:56.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.raumtemperatur_wohnbereich",
+  "state": "24.1",
+  "attributes": {
+   "state_class": "measurement",
+   "entity_id": [
+    "sensor.alex_wohnung_thermometer_wohnbereich_temperatur",
+    "sensor.thermometer_alex_temperature",
+    "sensor.alex_wohnung_alex_wohnung_echo_dot_temperatur",
+    "sensor.alex_wohnung_timmerflotte_temperatur",
+    "sensor.alex_wohnung_luftwerte_temperatur"
+   ],
+   "unit_of_measurement": "°C",
+   "device_class": "temperature",
+   "icon": "mdi:home-thermometer",
+   "friendly_name": "Raumtemperatur Wohnbereich"
+  },
+  "last_changed": "2026-11-11T12:26:31.123456+00:00",
+  "last_updated": "2026-11-11T12:26:31.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.schimmelrisiko_bad",
+  "state": "70",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "%",
+   "device_class": "humidity",
+   "friendly_name": "Thermometer Bad Feuchte Außenwand"
+  },
+  "last_changed": "2026-11-11T12:32:56.123456+00:00",
+  "last_updated": "2026-11-11T12:32:56.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.schimmelrisiko_wohnbereich",
+  "state": "78",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "%",
+   "device_class": "humidity",
+   "friendly_name": "Thermometer Wohnbereich Feuchte Außenwand"
+  },
+  "last_changed": "2026-11-11T12:25:27.123456+00:00",
+  "last_updated": "2026-11-11T12:25:27.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.studioboxen_leistung",
+  "state": "0.0",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "W",
+   "device_class": "power",
+   "friendly_name": "Studioboxen Leistung"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.switch_alex_leistung",
+  "state": "0.0",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "W",
+   "device_class": "power",
+   "friendly_name": "Lan-Switch Alex Leistung"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.thermometer_alex_humidity",
+  "state": "61.50",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "%",
+   "device_class": "humidity",
+   "friendly_name": "Thermometer Bett Alex Humidity"
+  },
+  "last_changed": "2026-11-11T12:25:32.123456+00:00",
+  "last_updated": "2026-11-11T12:25:32.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.thermometer_alex_temperature",
+  "state": "23.10",
+  "attributes": {
+   "state_class": "measurement",
+   "unit_of_measurement": "°C",
+   "device_class": "temperature",
+   "friendly_name": "Thermometer Bett Alex Temperature"
+  },
+  "last_changed": "2026-11-11T12:10:30.123456+00:00",
+  "last_updated": "2026-11-11T12:10:30.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.waschmaschiene_alex_aktuelle_phase",
+  "state": "unknown",
+  "attributes": {
+   "icon": "mdi:water-sync",
+   "friendly_name": "Waschmaschine Alex Aktuelle Phase"
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.waschmaschiene_alex_fortschritt",
+  "state": "49",
+  "attributes": {
+   "unit_of_measurement": "%",
+   "icon": "mdi:progress-clock",
+   "friendly_name": "Waschmaschine Alex Fortschritt"
+  },
+  "last_changed": "2026-11-11T12:32:05.123456+00:00",
+  "last_updated": "2026-11-11T12:32:05.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.waschmaschiene_alex_programm",
+  "state": "Buntwäsche 40 grad mit Schranktrocken",
+  "attributes": {
+   "options": [
+    "Buntwäsche 40 grad",
+    "Buntwäsche 40 grad mit Schranktrocken",
+    "Waschtrocknen mit Schranktrocken",
+    "none",
+    "unknown"
+   ],
+   "device_class": "enum",
+   "icon": "mdi:file-document-outline",
+   "friendly_name": "Waschmaschine Alex Programm"
+  },
+  "last_changed": "2026-11-11T11:14:26.123456+00:00",
+  "last_updated": "2026-11-11T11:14:26.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.waschmaschiene_alex_verbleibende_zeit",
+  "state": "96",
+  "attributes": {
+   "unit_of_measurement": "min",
+   "device_class": "duration",
+   "icon": "mdi:timer-sand",
+   "friendly_name": "Waschmaschine Alex Verbleibende Zeit"
+  },
+  "last_changed": "2026-11-11T12:34:19.123456+00:00",
+  "last_updated": "2026-11-11T12:34:19.123456+00:00"
+ },
+ {
+  "entity_id": "sensor.waschmaschiene_alex_zustand",
+  "state": "running",
+  "attributes": {
+   "options": [
+    "off",
+    "idle",
+    "starting",
+    "running",
+    "paused",
+    "user_paused",
+    "ending",
+    "finished",
+    "anti_wrinkle",
+    "delay_wait",
+    "interrupted",
+    "force_stopped",
+    "unknown",
+    "clean"
+   ],
+   "device_class": "enum",
+   "icon": "mdi:washing-machine",
+   "friendly_name": "Waschmaschine Alex Zustand"
+  },
+  "last_changed": "2026-11-11T11:20:06.123456+00:00",
+  "last_updated": "2026-11-11T11:20:06.123456+00:00"
+ },
+ {
+  "entity_id": "switch.vol_tv_soundanlage",
+  "state": "off",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Vol- TV Soundanlage"
+  },
+  "last_changed": "2026-11-11T00:12:14.123456+00:00",
+  "last_updated": "2026-11-11T00:12:14.123456+00:00"
+ },
+ {
+  "entity_id": "switch.vol_tv_soundanlage_2",
+  "state": "off",
+  "attributes": {
+   "device_class": "switch",
+   "friendly_name": "Vol+ TV Soundanlage"
+  },
+  "last_changed": "2026-11-11T00:12:14.123456+00:00",
+  "last_updated": "2026-11-11T00:12:14.123456+00:00"
+ },
+ {
+  "entity_id": "timer.heizung_bad_boost",
+  "state": "idle",
+  "attributes": {
+   "duration": "0:30:00",
+   "icon": "mdi:rocket-launch-outline",
+   "friendly_name": "Heizung Bad Boost"
+  },
+  "last_changed": "2026-11-11T02:29:41.123456+00:00",
+  "last_updated": "2026-11-11T02:29:41.123456+00:00"
+ },
+ {
+  "entity_id": "timer.heizung_wohnbereich_boost",
+  "state": "idle",
+  "attributes": {
+   "duration": "0:30:00",
+   "icon": "mdi:rocket-launch-outline",
+   "friendly_name": "Heizung Wohnbereich Boost"
+  },
+  "last_changed": "2026-11-11T02:29:40.123456+00:00",
+  "last_updated": "2026-11-11T02:29:40.123456+00:00"
+ },
+ {
+  "entity_id": "todo.einkaufsliste_2",
+  "state": "0",
+  "attributes": {
+   "friendly_name": "Einkaufsliste",
+   "supported_features": 15
+  },
+  "last_changed": "2026-11-11T00:12:16.123456+00:00",
+  "last_updated": "2026-11-11T00:12:16.123456+00:00"
+ },
+ {
+  "entity_id": "weather.forecast_home",
+  "state": "cloudy",
+  "attributes": {
+   "temperature": 15.2,
+   "temperature_unit": "°C",
+   "humidity": 95,
+   "friendly_name": "Home",
+   "supported_features": 3
+  },
+  "last_changed": "2026-11-11T12:33:20.123456+00:00",
+  "last_updated": "2026-11-11T12:33:20.123456+00:00"
+ },
+ {
+  "entity_id": "input_text.dashboard_alert_text",
+  "state": "",
+  "attributes": {
+   "min": 0,
+   "max": 100,
+   "friendly_name": "Dashboard Alert Text"
+  },
+  "last_changed": "2026-11-11T00:12:12.123456+00:00",
+  "last_updated": "2026-11-11T00:12:12.123456+00:00"
+ },
+ {
+  "entity_id": "input_select.dashboard_alert_level",
+  "state": "wichtig",
+  "attributes": {
+   "options": [
+    "hinweis",
+    "warnung",
+    "wichtig"
+   ],
+   "friendly_name": "Dashboard Alert Level"
+  },
+  "last_changed": "2026-11-11T00:12:12.123456+00:00",
+  "last_updated": "2026-11-11T00:12:12.123456+00:00"
+ },
+ {
+  "entity_id": "input_text.wdh_slot_1",
+  "state": "",
+  "attributes": {
+   "min": 0,
+   "max": 255,
+   "icon": "mdi:numeric-1-box-outline",
+   "friendly_name": "WDH Slot 1"
+  },
+  "last_changed": "2026-11-11T00:12:12.123456+00:00",
+  "last_updated": "2026-11-11T00:12:12.123456+00:00"
+ },
+ {
+  "entity_id": "input_text.wdh_slot_2",
+  "state": "",
+  "attributes": {
+   "min": 0,
+   "max": 255,
+   "icon": "mdi:numeric-2-box-outline",
+   "friendly_name": "WDH Slot 2"
+  },
+  "last_changed": "2026-11-11T00:12:12.123456+00:00",
+  "last_updated": "2026-11-11T00:12:12.123456+00:00"
+ },
+ {
+  "entity_id": "input_text.wdh_slot_3",
+  "state": "",
+  "attributes": {
+   "min": 0,
+   "max": 255,
+   "icon": "mdi:numeric-3-box-outline",
+   "friendly_name": "WDH Slot 3"
+  },
+  "last_changed": "2026-11-11T00:12:12.123456+00:00",
+  "last_updated": "2026-11-11T00:12:12.123456+00:00"
+ },
+ {
+  "entity_id": "input_text.wdh_slot_4",
+  "state": "",
+  "attributes": {
+   "min": 0,
+   "max": 255,
+   "icon": "mdi:numeric-4-box-outline",
+   "friendly_name": "WDH Slot 4"
+  },
+  "last_changed": "2026-11-11T00:12:12.123456+00:00",
+  "last_updated": "2026-11-11T00:12:12.123456+00:00"
+ },
+ {
+  "entity_id": "input_number.wdh_index",
+  "state": "1.0",
+  "attributes": {
+   "min": 1.0,
+   "max": 4.0,
+   "step": 1.0,
+   "icon": "mdi:rotate-right",
+   "friendly_name": "WDH Rotationsindex"
+  },
+  "last_changed": "2026-11-11T00:12:12.123456+00:00",
+  "last_updated": "2026-11-11T00:12:12.123456+00:00"
+ },
+ {
+  "entity_id": "switch.ecklampe_steckdose_1",
+  "state": "off",
+  "attributes": {
+   "device_class": "switch",
+   "friendly_name": "Ecklampe"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "switch.glasschrank_kinozimmer_steckdose_1",
+  "state": "off",
+  "attributes": {
+   "device_class": "switch",
+   "friendly_name": "Glasschrank Ambbiente"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "switch.lichterkette_steckdose_1",
+  "state": "off",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Lichterkette"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "switch.gebusch_steckdose_1",
+  "state": "unavailable",
+  "attributes": {
+   "device_class": "outlet",
+   "friendly_name": "Gebüsch"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "switch.tauchlampe_steckdose_1",
+  "state": "off",
+  "attributes": {
+   "device_class": "switch",
+   "friendly_name": "Tauchlampe"
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "light.kino_tv_led",
+  "state": "on",
+  "attributes": {
+   "supported_color_modes": [
+    "rgb"
+   ],
+   "color_mode": "rgb",
+   "brightness": 141,
+   "hs_color": [
+    343.902,
+    48.235
+   ],
+   "friendly_name": "Kino TV LED",
+   "supported_features": 36
+  },
+  "last_changed": "2026-11-11T10:37:11.123456+00:00",
+  "last_updated": "2026-11-11T10:37:11.123456+00:00"
+ },
+ {
+  "entity_id": "light.tauchlampe_steckdose_1",
+  "state": "off",
+  "attributes": {
+   "supported_color_modes": [
+    "onoff"
+   ],
+   "color_mode": null,
+   "friendly_name": "Tauchlampe",
+   "supported_features": 0
+  },
+  "last_changed": "2026-11-11T00:12:18.123456+00:00",
+  "last_updated": "2026-11-11T00:12:18.123456+00:00"
+ },
+ {
+  "entity_id": "light.roller_switch_wifi_ble_hintergrundbeleuchtung",
+  "state": "off",
+  "attributes": {
+   "supported_color_modes": [
+    "onoff"
+   ],
+   "color_mode": null,
+   "friendly_name": "Rollladen Kinozimmer Hintergrundbeleuchtung",
+   "supported_features": 0
+  },
+  "last_changed": "2026-11-11T07:25:48.123456+00:00",
+  "last_updated": "2026-11-11T07:25:48.123456+00:00"
+ },
+ {
+  "entity_id": "light.polarlicht",
+  "state": "on",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 9009,
+   "supported_color_modes": [
+    "color_temp",
+    "rgb"
+   ],
+   "color_mode": "color_temp",
+   "brightness": 89,
+   "color_temp_kelvin": 2000,
+   "hs_color": [
+    30.601,
+    94.547
+   ],
+   "icon": "mdi:led-strip-variant",
+   "friendly_name": "Polarlicht",
+   "supported_features": 44
+  },
+  "last_changed": "2026-11-11T00:41:33.123456+00:00",
+  "last_updated": "2026-11-11T00:41:33.123456+00:00"
+ },
+ {
+  "entity_id": "light.blech",
+  "state": "off",
+  "attributes": {
+   "min_color_temp_kelvin": 2000,
+   "max_color_temp_kelvin": 9009,
+   "supported_color_modes": [
+    "color_temp",
+    "rgb"
+   ],
+   "color_mode": null,
+   "brightness": null,
+   "color_temp_kelvin": null,
+   "hs_color": null,
+   "icon": "mdi:led-strip-variant",
+   "friendly_name": "Blech",
+   "supported_features": 44
+  },
+  "last_changed": "2026-11-11T00:41:32.123456+00:00",
+  "last_updated": "2026-11-11T00:41:32.123456+00:00"
+ }
+]

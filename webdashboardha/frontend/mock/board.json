@@ -1,0 +1,2064 @@
+{
+ "rev": 1,
+ "generated_now": 1794400800,
+ "zones": [
+  {
+   "id": "wohnbereich",
+   "name": "Wohnbereich",
+   "icon": "sofa",
+   "vacuum_segment": 2,
+   "facts": {
+    "temp": "sensor.raumtemperatur_wohnbereich",
+    "hum": "sensor.alex_wohnung_thermometer_wohnbereich_luftfeuchtigkeit",
+    "openings": [
+     "binary_sensor.alex_wohnung_fenster_links_wohnbereich_alex_tur",
+     "binary_sensor.alex_wohnung_fenster_bett_alex_wohnung_fenster_rechts_wohnbereich_alex",
+     "binary_sensor.alex_wohnung_einganstur_tur"
+    ],
+    "climate": "climate.thermostat_wohnbereich_alex"
+   },
+   "chips": [
+    "light.zone_sofa_deckenlicht",
+    "light.zone_ambiente_sofa",
+    "light.zone_tv"
+   ],
+   "sections": [
+    {
+     "id": "licht",
+     "name": "Licht",
+     "items": [
+      "light.alex_wohnung_eingangsbereich",
+      "light.alex_wohnung_wohnbereich_links",
+      "light.alex_wohnung_wohnbereich_rechts",
+      "light.alex_wohnung_wohnflache",
+      "light.alex_wohnung_sofa_links",
+      "light.alex_wohnung_sofa_rechts"
+     ]
+    },
+    {
+     "id": "ambiente",
+     "name": "Ambiente",
+     "items": [
+      "light.ambiente_ecklampe",
+      "light.regal_alex_wohnung",
+      "light.sofa_alex",
+      "light.alex_wohnung_schrank_ambiente",
+      "light.alex_wohnung_tv_beleuchtung",
+      "light.alex_wohnung_tv_lowboard_beleuchtung",
+      "input_boolean.ambilight"
+     ]
+    },
+    {
+     "id": "medien",
+     "name": "Medien & Geräte",
+     "items": [
+      "virtual.fernsehen",
+      "media_player.wohnbereich_snapcast_client"
+     ]
+    },
+    {
+     "id": "klima",
+     "name": "Klima & Fenster",
+     "items": [
+      "climate.thermostat_wohnbereich_alex",
+      "cover.rolladen_treppe_alex_wohnung"
+     ]
+    }
+   ],
+   "all_only": [
+    "light.ipad_backlights"
+   ],
+   "light_targets": [
+    "light.ambiente_ecklampe",
+    "light.alex_wohnung_eingangsbereich",
+    "light.alex_wohnung_wohnbereich_links",
+    "light.regal_alex_wohnung",
+    "light.alex_wohnung_wohnbereich_rechts",
+    "light.sofa_alex",
+    "light.alex_wohnung_schrank_ambiente",
+    "light.alex_wohnung_wohnflache",
+    "light.alex_wohnung_sofa_links",
+    "light.alex_wohnung_tv_beleuchtung",
+    "light.alex_wohnung_tv_lowboard_beleuchtung",
+    "light.alex_wohnung_sofa_rechts",
+    "input_boolean.ambilight"
+   ]
+  },
+  {
+   "id": "kueche",
+   "name": "Küche",
+   "icon": "pot",
+   "vacuum_segment": 4,
+   "facts": {
+    "openings": [
+     "binary_sensor.alex_wohnung_kuhlschranktur_tur",
+     "binary_sensor.alex_wohnung_gefrierschrank_tur"
+    ]
+   },
+   "chips": [
+    "light.zone_kueche"
+   ],
+   "sections": [
+    {
+     "id": "licht",
+     "name": "Licht",
+     "items": [
+      "light.alex_wohnung_kuchendeckenlicht",
+      "light.kuechenlicht_oben"
+     ]
+    },
+    {
+     "id": "ambiente",
+     "name": "Ambiente",
+     "items": [
+      "light.alex_wohnung_kuche_ambiente_alex_wohnung"
+     ]
+    },
+    {
+     "id": "medien",
+     "name": "Medien & Geräte",
+     "items": [
+      "virtual.spuelmaschine"
+     ]
+    }
+   ],
+   "all_only": [],
+   "light_targets": [
+    "light.alex_wohnung_kuche_ambiente_alex_wohnung",
+    "light.alex_wohnung_kuchendeckenlicht",
+    "light.kuechenlicht_oben"
+   ]
+  },
+  {
+   "id": "pc",
+   "name": "PC",
+   "icon": "monitor",
+   "vacuum_segment": 3,
+   "facts": {
+    "temp": "sensor.alex_wohnung_timmerflotte_temperatur",
+    "hum": "sensor.alex_wohnung_timmerflotte_luftfeuchtigkeit"
+   },
+   "chips": [
+    "light.zone_schreibtisch",
+    "virtual.pc_platz"
+   ],
+   "sections": [
+    {
+     "id": "licht",
+     "name": "Licht",
+     "items": [
+      "light.ty_02_5ch_v5_2",
+      "light.alex_wohnung_schreibtisch_licht_links",
+      "light.alex_wohnung_schreibtisch_licht_rechts"
+     ]
+    },
+    {
+     "id": "medien",
+     "name": "Medien & Geräte",
+     "items": [
+      "switch.alex_wohnung_monitore",
+      "switch.alex_wohnung_interface",
+      "switch.mischpult_alex_steckdose_1",
+      "switch.studioboxen_steckdose_1",
+      "media_player.pc_bereich_snapcast_client"
+     ]
+    }
+   ],
+   "all_only": [],
+   "light_targets": [
+    "light.ty_02_5ch_v5_2",
+    "light.alex_wohnung_schreibtisch_licht_links",
+    "light.alex_wohnung_schreibtisch_licht_rechts"
+   ]
+  },
+  {
+   "id": "bett",
+   "name": "Bett",
+   "icon": "bed",
+   "vacuum_segment": 5,
+   "facts": {
+    "temp": "sensor.thermometer_alex_temperature",
+    "hum": "sensor.thermometer_alex_humidity",
+    "openings": [
+     "binary_sensor.alex_wohnung_fenster_bett_alex_wohnung_tur"
+    ]
+   },
+   "chips": [
+    "light.zone_hinten"
+   ],
+   "sections": [
+    {
+     "id": "licht",
+     "name": "Licht",
+     "items": [
+      "light.alex_wohnung_bett_deckenlicht",
+      "light.bett_bereich"
+     ]
+    },
+    {
+     "id": "ambiente",
+     "name": "Ambiente",
+     "items": [
+      "light.alex_wohnung_nachtlicht",
+      "light.lichtschacht_licht"
+     ]
+    },
+    {
+     "id": "medien",
+     "name": "Medien & Geräte",
+     "items": [
+      "media_player.alex_wohnung_firetv_stick_bett_alex",
+      "switch.alex_wohnung_fernseher_bett"
+     ]
+    },
+    {
+     "id": "klima",
+     "name": "Klima & Fenster",
+     "items": [
+      "cover.alex_zimmer_rolladen_lichtschacht"
+     ]
+    }
+   ],
+   "all_only": [
+    "light.alex_wohnung_kleiderschrank_licht_rechts",
+    "light.alex_zimmer_kleiderschrank_licht_links"
+   ],
+   "light_targets": [
+    "light.alex_wohnung_bett_deckenlicht",
+    "light.alex_wohnung_nachtlicht",
+    "light.bett_bereich",
+    "light.lichtschacht_licht",
+    "light.alex_wohnung_kleiderschrank_licht_rechts",
+    "light.alex_zimmer_kleiderschrank_licht_links"
+   ]
+  },
+  {
+   "id": "bad",
+   "name": "Bad",
+   "icon": "bath",
+   "vacuum_segment": 1,
+   "facts": {
+    "temp": "sensor.raumtemperatur_bad",
+    "hum": "sensor.alex_wohnung_thermometer_bad_luftfeuchtigkeit",
+    "openings": [
+     "binary_sensor.alex_wohnung_fenster_bad_alex_wohnung_fenster_bad"
+    ],
+    "climate": "climate.alex_wohnung_thermostat_bad"
+   },
+   "chips": [
+    "light.zone_bad"
+   ],
+   "sections": [
+    {
+     "id": "licht",
+     "name": "Licht",
+     "items": [
+      "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_1",
+      "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_2"
+     ]
+    },
+    {
+     "id": "ambiente",
+     "name": "Ambiente",
+     "items": [
+      "light.bad_ambiente_alex_wohnung"
+     ]
+    },
+    {
+     "id": "medien",
+     "name": "Medien & Geräte",
+     "items": [
+      "media_player.bad_snapcast_client"
+     ]
+    },
+    {
+     "id": "klima",
+     "name": "Klima & Fenster",
+     "items": [
+      "climate.alex_wohnung_thermostat_bad"
+     ]
+    }
+   ],
+   "all_only": [],
+   "light_targets": [
+    "light.bad_ambiente_alex_wohnung",
+    "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_1",
+    "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_2"
+   ]
+  }
+ ],
+ "items": {
+  "light.alex_wohnung_eingangsbereich": {
+   "id": "light.alex_wohnung_eingangsbereich",
+   "kind": "light",
+   "name": "Eingang",
+   "zone": "wohnbereich",
+   "func": "licht",
+   "tier": "zone",
+   "order": 10,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2695,
+     6535
+    ]
+   }
+  },
+  "light.alex_wohnung_wohnbereich_links": {
+   "id": "light.alex_wohnung_wohnbereich_links",
+   "kind": "light",
+   "name": "Decke links",
+   "zone": "wohnbereich",
+   "func": "licht",
+   "tier": "zone",
+   "order": 20,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2695,
+     6535
+    ]
+   }
+  },
+  "light.alex_wohnung_wohnbereich_rechts": {
+   "id": "light.alex_wohnung_wohnbereich_rechts",
+   "kind": "light",
+   "name": "Decke rechts",
+   "zone": "wohnbereich",
+   "func": "licht",
+   "tier": "zone",
+   "order": 30,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2695,
+     6535
+    ]
+   }
+  },
+  "light.alex_wohnung_wohnflache": {
+   "id": "light.alex_wohnung_wohnflache",
+   "kind": "light",
+   "name": "Wohnfläche",
+   "zone": "wohnbereich",
+   "func": "licht",
+   "tier": "zone",
+   "order": 40,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2695,
+     6535
+    ]
+   }
+  },
+  "light.alex_wohnung_sofa_links": {
+   "id": "light.alex_wohnung_sofa_links",
+   "kind": "light",
+   "name": "Sofa links",
+   "zone": "wohnbereich",
+   "func": "licht",
+   "tier": "zone",
+   "order": 50,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2695,
+     6535
+    ]
+   }
+  },
+  "light.alex_wohnung_sofa_rechts": {
+   "id": "light.alex_wohnung_sofa_rechts",
+   "kind": "light",
+   "name": "Sofa rechts",
+   "zone": "wohnbereich",
+   "func": "licht",
+   "tier": "zone",
+   "order": 60,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2695,
+     6535
+    ]
+   }
+  },
+  "light.ambiente_ecklampe": {
+   "id": "light.ambiente_ecklampe",
+   "kind": "light",
+   "name": "Ecklampe",
+   "zone": "wohnbereich",
+   "func": "ambiente",
+   "tier": "zone",
+   "order": 10,
+   "icon": "lamp",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2000,
+     6535
+    ]
+   }
+  },
+  "light.regal_alex_wohnung": {
+   "id": "light.regal_alex_wohnung",
+   "kind": "light",
+   "name": "Regal",
+   "zone": "wohnbereich",
+   "func": "ambiente",
+   "tier": "zone",
+   "order": 20,
+   "icon": "lamp",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true
+   }
+  },
+  "light.sofa_alex": {
+   "id": "light.sofa_alex",
+   "kind": "light",
+   "name": "Sofa-Ambiente",
+   "zone": "wohnbereich",
+   "func": "ambiente",
+   "tier": "zone",
+   "order": 30,
+   "icon": "lamp",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2000,
+     6500
+    ]
+   }
+  },
+  "light.alex_wohnung_schrank_ambiente": {
+   "id": "light.alex_wohnung_schrank_ambiente",
+   "kind": "light",
+   "name": "Schrank",
+   "zone": "wohnbereich",
+   "func": "ambiente",
+   "tier": "zone",
+   "order": 40,
+   "icon": "lamp",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2000,
+     6500
+    ]
+   }
+  },
+  "light.alex_wohnung_tv_beleuchtung": {
+   "id": "light.alex_wohnung_tv_beleuchtung",
+   "kind": "light",
+   "name": "TV-Beleuchtung",
+   "zone": "wohnbereich",
+   "func": "ambiente",
+   "tier": "zone",
+   "order": 50,
+   "icon": "lamp",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true
+   }
+  },
+  "light.alex_wohnung_tv_lowboard_beleuchtung": {
+   "id": "light.alex_wohnung_tv_lowboard_beleuchtung",
+   "kind": "light",
+   "name": "Lowboard",
+   "zone": "wohnbereich",
+   "func": "ambiente",
+   "tier": "zone",
+   "order": 60,
+   "icon": "lamp",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     3000,
+     6000
+    ]
+   }
+  },
+  "input_boolean.ambilight": {
+   "id": "input_boolean.ambilight",
+   "kind": "input_boolean",
+   "name": "Ambilight",
+   "zone": "wohnbereich",
+   "func": "ambiente",
+   "tier": "zone",
+   "order": 70,
+   "icon": "tv",
+   "count": true,
+   "new": false,
+   "cloud": false
+  },
+  "light.ipad_backlights": {
+   "id": "light.ipad_backlights",
+   "kind": "status_led",
+   "name": "iPad-Leiste",
+   "zone": "wohnbereich",
+   "func": "ambiente",
+   "tier": "all",
+   "order": 80,
+   "icon": "strip",
+   "count": false,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true
+   },
+   "extra": [
+    "select.test_led_controller_farbpalette"
+   ]
+  },
+  "virtual.fernsehen": {
+   "id": "virtual.fernsehen",
+   "kind": "tv",
+   "name": "Fernsehen",
+   "zone": "wohnbereich",
+   "func": "medien",
+   "tier": "zone",
+   "order": 10,
+   "icon": "tv",
+   "count": false,
+   "new": false,
+   "cloud": false,
+   "primary": "media_player.alex_wohnung_fire_tv_max_alex_wohnung_wohnbereich",
+   "tv": "media_player.alex_wohnung_alex_tv_wohnbereich",
+   "sound": {
+    "mode": "input_select.soundanlage_modus",
+    "apply_script": "script.soundanlage_anwenden",
+    "ir_script": "script.soundanlage_ir_taste",
+    "vol_up": "switch.vol_tv_soundanlage_2",
+    "vol_down": "switch.vol_tv_soundanlage"
+   },
+   "lights": [
+    "input_boolean.ambilight",
+    "light.alex_wohnung_tv_beleuchtung",
+    "light.alex_wohnung_tv_lowboard_beleuchtung"
+   ]
+  },
+  "media_player.wohnbereich_snapcast_client": {
+   "id": "media_player.wohnbereich_snapcast_client",
+   "kind": "music_room",
+   "name": "Musik",
+   "zone": "wohnbereich",
+   "func": "medien",
+   "tier": "zone",
+   "order": 20,
+   "icon": "music",
+   "count": true,
+   "new": false,
+   "cloud": false
+  },
+  "climate.thermostat_wohnbereich_alex": {
+   "id": "climate.thermostat_wohnbereich_alex",
+   "kind": "climate_tuya",
+   "name": "Heizung",
+   "zone": "wohnbereich",
+   "func": "klima",
+   "tier": "zone",
+   "order": 10,
+   "icon": "heater",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "heating_room": "wohnbereich"
+  },
+  "cover.rolladen_treppe_alex_wohnung": {
+   "id": "cover.rolladen_treppe_alex_wohnung",
+   "kind": "cover",
+   "name": "Rollladen",
+   "zone": "wohnbereich",
+   "func": "klima",
+   "tier": "zone",
+   "order": 20,
+   "icon": "blinds",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "position": false
+   }
+  },
+  "media_player.alex_wohnung_alex_tv_wohnbereich": {
+   "id": "media_player.alex_wohnung_alex_tv_wohnbereich",
+   "kind": "media",
+   "name": "Alex TV Wohnbereich",
+   "zone": "wohnbereich",
+   "func": "medien",
+   "tier": "hidden",
+   "order": null,
+   "icon": "tv",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "name_auto": true
+  },
+  "media_player.alex_wohnung_fire_tv_max_alex_wohnung_wohnbereich": {
+   "id": "media_player.alex_wohnung_fire_tv_max_alex_wohnung_wohnbereich",
+   "kind": "media",
+   "name": "Fire TV Max Alex Wohnung Wohnbereich",
+   "zone": "wohnbereich",
+   "func": "medien",
+   "tier": "hidden",
+   "order": null,
+   "icon": "tv",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "name_auto": true
+  },
+  "media_player.alex_wohnung_echo_dot": {
+   "id": "media_player.alex_wohnung_echo_dot",
+   "kind": "media",
+   "name": "Alex Wohnung Echo Dot",
+   "zone": "wohnbereich",
+   "func": "medien",
+   "tier": "hidden",
+   "order": null,
+   "icon": "tv",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "name_auto": true
+  },
+  "light.alex_wohnung_kuchendeckenlicht": {
+   "id": "light.alex_wohnung_kuchendeckenlicht",
+   "kind": "light",
+   "name": "Decke",
+   "zone": "kueche",
+   "func": "licht",
+   "tier": "zone",
+   "order": 10,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2695,
+     6535
+    ]
+   }
+  },
+  "light.kuechenlicht_oben": {
+   "id": "light.kuechenlicht_oben",
+   "kind": "light",
+   "name": "Arbeitslicht",
+   "zone": "kueche",
+   "func": "licht",
+   "tier": "zone",
+   "order": 20,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2000,
+     6500
+    ]
+   }
+  },
+  "light.alex_wohnung_kuche_ambiente_alex_wohnung": {
+   "id": "light.alex_wohnung_kuche_ambiente_alex_wohnung",
+   "kind": "light",
+   "name": "Ambiente",
+   "zone": "kueche",
+   "func": "ambiente",
+   "tier": "zone",
+   "order": 10,
+   "icon": "lamp",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2000,
+     6500
+    ]
+   }
+  },
+  "virtual.spuelmaschine": {
+   "id": "virtual.spuelmaschine",
+   "kind": "appliance",
+   "name": "Spülmaschine",
+   "zone": "kueche",
+   "func": "medien",
+   "tier": "zone",
+   "order": 10,
+   "icon": "dishwasher",
+   "count": false,
+   "new": true,
+   "cloud": false,
+   "state": "sensor.alex_wohnung_spulmaschiene_zustand",
+   "remaining": "sensor.alex_wohnung_spulmaschiene_verbleibende_zeit",
+   "progress": "sensor.alex_wohnung_spulmaschiene_fortschritt",
+   "program": "sensor.alex_wohnung_spulmaschiene_programm",
+   "phase": "sensor.alex_wohnung_spulmaschiene_aktuelle_phase",
+   "power": "sensor.alex_wohnung_spulmaschiene_aktuelle_leistung",
+   "unload_button": "button.alex_wohnung_spulmaschiene_als_entladen_markieren"
+  },
+  "light.ty_02_5ch_v5_2": {
+   "id": "light.ty_02_5ch_v5_2",
+   "kind": "light",
+   "name": "Tischlicht",
+   "zone": "pc",
+   "func": "licht",
+   "tier": "zone",
+   "order": 10,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2000,
+     6500
+    ]
+   }
+  },
+  "light.alex_wohnung_schreibtisch_licht_links": {
+   "id": "light.alex_wohnung_schreibtisch_licht_links",
+   "kind": "light",
+   "name": "Decke links",
+   "zone": "pc",
+   "func": "licht",
+   "tier": "zone",
+   "order": 20,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2695,
+     6535
+    ]
+   }
+  },
+  "light.alex_wohnung_schreibtisch_licht_rechts": {
+   "id": "light.alex_wohnung_schreibtisch_licht_rechts",
+   "kind": "light",
+   "name": "Decke rechts",
+   "zone": "pc",
+   "func": "licht",
+   "tier": "zone",
+   "order": 30,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2695,
+     6535
+    ]
+   }
+  },
+  "switch.alex_wohnung_monitore": {
+   "id": "switch.alex_wohnung_monitore",
+   "kind": "switch",
+   "name": "Monitore",
+   "zone": "pc",
+   "func": "medien",
+   "tier": "zone",
+   "order": 10,
+   "icon": "plug",
+   "count": true,
+   "new": true,
+   "cloud": false,
+   "power": "sensor.alex_wohnung_monitore_leistung"
+  },
+  "switch.alex_wohnung_interface": {
+   "id": "switch.alex_wohnung_interface",
+   "kind": "switch",
+   "name": "Interface",
+   "zone": "pc",
+   "func": "medien",
+   "tier": "zone",
+   "order": 20,
+   "icon": "plug",
+   "count": true,
+   "new": true,
+   "cloud": false,
+   "power": "sensor.alex_wohnung_interface_leistung"
+  },
+  "switch.mischpult_alex_steckdose_1": {
+   "id": "switch.mischpult_alex_steckdose_1",
+   "kind": "switch",
+   "name": "Mischpult",
+   "zone": "pc",
+   "func": "medien",
+   "tier": "zone",
+   "order": 30,
+   "icon": "plug",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "power": "sensor.mischpult_alex_leistung"
+  },
+  "switch.studioboxen_steckdose_1": {
+   "id": "switch.studioboxen_steckdose_1",
+   "kind": "switch",
+   "name": "Studioboxen",
+   "zone": "pc",
+   "func": "medien",
+   "tier": "zone",
+   "order": 40,
+   "icon": "plug",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "power": "sensor.studioboxen_leistung"
+  },
+  "media_player.pc_bereich_snapcast_client": {
+   "id": "media_player.pc_bereich_snapcast_client",
+   "kind": "music_room",
+   "name": "Musik",
+   "zone": "pc",
+   "func": "medien",
+   "tier": "zone",
+   "order": 50,
+   "icon": "music",
+   "count": true,
+   "new": false,
+   "cloud": false
+  },
+  "switch.pc_2_strom_steckdose_1": {
+   "id": "switch.pc_2_strom_steckdose_1",
+   "kind": "switch_critical",
+   "name": "PC 2",
+   "zone": null,
+   "func": "medien",
+   "tier": "zone",
+   "order": null,
+   "icon": "plug",
+   "count": true,
+   "new": true,
+   "cloud": true,
+   "critical": true,
+   "power": "sensor.pc_2_strom_leistung",
+   "inbox": true
+  },
+  "switch.switch_alex_steckdose_1": {
+   "id": "switch.switch_alex_steckdose_1",
+   "kind": "switch_critical",
+   "name": "LAN-Switch",
+   "zone": null,
+   "func": "medien",
+   "tier": "zone",
+   "order": null,
+   "icon": "plug",
+   "count": true,
+   "new": true,
+   "cloud": true,
+   "critical": true,
+   "power": "sensor.switch_alex_leistung",
+   "inbox": true
+  },
+  "switch.pc_power_switch": {
+   "id": "switch.pc_power_switch",
+   "kind": "switch",
+   "name": "Pc Power Switch",
+   "zone": null,
+   "func": "medien",
+   "tier": "hidden",
+   "order": null,
+   "icon": "plug",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "name_auto": true
+  },
+  "light.alex_wohnung_bett_deckenlicht": {
+   "id": "light.alex_wohnung_bett_deckenlicht",
+   "kind": "light",
+   "name": "Decke",
+   "zone": "bett",
+   "func": "licht",
+   "tier": "zone",
+   "order": 10,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2695,
+     6535
+    ]
+   }
+  },
+  "light.bett_bereich": {
+   "id": "light.bett_bereich",
+   "kind": "light",
+   "name": "Bettlicht",
+   "zone": "bett",
+   "func": "licht",
+   "tier": "zone",
+   "order": 20,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2702,
+     6535
+    ]
+   }
+  },
+  "light.alex_wohnung_kleiderschrank_licht_rechts": {
+   "id": "light.alex_wohnung_kleiderschrank_licht_rechts",
+   "kind": "light",
+   "name": "Schrank rechts",
+   "zone": "bett",
+   "func": "licht",
+   "tier": "all",
+   "order": 30,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2695,
+     6535
+    ]
+   }
+  },
+  "light.alex_zimmer_kleiderschrank_licht_links": {
+   "id": "light.alex_zimmer_kleiderschrank_licht_links",
+   "kind": "light",
+   "name": "Schrank links",
+   "zone": "bett",
+   "func": "licht",
+   "tier": "all",
+   "order": 40,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2695,
+     6535
+    ]
+   }
+  },
+  "light.alex_wohnung_nachtlicht": {
+   "id": "light.alex_wohnung_nachtlicht",
+   "kind": "light",
+   "name": "Nachtlicht",
+   "zone": "bett",
+   "func": "ambiente",
+   "tier": "zone",
+   "order": 10,
+   "icon": "lamp",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2000,
+     6500
+    ]
+   }
+  },
+  "light.lichtschacht_licht": {
+   "id": "light.lichtschacht_licht",
+   "kind": "light",
+   "name": "Lichtschacht",
+   "zone": "bett",
+   "func": "ambiente",
+   "tier": "zone",
+   "order": 20,
+   "icon": "lamp",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2000,
+     9009
+    ]
+   }
+  },
+  "media_player.alex_wohnung_firetv_stick_bett_alex": {
+   "id": "media_player.alex_wohnung_firetv_stick_bett_alex",
+   "kind": "media",
+   "name": "Fire TV",
+   "zone": "bett",
+   "func": "medien",
+   "tier": "zone",
+   "order": 10,
+   "icon": "tv",
+   "count": true,
+   "new": false,
+   "cloud": false
+  },
+  "switch.alex_wohnung_fernseher_bett": {
+   "id": "switch.alex_wohnung_fernseher_bett",
+   "kind": "switch",
+   "name": "Fernseher",
+   "zone": "bett",
+   "func": "medien",
+   "tier": "zone",
+   "order": 20,
+   "icon": "tv",
+   "count": true,
+   "new": false,
+   "cloud": false
+  },
+  "cover.alex_zimmer_rolladen_lichtschacht": {
+   "id": "cover.alex_zimmer_rolladen_lichtschacht",
+   "kind": "cover",
+   "name": "Rollladen",
+   "zone": "bett",
+   "func": "klima",
+   "tier": "zone",
+   "order": 10,
+   "icon": "blinds",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "position": false
+   }
+  },
+  "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_1": {
+   "id": "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_1",
+   "kind": "light_onoff",
+   "name": "Decke",
+   "zone": "bad",
+   "func": "licht",
+   "tier": "zone",
+   "order": 10,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": false,
+    "color": false
+   }
+  },
+  "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_2": {
+   "id": "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_2",
+   "kind": "light_onoff",
+   "name": "Spiegel",
+   "zone": "bad",
+   "func": "licht",
+   "tier": "zone",
+   "order": 20,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "features": {
+    "brightness": false,
+    "color": false
+   }
+  },
+  "light.bad_ambiente_alex_wohnung": {
+   "id": "light.bad_ambiente_alex_wohnung",
+   "kind": "light",
+   "name": "Ambiente",
+   "zone": "bad",
+   "func": "ambiente",
+   "tier": "zone",
+   "order": 10,
+   "icon": "lamp",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2000,
+     6500
+    ]
+   }
+  },
+  "media_player.bad_snapcast_client": {
+   "id": "media_player.bad_snapcast_client",
+   "kind": "music_room",
+   "name": "Musik",
+   "zone": "bad",
+   "func": "medien",
+   "tier": "zone",
+   "order": 10,
+   "icon": "music",
+   "count": true,
+   "new": false,
+   "cloud": false
+  },
+  "climate.alex_wohnung_thermostat_bad": {
+   "id": "climate.alex_wohnung_thermostat_bad",
+   "kind": "climate_tuya",
+   "name": "Heizung",
+   "zone": "bad",
+   "func": "klima",
+   "tier": "zone",
+   "order": 10,
+   "icon": "heater",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "heating_room": "bad"
+  },
+  "media_player.bad_echo_dot_alex_wohnung": {
+   "id": "media_player.bad_echo_dot_alex_wohnung",
+   "kind": "media",
+   "name": "Bad Echo Dot Alex Wohnung",
+   "zone": "bad",
+   "func": "medien",
+   "tier": "hidden",
+   "order": null,
+   "icon": "tv",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "name_auto": true
+  },
+  "input_boolean.multiroom": {
+   "id": "input_boolean.multiroom",
+   "kind": "multiroom",
+   "name": "Musik",
+   "zone": null,
+   "func": null,
+   "tier": "zone",
+   "order": null,
+   "icon": "music",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "system": true
+  },
+  "media_player.alex_wohnung_echo": {
+   "id": "media_player.alex_wohnung_echo",
+   "kind": "media",
+   "name": "Alex Wohnung Echo",
+   "zone": null,
+   "func": "medien",
+   "tier": "hidden",
+   "order": null,
+   "icon": "tv",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "name_auto": true
+  },
+  "media_player.alexanders_fire_tv_stick": {
+   "id": "media_player.alexanders_fire_tv_stick",
+   "kind": "media",
+   "name": "Alexanders Fire TV Stick",
+   "zone": null,
+   "func": "medien",
+   "tier": "hidden",
+   "order": null,
+   "icon": "tv",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "name_auto": true
+  },
+  "switch.alex_zimmer_lichtschalter_eingang_alex_wohnung_deckenlicht_1_alex_wohnung": {
+   "id": "switch.alex_zimmer_lichtschalter_eingang_alex_wohnung_deckenlicht_1_alex_wohnung",
+   "kind": "switch",
+   "name": "Wohnlicht",
+   "zone": null,
+   "func": "medien",
+   "tier": "hidden",
+   "order": null,
+   "icon": "plug",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "name_auto": true
+  },
+  "switch.alex_wohnung_lichtschalter_eingang_hinten": {
+   "id": "switch.alex_wohnung_lichtschalter_eingang_hinten",
+   "kind": "switch",
+   "name": "Licht Hinten",
+   "zone": null,
+   "func": "medien",
+   "tier": "hidden",
+   "order": null,
+   "icon": "plug",
+   "count": true,
+   "new": false,
+   "cloud": false,
+   "name_auto": true
+  },
+  "light.rollladen_alex_hintergrundbeleuchtung": {
+   "id": "light.rollladen_alex_hintergrundbeleuchtung",
+   "kind": "light_onoff",
+   "name": "Rollladen Alex Hintergrundbeleuchtung",
+   "zone": null,
+   "func": "licht",
+   "tier": "hidden",
+   "order": null,
+   "icon": "ceiling",
+   "count": true,
+   "new": false,
+   "cloud": true,
+   "name_auto": true,
+   "features": {
+    "brightness": false,
+    "color": false
+   }
+  },
+  "light.zone_ambiente": {
+   "id": "light.zone_ambiente",
+   "kind": "group",
+   "name": "Zone Ambiente Global",
+   "zone": null,
+   "func": "licht",
+   "tier": "hidden",
+   "order": null,
+   "icon": "bulb",
+   "count": false,
+   "new": false,
+   "cloud": true,
+   "name_auto": true,
+   "members": [
+    "light.regal_alex_wohnung",
+    "light.ty_02_5ch_v5_2",
+    "light.alex_wohnung_nachtlicht",
+    "light.alex_wohnung_schrank_ambiente",
+    "light.sofa_alex",
+    "light.ambiente_ecklampe",
+    "light.lichtschacht_licht",
+    "light.bad_ambiente_alex_wohnung",
+    "light.alex_wohnung_kuche_ambiente_alex_wohnung",
+    "light.alex_wohnung_tv_beleuchtung",
+    "light.alex_wohnung_tv_lowboard_beleuchtung"
+   ],
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     15,
+     9009
+    ]
+   }
+  },
+  "light.zone_sofa_deckenlicht": {
+   "id": "light.zone_sofa_deckenlicht",
+   "kind": "group",
+   "name": "Sofa-Decke",
+   "zone": "wohnbereich",
+   "func": "licht",
+   "tier": "zone",
+   "order": 10,
+   "icon": "bulb",
+   "count": false,
+   "new": false,
+   "cloud": false,
+   "members": [
+    "light.alex_wohnung_sofa_links",
+    "light.alex_wohnung_sofa_rechts",
+    "light.alex_wohnung_wohnbereich_links",
+    "light.alex_wohnung_wohnbereich_rechts"
+   ],
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2695,
+     6535
+    ]
+   },
+   "chip": true
+  },
+  "light.zone_ambiente_sofa": {
+   "id": "light.zone_ambiente_sofa",
+   "kind": "group",
+   "name": "Ambiente Sofa",
+   "zone": "wohnbereich",
+   "func": "licht",
+   "tier": "zone",
+   "order": 20,
+   "icon": "bulb",
+   "count": false,
+   "new": false,
+   "cloud": true,
+   "members": [
+    "light.ambiente_ecklampe",
+    "light.alex_wohnung_kuche_ambiente_alex_wohnung",
+    "light.alex_wohnung_schrank_ambiente",
+    "light.regal_alex_wohnung",
+    "light.sofa_alex",
+    "light.alex_wohnung_tv_beleuchtung",
+    "light.alex_wohnung_tv_lowboard_beleuchtung"
+   ],
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     15,
+     6535
+    ]
+   },
+   "chip": true
+  },
+  "light.zone_tv": {
+   "id": "light.zone_tv",
+   "kind": "group",
+   "name": "TV-Licht",
+   "zone": "wohnbereich",
+   "func": "licht",
+   "tier": "zone",
+   "order": 30,
+   "icon": "bulb",
+   "count": false,
+   "new": false,
+   "cloud": false,
+   "members": [
+    "light.alex_wohnung_tv_beleuchtung",
+    "light.alex_wohnung_tv_lowboard_beleuchtung"
+   ],
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     3000,
+     6000
+    ]
+   },
+   "chip": true
+  },
+  "light.zone_kueche": {
+   "id": "light.zone_kueche",
+   "kind": "group",
+   "name": "Küche",
+   "zone": "kueche",
+   "func": "licht",
+   "tier": "zone",
+   "order": 10,
+   "icon": "bulb",
+   "count": false,
+   "new": false,
+   "cloud": true,
+   "members": [
+    "light.kuechenlicht_oben",
+    "light.alex_wohnung_kuche_ambiente_alex_wohnung",
+    "light.alex_wohnung_kuchendeckenlicht"
+   ],
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2000,
+     6535
+    ]
+   },
+   "chip": true
+  },
+  "light.zone_schreibtisch": {
+   "id": "light.zone_schreibtisch",
+   "kind": "group",
+   "name": "Deckenlicht",
+   "zone": "pc",
+   "func": "licht",
+   "tier": "zone",
+   "order": 10,
+   "icon": "bulb",
+   "count": false,
+   "new": false,
+   "cloud": false,
+   "members": [
+    "light.alex_wohnung_schreibtisch_licht_links",
+    "light.alex_wohnung_schreibtisch_licht_rechts"
+   ],
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2695,
+     6535
+    ]
+   },
+   "chip": true
+  },
+  "virtual.pc_platz": {
+   "id": "virtual.pc_platz",
+   "kind": "switch_group",
+   "name": "PC-Platz",
+   "zone": "pc",
+   "func": "medien",
+   "tier": "zone",
+   "order": 20,
+   "icon": "monitor",
+   "count": false,
+   "new": false,
+   "cloud": true,
+   "members": [
+    "switch.alex_wohnung_interface",
+    "switch.mischpult_alex_steckdose_1",
+    "switch.alex_wohnung_monitore"
+   ],
+   "mode": "any_on_all_off",
+   "chip": true
+  },
+  "light.zone_hinten": {
+   "id": "light.zone_hinten",
+   "kind": "group",
+   "name": "Licht hinten",
+   "zone": "bett",
+   "func": "licht",
+   "tier": "zone",
+   "order": 10,
+   "icon": "bulb",
+   "count": false,
+   "new": false,
+   "cloud": true,
+   "members": [
+    "light.alex_wohnung_kuchendeckenlicht",
+    "light.alex_zimmer_kleiderschrank_licht_links",
+    "light.alex_wohnung_kleiderschrank_licht_rechts",
+    "light.alex_wohnung_bett_deckenlicht",
+    "light.lichtschacht_licht",
+    "light.alex_wohnung_nachtlicht"
+   ],
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2000,
+     9009
+    ]
+   },
+   "chip": true
+  },
+  "light.zone_bad": {
+   "id": "light.zone_bad",
+   "kind": "group",
+   "name": "Bad",
+   "zone": "bad",
+   "func": "licht",
+   "tier": "zone",
+   "order": 10,
+   "icon": "bulb",
+   "count": false,
+   "new": false,
+   "cloud": true,
+   "members": [
+    "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_1",
+    "light.alex_wohnung_badlichtschalter_alex_wohnung_schalter_2",
+    "light.bad_ambiente_alex_wohnung"
+   ],
+   "features": {
+    "brightness": true,
+    "color": true,
+    "ct": [
+     2000,
+     6500
+    ]
+   },
+   "chip": true
+  },
+  "light.schrank_ambiente": {
+   "id": "light.schrank_ambiente",
+   "kind": "light",
+   "name": "Kleiderschrank Ambiente",
+   "name_auto": true,
+   "zone": null,
+   "func": "licht",
+   "tier": "zone",
+   "order": null,
+   "icon": "ceiling",
+   "count": true,
+   "new": true,
+   "cloud": false,
+   "features": {
+    "brightness": true,
+    "color": true
+   },
+   "inbox": true
+  },
+  "cover.rollladen_alex": {
+   "id": "cover.rollladen_alex",
+   "kind": "cover_pos",
+   "name": "Rollladen",
+   "name_auto": true,
+   "zone": null,
+   "func": "klima",
+   "tier": "zone",
+   "order": null,
+   "icon": "blinds",
+   "count": true,
+   "new": true,
+   "cloud": true,
+   "features": {
+    "position": true
+   },
+   "inbox": true
+  },
+  "input_boolean.lichtshow": {
+   "id": "input_boolean.lichtshow",
+   "kind": "input_boolean",
+   "name": "lichtshow",
+   "name_auto": true,
+   "zone": null,
+   "func": "ambiente",
+   "tier": "zone",
+   "order": null,
+   "icon": "power",
+   "count": true,
+   "new": true,
+   "cloud": false,
+   "inbox": true
+  },
+  "climate.klima": {
+   "id": "climate.klima",
+   "kind": "climate",
+   "name": "Klima",
+   "name_auto": true,
+   "zone": null,
+   "func": "klima",
+   "tier": "zone",
+   "order": null,
+   "icon": "air",
+   "count": true,
+   "new": true,
+   "cloud": true,
+   "inbox": true
+  }
+ },
+ "start": {
+  "kommen_gehen": [
+   {
+    "role": "ambiente",
+    "name": "Ambiente",
+    "action": [
+     "input_boolean.ambilight",
+     "light.alex_wohnung_kuche_ambiente_alex_wohnung",
+     "light.alex_wohnung_nachtlicht",
+     "light.alex_wohnung_schrank_ambiente",
+     "light.alex_wohnung_tv_beleuchtung",
+     "light.alex_wohnung_tv_lowboard_beleuchtung",
+     "light.ambiente_ecklampe",
+     "light.bad_ambiente_alex_wohnung",
+     "light.ipad_backlights",
+     "light.kuechenlicht_oben",
+     "light.lichtschacht_licht",
+     "light.regal_alex_wohnung",
+     "light.sofa_alex",
+     "light.ty_02_5ch_v5_2",
+     "switch.lichtschacht_schalter"
+    ],
+    "count": [
+     "input_boolean.ambilight",
+     "light.alex_wohnung_kuche_ambiente_alex_wohnung",
+     "light.alex_wohnung_nachtlicht",
+     "light.alex_wohnung_schrank_ambiente",
+     "light.alex_wohnung_tv_beleuchtung",
+     "light.alex_wohnung_tv_lowboard_beleuchtung",
+     "light.ambiente_ecklampe",
+     "light.bad_ambiente_alex_wohnung",
+     "light.kuechenlicht_oben",
+     "light.lichtschacht_licht",
+     "light.regal_alex_wohnung",
+     "light.sofa_alex",
+     "light.ty_02_5ch_v5_2"
+    ]
+   },
+   {
+    "role": "group",
+    "id": "light.zone_wohnlicht",
+    "name": "Wohnlicht",
+    "members": [
+     "light.alex_wohnung_wohnbereich_links",
+     "light.alex_wohnung_wohnbereich_rechts",
+     "light.alex_wohnung_wohnflache",
+     "light.alex_wohnung_sofa_links",
+     "light.alex_wohnung_sofa_rechts",
+     "light.alex_wohnung_eingangsbereich"
+    ],
+    "features": {
+     "brightness": true,
+     "color": true,
+     "ct": [
+      2695,
+      6535
+     ]
+    },
+    "cloud": false
+   },
+   {
+    "role": "group",
+    "id": "light.zone_hinten",
+    "name": "Licht hinten",
+    "members": [
+     "light.alex_wohnung_kuchendeckenlicht",
+     "light.alex_zimmer_kleiderschrank_licht_links",
+     "light.alex_wohnung_kleiderschrank_licht_rechts",
+     "light.alex_wohnung_bett_deckenlicht",
+     "light.lichtschacht_licht",
+     "light.alex_wohnung_nachtlicht"
+    ],
+    "features": {
+     "brightness": true,
+     "color": true,
+     "ct": [
+      2000,
+      9009
+     ]
+    },
+    "cloud": true
+   },
+   {
+    "role": "covers",
+    "name": "Rollläden",
+    "covers": [
+     {
+      "id": "cover.rolladen_treppe_alex_wohnung",
+      "short": "Treppe"
+     },
+     {
+      "id": "cover.alex_zimmer_rolladen_lichtschacht",
+      "short": "Schacht"
+     }
+    ]
+   },
+   {
+    "role": "alles_aus",
+    "name": "Alles aus",
+    "script": "script.alles_aus",
+    "area": "alex_wohnung",
+    "label": "alles_aus",
+    "exception_label": "alles_aus_ausnahme"
+   }
+  ],
+  "favorites": [
+   {
+    "id": "light.alex_wohnung_eingangsbereich",
+    "name": "Eingang"
+   },
+   {
+    "id": "light.zone_sofa_deckenlicht",
+    "name": "Sofa-Decke"
+   },
+   {
+    "id": "light.zone_ambiente_sofa",
+    "name": "Ambiente Sofa"
+   },
+   {
+    "id": "light.zone_kueche",
+    "name": "Küche"
+   },
+   {
+    "id": "light.kuechenlicht_oben",
+    "name": "Arbeitslicht"
+   },
+   {
+    "id": "light.ty_02_5ch_v5_2",
+    "name": "Tischlicht"
+   },
+   {
+    "id": "virtual.pc_platz",
+    "name": "PC-Platz"
+   },
+   {
+    "id": "light.alex_wohnung_nachtlicht",
+    "name": "Nachtlicht"
+   },
+   {
+    "id": "virtual.fernsehen",
+    "name": "Fernsehen"
+   },
+   {
+    "id": "input_boolean.ambilight",
+    "name": "Ambilight"
+   },
+   {
+    "id": "light.zone_bad",
+    "name": "Bad"
+   },
+   {
+    "id": "climate.thermostat_wohnbereich_alex",
+    "name": "Heizung"
+   },
+   {
+    "id": "light.bett_bereich",
+    "name": "Bettlicht"
+   },
+   {
+    "id": "light.lichtschacht_licht",
+    "name": "Lichtschacht"
+   },
+   {
+    "id": "input_boolean.multiroom",
+    "name": "Musik",
+    "kind": "multiroom"
+   }
+  ],
+  "head": {
+   "outside_temp": "sensor.alex_wohnung_thermometer_aussen_temperatur",
+   "weather": "weather.forecast_home",
+   "forecast": "wdh.forecast_today"
+  },
+  "lage": [
+   {
+    "key": "oeffnungen",
+    "name": "Öffnungen",
+    "icon": "window",
+    "contacts": [
+     {
+      "id": "binary_sensor.alex_wohnung_einganstur_tur",
+      "name": "Eingangstür",
+      "zone": "wohnbereich",
+      "alarm_after_s": 120
+     },
+     {
+      "id": "binary_sensor.alex_wohnung_fenster_links_wohnbereich_alex_tur",
+      "name": "Fenster Wohnbereich links",
+      "zone": "wohnbereich",
+      "alarm_after_s": 0
+     },
+     {
+      "id": "binary_sensor.alex_wohnung_fenster_bett_alex_wohnung_fenster_rechts_wohnbereich_alex",
+      "name": "Fenster Wohnbereich rechts",
+      "zone": "wohnbereich",
+      "alarm_after_s": 0
+     },
+     {
+      "id": "binary_sensor.alex_wohnung_fenster_bett_alex_wohnung_tur",
+      "name": "Fenster Bett",
+      "zone": "bett",
+      "alarm_after_s": 0
+     },
+     {
+      "id": "binary_sensor.alex_wohnung_fenster_bad_alex_wohnung_fenster_bad",
+      "name": "Fenster Bad",
+      "zone": "bad",
+      "alarm_after_s": 0
+     },
+     {
+      "id": "binary_sensor.alex_wohnung_kuhlschranktur_tur",
+      "name": "Kühlschrank",
+      "zone": "kueche",
+      "alarm_after_s": 60
+     },
+     {
+      "id": "binary_sensor.alex_wohnung_gefrierschrank_tur",
+      "name": "Gefrierfach",
+      "zone": "kueche",
+      "alarm_after_s": 60
+     }
+    ],
+    "vent_minutes": "sensor.luftungsdauer_empfohlen"
+   },
+   {
+    "key": "waesche",
+    "name": "Wäsche",
+    "icon": "washer",
+    "state": "sensor.waschmaschiene_alex_zustand",
+    "remaining": "sensor.waschmaschiene_alex_verbleibende_zeit",
+    "progress": "sensor.waschmaschiene_alex_fortschritt",
+    "program": "sensor.waschmaschiene_alex_programm",
+    "phase": "sensor.waschmaschiene_alex_aktuelle_phase",
+    "unload_button": "button.alex_wohnung_waschmaschiene_alex_als_entladen_markieren"
+   },
+   {
+    "key": "spuelmaschine",
+    "name": "Spülmaschine",
+    "icon": "dishwasher",
+    "virtual": "virtual.spuelmaschine"
+   },
+   {
+    "key": "sauger",
+    "name": "Sauger",
+    "icon": "vacuum",
+    "vacuum": "vacuum.dreame",
+    "battery": "sensor.dreame_battery_level",
+    "error": "sensor.dreame_error",
+    "room": "sensor.dreame_current_room",
+    "status": "sensor.dreame_status",
+    "segments": {
+     "1": "Bad",
+     "2": "Wohnzimmer",
+     "3": "PC-Bereich",
+     "4": "Küche",
+     "5": "Schlafbereich"
+    }
+   },
+   {
+    "key": "innen",
+    "name": "Innen",
+    "icon": "thermometer",
+    "temp": "sensor.raumtemperatur_wohnbereich",
+    "hum": "sensor.durchschnitt_luftfeuchtigkeit"
+   },
+   {
+    "key": "luft",
+    "name": "Luft",
+    "icon": "air",
+    "co2": "sensor.alex_wohnung_luftwerte_kohlendioxid",
+    "co2_limit": 1000,
+    "mold": [
+     {
+      "id": "sensor.schimmelrisiko_bad",
+      "name": "Bad"
+     },
+     {
+      "id": "sensor.schimmelrisiko_wohnbereich",
+      "name": "Wohnbereich"
+     }
+    ],
+    "mold_limit": 80,
+    "vent_useful": "binary_sensor.luften_lohnt_sich",
+    "vent_minutes": "sensor.luftungsdauer_empfohlen"
+   },
+   {
+    "key": "musik",
+    "name": "Musik",
+    "icon": "music",
+    "multiroom": "input_boolean.multiroom"
+   },
+   {
+    "key": "lichter",
+    "name": "Lichter",
+    "icon": "bulb"
+   },
+   {
+    "key": "einkauf",
+    "name": "Einkauf",
+    "icon": "cart",
+    "todo": "todo.einkaufsliste_2"
+   }
+  ],
+  "lage_trim_order": [
+   "einkauf",
+   "musik",
+   "luft",
+   "innen",
+   "spuelmaschine",
+   "sauger"
+  ]
+ },
+ "heating": {
+  "mode": "input_select.heizung_modus",
+  "mode_options_shown": [
+   "Automatik",
+   "Komfort",
+   "Eco",
+   "Aus"
+  ],
+  "rooms": {
+   "wohnbereich": {
+    "climate": "climate.thermostat_wohnbereich_alex",
+    "ist": "sensor.raumtemperatur_wohnbereich",
+    "hum": "sensor.alex_wohnung_thermometer_wohnbereich_luftfeuchtigkeit",
+    "soll_helper": "input_number.heizung_wohnbereich_soll",
+    "reason": "input_text.heizung_wohnbereich_grund",
+    "boost_timer": "timer.heizung_wohnbereich_boost"
+   },
+   "bad": {
+    "climate": "climate.alex_wohnung_thermostat_bad",
+    "ist": "sensor.raumtemperatur_bad",
+    "hum": "sensor.alex_wohnung_thermometer_bad_luftfeuchtigkeit",
+    "soll_helper": "input_number.heizung_bad_soll",
+    "reason": "input_text.heizung_bad_grund",
+    "boost_timer": "timer.heizung_bad_boost"
+   }
+  }
+ },
+ "music": {
+  "multiroom": "input_boolean.multiroom",
+  "rooms": [
+   {
+    "id": "media_player.wohnbereich_snapcast_client",
+    "name": "Wohnbereich",
+    "zone": "wohnbereich"
+   },
+   {
+    "id": "media_player.pc_bereich_snapcast_client",
+    "name": "PC-Bereich",
+    "zone": "pc"
+   },
+   {
+    "id": "media_player.bad_snapcast_client",
+    "name": "Bad",
+    "zone": "bad"
+   }
+  ],
+  "wake_script": "script.xp700_einschalten",
+  "echos": [
+   {
+    "id": "media_player.alex_wohnung_echo_dot",
+    "name": "Echo Dot Wohnbereich"
+   },
+   {
+    "id": "media_player.bad_echo_dot_alex_wohnung",
+    "name": "Echo Dot Bad"
+   },
+   {
+    "id": "media_player.alex_wohnung_echo",
+    "name": "Echo"
+   }
+  ]
+ },
+ "door_reset": "binary_sensor.alex_wohnung_einganstur_tur",
+ "undo_scene_id": "wdh_undo",
+ "inbox": [
+  {
+   "id": "light.schrank_ambiente",
+   "name": "Kleiderschrank Ambiente",
+   "ha_name": "Kleiderschrank Ambiente",
+   "device": "Kleiderschrank Ambiente",
+   "model": "Controller RGB IR (0x33)",
+   "area": "alex_zimmer",
+   "suggest": "bett",
+   "first_seen": 1794400800
+  },
+  {
+   "id": "cover.rollladen_alex",
+   "name": "Rollladen",
+   "ha_name": "Rollladen",
+   "device": "Rollladen Alex",
+   "model": "Roller Switch（WIFI+BLE)",
+   "area": "alex_zimmer",
+   "suggest": null,
+   "first_seen": 1794400800
+  },
+  {
+   "id": "input_boolean.lichtshow",
+   "name": "lichtshow",
+   "ha_name": "lichtshow",
+   "device": null,
+   "model": null,
+   "area": "alex_zimmer",
+   "suggest": null,
+   "first_seen": 1794400800
+  },
+  {
+   "id": "climate.klima",
+   "name": "Klima",
+   "ha_name": "Klima",
+   "device": "Klima",
+   "model": "YPK-Air Condition",
+   "area": "alex_zimmer",
+   "suggest": null,
+   "first_seen": 1794400800
+  },
+  {
+   "id": "switch.pc_2_strom_steckdose_1",
+   "name": "PC 2",
+   "ha_name": "Pc 2 Strom",
+   "device": "Pc 2 Strom",
+   "model": "Smart plug",
+   "area": "alex_zimmer",
+   "suggest": "pc",
+   "first_seen": 1794400800
+  },
+  {
+   "id": "switch.switch_alex_steckdose_1",
+   "name": "LAN-Switch",
+   "ha_name": "Lan-Switch",
+   "device": "Lan-Switch Alex",
+   "model": "ANTELA Smart Plug",
+   "area": "alex_zimmer",
+   "suggest": "pc",
+   "first_seen": 1794400800
+  }
+ ],
+ "hidden": [
+  "light.rollladen_alex_hintergrundbeleuchtung",
+  "light.zone_ambiente",
+  "media_player.alex_wohnung_alex_tv_wohnbereich",
+  "media_player.alex_wohnung_echo",
+  "media_player.alex_wohnung_echo_dot",
+  "media_player.alex_wohnung_fire_tv_max_alex_wohnung_wohnbereich",
+  "media_player.alexanders_fire_tv_stick",
+  "media_player.bad_echo_dot_alex_wohnung",
+  "switch.alex_wohnung_lichtschalter_eingang_hinten",
+  "switch.alex_zimmer_lichtschalter_eingang_alex_wohnung_deckenlicht_1_alex_wohnung",
+  "switch.pc_power_switch"
+ ],
+ "orphans": [],
+ "watch_count": 141
+}
