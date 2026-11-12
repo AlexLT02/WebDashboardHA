@@ -26,6 +26,10 @@
   --on-ink: #3a1d10;
   --on-text: #f6b394;
   --on-line: rgba(239, 147, 107, 0.34);
+  /* accent shades, overridden together by state/accent.ts */
+  --on-soft: rgba(239, 147, 107, 0.16);
+  --on-badge-press: #f6aa88;
+  --on-press: #33281f;
   --cool: #7fb2ff;
   --cool-tint: rgba(127, 178, 255, 0.14);
   --hint: #e3b25b;
@@ -109,7 +113,7 @@ button { font-family: inherit; }
   position: absolute; left: 50px; top: 6px;
   min-width: 20px; height: 18px; padding: 0 5px;
   border-radius: 9px;
-  background: rgba(239, 147, 107, 0.16);
+  background: var(--on-soft);
   color: var(--on-text);
   font-size: 12px; font-weight: 700; line-height: 18px;
 }
@@ -196,7 +200,7 @@ button { font-family: inherit; }
 .tile.is-on { background: var(--tile-on); border-color: var(--on-line); }
 .tile.is-on .badge { background: var(--on); color: var(--on-ink); }
 .tile.is-on .badge--bare { background: transparent; color: var(--on-text); }
-.tile.is-on .badge.is-press { background: #f6aa88; }
+.tile.is-on .badge.is-press { background: var(--on-badge-press); }
 .tile.is-on .tile__sub { color: var(--on-text); }
 /* light colour: small pip on the badge, the badge itself stays warm */
 .pip {
@@ -300,7 +304,7 @@ button { font-family: inherit; }
 .chip__n { display: inline-block; vertical-align: top; font-weight: 400; color: var(--text-muted); margin-left: 8px; font-size: 14px; }
 .chip.is-on { background: var(--tile-on); border-color: var(--on-line); }
 .chip.is-on .badge { background: var(--on); color: var(--on-ink); }
-.chip.is-on .badge.is-press { background: #f6aa88; }
+.chip.is-on .badge.is-press { background: var(--on-badge-press); }
 .chip.is-on .chip__n { color: var(--on-text); }
 .chip.is-offline { background: transparent; border-style: dashed; color: var(--text-muted); }
 
@@ -398,7 +402,7 @@ button { font-family: inherit; }
   font-size: 16px; font-weight: 600; line-height: 54px; white-space: nowrap;
 }
 .zone__off svg { position: absolute; left: 16px; top: 15px; width: 24px; height: 24px; color: var(--text-soft); }
-.zone__off span { display: inline-block; margin-left: 8px; padding: 0 7px; height: 22px; line-height: 22px; border-radius: 11px; background: rgba(239, 147, 107, 0.16); color: var(--on-text); font-size: 13px; vertical-align: 1px; }
+.zone__off span { display: inline-block; margin-left: 8px; padding: 0 7px; height: 22px; line-height: 22px; border-radius: 11px; background: var(--on-soft); color: var(--on-text); font-size: 13px; vertical-align: 1px; }
 .zone__off.is-off { color: var(--text-muted); border-color: var(--line); }
 .zone__off.is-off svg { color: var(--text-faint); }
 .zone__off.is-press { background: #1f242e; }
@@ -476,7 +480,7 @@ button { font-family: inherit; }
 }
 .bigsw.is-on { background: var(--tile-on); border-color: var(--on-line); color: var(--on-text); }
 .bigsw.is-press { background: #2a303c; }
-.bigsw.is-on.is-press { background: #33281f; }
+.bigsw.is-on.is-press { background: var(--on-press); }
 .bigsw.is-disabled { color: var(--text-faint); border-style: dashed; }
 
 /* member rows (group popup) */
@@ -543,7 +547,7 @@ button { font-family: inherit; }
 }
 .pbtn.is-on { background: var(--tile-on); border-color: var(--on-line); color: var(--on-text); }
 .pbtn.is-press { background: #2a303c; }
-.pbtn.is-on.is-press { background: #33281f; }
+.pbtn.is-on.is-press { background: var(--on-press); }
 .pbtn.is-disabled { color: var(--text-faint); }
 .pbtn--cool { border-color: rgba(127, 178, 255, 0.45); color: var(--cool); background: #172133; }
 .pbtn svg { display: inline-block; width: 20px; height: 20px; vertical-align: -5px; margin-right: 6px; }

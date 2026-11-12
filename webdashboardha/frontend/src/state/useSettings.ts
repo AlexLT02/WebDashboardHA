@@ -21,7 +21,13 @@ export interface Settings {
   alertSlotPrefix: string;
   alertIndexEntity: string;
   alertAckScript: string;
+  /** P8: snowfall layer, "auto" = December to February. */
+  snow: SnowMode;
+  /** Accent preset id, see state/accent.ts. */
+  accent: string;
 }
+
+export type SnowMode = "auto" | "on" | "off";
 
 export const DEFAULT_SETTINGS: Settings = {
   night: false,
@@ -36,6 +42,8 @@ export const DEFAULT_SETTINGS: Settings = {
   alertSlotPrefix: "input_text.wdh_slot_",
   alertIndexEntity: "input_number.wdh_index",
   alertAckScript: "script.wdh_ack",
+  snow: "auto",
+  accent: "orange",
 };
 
 interface SettingsStore {

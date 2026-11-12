@@ -1,0 +1,49 @@
+/* Snowfall (P8): compositor only, transform + opacity, no filter/blur. z 150. */
+.snow {
+  position: fixed; left: 0; top: 0; width: 100%; height: 100%;
+  pointer-events: none; overflow: hidden; z-index: 150;
+}
+.snow__f {
+  position: absolute; top: -20px; display: block; line-height: 0;
+  -webkit-animation: snow-d1 18s linear infinite; animation: snow-d1 18s linear infinite;
+  will-change: transform;
+}
+.snow__f--d0 { -webkit-animation-name: snow-d0; animation-name: snow-d0; }
+.snow__f--d2 { -webkit-animation-name: snow-d2; animation-name: snow-d2; }
+
+@-webkit-keyframes snow-d0 {
+  0% { -webkit-transform: translate3d(0, 0, 0); opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { -webkit-transform: translate3d(-48px, 108vh, 0); opacity: 0; }
+}
+@keyframes snow-d0 {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { transform: translate3d(-48px, 108vh, 0); opacity: 0; }
+}
+@-webkit-keyframes snow-d1 {
+  0% { -webkit-transform: translate3d(0, 0, 0); opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { -webkit-transform: translate3d(14px, 108vh, 0); opacity: 0; }
+}
+@keyframes snow-d1 {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { transform: translate3d(14px, 108vh, 0); opacity: 0; }
+}
+@-webkit-keyframes snow-d2 {
+  0% { -webkit-transform: translate3d(0, 0, 0); opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { -webkit-transform: translate3d(52px, 108vh, 0); opacity: 0; }
+}
+@keyframes snow-d2 {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { transform: translate3d(52px, 108vh, 0); opacity: 0; }
+}

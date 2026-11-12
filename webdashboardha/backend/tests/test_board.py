@@ -88,7 +88,7 @@ def test_kommen_gehen_ambiente_sets(seed, store, registry, states):
 
 def test_watch_set_and_snapshot_size(seed, store, registry, states):
     board = _build(seed, store, registry, states)
-    assert 140 <= board.data["watch_count"] <= 170
+    assert 130 <= board.data["watch_count"] <= 170
     assert board.data["watch_count"] == len(board.watch)
     # alert helpers + virtual parts + facts are watched
     for eid in ("input_text.wdh_slot_4", "sensor.alex_wohnung_spulmaschiene_zustand",

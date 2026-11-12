@@ -207,42 +207,6 @@ function innen(cfg: LageCfg, board: Board, get: StateGetter): Entry {
   };
 }
 
-function luft(cfg: LageCfg, get: StateGetter): Entry {
-  const co2 = parseNum(cfg.co2 ? get(cfg.co2 as string)?.state : undefined);
-  const co2Limit = (cfg.co2_limit as number) || 1000;
-  const moldLimit = (cfg.mold_limit as number) || 80;
-  const molds = ((cfg.mold as { id: string; name: string }[]) || [])
-    .map((m) => ({ name: m.name, v: parseNum(get(m.id)?.state) }))
-    .filter((m) => m.v !== null) as { name: string; v: number }[];
-  const vent = parseNum(cfg.vent_minutes ? get(cfg.vent_minutes as string)?.state : undefined);
-  const ventText = vent !== null ? `, ${Math.round(vent)} min empfohlen` : "";
-  const row: LageRow = { key: cfg.key, icon: cfg.icon, name: cfg.name, value: "gut", tap: null };
-  if (co2 === null && !molds.length) {
-    row.value = "keine Daten";
-    return { key: cfg.key, row };
-  }
-  const worst = molds.reduce<{ name: string; v: number } | null>((a, m) => (!a || m.v > a.v ? m : a), null);
-  // CO2 station offline: the row still says something, from the mould risk (R8).
-  if (co2 === null && worst) row.value = `Schimmelrisiko ${Math.round(worst.v)} %`;
-  if (co2 !== null && co2 > co2Limit) {
-    return {
-      key: cfg.key, row,
-      block: { key: cfg.key, tone: "amber", icon: cfg.icon, head: cfg.name, big: "Lüften", sub: `CO₂ ${Math.round(co2)} ppm${ventText}`, tap: null },
-    };
-  }
-  if (worst && worst.v >= moldLimit) {
-    const useful = cfg.vent_useful ? get(cfg.vent_useful as string)?.state === "on" : true;
-    return {
-      key: cfg.key, row,
-      block: {
-        key: cfg.key, tone: "amber", icon: cfg.icon, head: cfg.name, big: useful ? "Lüften" : "Heizen",
-        sub: `Schimmelrisiko ${worst.name} ${Math.round(worst.v)} %`, tap: null,
-      },
-    };
-  }
-  return { key: cfg.key, row };
-}
-
 function musik(cfg: LageCfg, board: Board, get: StateGetter): Entry {
   const mr = cfg.multiroom ? get(cfg.multiroom as string) : undefined;
   const id = cfg.multiroom as string | undefined;
@@ -286,7 +250,6 @@ function entry(cfg: LageCfg, board: Board, get: StateGetter, now: number): Entry
     case "spuelmaschine": return appliance(cfg, board, get, now);
     case "sauger": return vacuum(cfg, get);
     case "innen": return innen(cfg, board, get);
-    case "luft": return luft(cfg, get);
     case "musik": return musik(cfg, board, get);
     case "lichter": return lichter(cfg, board, get);
     case "einkauf": return einkauf(cfg, get);

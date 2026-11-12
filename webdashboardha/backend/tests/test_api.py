@@ -55,7 +55,7 @@ def test_board_endpoint(api):
     client, hub = api
     b = client.get("/api/board").json()
     assert b["rev"] == 1 and len(b["zones"]) == 5 and b["orphans"] == []
-    assert len(b["inbox"]) == 6 and 140 <= b["watch_count"] <= 170
+    assert len(b["inbox"]) == 6 and 130 <= b["watch_count"] <= 170
     # Registry loaded before states, via the four list commands.
     assert [c["type"] for c in hub.ha.commands][:4] == [
         "config/area_registry/list", "config/device_registry/list",

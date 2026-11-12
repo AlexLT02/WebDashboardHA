@@ -217,20 +217,11 @@
     { "key": "innen", "name": "Innen", "icon": "thermometer",
       "temp": "sensor.raumtemperatur_wohnbereich",
       "hum": "sensor.durchschnitt_luftfeuchtigkeit" },
-    { "key": "luft", "name": "Luft", "icon": "air",
-      "co2": "sensor.alex_wohnung_luftwerte_kohlendioxid", "co2_limit": 1000,
-      "mold": [
-        { "id": "sensor.schimmelrisiko_bad", "name": "Bad" },
-        { "id": "sensor.schimmelrisiko_wohnbereich", "name": "Wohnbereich" }
-      ],
-      "mold_limit": 80,
-      "vent_useful": "binary_sensor.luften_lohnt_sich",
-      "vent_minutes": "sensor.luftungsdauer_empfohlen" },
     { "key": "musik", "name": "Musik", "icon": "music", "multiroom": "input_boolean.multiroom" },
     { "key": "lichter", "name": "Lichter", "icon": "bulb" },
     { "key": "einkauf", "name": "Einkauf", "icon": "cart", "todo": "todo.einkaufsliste_2" }
   ],
-  "lage_trim_order": ["einkauf", "musik", "luft", "innen", "spuelmaschine", "sauger"],
+  "lage_trim_order": ["einkauf", "musik", "innen", "spuelmaschine", "sauger"],
   "heating": {
     "mode": "input_select.heizung_modus",
     "mode_options_shown": ["Automatik", "Komfort", "Eco", "Aus"],

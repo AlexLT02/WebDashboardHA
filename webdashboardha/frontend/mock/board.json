@@ -1889,26 +1889,6 @@
     "hum": "sensor.durchschnitt_luftfeuchtigkeit"
    },
    {
-    "key": "luft",
-    "name": "Luft",
-    "icon": "air",
-    "co2": "sensor.alex_wohnung_luftwerte_kohlendioxid",
-    "co2_limit": 1000,
-    "mold": [
-     {
-      "id": "sensor.schimmelrisiko_bad",
-      "name": "Bad"
-     },
-     {
-      "id": "sensor.schimmelrisiko_wohnbereich",
-      "name": "Wohnbereich"
-     }
-    ],
-    "mold_limit": 80,
-    "vent_useful": "binary_sensor.luften_lohnt_sich",
-    "vent_minutes": "sensor.luftungsdauer_empfohlen"
-   },
-   {
     "key": "musik",
     "name": "Musik",
     "icon": "music",
@@ -1929,7 +1909,6 @@
   "lage_trim_order": [
    "einkauf",
    "musik",
-   "luft",
    "innen",
    "spuelmaschine",
    "sauger"

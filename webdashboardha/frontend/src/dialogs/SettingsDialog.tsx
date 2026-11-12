@@ -3,10 +3,17 @@ import { Dialog } from "./Dialog";
 import { Icon } from "../controls/icons";
 import { Press } from "../controls/Press";
 import { fetchHostInfo } from "../state/api";
-import { useSettings, useSettingsStore, type Settings } from "../state/useSettings";
+import { useSettings, useSettingsStore, type Settings, type SnowMode } from "../state/useSettings";
+import { ACCENTS, accentById } from "../state/accent";
 
 /** "Nachts gedimmt einschalten" (D14): Aus · 10 · 15 · 25 %. */
 const NIGHT_ON = [0, 10, 15, 25];
+
+const SNOW: [SnowMode, string][] = [
+  ["auto", "Auto"],
+  ["on", "An"],
+  ["off", "Aus"],
+];
 
 function Toggle({ on, label, onToggle }: { on: boolean; label: string; onToggle: () => void }) {
   return (
@@ -79,9 +86,20 @@ export function SettingsDialog() {
   }, []);
 
   return (
-    <Dialog name="Einstellungen" state={helpers ? "Warnmeldung, HA-Helfer" : undefined} idleMs={120000}>
+    <Dialog name="Einstellungen" state={helpers ? "Warnmeldung, HA-Helfer, Adresse" : undefined} idleMs={120000}>
       {helpers ? (
-        <AlertHelpers onBack={() => setHelpers(false)} />
+        <>
+          <AlertHelpers onBack={() => setHelpers(false)} />
+          <div className="psub">Adresse</div>
+          <div className="dlg__row">
+            <span className="dlg__row-k">Kiosk (iPad)</span>
+            <span className="dlg__row-v">{kioskUrl || "…"}</span>
+          </div>
+          <div className="dlg__row">
+            <span className="dlg__row-k">Diese Seite</span>
+            <span className="dlg__row-v">{window.location.host}</span>
+          </div>
+        </>
       ) : (
         <>
           <div className="dlg__gap" />
@@ -110,19 +128,28 @@ export function SettingsDialog() {
               </Press>
             ))}
           </div>
-          <Press className="pbtn" label="Warnmeldung, HA-Helfer" onPress={() => setHelpers(true)}>
-            Warnmeldung, HA-Helfer
+          <div className="psub">
+            Schneefall<span>Auto: Dezember bis Februar</span>
+          </div>
+          <div className="qchips qchips--3">
+            {SNOW.map(([mode, text]) => (
+              <Press key={mode} className={`qchip${settings.snow === mode ? " is-sel" : ""}`} label={`Schneefall ${text}`} onPress={() => set("snow", mode)}>
+                {text}
+              </Press>
+            ))}
+          </div>
+          <div className="psub">Akzentfarbe</div>
+          <div className="qchips qchips--6">
+            {ACCENTS.map((a) => (
+              <Press key={a.id} className={`qchip${accentById(settings.accent).id === a.id ? " is-sel" : ""}`} label={`Akzentfarbe ${a.name}`} onPress={() => set("accent", a.id)}>
+                <span className="dlg__swatch" style={{ background: a.hex }} />
+              </Press>
+            ))}
+          </div>
+          <Press className="pbtn" label="Warnmeldung, HA-Helfer, Adresse" onPress={() => setHelpers(true)}>
+            Warnmeldung, HA-Helfer, Adresse
             <Icon name="chev" className="qicon" />
           </Press>
-          <div className="psub">Adresse</div>
-          <div className="dlg__row">
-            <span className="dlg__row-k">Kiosk (iPad)</span>
-            <span className="dlg__row-v">{kioskUrl || "…"}</span>
-          </div>
-          <div className="dlg__row">
-            <span className="dlg__row-k">Diese Seite</span>
-            <span className="dlg__row-v">{window.location.host}</span>
-          </div>
         </>
       )}
     </Dialog>

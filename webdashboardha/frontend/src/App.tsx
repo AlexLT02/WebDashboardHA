@@ -10,6 +10,8 @@ import { showOffResult } from "./state/notice";
 import { beginPending } from "./state/pending";
 import { Rail } from "./shell/Rail";
 import { NightShade } from "./shell/NightShade";
+import { Snow } from "./shell/Snow";
+import { applyAccent } from "./state/accent";
 import { AlertOverlay, useAlertBanner } from "./shell/AlertOverlay";
 import { useConn, useConnWatch } from "./state/conn";
 import { useReloads } from "./state/reload";
@@ -108,6 +110,8 @@ export default function App() {
     return () => stops.forEach((stop) => stop());
   }, []);
 
+  useEffect(() => applyAccent(settings.accent), [settings.accent]);
+
   useReturnToStart();
   useConnWatch();
   useReloads();
@@ -119,6 +123,7 @@ export default function App() {
     <div className={`stage${editing ? " is-editing" : ""}${stale ? " is-stale" : ""}${banner ? " has-banner" : ""}`}>
       <Rail />
       <Content />
+      <Snow settings={settings} />
       <TopNotice />
       <EditBar />
       <PopupHost />

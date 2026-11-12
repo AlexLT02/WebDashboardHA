@@ -51,7 +51,7 @@ try {
   await mock("/__mock/state", { entity_id: "sensor.alex_wohnung_spulmaschiene_zustand", state: "running" });
   await mock("/__mock/state", { entity_id: "sensor.alex_wohnung_spulmaschiene_verbleibende_zeit", state: "80" });
   await mock("/__mock/state", { entity_id: "sensor.alex_wohnung_spulmaschiene_fortschritt", state: "10" });
-  await mock("/__mock/state", { entity_id: "sensor.alex_wohnung_luftwerte_kohlendioxid", state: "1300" });
+  await mock("/__mock/state", { entity_id: "vacuum.dreame", state: "cleaning" });
   await c.eval(`window.__wdh.showOffResult({ scope: 'alles_aus' }, { undo: 'u10', label: 'Alles aus', count: 11, hint: 'Fenster Bad offen', partial: false, expires_in: 10 }); 1`);
   await sleep(600);
   await c.shot(resolve(OUT, "p3-start-3-bloecke.png"));
