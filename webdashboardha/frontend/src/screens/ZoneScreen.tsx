@@ -15,9 +15,9 @@ import type { Board, EntityState, Item, Zone } from "../state/model";
 export const OFFLINE_FOLD_MS = 60 * 60 * 1000;
 
 /** Tile or wide cover tile for an item. */
-export function ItemTile({ item, name }: { item: Item; name?: string }) {
-  if (item.kind === "cover" || item.kind === "cover_pos") return <CoverWide item={item} name={name} />;
-  return <Tile item={item} name={name} />;
+export function ItemTile({ item, name, ctx, zoneLabel }: { item: Item; name?: string; ctx?: "fav" | "zone"; zoneLabel?: string }) {
+  if (item.kind === "cover" || item.kind === "cover_pos") return <CoverWide item={item} name={name} ctx={ctx} />;
+  return <Tile item={item} name={name} ctx={ctx} zoneLabel={zoneLabel} />;
 }
 
 interface ContactCfg {

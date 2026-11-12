@@ -334,6 +334,15 @@ function applyScenario(name: string) {
       states[id] = next;
     }
     for (const id in sc.items || {}) Object.assign(board.items[id], sc.items[id]);
+    // "inbox": {id: partial row} keeps only these inbox rows (in this order) and patches them.
+    if (sc.inbox) {
+      board.inbox = Object.keys(sc.inbox)
+        .map((id) => {
+          const r = board.inbox.find((x: any) => x.id === id);
+          return r ? { ...r, ...sc.inbox[id] } : null;
+        })
+        .filter(Boolean);
+    }
     // Recompute light-group states from members, like HA does.
     for (const id in states) {
       if (!isGroup(id) || domainOf(id) !== "light" || (sc.states && sc.states[id] && sc.states[id].state)) continue;

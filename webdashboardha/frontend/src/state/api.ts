@@ -71,6 +71,28 @@ export function markSeen(id: string): Promise<{ rev: number }> {
   return request("POST", `/api/zones/items/${encodeURIComponent(id)}/seen`);
 }
 
+/** Local edit of one item (04 §4.7); `name: null` = back to the seed/HA name. */
+export interface ItemPatch {
+  zone?: string | null;
+  name?: string | null;
+  tier?: "zone" | "all" | "hidden";
+  func?: "licht" | "ambiente" | "medien" | "klima";
+  order_step?: -1 | 1;
+}
+
+export function patchItem(id: string, patch: ItemPatch): Promise<{ rev: number }> {
+  return request("PATCH", `/api/zones/items/${encodeURIComponent(id)}`, patch);
+}
+
+export function resetItem(id: string): Promise<{ rev: number }> {
+  return request("POST", `/api/zones/items/${encodeURIComponent(id)}/reset`);
+}
+
+/** Favourites in order (max 15); `names` renames single favourite tiles (P5). */
+export function putFavorites(ids: string[], names?: Record<string, string>): Promise<{ rev: number }> {
+  return request("PUT", "/api/zones/favorites", names ? { ids, names } : { ids });
+}
+
 export interface HostInfo {
   host: string | null;
   port: number;

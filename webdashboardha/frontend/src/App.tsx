@@ -10,8 +10,11 @@ import { showOffResult } from "./state/notice";
 import { beginPending } from "./state/pending";
 import { Rail } from "./shell/Rail";
 import { NightShade } from "./shell/NightShade";
-import { AlertOverlay } from "./shell/AlertOverlay";
+import { AlertOverlay, useAlertBanner } from "./shell/AlertOverlay";
+import { useConn, useConnWatch } from "./state/conn";
+import { useReloads } from "./state/reload";
 import { TopNotice } from "./shell/TopNotice";
+import { EditBar } from "./shell/EditBar";
 import { StartScreen } from "./screens/StartScreen";
 import { ZoneScreen } from "./screens/ZoneScreen";
 import { AllScreen } from "./screens/AllScreen";
@@ -82,10 +85,12 @@ function useReturnToStart(): void {
   const door = useStore((s) => (s.board?.door_reset ? s.states[s.board.door_reset]?.state : undefined));
   const reset = () => {
     const ui = useUi.getState();
+    // Bearbeiten pauses the return (04 §5.6); it ends by itself after 10 min.
+    if (ui.editing) return;
     ui.closePopup();
     if (ui.screen.t !== "start") ui.go({ t: "start" });
-    const scroller = document.querySelector(".zone");
-    if (scroller) scroller.scrollTop = 0;
+    const scrollers = document.querySelectorAll(".zone, .alle__list");
+    for (let i = 0; i < scrollers.length; i++) scrollers[i].scrollTop = 0;
   };
   useIdleTimer(RETURN_MS, reset);
   useEffect(() => {
@@ -104,12 +109,18 @@ export default function App() {
   }, []);
 
   useReturnToStart();
+  useConnWatch();
+  useReloads();
+  const editing = useUi((s) => s.editing);
+  const stale = useConn((s) => s.stale);
+  const banner = useAlertBanner((s) => s.on);
 
   return (
-    <div className="stage">
+    <div className={`stage${editing ? " is-editing" : ""}${stale ? " is-stale" : ""}${banner ? " has-banner" : ""}`}>
       <Rail />
       <Content />
       <TopNotice />
+      <EditBar />
       <PopupHost />
       <NightShade settings={settings} />
       <AlertOverlay settings={settings} />

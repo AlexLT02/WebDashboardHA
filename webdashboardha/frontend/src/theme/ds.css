@@ -185,6 +185,7 @@ button { font-family: inherit; }
   font-size: 16px; font-weight: 600; line-height: 21px; letter-spacing: -0.012em;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
+.tile__name--long { letter-spacing: -0.04em; }
 .tile__sub {
   margin-top: 1px; font-size: 14px; line-height: 19px; color: var(--text-muted);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -351,6 +352,14 @@ button { font-family: inherit; }
   background: #222733; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--r-block);
   box-shadow: var(--shadow-pop); overflow: hidden; z-index: 250;
   -webkit-animation: pop-in 0.18s ease-out; animation: pop-in 0.18s ease-out;
+}
+/* Hint banner at y 24: the notice moves below it (04 §5.2). */
+.stage.has-banner .undo { top: 96px;
+}
+/* Offline > 30 s (04 §5.6): values grey, badges hollow, nothing is sent. */
+.stage.is-stale .tile__sub, .stage.is-stale .chip__n, .stage.is-stale .lage { color: var(--text-muted); }
+.stage.is-stale .badge, .stage.is-stale .tile.is-on .badge, .stage.is-stale .chip.is-on .badge {
+  background: transparent; color: var(--text-muted); box-shadow: inset 0 0 0 2px var(--line-strong);
 }
 .undo__txt { position: absolute; left: 16px; top: 0; right: 140px; line-height: 54px; font-size: 16px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .undo--plain .undo__txt { right: 16px; }
@@ -585,6 +594,81 @@ button { font-family: inherit; }
 .qchip.is-on { border-color: rgba(127, 178, 255, 0.55); color: var(--cool); background: #172133; }
 .progress--6 { height: 6px; border-radius: 3px; margin-top: 14px; }
 .progress--6 i { height: 6px; border-radius: 3px; }
+
+/* ---------------- Alle / inbox (mockup 06) ---------------- */
+.alle { position: absolute; left: 112px; top: 24px; width: 896px; bottom: 0; }
+/* The list is the only scrolling area; title and filter chips stay put (04 §5.2). */
+.alle__list {
+  position: absolute; left: 0; right: 0; top: 116px; bottom: 0;
+  overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding-bottom: 24px;
+}
+.alle__list .label { margin-top: 16px; }
+.alle__list > .label:first-child { margin-top: 12px; }
+.alle__list .chips { margin-bottom: 8px; }
+.alle__empty { margin-top: 16px; font-size: 15px; color: var(--text-muted); }
+.fchips { white-space: nowrap; height: 44px; margin-bottom: 4px; }
+.fchip {
+  display: inline-block; height: 44px; margin-right: 6px; padding: 0 13px;
+  border-radius: 22px; background: var(--tile); border: 1px solid var(--line);
+  font-size: 15px; font-weight: 600; color: var(--text-soft); line-height: 42px; vertical-align: top;
+}
+.fchip span { display: inline-block; margin-left: 6px; padding: 0 6px; height: 20px; line-height: 20px; border-radius: 10px; background: rgba(255, 255, 255, 0.08); font-size: 12px; color: var(--text-soft); vertical-align: 1px; }
+.fchip.is-sel { background: #e6e9ef; color: #11141b; border-color: #e6e9ef; }
+.fchip.is-sel span { background: var(--cool); color: #0d1016; }
+.fchip.is-press { background: #1f242e; }
+.fchip.is-sel.is-press { background: #d3d7de; }
+.fchip--edit { border-style: dashed; border-color: rgba(127, 178, 255, 0.45); }
+.inbox { border-radius: var(--r-block); background: #12161e; border: 1px solid var(--line); }
+.inrow { position: relative; height: 80px; border-bottom: 1px solid var(--line); }
+.inrow:last-child { border-bottom: 0; }
+.inrow .badge { top: 20px; left: 12px; }
+.inrow__id { position: absolute; left: 0; top: 0; width: 316px; height: 79px; }
+.inrow__t { position: absolute; left: 66px; top: 17px; width: 250px; }
+.inrow__t .tile__sub { margin-top: 3px; }
+.inrow__z { position: absolute; left: 318px; top: 18px; white-space: nowrap; }
+.inrow.is-busy { opacity: 0.55; }
+.zbtn {
+  display: inline-block; height: 44px; margin-right: 6px; padding: 0 12px; border-radius: 10px;
+  background: var(--btn); border: 1px solid var(--line-strong);
+  font-size: 15px; font-weight: 600; color: var(--text-soft); line-height: 42px; vertical-align: top;
+}
+.zbtn.is-sug { border-color: var(--cool); color: var(--cool); background: #172133; }
+.zbtn--quiet { background: transparent; border-color: transparent; color: var(--text-muted); margin-right: 0; }
+.zbtn.is-press { background: #2a303c; }
+.zbtn.is-sel { border-color: var(--on-line); color: var(--on-text); background: var(--tile-on); }
+
+/* ---------------- Bearbeiten (04 §5.7) ---------------- */
+.editbar {
+  position: absolute; left: 552px; top: 24px; width: 456px; height: 56px; z-index: 251;
+  background: #172133; border: 1px solid rgba(127, 178, 255, 0.45); border-radius: var(--r-block);
+  box-shadow: var(--shadow-pop); overflow: hidden;
+}
+.editbar svg { position: absolute; left: 16px; top: 16px; width: 22px; height: 22px; color: var(--cool); }
+.editbar__txt { position: absolute; left: 48px; top: 0; right: 140px; line-height: 54px; font-size: 16px; font-weight: 600; color: var(--cool); white-space: nowrap; overflow: hidden; }
+.editbar__txt span { font-weight: 400; color: var(--text-soft); margin-left: 8px; }
+.editbar__btn {
+  position: absolute; right: 6px; top: 5px; width: 128px; height: 44px; border-radius: 10px;
+  background: var(--cool); color: #0d1016; font-size: 15px; font-weight: 700; line-height: 44px; text-align: center;
+}
+.editbar__btn.is-press { background: #a9caff; }
+.stage.is-editing .undo { top: 88px; }
+.stage.is-editing .tile, .stage.is-editing .chip { border-style: dashed; border-color: rgba(127, 178, 255, 0.45); }
+.psub + .seg { margin-top: 8px; }
+.qicon { display: inline-block; vertical-align: -3px; margin: 0 4px; }
+.seg--4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+.seg--3 { grid-template-columns: 1fr 1fr 1fr; }
+.seg div svg { display: inline-block; width: 15px; height: 15px; vertical-align: -2px; margin-right: 3px; }
+.ename { position: relative; height: 48px; margin-top: 8px; }
+.ename__in {
+  position: absolute; left: 0; top: 0; right: 132px; height: 48px; padding: 0 64px 0 14px;
+  border-radius: 12px; background: #11141b; border: 1px solid var(--line-strong);
+  color: var(--text); font-size: 17px; font-weight: 600; font-family: inherit; outline: none;
+  -webkit-user-select: text; user-select: text; -webkit-appearance: none;
+}
+.ename__in.is-bad { border-color: var(--alarm); }
+.ename__n { position: absolute; right: 146px; top: 0; line-height: 48px; font-size: 13px; color: var(--text-muted); }
+.ename .pbtn { position: absolute; right: 0; top: 0; width: 124px; margin-top: 0; }
 
 /* ---------------- waiting screen ---------------- */
 .wait { position: absolute; left: 112px; top: 300px; width: 896px; text-align: center; }

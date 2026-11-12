@@ -10,7 +10,7 @@ const CONN_OK_MS = 1000;
 /**
  * Connection hint (04 §5.6 first stage): nothing for 3 s, then amber
  * "Verbindung wird wiederhergestellt …", 1 s green "Verbunden" when back.
- * Stale look, refusal and reloads after 30 s / 5 min follow in P6.
+ * Stale look, refusal and reloads after 30 s / 5 min: state/conn.ts.
  */
 function useConnNotice(): "lost" | "ok" | null {
   const up = useStore((s) => s.connected && s.haConnected);

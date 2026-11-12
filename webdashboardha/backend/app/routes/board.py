@@ -116,6 +116,13 @@ class ItemPatch(BaseModel):
 
 class FavoritesPut(BaseModel):
     ids: list[str] = Field(max_length=FAVORITES_MAX)
+    # P5: label of a favourite tile, edited from the start screen (1..14 characters).
+    names: dict[str, str] | None = None
+
+    @field_validator("names")
+    @classmethod
+    def _names(cls, v: dict[str, str] | None) -> dict[str, str] | None:
+        return None if v is None else {k: validate_name(n) for k, n in v.items()}
 
 
 def _known(hub: Hub, item_id: str) -> bool:
@@ -181,8 +188,11 @@ async def put_favorites(payload: FavoritesPut, hub: HubDep) -> dict[str, int]:
     unknown = [i for i in payload.ids if i not in items]
     if unknown:
         raise HTTPException(status_code=404, detail=f"unbekannt: {', '.join(unknown)}")
+    stray = [i for i in (payload.names or {}) if i not in payload.ids]
+    if stray:
+        raise HTTPException(status_code=422, detail=f"Name für Nicht-Favorit: {', '.join(stray)}")
     try:
-        hub.zones.set_favorites(payload.ids, {i: items[i]["name"] for i in payload.ids})
+        hub.zones.set_favorites(payload.ids, {i: items[i]["name"] for i in payload.ids}, labels=payload.names)
     except ZoneError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     return await _changed(hub)

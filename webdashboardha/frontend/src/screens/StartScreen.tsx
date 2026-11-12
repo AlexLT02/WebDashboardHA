@@ -51,7 +51,7 @@ export function StartScreen() {
         <div className="label">Favoriten</div>
         <div className="grid3">
           {favs.map((f) => (
-            <ItemTile key={f.item.id} item={f.item} name={f.name} />
+            <ItemTile key={f.item.id} item={f.item} name={f.name} ctx="fav" />
           ))}
         </div>
       </section>

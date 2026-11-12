@@ -168,6 +168,25 @@ def test_hide_reset_seen_favorites(api):
     assert client.put("/api/zones/favorites", json={"ids": too_many}).status_code == 422
 
 
+def test_favorite_labels_from_the_start_screen(api):
+    """P5: the edit sheet renames a favourite tile without touching the item name."""
+    client, _hub = api
+    ids = [f["id"] for f in client.get("/api/board").json()["start"]["favorites"]]
+    r = client.put("/api/zones/favorites", json={"ids": ids, "names": {"light.zone_kueche": "Kochen"}})
+    assert r.status_code == 200
+    b = client.get("/api/board").json()
+    fav = next(f for f in b["start"]["favorites"] if f["id"] == "light.zone_kueche")
+    assert fav["name"] == "Kochen" and b["items"]["light.zone_kueche"]["name"] == "Küche"
+    assert [f["id"] for f in b["start"]["favorites"]] == ids  # order unchanged
+    # moving keeps the label, 15 characters are refused, labels only for favourites
+    moved = ids[1:] + ids[:1]
+    assert client.put("/api/zones/favorites", json={"ids": moved}).status_code == 200
+    b = client.get("/api/board").json()
+    assert next(f for f in b["start"]["favorites"] if f["id"] == "light.zone_kueche")["name"] == "Kochen"
+    assert client.put("/api/zones/favorites", json={"ids": moved, "names": {"light.zone_kueche": "x" * 15}}).status_code == 422
+    assert client.put("/api/zones/favorites", json={"ids": moved[:3], "names": {moved[5]: "Neu"}}).status_code == 422
+
+
 def test_actions_endpoints(api):
     client, hub = api
     r = client.post("/api/actions/off", json={"scope": "alles_aus"})

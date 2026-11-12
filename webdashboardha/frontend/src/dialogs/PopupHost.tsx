@@ -10,7 +10,8 @@ import { MusicPopup } from "./popups/MusicPopup";
 import { VacuumPopup } from "./popups/VacuumPopup";
 import { AppliancePopup } from "./popups/AppliancePopup";
 import { ActivePopup, ContactsPopup, CoversPopup, KgPopup } from "./popups/StartPopups";
-import { ServicePanel } from "../shell/ServicePanel";
+import { EditSheet } from "./popups/EditSheet";
+import { OrphansPopup, ServicePanel } from "../shell/ServicePanel";
 import { SettingsDialog } from "./SettingsDialog";
 import type { Item } from "../state/model";
 
@@ -72,8 +73,12 @@ export function PopupHost() {
       return <VacuumPopup entityId={popup.id} />;
     case "service":
       return <ServicePanel />;
+    case "orphans":
+      return <OrphansPopup />;
     case "settings":
       return <SettingsDialog />;
+    case "edit":
+      return board.items[popup.id] ? <EditSheet key={`${popup.id}|${popup.from}`} id={popup.id} from={popup.from} /> : null;
     default:
       return null;
   }

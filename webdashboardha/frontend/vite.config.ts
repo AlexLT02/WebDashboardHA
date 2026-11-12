@@ -1,6 +1,14 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import legacy from "@vitejs/plugin-legacy";
+import { existsSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
+
+// Build version = backend __version__; the app reloads when hello.version differs (04 §5.6).
+const VERSION_FILE = resolve(__dirname, "../backend/app/__init__.py");
+const APP_VERSION = existsSync(VERSION_FILE)
+  ? (/__version__\s*=\s*"([^"]+)"/.exec(readFileSync(VERSION_FILE, "utf8")) || [])[1] || ""
+  : "";
 
 // iPad Air 1 hängt fest auf iPadOS 12.5 / Safari 12. Der Legacy-Build
 // transpiliert nach ES5-nah und injiziert core-js-Polyfills + SystemJS,
@@ -12,6 +20,9 @@ export default defineConfig({
   // dynamischen Pfad /api/hassio_ingress/<token>/ eingebunden. Absolute
   // /assets/... würden ins Leere zeigen.
   base: "./",
+  define: {
+    __APP_VERSION__: JSON.stringify(APP_VERSION),
+  },
   plugins: [
     react(),
     legacy({

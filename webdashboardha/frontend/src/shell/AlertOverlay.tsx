@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { create } from "zustand";
 import { useEntity } from "../state/store";
 import { callService } from "../state/api";
 import { pauseIdle, resumeIdle } from "../state/idle";
@@ -24,6 +25,9 @@ const FALLBACK: Record<AlertLevel, string> = {
   warnung: "Warnung",
   hinweis: "Hinweis",
 };
+
+/** Hint banner on screen: the TopNotice moves down to y 96 (04 §5.2). */
+export const useAlertBanner = create<{ on: boolean }>(() => ({ on: false }));
 
 /** Warndreieck (wichtig/warnung) bzw. Info-Kreis (hinweis), erbt die Level-Farbe. */
 function AlertIcon({ level }: { level: AlertLevel }) {
@@ -131,12 +135,21 @@ export function AlertOverlay({ settings }: Props) {
     return () => window.removeEventListener("resize", measure);
   }, [visible, active, alerts.length, fingerprint]);
 
-  // A standing warning pauses the return-to-start timer (04 §5.6).
+  // Only "hinweis" everywhere → banner; any higher level → full screen (04 §5.6).
+  const banner = visible && alerts.every((a) => a.level === "hinweis");
+
+  // A standing full-screen warning pauses the return-to-start timer (04 §5.6).
+  // The banner does not: "Wäsche ist fertig" may stand for hours.
   useEffect(() => {
-    if (!visible) return;
+    if (!visible || banner) return;
     pauseIdle("alert");
     return () => resumeIdle("alert");
-  }, [visible]);
+  }, [visible, banner]);
+
+  useEffect(() => {
+    useAlertBanner.setState({ on: banner });
+  }, [banner]);
+  useEffect(() => () => useAlertBanner.setState({ on: false }), []);
 
   if (!visible) return null;
 
@@ -155,6 +168,20 @@ export function AlertOverlay({ settings }: Props) {
     const domain = alertSwitchEntity.split(".")[0] || "input_boolean";
     callService({ domain, service: "turn_off", entity_id: alertSwitchEntity }).catch(undo);
   };
+
+  if (banner) {
+    return (
+      <div className="wban" role="status">
+        <span className="wban__icon">
+          <AlertIcon level="hinweis" />
+        </span>
+        <div className="wban__txt">{current.text || FALLBACK.hinweis}</div>
+        <Press className="wban__ok" label="Quittieren" onPress={dismiss}>
+          OK
+        </Press>
+      </div>
+    );
+  }
 
   return (
     <div className="wov" role="alertdialog" aria-modal="true">

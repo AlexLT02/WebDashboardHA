@@ -1,11 +1,7 @@
-/* Settings dialog content (shortened again in P5). Popup frame lives in ds.css. */
-.dlg__scroll {
-  max-height: 520px;
-  margin: 0 -24px;
-  padding: 16px 24px 0;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
+/* Settings dialog content (P5: shortened, never scrolls). Popup frame lives in ds.css. */
+.dlg__field { margin-top: 12px; }
+.dlg__duo--fields { align-items: start; }
+.dlg__input:disabled { color: var(--text-faint); }
 .dlg__label {
   font-size: 13px;
   font-weight: 600;

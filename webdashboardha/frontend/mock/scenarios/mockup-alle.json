@@ -1,0 +1,9 @@
+{
+  "description": "Mockup 06-alle-neu (Wednesday 14:12): two devices without zone, the suggestion of the second one highlighted.",
+  "extends": "mockup-day",
+  "now": "2026-11-11T14:12:00",
+  "inbox": {
+    "switch.pc_2_strom_steckdose_1": { "name": "Spülmaschine", "device": "IKEA Steckdose", "model": "nur Messung", "suggest": null },
+    "climate.klima": { "name": "Thermometer Küche", "device": "SONOFF SNZB-02D", "model": null, "suggest": "kueche" }
+  }
+}

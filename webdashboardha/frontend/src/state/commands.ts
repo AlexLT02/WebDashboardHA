@@ -8,6 +8,10 @@ import { beginPending, failPending } from "./pending";
 import { showOffResult, showText } from "./notice";
 import { hvacAllowed } from "./climate";
 import { useStore } from "./store";
+import { refuseIfStale } from "./conn";
+import { nightOnPct } from "./night";
+import { useSettingsStore } from "./useSettings";
+import { now } from "./clock";
 import type { Item } from "./model";
 import type { TileView } from "./tileState";
 
@@ -15,8 +19,14 @@ export function domainOf(entityId: string): string {
   return entityId.split(".")[0];
 }
 
+/** D14: icon "on" for lights inside the night window (not Ambiente, not popups). */
+function nightPct(): number | undefined {
+  return nightOnPct(useSettingsStore.getState().settings, new Date(now()));
+}
+
 /** Run a single service call for an item with optimistic feedback. */
 function send(item: Item, on: boolean, calls: ServiceCall[], script = false): void {
+  if (refuseIfStale()) return;
   const board = useStore.getState().board;
   beginPending(item, on, board, script);
   calls
@@ -26,6 +36,7 @@ function send(item: Item, on: boolean, calls: ServiceCall[], script = false): vo
 
 /** Bulk "off" with undo, used by groups, zones, Ambiente, Alles aus, all lights. */
 export function runOff(scope: OffScope, item?: Item): Promise<OffResult | null> {
+  if (refuseIfStale()) return Promise.resolve(null);
   if (item) beginPending(item, false, useStore.getState().board);
   return actionOff(scope).then(
     (res) => {
@@ -42,6 +53,7 @@ export function runOff(scope: OffScope, item?: Item): Promise<OffResult | null> 
 
 /** Bulk "on" (Ambiente, groups) with an optimistic record for the tile. */
 export function runOn(item: Item, scope: Parameters<typeof actionOn>[0]): void {
+  if (refuseIfStale()) return;
   beginPending(item, true, useStore.getState().board);
   actionOn(scope).catch(() => failPending(item.id));
 }
@@ -54,9 +66,16 @@ export function toggleItem(item: Item, view: TileView): void {
     case "group":
     case "switch_group":
       if (view.on) runOff({ scope: "group", id }, item);
+      else if (item.kind === "group") runOn(item, { scope: "group", id, brightness_pct: nightPct() });
       else runOn(item, { scope: "group", id });
       return;
-    case "light":
+    case "light": {
+      const pct = want ? nightPct() : undefined;
+      const call: ServiceCall = { domain: "light", service: want ? "turn_on" : "turn_off", entity_id: id };
+      if (pct) call.data = { brightness_pct: pct };
+      send(item, want, [call]);
+      return;
+    }
     case "light_onoff":
     case "status_led":
       send(item, want, [{ domain: "light", service: want ? "turn_on" : "turn_off", entity_id: id }]);
@@ -107,6 +126,7 @@ export function hvacCall(entityId: string, mode: "cool" | "off"): ServiceCall | 
 
 /** Plain fire-and-forget service call (cover buttons, popup controls). */
 export function fire(call: ServiceCall, onError?: () => void): void {
+  if (refuseIfStale()) return;
   callService(call).catch(() => {
     if (onError) onError();
     else showText("Fehlgeschlagen", "amber");

@@ -124,15 +124,14 @@
   50% { opacity: 0.4; }
 }
 
-/* Night shade (behaviour unchanged until P6). */
-.nightshade {
+/* Night shade v2 (04 §5.6, D13): sleep layer of four static rectangles, wake layer 35 %. */
+.night {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 300;
-  background: #000;
   opacity: 0;
   pointer-events: none;
   -webkit-transition-property: opacity;
@@ -140,3 +139,58 @@
   -webkit-transition-timing-function: linear;
   transition-timing-function: linear;
 }
+.night--wake { background: rgba(0, 0, 0, 0.35); }
+.night__r { position: absolute; display: block; background: rgba(0, 0, 0, 0.85); }
+.night__rail { left: 0; top: 0; bottom: 0; width: 96px; }
+.night__head { left: 96px; right: 0; top: 0; height: 110px; background: rgba(0, 0, 0, 0.5); }
+.night__lage { left: 688px; right: 0; top: 110px; bottom: 0; }
+.night__rest { left: 96px; top: 110px; bottom: 0; width: 592px; }
+.night--sleep.is-start .night__lage { background: rgba(0, 0, 0, 0.5); }
+
+/* Hint banner (level "hinweis" only): x 112-1008, y 24, 64 high, below the
+   night shade (z 280), everything under it stays usable. */
+.wban {
+  position: absolute;
+  left: 112px;
+  top: 24px;
+  width: 896px;
+  height: 64px;
+  z-index: 280;
+  box-sizing: border-box;
+  padding: 0 8px 0 16px;
+  background: #16202b;
+  border: 1px solid rgba(124, 196, 255, 0.45);
+  border-radius: 14px;
+  color: #7cc4ff;
+  white-space: nowrap;
+}
+.wban__icon { position: absolute; left: 16px; top: 18px; width: 26px; height: 26px; }
+.wban__icon svg { width: 26px; height: 26px; }
+.wban__txt {
+  position: absolute;
+  left: 56px;
+  right: 152px;
+  top: 0;
+  line-height: 62px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wban__ok {
+  position: absolute;
+  right: 8px;
+  top: 7px;
+  width: 128px;
+  height: 48px;
+  line-height: 46px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  background: #222733;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+}
+.wban__ok.is-press { background: #2a303c; }

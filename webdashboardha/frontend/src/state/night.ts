@@ -39,6 +39,18 @@ export function isNight(start: string, end: string, now: Date): boolean {
     : minutes >= from || minutes < to; // über Mitternacht
 }
 
+/**
+ * D14: brightness for lights switched on by icon inside the night window,
+ * undefined outside it or when "Nachts gedimmt einschalten" is off (0).
+ */
+export function nightOnPct(
+  s: { night: boolean; nightStart: string; nightEnd: string; nightOnPct: number },
+  now: Date,
+): number | undefined {
+  if (!s.night || !(s.nightOnPct > 0) || !isNight(s.nightStart, s.nightEnd, now)) return undefined;
+  return Math.min(100, Math.round(s.nightOnPct));
+}
+
 /** Sekunden → größte Einheit, die glatt aufgeht (für die Anzeige im Dialog). */
 export function splitDuration(totalSeconds: number): { value: number; unit: DurationUnit } {
   const total = Math.max(0, Math.round(totalSeconds));

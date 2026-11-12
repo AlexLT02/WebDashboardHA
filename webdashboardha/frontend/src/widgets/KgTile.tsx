@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { Icon } from "../controls/icons";
 import { useTap } from "../controls/useTap";
 import { runOff, runOn, toggleItem } from "../state/commands";
+import { isEditing } from "../state/ui";
 import { useFlash, usePend } from "../state/pending";
 import { useUi } from "../state/ui";
 import { useTileView } from "./useTileView";
@@ -36,7 +37,8 @@ export function KgTile({ kg }: { kg: KgAmbiente | KgGroup }) {
   const open = () => openPopup(kg.role === "ambiente" ? { t: "kg", role: "ambiente" } : { t: "kg", role: "group", id: kg.id });
   const toggle = () => {
     const v = viewRef.current;
-    if (!v || v.offline) return;
+    // Bearbeiten mode: Kommen & Gehen is fixed structure, nothing switches.
+    if (!v || v.offline || isEditing()) return;
     if (kg.role === "group") return toggleItem(item, v);
     if (v.on) runOff({ scope: "ambiente" }, item);
     else runOn(item, { scope: "ambiente" });

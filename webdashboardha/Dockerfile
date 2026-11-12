@@ -5,6 +5,8 @@ WORKDIR /build/frontend
 COPY frontend/package.json frontend/package-lock.json* ./
 RUN npm install
 COPY frontend/ ./
+# Versionsquelle für den Versions-Reload (vite.config.ts liest __version__).
+COPY backend/app/__init__.py /build/backend/app/__init__.py
 RUN npm run build
 # Ergebnis: /build/frontend/dist
 

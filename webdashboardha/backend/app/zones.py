@@ -276,7 +276,9 @@ class ZoneStore:
             self.seen.append(item_id)
             self.save()
 
-    def set_favorites(self, ids: list[str], names: dict[str, str]) -> None:
+    def set_favorites(self, ids: list[str], names: dict[str, str],
+                      labels: dict[str, str] | None = None) -> None:
+        """Order of the favourites; ``labels`` renames single favourite tiles (validated)."""
         if len(ids) > FAVORITES_MAX:
             raise ZoneError(f"höchstens {FAVORITES_MAX} Favoriten")
         if len(set(ids)) != len(ids):
@@ -285,7 +287,10 @@ class ZoneStore:
         result = []
         for fid in ids:
             entry = copy.deepcopy(old.get(fid) or {"id": fid})
-            entry["name"] = entry.get("name") or names.get(fid, fid)[:NAME_MAX].rstrip()
+            if labels and fid in labels:
+                entry["name"] = validate_name(labels[fid])
+            else:
+                entry["name"] = entry.get("name") or names.get(fid, fid)[:NAME_MAX].rstrip()
             result.append(entry)
         self.favorites = result
         self.save()

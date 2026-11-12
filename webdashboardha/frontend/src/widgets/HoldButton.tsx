@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Icon } from "../controls/icons";
 import { HOLD_ALL_OFF_MS, useHold } from "../controls/useHold";
 import { runOff } from "../state/commands";
+import { isEditing } from "../state/ui";
 import type { KgAllesAus } from "../state/model";
 
 /**
@@ -16,7 +17,7 @@ export function HoldButton({ kg }: { kg: KgAllesAus }) {
     HOLD_ALL_OFF_MS,
     () => {
       setHint(false);
-      runOff({ scope: "alles_aus" });
+      if (!isEditing()) runOff({ scope: "alles_aus" });
     },
     () => {
       setHint(true);

@@ -3,14 +3,17 @@ import { Press } from "../controls/Press";
 import { useTap } from "../controls/useTap";
 import { fire } from "../state/commands";
 import { useEntity } from "../state/store";
-import { useUi } from "../state/ui";
+import { isEditing, useUi } from "../state/ui";
 import { useTileView } from "./useTileView";
+import { openEdit } from "./Tile";
 import { shortName } from "../state/format";
 import type { Item } from "../state/model";
 
 export type CoverCmd = "open_cover" | "stop_cover" | "close_cover";
 
 export function coverCmd(ids: string | string[], cmd: CoverCmd): void {
+  // Bearbeiten mode: nothing moves (the cover tile opens its edit sheet instead).
+  if (isEditing()) return;
   fire({ domain: "cover", service: cmd, entity_id: ids });
 }
 
@@ -39,11 +42,11 @@ export function CoverButtons({ ids, moving, label }: ButtonsProps) {
 }
 
 /** Rollladen 2 x 1 in the zone (444 x 64): icon without badge, status, ▲ ■ ▼. */
-export function CoverWide({ item, name }: { item: Item; name?: string }) {
+export function CoverWide({ item, name, ctx }: { item: Item; name?: string; ctx?: "fav" | "zone" }) {
   const view = useTileView(item);
   const st = useEntity(item.id);
   const openPopup = useUi((s) => s.openPopup);
-  const open = () => openPopup({ t: "item", id: item.id, name });
+  const open = () => (isEditing() ? openEdit(item.id, ctx) : openPopup({ t: "item", id: item.id, name }));
   const ref = useTap({ onTap: open, onLongPress: open });
   if (!view) return null;
   const cls = `tile tile--cover span2${view.offline ? " is-offline" : ""}`;

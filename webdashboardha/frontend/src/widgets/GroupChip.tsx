@@ -3,8 +3,9 @@ import { Icon } from "../controls/icons";
 import { useTap } from "../controls/useTap";
 import { toggleItem } from "../state/commands";
 import { useFlash, usePend } from "../state/pending";
-import { useUi } from "../state/ui";
+import { isEditing, useUi } from "../state/ui";
 import { useTileView } from "./useTileView";
+import { openEdit } from "./Tile";
 import { shortName } from "../state/format";
 import type { Item } from "../state/model";
 
@@ -19,15 +20,16 @@ export function GroupChip({ item }: { item: Item }) {
   const openPopup = useUi((s) => s.openPopup);
   const viewRef = useRef(view);
   viewRef.current = view;
-  const open = () => openPopup({ t: "item", id: item.id });
-  const switchable = !!view && view.badge && !view.offline;
+  const editing = useUi((s) => s.editing);
+  const open = () => (isEditing() ? openEdit(item.id, "zone") : openPopup({ t: "item", id: item.id }));
+  const switchable = !!view && view.badge && !view.offline && !editing;
   const ref = useTap({
     iconWidth: switchable ? 42 : 0,
     pressSelector: ".badge",
     pressIconOnly: true,
     onTap: (zone) => {
       const v = viewRef.current;
-      if (zone === "icon" && v && v.badge && !v.offline) toggleItem(item, v);
+      if (zone === "icon" && v && v.badge && !v.offline && !isEditing()) toggleItem(item, v);
       else open();
     },
     onLongPress: open,
