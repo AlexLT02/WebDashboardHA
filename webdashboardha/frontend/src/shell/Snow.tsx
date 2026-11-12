@@ -34,7 +34,7 @@ function makeFlakes(): Flake[] {
     const dur = 12 + Math.random() * 13;
     list.push({
       left: Math.random() * 100,
-      size: 8 + Math.round(Math.random() * 8),
+      size: 14 + Math.round(Math.random() * 12),
       dur,
       delay: -Math.random() * dur,
       drift: i % 3,

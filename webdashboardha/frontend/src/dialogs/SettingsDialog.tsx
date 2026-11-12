@@ -4,7 +4,8 @@ import { Icon } from "../controls/icons";
 import { Press } from "../controls/Press";
 import { fetchHostInfo } from "../state/api";
 import { useSettings, useSettingsStore, type Settings, type SnowMode } from "../state/useSettings";
-import { ACCENTS, accentById } from "../state/accent";
+import { DragBar } from "../controls/DragBar";
+import { accentFromHs, applyAccent, hsFromAccent, normalizeAccent } from "../state/accent";
 
 /** "Nachts gedimmt einschalten" (D14): Aus · 10 · 15 · 25 %. */
 const NIGHT_ON = [0, 10, 15, 25];
@@ -40,6 +41,54 @@ function EntityField({ k, label, placeholder }: { k: keyof Settings; label: stri
         onChange={(e) => set(k, e.target.value.trim() as never)}
       />
     </div>
+  );
+}
+
+const near = (t: number, r: number | null) => r !== null && Math.abs(t - r) < 0.01;
+
+/**
+ * Free accent colour: hue and saturation sliders (no <input type=color> on
+ * iOS 12). Dragging previews live on :root, release saves it.
+ */
+function AccentPicker({ value, onChange }: { value: string; onChange: (hex: string) => void }) {
+  const [h, s] = hsFromAccent(value);
+  const [live, setLive] = useState<[number, number] | null>(null);
+  const cur = live || [h, s];
+  const hex = accentFromHs(cur[0], cur[1]);
+  const preview = (next: [number, number] | null) => {
+    setLive(next);
+    applyAccent(next ? accentFromHs(next[0], next[1]) : normalizeAccent(value));
+  };
+  const satBg = `linear-gradient(90deg, ${accentFromHs(cur[0], 0)}, ${accentFromHs(cur[0], 1)})`;
+  return (
+    <>
+      <div className="psub">
+        Akzentfarbe<span className="dlg__swatch" style={{ background: hex }} />
+      </div>
+      <DragBar
+        mode="pick"
+        className="bar--hue"
+        value={h}
+        label="Akzentfarbe Farbton"
+        throttleMs={0}
+        timeoutMs={3000}
+        confirm={near}
+        onLocal={(v) => preview(v === null ? null : [v, cur[1]])}
+        onCommit={(v) => onChange(accentFromHs(v, cur[1]))}
+      />
+      <DragBar
+        mode="pick"
+        className="bar--hue"
+        style={{ background: satBg }}
+        value={s}
+        label="Akzentfarbe Sättigung"
+        throttleMs={0}
+        timeoutMs={3000}
+        confirm={near}
+        onLocal={(v) => preview(v === null ? null : [cur[0], v])}
+        onCommit={(v) => onChange(accentFromHs(cur[0], v))}
+      />
+    </>
   );
 }
 
@@ -138,14 +187,7 @@ export function SettingsDialog() {
               </Press>
             ))}
           </div>
-          <div className="psub">Akzentfarbe</div>
-          <div className="qchips qchips--6">
-            {ACCENTS.map((a) => (
-              <Press key={a.id} className={`qchip${accentById(settings.accent).id === a.id ? " is-sel" : ""}`} label={`Akzentfarbe ${a.name}`} onPress={() => set("accent", a.id)}>
-                <span className="dlg__swatch" style={{ background: a.hex }} />
-              </Press>
-            ))}
-          </div>
+          <AccentPicker value={settings.accent} onChange={(hex) => set("accent", hex)} />
           <Press className="pbtn" label="Warnmeldung, HA-Helfer, Adresse" onPress={() => setHelpers(true)}>
             Warnmeldung, HA-Helfer, Adresse
             <Icon name="chev" className="qicon" />

@@ -90,6 +90,4 @@
 }
 .dlg__switch.is-on .dlg__switch-knob { -webkit-transform: translateX(22px); transform: translateX(22px); }
 
-/* Akzentfarbe: six swatches in one row (Safari 12: grid-gap, no flex gap) */
-.qchips.qchips--6 { grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; }
-.dlg__swatch { display: inline-block; width: 22px; height: 22px; border-radius: 11px; vertical-align: middle; margin-top: -3px; }
+.dlg__swatch { display: inline-block; width: 14px; height: 14px; border-radius: 7px; margin-left: 8px; vertical-align: -2px; }

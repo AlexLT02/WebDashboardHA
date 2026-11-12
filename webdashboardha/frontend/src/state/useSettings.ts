@@ -23,7 +23,7 @@ export interface Settings {
   alertAckScript: string;
   /** P8: snowfall layer, "auto" = December to February. */
   snow: SnowMode;
-  /** Accent preset id, see state/accent.ts. */
+  /** Accent colour as hex, see state/accent.ts. */
   accent: string;
 }
 
@@ -43,7 +43,7 @@ export const DEFAULT_SETTINGS: Settings = {
   alertIndexEntity: "input_number.wdh_index",
   alertAckScript: "script.wdh_ack",
   snow: "auto",
-  accent: "orange",
+  accent: "#ef936b",
 };
 
 interface SettingsStore {
